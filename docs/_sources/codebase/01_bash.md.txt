@@ -5,7 +5,9 @@
 Excellent ressources:
 
 http://www.stanford.edu/class/cs124/kwc-unix-for-poets.pdf
+
 http://www.stanford.edu/class/cs124/lec/124-2021-UnixForPoets.pdf
+
 https://web.stanford.edu/class/cs124/inclass_activity_solutions/activity1_solutions.txt
 
 ```bash
