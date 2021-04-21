@@ -211,7 +211,7 @@
 </div>
 <div class="section" id="sur-quelles-taches-est-entraine-bert">
 <h2>Sur quelles tâches est entraîné Bert ?<a class="headerlink" href="#sur-quelles-taches-est-entraine-bert" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="../_images/0b53924e.png"/></p>
+<p><img alt="" src="../images/0b53924e.png"/></p>
 <p>Tout comme pour word embedding de Mikolov, ce sont des fake tasks ou tâches de pré-entraînement. La première (Masked Language Model) consiste à deviner un mot masqué dans une phrase (comme le mot cool) et la deuxième (Next Sentence Prediction) à déterminer si la deuxième d’une paire de phrases (comme la phrase en orange) constitue la suite de la première.</p>
 </div>
 <div class="section" id="quels-avantages-des-embeddings-bert">
@@ -225,7 +225,7 @@
 <div class="section" id="comment-le-fine-tuning-marche-concretement">
 <h2>Comment le fine-tuning marche concrètement ?<a class="headerlink" href="#comment-le-fine-tuning-marche-concretement" title="Permalink to this headline">¶</a></h2>
 <p>Cette question est liée à la question. Le processus de fine-tuning dépend de la dernière couche que vous rajoutez à Bert. Prenons l’analyse sentimentale comme un exemple. La figure créée par nos soins illustre ce principe fort simple. A la suite de 12 couches Bert on rajoute un classifieur qui, en fonction du embedding du token CLS (qui englobe l’info de toute la phrase), prédit s’il s’agit d’un commentaire positif ou négatif.</p>
-<p><img alt="" src="../_images/3ed81414.png"/></p>
+<p><img alt="" src="../images/3ed81414.png"/></p>
 <div class="note admonition">
 <p class="admonition-title">Next ?</p>
 <p>Des tutoriels sur</p>

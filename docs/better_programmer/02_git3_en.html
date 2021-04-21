@@ -213,16 +213,16 @@ git config --global user.email johndoe@example.com
 <p>once tracked it has two states: modified and unmodifed</p>
 <p>Once commited, it’s called staged</p>
 <p>If modified but not commited, you see the following notification when running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>. Note the red text.</p>
-<p><img alt="" src="../_images/2021-01-21-20-06-42.png"/></p>
+<p><img alt="" src="../images/2021-01-21-20-06-42.png"/></p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">file</span></code> to stage the file (which doesn’t mean it’s commited)</p>
 <p>If you modify a file after you run git add, you have to run git add again to stage the latest version of the file. See the following snapshot:</p>
-<p><img alt="" src="../_images/2021-01-21-20-10-21.png"/></p>
+<p><img alt="" src="../images/2021-01-21-20-10-21.png"/></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">contributing.md</span></code> is both staged and not staged because it has been modified since the last <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code></p>
 <p>Sometimes use a GUI interface like <a class="reference external" href="https://www.gitkraken.com/">GitKraken</a> is a good idea. See the screenshot below.</p>
-<p><img alt="" src="../_images/2021-01-21-20-29-24.png"/></p>
+<p><img alt="" src="../images/2021-01-21-20-29-24.png"/></p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span> <span class="pre">-s</span></code> to get a concise report.</p>
 <p>💯 Setting up a <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file for your new repository <strong>before</strong> you get going is generally a good idea. <code class="docutils literal notranslate"><span class="pre">/</span></code> is to avoir recursivity and <code class="docutils literal notranslate"><span class="pre">/</span></code> at the end is to specify a directory. An exemple:</p>
-<p><img alt="" src="../_images/2021-01-21-20-16-05.png"/></p>
+<p><img alt="" src="../images/2021-01-21-20-16-05.png"/></p>
 <p>For python template, see <a class="reference external" href="https://github.com/github/gitignore/blob/master/Python.gitignore">here</a>. For other languages, see <a class="reference external" href="https://github.com/github/gitignore">here</a></p>
 </div>
 <div class="section" id="intermediate">
@@ -230,10 +230,10 @@ git config --global user.email johndoe@example.com
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> by itself doesn’t show all changes made since your last commit — only changes that are still unstaged. If you’ve staged all of your changes, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> will give you no output. Instead, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--staged</span></code>. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--cached</span></code> is a synonym.</p>
 <p>Often people use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">message</span></code> directly, at the base level, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> works, and you would enter the commit message using your text editor set by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">core.editor</span></code>.</p>
 <p>After you make a commit (you have to make a commit message whether you use <code class="docutils literal notranslate"><span class="pre">-m</span></code> or not). You get this kind of feedback. <code class="docutils literal notranslate"><span class="pre">main</span></code> is the branch, <code class="docutils literal notranslate"><span class="pre">5641629</span></code> is the SHA-1 checksum and the rest is statistics.</p>
-<p><img alt="" src="../_images/2021-01-21-20-34-47.png"/></p>
+<p><img alt="" src="../images/2021-01-21-20-34-47.png"/></p>
 <p>Finally you can also use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-a</span> <span class="pre">-m</span> <span class="pre">message</span></code> to skip the staging part. Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit, letting you skip the git add part.</p>
 <p>This is the lifecycle of the status of your files.</p>
-<p><img alt="" src="../_images/2021-01-21-20-39-55.png"/></p>
+<p><img alt="" src="../images/2021-01-21-20-39-55.png"/></p>
 </div>
 <div class="section" id="push">
 <h2>Push<a class="headerlink" href="#push" title="Permalink to this headline">¶</a></h2>

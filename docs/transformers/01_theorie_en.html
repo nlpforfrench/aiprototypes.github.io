@@ -211,7 +211,7 @@
 </div>
 <div class="section" id="what-tasks-is-bert-trained-on">
 <h2>What tasks is Bert trained on?<a class="headerlink" href="#what-tasks-is-bert-trained-on" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="../_images/0b53924e.png"/></p>
+<p><img alt="" src="../images/0b53924e.png"/></p>
 <p>As for Mikolov’s word embedding, these are fake tasks or pre-training tasks. The first one (Masked Language Model) is to guess a hidden word in a sentence (like the word <code class="docutils literal notranslate"><span class="pre">cool</span></code>) and the second one (Next Sentence Prediction) is to determine if the second of a pair of sentences (like the sentence in orange) is the continuation of the first one.</p>
 </div>
 <div class="section" id="what-are-the-advantages-of-bert-embeddings">
@@ -225,7 +225,7 @@
 <div class="section" id="how-does-fine-tuning-work-in-practice">
 <h2>How does fine-tuning work in practice?<a class="headerlink" href="#how-does-fine-tuning-work-in-practice" title="Permalink to this headline">¶</a></h2>
 <p>This question is related to the question. The fine-tuning process depends on the last layer you add to Bert. Let’s take sentimental analysis as an example. The figure we created illustrates this simple principle. After 12 Bert layers we add a binary classifier which, depending on the embedding of the CLS token (which includes the info of the whole sentence), predicts whether it is a positive or negative comment.</p>
-<p><img alt="" src="../_images/3ed81414.png"/></p>
+<p><img alt="" src="../images/3ed81414.png"/></p>
 <div class="note admonition">
 <p class="admonition-title">Next ?</p>
 <p>Tutorials on</p>

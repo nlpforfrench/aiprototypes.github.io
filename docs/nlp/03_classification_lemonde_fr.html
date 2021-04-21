@@ -199,7 +199,7 @@
 <li><p>Ce tutoriel est un issu d’un travail d’équipe, nous avons veillé au bon déroulement et à la bonne répartition des tâches en mettant en place toute une panoplie d’outils en logistique comme <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">méthode</span> <span class="pre">agile</span></code>, <a class="reference external" href="https://github.com/xiaoouwang/tuto_classification">Github</a>, <code class="docutils literal notranslate"><span class="pre">Omniplan</span></code> (outil de gestion de projet) et un document <a class="reference external" href="https://docs.google.com/document/d/11vaB74HV0GxerkVm9Pv_mgnhXN27QVegFYPdPA34t5g/edit?usp=sharing">Google Docs</a> auquel vous pouvez vous référer pour revoir comment ce tutoriel d’équipe a été réalisé pendant plus d’un mois.</p></li>
 </ol>
 <p>La répartition des tâches est illustrée succinctement par la Figure 1 :</p>
-<p><img alt="" src="../_images/ac2e3489.png"/></p>
+<p><img alt="" src="../images/ac2e3489.png"/></p>
 <p>Figure 1 : Répartition des tâches pendant l’écriture de ce tutoriel</p>
 </div>
 <div class="section" id="structure-du-tutoriel">
@@ -218,10 +218,10 @@
 <p>Nous avons aussi essayé de regrouper les entités nommées dans un seul token car cela permet de garder des informations sémantiques intactes. Dans Spacy il est facile d’y procéder ainsi mais dans Stanza il n’existe pas de fonction pré-définie. Nous avons donc soumis un <a class="reference external" href="https://github.com/stanfordnlp/stanza/issues/583">issue</a> sur Github et proposé notre propre solution sur le même lien au cas où cela pourrait servir la communauté.</p>
 <p>Ensuite nous avons lemmatisé les tokens et enlevé les mots vides et ponctuation. Pour la liste des mots vides nous avons combiné les ensembles proposés par <code class="docutils literal notranslate"><span class="pre">NLTK</span></code> et <code class="docutils literal notranslate"><span class="pre">Spacy</span></code>. Notons que cette étape, en enlevant les tokens peu pertinents à chaque document, constitue en essence une tentative de réduction de dimensionnalité.</p>
 <p>Enfin nous avons mis tous les tokens en minuscules. L’ensemble des opérations est illustré par la Figure 2 :</p>
-<p><img alt="" src="../_images/768a8e62.png"/></p>
+<p><img alt="" src="../images/768a8e62.png"/></p>
 <p>Figure 2 : Prétraitement en amont des articles en vue de la classification</p>
 <p>Notons que nous avons aussi préparé une version enrichie du corpus en xml pour calculer des features expertes. Il y a en tout 6 colonnes signifiant id, token, lemme, partie du discours, tête et relation de dépendance. Par contraintes d’espace nous ne détaillons pas la procédure de préparation. Chaque article est enchâssé dans le tag <code class="docutils literal notranslate"><span class="pre">&lt;art&gt;</span></code> avec label comme attribut et classe comme valeur. Ensuite chaque phrase est contenue dans un tag <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code>. La Figure 3 montre la structure du fichier xml :</p>
-<p><img alt="" src="../_images/c6849494.png"/></p>
+<p><img alt="" src="../images/c6849494.png"/></p>
 <p>Figure 3 : Structure du corpus enrichi en xml</p>
 </div>
 <div class="section" id="classification-de-textes">
@@ -232,20 +232,20 @@
 <p>Un document peut être représenté de diverses façons selon le traitement des mots contenus dans le document. Le modèle le plus simple est le sac de mots qui compte l’occurrence de chaque token afin de générer une matrice documents-termes (MDT). Ce modèle est quelque peu simpliste car l’occurrence des tokens augmente en fonction de la longueur du document. Pour remédier à ce défaut la MDT peut être modifiée pour représenter non plus la fréquence absolue mais la fréquence relative des tokens. Cependant il subsiste toujours le problème des mots vides car ces derniers sont quasiment toujours les plus fréquents (cf. la loi de Zipf à ce propos).</p>
 <p>Pour faire face à ce problème une autre mesure est proposée : celle de TF-IDF, la formule de cette mesure est la suivante :</p>
 <div class="figure align-center" id="id1">
-<img alt="../_images/a322e8b3.png" src="../_images/a322e8b3.png"/>
+<img alt="../images/a322e8b3.png" src="../images/a322e8b3.png"/>
 <p class="caption"><span class="caption-text">Figure 4 : Formule de TF-IDF</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>L’efficacité de cette mesure est basée sur l’hypothèse selon laquelle un terme doit être à la fois fréquent et spécifique à un document pour caractériser ce dernier. Notons que cette feature est peu gourmande en termes de calcul.</p>
 <p>Nous avons utilisé scikit-learn pour implémenter la classification. La feature est représentée par le vecteur TF-IDF et le classifieur utilisé est le classifieur bayésien. Nous avons utilisé un split de 0.3, ce qui fait qu’environ 300 articles par thème ont été utilisés comme test. Le random state a été configuré à 42 pour garantir la reproductibilité de notre travail.</p>
 <p>Dans un premier temps nous avons essayé de classifier tous les 5 thèmes pour en sélectionner ceux qui présentent le plus de difficultés. La Figure 5 montre la performance du classifieur sur les articles de 5 thèmes :</p>
-<p><img alt="" src="../_images/e6e2fd44.png"/></p>
+<p><img alt="" src="../images/e6e2fd44.png"/></p>
 <p>Figure 5 : Matrice de confusion du classifieur bayésien sur les articles de 5 thèmes</p>
 <p>Le fait que les classes <code class="docutils literal notranslate"><span class="pre">économie,</span> <span class="pre">politique</span> <span class="pre">et</span> <span class="pre">société</span></code> sont les plus faciles à confondre pour le classifieur nous a décidés à choisir ces 3 thèmes pour notre projet. La Figure 6 rapporte les métriques principales à l’issue de cette sélection :</p>
-<p><img alt="" src="../_images/12d5a6a6.png"/></p>
+<p><img alt="" src="../images/12d5a6a6.png"/></p>
 <p>Figure 6 : Métriques classiques pour la classification de textes sur les articles en 3 thèmes</p>
 <p>Vous pouvez voir que la classe économie est la mieux classée et les deux autres présentent une plus grande confusion, ce qui est plutôt attendu car la classe économie renvoie à une notion plus restreinte.</p>
 <p>Avec le package Lime nous avons pu voir comment est procédé le classifieur pour classer les articles, la Figure 7 montre l’exemple d’un seul article. L’interprétation de cette figure est plutôt intuitive : La légende d’en haut à gauche présente les probabilités respectives que cet article appartient aux 3 classes (la somme = 1). Lorsque le score se situe à droite, il contribue positivement à la classification.</p>
-<p><img alt="" src="../_images/e1cb0478.png"/></p>
+<p><img alt="" src="../images/e1cb0478.png"/></p>
 <p>Figure 7 : Contribution des termes à la classification d’un article</p>
 <p>Les fonctionnalités proposées par Lime nous ont incités à faire un post-traitement susceptible d’augmenter la performance du classifieur. Nous avons extrait les 3 premiers termes de chaque prédiction de classe au cas où la prédiction serait mauvaise. Cette liste de termes constitue par la suite une liste de « mots inadéquats » avec laquelle nous filtrons le texte de chaque article. Nous avons ensuite ré-entraîné le classifieur, portant l’accuracy global de 0.82 à 0.85. Ce score de 0.85 a été retenu par la suite comme benchmark pour notre tâche de classification.</p>
 </div>

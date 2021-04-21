@@ -491,7 +491,7 @@ div.rendered_html tbody tr:hover {
 <h3>Quand les exceptions agissent en ta faveur<a class="headerlink" href="#Quand-les-exceptions-agissent-en-ta-faveur" title="Permalink to this headline">¶</a></h3>
 <p>Les exceptions sont pratiques dans notre cas car nous avons généré des liens pour des dates comme 02-31, c’est beaucoup facile de catcher ces exceptions que de générer des liens correspondant seulement à des dates existantes. Chaque lien d’article est dans un tag <code class="docutils literal notranslate"><span class="pre">&lt;section&gt;</span></code> contenant une <code class="docutils literal notranslate"><span class="pre">class</span></code> nommé <code class="docutils literal notranslate"><span class="pre">teaser</span></code>.</p>
 <p>Il est important de filtrer tous les articles non gratuits avec un <code class="docutils literal notranslate"><span class="pre">span</span> <span class="pre">&gt;</span> <span class="pre">class</span> <span class="pre">icon__premium</span></code> (à moins que tu aies un compte premium). Tous les liens contenant le mot-clé <code class="docutils literal notranslate"><span class="pre">en-direct</span></code> sont aussi à filtrer car ce sont des vidéos. Tu aurais compris que web scraping demande des capacités d’analyse des pages webs.</p>
-<p><img alt="image1" src="../_images/957b6f67.png"/></p>
+<p><img alt="image1" src="../images/957b6f67.png"/></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -574,7 +574,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Scraper-tout">
 <h3>Scraper tout<a class="headerlink" href="#Scraper-tout" title="Permalink to this headline">¶</a></h3>
 <p>C’est enfin le moment de tout scraper ! Pour ce faire je te conseille d’utiliser le package <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> car le scraping peut être long et tu voudras savoir où il en est. Voici à quoi ressemble la barre de progression :</p>
-<p><img alt="image1" src="../_images/957b6f67.png"/></p>
+<p><img alt="image1" src="../images/957b6f67.png"/></p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scrape_articles</span><span class="p">(</span><span class="n">dict_links</span><span class="p">):</span>
     <span class="n">themes</span> <span class="o">=</span> <span class="n">dict_links</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="n">themes</span><span class="p">:</span>

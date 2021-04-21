@@ -12,10 +12,10 @@ cd ..
 # rm -rf ../docs
 cp -rf html ../docs
 cd ../docs
-grep -rl static . | xargs gsed -i "s/images/images/g"
-grep -rl sources . | xargs gsed -i "s/images/images/g"
+grep -rl static . | xargs gsed -i "s/_images/images/g"
+grep -rl sources . | xargs gsed -i "s/_images/images/g"
 rm -rf images
-cp -rf images images
+cp -rf _images images
 #find . -type f -print0 | xargs -0 perl -pi -e 's/\'
 echo "nlpinfrench.fr" > CNAME
 cd ..

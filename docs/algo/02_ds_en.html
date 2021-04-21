@@ -472,17 +472,17 @@ hello my name is Xiaoou
 <h2>Data structure, speed and memory<a class="headerlink" href="#Data-structure,-speed-and-memory" title="Permalink to this headline">¶</a></h2>
 <p>However, data structure is much more than looking organized. If you’ve read <a class="reference internal" href="01_intro_en.html"><span class="doc">the first tutorial</span></a>, it should be clear to you that speed matters when designing programs. But to what speed is related ? We all know that hardware impacts strongly the performance, however this aspect is unrelated in our discussion. More concretely, when we use the word <code class="docutils literal notranslate"><span class="pre">speed</span></code> in algorithms we are referring specifically to how many steps an algorithm takes.</p>
 <p>Note that on the Internet you will meet a bunch of terms of which I’ve made a summary.</p>
-<p><img alt="test2" src="../_images/2021-04-13-15-43-22.png"/></p>
+<p><img alt="test2" src="../images/2021-04-13-15-43-22.png"/></p>
 <p>Don’t be intimidated by these terms. Although there are some subtle differences, in most non-academic contexts they can be used interchangeably.</p>
 <p>So what do I mean by <code class="docutils literal notranslate"><span class="pre">how</span> <span class="pre">many</span> <span class="pre">steps</span></code>?</p>
 <p>For this you have to know how things are stored/organized on your computer’s memory.</p>
 <div class="section" id="How-computer-memory-works">
 <h3>How computer memory works<a class="headerlink" href="#How-computer-memory-works" title="Permalink to this headline">¶</a></h3>
 <p>Put simply, the computer memory has a lot of <code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">address</span></code>es by means of which we can store things. Some are distributed sparsely while some, like <code class="docutils literal notranslate"><span class="pre">array</span></code>, are placed on a compact memory span.</p>
-<p><img alt="test1" src="../_images/2021-04-13-15-53-53.png"/></p>
+<p><img alt="test1" src="../images/2021-04-13-15-53-53.png"/></p>
 <p>Another common data structure is called <code class="docutils literal notranslate"><span class="pre">set</span></code>. The set is very useful when we need a list of non-duplicate items. A common example is phone book.</p>
 <p>However the difference between array and set goes far beyond the aforementioned constraint. In order to understand the performance of any data structure, you need to know the 4 common ways our code might interact with that data structure.</p>
-<p><img alt="image1" src="../_images/2021-04-13-22-48-30.png"/></p>
+<p><img alt="image1" src="../images/2021-04-13-22-48-30.png"/></p>
 </div>
 </div>
 <div class="section" id="Analyse-a-data-structure-(Read,-search,-insert-and-delete)">
@@ -495,7 +495,7 @@ hello my name is Xiaoou
 </ul>
 <p>So what is the efficiency of there 4 operations when it comes to array and set?</p>
 <p>Let’s look at the operation of reading. Only 2 steps are necessary for both cases. That’s because these two structures are stored in memory as follows:</p>
-<p><img alt="image2" src="../_images/2021-04-13-22-56-14.png"/></p>
+<p><img alt="image2" src="../images/2021-04-13-22-56-14.png"/></p>
 <p>Each value (content) is retrievable via a memory address which in turn is related to an index.</p>
 <p>Quick anecdote: Do you know why in most programming languages the index starts at 0?</p>
 <p>It’s because 0 means 0 element from the beginning = the same address as the start of of the array, a value <code class="docutils literal notranslate"><span class="pre">remembered</span></code> by your computer when you create an array. Another value recorded is the length of the array.</p>
@@ -517,7 +517,7 @@ hello my name is Xiaoou
 <p>Here comes the real game (in French we say ça change la donne).</p>
 <p>First of all it takes at most N steps to insert a new value into an array. Finding the right spot takes just 1 step (see the Read section), however before insertion one has to shift all the elements to make space for the new element.</p>
 <p>I know, one picture is worth a thousand words.</p>
-<p><img alt="image3" src="../_images/2021-04-13-23-18-56.png"/></p>
+<p><img alt="image3" src="../images/2021-04-13-23-18-56.png"/></p>
 <p>What is the best case? Well it happens when one inserts a new element at the end. As said before, your computer already knows the length of your array, i.e. it already knows the address of the last element. Better, no shift is required.</p>
 <p>What about set?</p>
 <p>Remember that a set is supposed to contain no duplicate elements. So first you have to make sure that the element to be inserted has no duplicate! In the worst case it takes N steps. Besides, when we’re inserting a value at the beginning of a set, another N steps are required to shift all the data to the right and another final step to insert the new value, taking the total number of steps to 2N + 1 steps.</p>
@@ -525,7 +525,7 @@ hello my name is Xiaoou
 <div class="section" id="Deletion-(idem)">
 <h3>Deletion (idem)<a class="headerlink" href="#Deletion-(idem)" title="Permalink to this headline">¶</a></h3>
 <p>Just like the insertion, deletion requires also shifting because remember, an array should be stored on contingent memory cells. The sames applies to array-based set. So it’s not difficult to figure out that in the worst case we are bound to make N moves when the first element is deleted.</p>
-<p><img alt="image4" src="../_images/2021-04-13-23-32-36.png"/></p>
+<p><img alt="image4" src="../images/2021-04-13-23-32-36.png"/></p>
 </div>
 </div>
 <div class="section" id="Which-data-structure-to-use">

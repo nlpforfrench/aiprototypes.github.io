@@ -207,14 +207,14 @@
 </pre></div>
 </div>
 <p>Example output of <code class="docutils literal notranslate"><span class="pre">create_archive_links(2006,2020,1,</span> <span class="pre">12,</span> <span class="pre">1,</span> <span class="pre">31)</span></code>:</p>
-<p><img alt="" src="../_images/2021-02-20-19-38-41.png"/></p>
+<p><img alt="" src="../images/2021-02-20-19-38-41.png"/></p>
 <p>The next step is to get all the article links on the archive page. For this you need 3 modules: <code class="docutils literal notranslate"><span class="pre">HTTPError</span></code> to handle exceptions, <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> to open webpages and <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> to parse webpages.</p>
 </div>
 <div class="section" id="the-magic-power-of-exception-handling">
 <h2>The magic power of exception handling<a class="headerlink" href="#the-magic-power-of-exception-handling" title="Permalink to this headline">¶</a></h2>
 <p>The exception handling is necessary because we have archive pages for dates like 02–31, it’s much easier to handle exceptions than generating links corresponding only to existent dates. Each article is in a <code class="docutils literal notranslate"><span class="pre">&lt;section&gt;</span></code> having a <code class="docutils literal notranslate"><span class="pre">class</span></code> named <code class="docutils literal notranslate"><span class="pre">teaser</span></code>.</p>
 <p>I also filter out all the non-free articles having a span with class <code class="docutils literal notranslate"><span class="pre">icon__premium</span></code>. All the links containing the word <code class="docutils literal notranslate"><span class="pre">en-direct</span></code> are also filtered because they are videos. This is to say that web scraping requires not only programming skills but also some elementary web analysis.</p>
-<p><img alt="" src="../_images/2021-02-20-19-39-25.png"/></p>
+<p><img alt="" src="../images/2021-02-20-19-39-25.png"/></p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.error</span> <span class="kn">import</span> <span class="n">HTTPError</span>
 <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
@@ -257,7 +257,7 @@
 </pre></div>
 </div>
 <p>This would produce something like this:</p>
-<p><img alt="" src="../_images/2021-02-20-19-42-03.png"/></p>
+<p><img alt="" src="../images/2021-02-20-19-42-03.png"/></p>
 </div>
 <div class="section" id="let-s-scrape">
 <h2>Let’s scrape<a class="headerlink" href="#let-s-scrape" title="Permalink to this headline">¶</a></h2>
@@ -325,7 +325,7 @@
 </pre></div>
 </div>
 <p>Finally, you can scrape ! Note the <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> around <code class="docutils literal notranslate"><span class="pre">range</span></code>, since the whole scraping process could be quite long, you need to keep track of the progress so that you know it’s always running. See how to use <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> here https://tqdm.github.io/. Below is a progress bar example copied from the official documentation.</p>
-<p><img alt="" src="../_images/2021-02-20-19-45-58.png"/></p>
+<p><img alt="" src="../images/2021-02-20-19-45-58.png"/></p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scrape_articles</span><span class="p">(</span><span class="n">dict_links</span><span class="p">):</span>
     <span class="n">themes</span> <span class="o">=</span> <span class="n">dict_links</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="n">themes</span><span class="p">:</span>
