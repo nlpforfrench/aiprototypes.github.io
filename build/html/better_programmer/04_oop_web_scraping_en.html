@@ -1,0 +1,1003 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Be a responsible programmer when doing Object-Oriented Programming 🇬🇧" href="05_oop_web_scraping_cooper_en.html" /><link rel="prev" title="Connect to remote jupyter notebook in Pycharm" href="03_jupyter_remote_pycharm.html" />
+
+    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+        <title>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧 - NLP in French</title>
+      <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
+    <link rel="stylesheet" href="../static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+    <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NLP in French</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../static/nlp_Logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../static/nlp_Logo.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">NLP in French</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/index.html">NLP and Machine Learning-related</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/01_compara_anno_fr.html">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/02_classification_prenoms_fr.html">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/03_classification_lemonde_fr.html">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/index.html">Transformers in NLP with PyTorch, TensorFlow and Hugging Face</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_en.html">10 questions on Bert 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_fr.html">10 questions sur Bert 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/02_firstBert_fr.html">Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Better Programmer</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_python_fr.html">Mieux programmer en Python 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_git3_en.html">A serious guide to git 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_jupyter_remote_pycharm.html">Connect to remote jupyter notebook in Pycharm</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_oop_web_scraping_cooper_en.html">Be a responsible programmer when doing Object-Oriented Programming 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algo/index.html">Algorithms and data structures by examples in Python</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_en.html">Algorithm or many ways of solving a problem 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_fr.html">Algorithme ou plusieurs façons de résoudre un problème 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/02_ds_en.html">Data structures or many ways of organizing your stuff 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/099algo_map.html">Roadmap and cheatsheet of algorithms and data structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../web/index.html">Web Related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label for="toctree-checkbox-5"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_en.html">Complete tutorial on scraping French news from Le Monde 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_fr.html">Scraper « le monde » et construire ton propre corpus 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/02_forum_en.html">On your way to scraping French forums 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/03_django_en.html">Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linguistique_informatique/index.html">Computational Linguistics in R</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label for="toctree-checkbox-6"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/01_zipf_fr.html">La loi de Zipf illustrée avec gutenbergr en R 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/02_mca_ergatif_fr.html">Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/03_pca_inclusion_fr.html">Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/01_bash.html">My codebase for bash/shell script (macOS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/02_tmux.html">Tumux-related code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/03_python.html">My python codebase (including packages/libraries)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧">
+<h1>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧<a class="headerlink" href="#Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="What-you-are-going-to-learn">
+<h2>What you are going to learn<a class="headerlink" href="#What-you-are-going-to-learn" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">requests</span></code> is a very popular package in Python because it provides many convenient methods to handle requests, parsing and exception handling. One could also use the official <code class="docutils literal notranslate"><span class="pre">urllib</span></code> package, however for the same tasks it is overall much easier to use requests due to its code design. You can clearly see the philosophy of the creator through the website’s motto:</p>
+<p><img alt="image1" src="better_programmer/img/image/2021-04-04-16-31-25.png"/></p>
+<p>The objective of this tutorial is to introduce you to objected-oriented programming (OOP) by imitating a working example in <code class="docutils literal notranslate"><span class="pre">requests</span></code>. After having a grasp of the very basic principles of OOP, we would move on to a more elaborate example to make you better seize the benefits of OOP.</p>
+<p>At the end you will be able to build a minimal web scraping framework allowing to scrape articles of the famous French newspaper <code class="docutils literal notranslate"><span class="pre">Le</span> <span class="pre">Monde</span></code> and the American newspaper <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">York</span> <span class="pre">Times</span></code>.</p>
+<p>Before starting this tutorial, be sure to have installed <code class="docutils literal notranslate"><span class="pre">requests</span></code> and <code class="docutils literal notranslate"><span class="pre">beautiful</span> <span class="pre">soup</span></code> with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install requests
+pip install beautifulsoup4
+</pre></div>
+</div>
+</div>
+<div class="section" id="A-working-example-in-requests">
+<h2>A working example in requests<a class="headerlink" href="#A-working-example-in-requests" title="Permalink to this headline">¶</a></h2>
+<p>Here is a quick starting example using <code class="docutils literal notranslate"><span class="pre">requests</span></code>, as you can see from the output.</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">get</span></code> method returns a class object.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">status</span> <span class="pre">code</span></code> tells us that the request is successful.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">text</span></code> property returns the source code of Google homepage.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">cookies</span></code> property returns your cookies.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://www.google.com/'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The get method returns a class object."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The status code tells us that the request is successful."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The text property returns the source code of Google homepage."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The cookies property returns your cookies."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The get method returns a class object.
+-------------
+&lt;class 'requests.models.Response'&gt;
+
+The status code tells us that the request is successful.
+-------------
+200
+
+The text property returns the source code of Google homepage.
+-------------
+&lt;class 'str'&gt;
+&lt;!doctype html&gt;&lt;html itemscope="" itemtype="http://schema.org/WebPage" lang="fr"&gt;&lt;head&gt;&lt;meta content="text/html; charset=UTF-8" http-equiv="Content-Type"&gt;&lt;meta content="/images/branding/googleg/1x/googleg_standard_color_128dp.png" itemprop="image"&gt;&lt;title&gt;Google&lt;/title&gt;&lt;script nonce="EVjWNLKn/4GJbqSpNyB4Cw=="&gt;(function(){window.google={kEI:'qs9oYJfZE5mdjLsPvseTqAY',kEXPI:'0,18167,37697,1246576,96,56873,954,756,4349,206,2414,2390,2316,383,246,5,1129,225,1300,3951,5,7674,1114836,1232,1196551,500,302679,26305,51224,16114,17444,11240,9188,8384,4859,1361,284,9007,3020,4747,12841,4020,978,13228,2677,297,873,38,10584,14528,4516,2778,919,2277,8,85,2711,887,707,1278,2212,530,149,1103,840,517,1466,56,157,4101,4120,2023,1777,520,4271,326,1284,8789,3227,419,1571,856,6,5599,6755,5096,599,7278,3748,1180,108,3407,908,2,941,2614,2397,7470,3275,3,346,230,1835,8,4616,149,5990,6299,1686,1,1,2,1528,2304,217,1019,1145,4658,1791,2892,460,1555,4067,7434,3824,1297,1409,344,2658,3903,1,339,518,912,564,1120,30,3852,1811,2466,5499,2305,638,3584,3496,9793,11,731,665,2145,376,3309,2527,479,512,871,185,907,1140,19,48,99,2276,696,6,908,3,1327,2214,1,1042,2,3133,5491,276,501,894,603,1229,1539,1814,38,245,262,650,3434,1940,618,1260,1194,2,1507,1030,1761,33,368,31,2859,424,286,77,1694,2,1394,115,379,922,109,8,27,779,2,465,1721,2,482,1922,626,21,2548,2713,284,20,150,1169,471,142,540,296,392,2,2128,108,1130,2,738,2,41,1,1,18,618,9,244,638,23,350,1,1,1,426,170,240,377,810,81,13,2044,287,411,135,51,677,318,2,2,500,108,291,119,784,204,217,449,27,1557,1717,3,333,394,186,723,5,131,205,189,37,2,791,2153,534,230,5665488,3870,35,226,5997078,2800707,882,444,1,2,80,1,1796,1,9,2,2551,1,748,141,795,563,1,4265,1,1,2,1331,3299,843,1,2608,155,17,13,72,338,13,16,46,5,39,97,41,6,4,6,16,4,47,38,8,111,3,2,2,2,2,2,2,2,2,2,2,2,2,6,2,2,2,2,2,2,2,11,1,10,2,34,66,33,7,10,40,25,2,23956273,148,4010124,267,247,26533,601,2,1223,555',kBL:'1D5i'};google.sn='webhp';google.kHL='fr';})();(function(){
+var f,h=[];function k(a){for(var b;a&amp;&amp;(!a.getAttribute||!(b=a.getAttribute("eid")));)a=a.parentNode;return b||f}function l(a){for(var b=null;a&amp;&amp;(!a.getAttribute||!(b=a.getAttribute("leid")));)a=a.parentNode;return b}
+function m(a,b,c,d,g){var e="";c||-1!=b.search("&amp;ei=")||(e="&amp;ei="+k(d),-1==b.search("&amp;lei=")&amp;&amp;(d=l(d))&amp;&amp;(e+="&amp;lei="+d));d="";!c&amp;&amp;window._cshid&amp;&amp;-1==b.search("&amp;cshid=")&amp;&amp;"slh"!=a&amp;&amp;(d="&amp;cshid="+window._cshid);c=c||"/"+(g||"gen_204")+"?atyp=i&amp;ct="+a+"&amp;cad="+b+e+"&amp;zx="+Date.now()+d;/^http:/i.test(c)&amp;&amp;"https:"==window.location.protocol&amp;&amp;(google.ml(Error("a"),!1,{src:c,glmm:1}),c="");return c};f=google.kEI;google.getEI=k;google.getLEI=l;google.ml=function(){return null};google.log=function(a,b,c,d,g){if(c=m(a,b,c,d,g)){a=new Image;var e=h.length;h[e]=a;a.onerror=a.onload=a.onabort=function(){delete h[e]};a.src=c}};google.logUrl=m;}).call(this);(function(){google.y={};google.sy=[];google.x=function(a,b){if(a)var c=a.id;else{do c=Math.random();while(google.y[c])}google.y[c]=[a,b];return!1};google.sx=function(a){google.sy.push(a)};google.lm=[];google.plm=function(a){google.lm.push.apply(google.lm,a)};google.lq=[];google.load=function(a,b,c){google.lq.push([[a],b,c])};google.loadAll=function(a,b){google.lq.push([a,b])};google.bx=!1;google.lx=function(){};}).call(this);google.f={};(function(){
+document.documentElement.addEventListener("submit",function(b){var a;if(a=b.target){var c=a.getAttribute("data-submitfalse");a="1"==c||"q"==c&amp;&amp;!a.elements.q.value?!0:!1}else a=!1;a&amp;&amp;(b.preventDefault(),b.stopPropagation())},!0);document.documentElement.addEventListener("click",function(b){var a;a:{for(a=b.target;a&amp;&amp;a!=document.documentElement;a=a.parentElement)if("A"==a.tagName){a="1"==a.getAttribute("data-nohref");break a}a=!1}a&amp;&amp;b.preventDefault()},!0);}).call(this);&lt;/script&gt;&lt;style&gt;#gbar,#guser{font-size:13px;padding-top:1px !important;}#gbar{height:22px}#guser{padding-bottom:7px !important;text-align:right}.gbh,.gbd{border-top:1px solid #c9d7f1;font-size:1px}.gbh{height:0;position:absolute;top:24px;width:100%}@media all{.gb1{height:22px;margin-right:.5em;vertical-align:top}#gbar{float:left}}a.gb1,a.gb4{text-decoration:underline !important}a.gb1,a.gb4{color:#00c !important}.gbi .gb4{color:#dd8e27 !important}.gbf .gb4{color:#900 !important}
+&lt;/style&gt;&lt;style&gt;body,td,a,p,.h{font-family:arial,sans-serif}body{margin:0;overflow-y:scroll}#gog{padding:3px 8px 0}td{line-height:.8em}.gac_m td{line-height:17px}form{margin-bottom:20px}.h{color:#1558d6}em{font-weight:bold;font-style:normal}.lst{height:25px;width:496px}.gsfi,.lst{font:18px arial,sans-serif}.gsfs{font:17px arial,sans-serif}.ds{display:inline-box;display:inline-block;margin:3px 0 4px;margin-left:4px}input{font-family:inherit}body{background:#fff;color:#000}a{color:#4b11a8;text-decoration:none}a:hover,a:active{text-decoration:underline}.fl a{color:#1558d6}a:visited{color:#4b11a8}.sblc{padding-top:5px}.sblc a{display:block;margin:2px 0;margin-left:13px;font-size:11px}.lsbb{background:#f8f9fa;border:solid 1px;border-color:#dadce0 #70757a #70757a #dadce0;height:30px}.lsbb{display:block}#WqQANb a{display:inline-block;margin:0 12px}.lsb{background:url(/images/nav_logo229.png) 0 -261px repeat-x;border:none;color:#000;cursor:pointer;height:30px;margin:0;outline:0;font:15px arial,sans-serif;vertical-align:top}.lsb:active{background:#dadce0}.lst:focus{outline:none}&lt;/style&gt;&lt;script nonce="EVjWNLKn/4GJbqSpNyB4Cw=="&gt;&lt;/script&gt;&lt;/head&gt;&lt;body bgcolor="#fff"&gt;&lt;script nonce="EVjWNLKn/4GJbqSpNyB4Cw=="&gt;(function(){var src='/images/nav_logo229.png';var iesg=false;document.body.onload = function(){window.n &amp;&amp; window.n();if (document.images){new Image().src=src;}
+if (!iesg){document.f&amp;&amp;document.f.q.focus();document.gbqf&amp;&amp;document.gbqf.q.focus();}
+}
+})();&lt;/script&gt;&lt;div id="mngb"&gt;&lt;div id=gbar&gt;&lt;nobr&gt;&lt;b class=gb1&gt;Recherche&lt;/b&gt; &lt;a class=gb1 href="https://www.google.fr/imghp?hl=fr&amp;tab=wi"&gt;Images&lt;/a&gt; &lt;a class=gb1 href="https://maps.google.fr/maps?hl=fr&amp;tab=wl"&gt;Maps&lt;/a&gt; &lt;a class=gb1 href="https://play.google.com/?hl=fr&amp;tab=w8"&gt;Play&lt;/a&gt; &lt;a class=gb1 href="https://www.youtube.com/?gl=FR&amp;tab=w1"&gt;YouTube&lt;/a&gt; &lt;a class=gb1 href="https://news.google.com/?tab=wn"&gt;Actualités&lt;/a&gt; &lt;a class=gb1 href="https://mail.google.com/mail/?tab=wm"&gt;Gmail&lt;/a&gt; &lt;a class=gb1 href="https://drive.google.com/?tab=wo"&gt;Drive&lt;/a&gt; &lt;a class=gb1 style="text-decoration:none" href="https://www.google.fr/intl/fr/about/products?tab=wh"&gt;&lt;u&gt;Plus&lt;/u&gt; &amp;raquo;&lt;/a&gt;&lt;/nobr&gt;&lt;/div&gt;&lt;div id=guser width=100%&gt;&lt;nobr&gt;&lt;span id=gbn class=gbi&gt;&lt;/span&gt;&lt;span id=gbf class=gbf&gt;&lt;/span&gt;&lt;span id=gbe&gt;&lt;/span&gt;&lt;a href="http://www.google.fr/history/optout?hl=fr" class=gb4&gt;Historique Web&lt;/a&gt; | &lt;a  href="/preferences?hl=fr" class=gb4&gt;Paramètres&lt;/a&gt; | &lt;a target=_top id=gb_70 href="https://accounts.google.com/ServiceLogin?hl=fr&amp;passive=true&amp;continue=https://www.google.com/&amp;ec=GAZAAQ" class=gb4&gt;Connexion&lt;/a&gt;&lt;/nobr&gt;&lt;/div&gt;&lt;div class=gbh style=left:0&gt;&lt;/div&gt;&lt;div class=gbh style=right:0&gt;&lt;/div&gt;&lt;/div&gt;&lt;center&gt;&lt;br clear="all" id="lgpd"&gt;&lt;div id="lga"&gt;&lt;img alt="Google" height="92" src="/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png" style="padding:28px 0 14px" width="272" id="hplogo"&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;form action="/search" name="f"&gt;&lt;table cellpadding="0" cellspacing="0"&gt;&lt;tr valign="top"&gt;&lt;td width="25%"&gt;&amp;nbsp;&lt;/td&gt;&lt;td align="center" nowrap=""&gt;&lt;input name="ie" value="ISO-8859-1" type="hidden"&gt;&lt;input value="fr" name="hl" type="hidden"&gt;&lt;input name="source" type="hidden" value="hp"&gt;&lt;input name="biw" type="hidden"&gt;&lt;input name="bih" type="hidden"&gt;&lt;div class="ds" style="height:32px;margin:4px 0"&gt;&lt;input class="lst" style="margin:0;padding:5px 8px 0 6px;vertical-align:top;color:#000" autocomplete="off" value="" title="Recherche Google" maxlength="2048" name="q" size="57"&gt;&lt;/div&gt;&lt;br style="line-height:0"&gt;&lt;span class="ds"&gt;&lt;span class="lsbb"&gt;&lt;input class="lsb" value="Recherche Google" name="btnG" type="submit"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="ds"&gt;&lt;span class="lsbb"&gt;&lt;input class="lsb" id="tsuid1" value="J'ai de la chance" name="btnI" type="submit"&gt;&lt;script nonce="EVjWNLKn/4GJbqSpNyB4Cw=="&gt;(function(){var id='tsuid1';document.getElementById(id).onclick = function(){if (this.form.q.value){this.checked = 1;if (this.form.iflsig)this.form.iflsig.disabled = false;}
+else top.location='/doodles/';};})();&lt;/script&gt;&lt;input value="AINFCbYAAAAAYGjdusjrOdF-VqxQ4Zw5EKEoanQuATTf" name="iflsig" type="hidden"&gt;&lt;/span&gt;&lt;/span&gt;&lt;/td&gt;&lt;td class="fl sblc" align="left" nowrap="" width="25%"&gt;&lt;a href="/advanced_search?hl=fr&amp;amp;authuser=0"&gt;Recherche avancée&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;input id="gbv" name="gbv" type="hidden" value="1"&gt;&lt;script nonce="EVjWNLKn/4GJbqSpNyB4Cw=="&gt;(function(){var a,b="1";if(document&amp;&amp;document.getElementById)if("undefined"!=typeof XMLHttpRequest)b="2";else if("undefined"!=typeof ActiveXObject){var c,d,e=["MSXML2.XMLHTTP.6.0","MSXML2.XMLHTTP.3.0","MSXML2.XMLHTTP","Microsoft.XMLHTTP"];for(c=0;d=e[c++];)try{new ActiveXObject(d),b="2"}catch(h){}}a=b;if("2"==a&amp;&amp;-1==location.search.indexOf("&amp;gbv=2")){var f=google.gbvu,g=document.getElementById("gbv");g&amp;&amp;(g.value=a);f&amp;&amp;window.setTimeout(function(){location.href=f},0)};}).call(this);&lt;/script&gt;&lt;/form&gt;&lt;div id="gac_scont"&gt;&lt;/div&gt;&lt;div style="font-size:83%;min-height:3.5em"&gt;&lt;br&gt;&lt;/div&gt;&lt;span id="footer"&gt;&lt;div style="font-size:10pt"&gt;&lt;div style="margin:19px auto;text-align:center" id="WqQANb"&gt;&lt;a href="/intl/fr/ads/"&gt;Solutions publicitaires&lt;/a&gt;&lt;a href="/services/"&gt;Solutions d'entreprise&lt;/a&gt;&lt;a href="/intl/fr/about.html"&gt;À propos de Google&lt;/a&gt;&lt;a href="https://www.google.com/setprefdomain?prefdom=FR&amp;amp;prev=https://www.google.fr/&amp;amp;sig=K_MzmiVFsLFIp3kWzbwMcpMftHbp8%3D"&gt;Google.fr&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;p style="font-size:8pt;color:#70757a"&gt;&amp;copy; 2021 - &lt;a href="/intl/fr/policies/privacy/"&gt;Confidentialité&lt;/a&gt; - &lt;a href="/intl/fr/policies/terms/"&gt;Conditions&lt;/a&gt;&lt;/p&gt;&lt;/span&gt;&lt;/center&gt;&lt;script nonce="EVjWNLKn/4GJbqSpNyB4Cw=="&gt;(function(){window.google.cdo={height:0,width:0};(function(){var a=window.innerWidth,b=window.innerHeight;if(!a||!b){var c=window.document,d="CSS1Compat"==c.compatMode?c.documentElement:c.body;a=d.clientWidth;b=d.clientHeight}a&amp;&amp;b&amp;&amp;(a!=google.cdo.width||b!=google.cdo.height)&amp;&amp;google.log("","","/client_204?&amp;atyp=i&amp;biw="+a+"&amp;bih="+b+"&amp;ei="+google.kEI);}).call(this);})();(function(){var u='/xjs/_/js/k\x3dxjs.hp.en.rMSPgVHe7zM.O/m\x3dsb_he,d/am\x3dAHiCOA/d\x3d1/rs\x3dACT90oG4raM0O3coqYKShqRNsTfGdg4Qzw';
+var d=this||self,e=/^[\w+/_-]+[=]{0,2}$/,f=null,g=function(a){return(a=a.querySelector&amp;&amp;a.querySelector("script[nonce]"))&amp;&amp;(a=a.nonce||a.getAttribute("nonce"))&amp;&amp;e.test(a)?a:""},h=function(a){return a};var l;var n=function(a,b){this.g=b===m?a:""};n.prototype.toString=function(){return this.g+""};var m={};function p(){var a=u;google.lx=function(){q(a);google.lx=function(){}};google.bx||google.lx()}
+function q(a){var b=document;var c="SCRIPT";"application/xhtml+xml"===b.contentType&amp;&amp;(c=c.toLowerCase());c=b.createElement(c);if(void 0===l){b=null;var k=d.trustedTypes;if(k&amp;&amp;k.createPolicy){try{b=k.createPolicy("goog#html",{createHTML:h,createScript:h,createScriptURL:h})}catch(r){d.console&amp;&amp;d.console.error(r.message)}l=b}else l=b}a=(b=l)?b.createScriptURL(a):a;a=new n(a,m);c.src=a instanceof n&amp;&amp;a.constructor===n?a.g:"type_error:TrustedResourceUrl";(a=c.ownerDocument&amp;&amp;c.ownerDocument.defaultView)&amp;&amp;
+a!=d?a=g(a.document):(null===f&amp;&amp;(f=g(d.document)),a=f);a&amp;&amp;c.setAttribute("nonce",a);google.timers&amp;&amp;google.timers.load&amp;&amp;google.tick&amp;&amp;google.tick("load","xjsls");document.body.appendChild(c)};setTimeout(function(){p()},0);})();(function(){window.google.xjsu='/xjs/_/js/k\x3dxjs.hp.en.rMSPgVHe7zM.O/m\x3dsb_he,d/am\x3dAHiCOA/d\x3d1/rs\x3dACT90oG4raM0O3coqYKShqRNsTfGdg4Qzw';})();function _DumpException(e){throw e;}
+function _F_installCss(c){}
+(function(){google.jl={blt:'none',dw:false,em:[],emtn:0,ine:false,lls:'default',pdt:0,snet:true,uwp:true};})();(function(){var pmc='{\x22d\x22:{},\x22sb_he\x22:{\x22agen\x22:true,\x22cgen\x22:true,\x22client\x22:\x22heirloom-hp\x22,\x22dh\x22:true,\x22dhqt\x22:true,\x22ds\x22:\x22\x22,\x22ffql\x22:\x22fr\x22,\x22fl\x22:true,\x22host\x22:\x22google.com\x22,\x22isbh\x22:28,\x22jsonp\x22:true,\x22lm\x22:true,\x22msgs\x22:{\x22cibl\x22:\x22Effacer la recherche\x22,\x22dym\x22:\x22Essayez avec cette orthographe :\x22,\x22lcky\x22:\x22J\\u0026#39;ai de la chance\x22,\x22lml\x22:\x22En savoir plus\x22,\x22oskt\x22:\x22Outils de saisie\x22,\x22psrc\x22:\x22Cette suggestion a bien été supprimée de votre \\u003Ca href\x3d\\\x22/history\\\x22\\u003Ehistorique Web\\u003C/a\\u003E.\x22,\x22psrl\x22:\x22Supprimer\x22,\x22sbit\x22:\x22Recherche par image\x22,\x22srch\x22:\x22Recherche Google\x22},\x22nrft\x22:false,\x22ovr\x22:{},\x22pq\x22:\x22\x22,\x22refpd\x22:true,\x22rfs\x22:[],\x22sbas\x22:\x220 3px 8px 0 rgba(0,0,0,0.2),0 0 0 1px rgba(0,0,0,0.08)\x22,\x22sbpl\x22:16,\x22sbpr\x22:16,\x22scd\x22:10,\x22stok\x22:\x221lDstMgtMp9RFnSbOW3Ur5w3QBw\x22,\x22uhde\x22:false}}';google.pmc=JSON.parse(pmc);})();&lt;/script&gt;        &lt;/body&gt;&lt;/html&gt;
+
+The cookies property returns your cookies.
+-------------
+&lt;RequestsCookieJar[&lt;Cookie CONSENT=PENDING+267 for .google.com/&gt;]&gt;
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Class,-constructor,-method-and-property">
+<h2>Class, constructor, method and property<a class="headerlink" href="#Class,-constructor,-method-and-property" title="Permalink to this headline">¶</a></h2>
+<p>When we talk about objected-oriented programming (OOP), no matter which language you are using (Some languages like Java and C++ are more natively class-based), the four most fundamental concepts are <code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">constructor</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code> and <code class="docutils literal notranslate"><span class="pre">property</span></code>.</p>
+<p>Let’s construct our first class in Python. A class is a concept, a perception. Let’s say we want to define what is a human being (Person).</p>
+<p>Typically you would start building your <code class="docutils literal notranslate"><span class="pre">Person</span></code> (capital case) class by defining it’s properties (name, nationality, job) using a constructor (the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> here). You would also like to define the class’s method (what a human can do).</p>
+<p>One thing might seem odd for beginners is the <code class="docutils literal notranslate"><span class="pre">self</span></code> parameter. Roughly speaking it’s a placeholder which allows your methods to access the properties.</p>
+<p>The code should be quite self-explanatory.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">nationality</span><span class="p">,</span> <span class="n">job</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">nationality</span> <span class="o">=</span> <span class="n">nationality</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">job</span> <span class="o">=</span> <span class="n">job</span>
+
+  <span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Hello my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">I'm </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nationality</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">I work in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+
+<span class="c1"># initiate a class</span>
+<span class="n">me</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Xiaoou"</span><span class="p">,</span> <span class="s2">"Chinese"</span><span class="p">,</span> <span class="s2">"NLP"</span><span class="p">)</span>
+
+<span class="c1"># using the greeting method</span>
+<span class="n">me</span><span class="o">.</span><span class="n">greeting</span><span class="p">()</span>
+
+<span class="c1"># access the name property</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">me</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Hello my name is Xiaoou.
+I'm Chinese.
+I work in NLP.
+Xiaoou
+</pre></div></div>
+</div>
+<p>So far so good. We have built our first class. Now let’s imitate the schema used in the working example of <code class="docutils literal notranslate"><span class="pre">requests</span></code> we saw at the beginning. As a reminder, the working code bloc is:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://www.google.com/'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Imitate-the-requests-framework">
+<h2>Imitate the requests framework<a class="headerlink" href="#Imitate-the-requests-framework" title="Permalink to this headline">¶</a></h2>
+<p>When you run <code class="docutils literal notranslate"><span class="pre">requests.get("https://www.google.com/")</span></code>, you have an object of class <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">'requests.models.Response'&gt;</span></code>. This object has two properties: <code class="docutils literal notranslate"><span class="pre">status_code</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code>. Let’s replicate this schema with an example of article scraping.</p>
+<p>So basically we are trying to have an object returned after calling a function/method.</p>
+<p>So we first create the class <code class="docutils literal notranslate"><span class="pre">Content</span></code> and then the function <code class="docutils literal notranslate"><span class="pre">scrape_lemonde</span></code> which encapsulate the scraped url, title, and the first 100 characters in the object created by the <code class="docutils literal notranslate"><span class="pre">Content</span></code> class.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="k">class</span> <span class="nc">Content</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first100</span> <span class="o">=</span> <span class="n">first100</span>
+
+<span class="k">def</span> <span class="nf">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">soup</span>
+
+<span class="k">def</span> <span class="nf">scrape_lemonde</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">body_tags</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">article</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">"p"</span><span class="p">,</span> <span class="s2">"h2"</span><span class="p">],</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">body_tags</span><span class="p">:</span>
+        <span class="n">body</span> <span class="o">+=</span> <span class="n">tag</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+    <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html'</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">scrape_lemonde</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Url
+---------
+https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html
+
+Title
+----------
+Le mouvement Wiener Werkstätte, dans « Cartes postales magazine »
+
+First 100 characters
+-----------
+« Le 22 janvier 2012 décède Paul Armand, ce qui entraîne la mort de Cartes postales et collections (
+</pre></div></div>
+</div>
+<p>What are the benefits of such an approach ?</p>
+<p>Let’s imagine that the end user who uses your product only have the <code class="docutils literal notranslate"><span class="pre">scrape_lemonde</span></code> function. He would have to know another 3 functions <code class="docutils literal notranslate"><span class="pre">get_url</span></code>, <code class="docutils literal notranslate"><span class="pre">get_content</span></code> and <code class="docutils literal notranslate"><span class="pre">get_title</span></code> to be able to use your scraper.</p>
+<p>It’s quite complex and counter-intuitive.</p>
+<p>However, an objected-oriented approach is much more comprehensible. Because a webpage naturally has a title, a url and text. Your end user doesn’t need to know how you manage to get these informations, he just needs to know how to access them. That’s the principle of <code class="docutils literal notranslate"><span class="pre">encapsulation</span></code>.</p>
+<p>Note that I’ve deliberately simplified some concepts relevant to <code class="docutils literal notranslate"><span class="pre">software</span> <span class="pre">design</span></code> as I don’t want to get too deep into it. However I hope that you see already how OOP works in vivo and the benefits of such approach.</p>
+<p>Another benefit (besides encapsulation and better code structure) is its underlying <strong>normalizing abilities</strong>. Let’s say you now want to scrape New York Times. It suffices to add a <code class="docutils literal notranslate"><span class="pre">scrape_nytimes</span></code> while returning <strong>always the same object</strong> (<code class="docutils literal notranslate"><span class="pre">Content</span></code> with 3 properties).</p>
+<p>This way you normalize your framework by defining an <strong>unified output</strong> regardless of the scraper/function that the user employs.</p>
+<p>Let’s implement it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># The new function</span>
+<span class="k">def</span> <span class="nf">scrape_nytimes</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">bs</span> <span class="o">=</span> <span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'div.StoryBodyCompanionColumn div p'</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">])</span>
+    <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+
+<span class="c1"># Exactly the same schema</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://www.nytimes.com/2018/01/25/opinion/sunday/silicon-valley-immortality.html'</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">scrape_nytimes</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Url
+---------
+https://www.nytimes.com/2018/01/25/opinion/sunday/silicon-valley-immortality.html
+
+Title
+----------
+The Men Who Want to Live Forever
+
+First 100 characters
+-----------
+Would you like to live forever? Some billionaires, already invincible in every other way, have decid
+</pre></div></div>
+</div>
+<p>Isn’t that beautiful?</p>
+<p>However the structure of our code (or product) is still one step from being totally intuitive. As a common mortal, I feel like a <code class="docutils literal notranslate"><span class="pre">scraper</span></code> class would be a perfect place to start instead of having to know the two functions <code class="docutils literal notranslate"><span class="pre">scrape_lemonde</span></code> and <code class="docutils literal notranslate"><span class="pre">scrape_nytimes</span></code>.</p>
+<p>Let’s do it! Note that we reuse the <code class="docutils literal notranslate"><span class="pre">Content</span></code> class created earlier.</p>
+<p>Then we integrate the two scraper functions in a new <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> class.</p>
+<p>The new <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> class has <code class="docutils literal notranslate"><span class="pre">journal</span></code> as parameter, which allows us to adjust the scraper’s behavior according to the newspaper (which uses different tags to surround text body).</p>
+<p>It’s important to add <code class="docutils literal notranslate"><span class="pre">self</span></code> as a parameter when you create functions in a class. Actually when “functions” are created inside a <code class="docutils literal notranslate"><span class="pre">class</span></code> they are called <code class="docutils literal notranslate"><span class="pre">methods</span></code> and the <code class="docutils literal notranslate"><span class="pre">self</span></code> parameter suggests that these are <code class="docutils literal notranslate"><span class="pre">methods</span></code> acting on objects of the same <code class="docutils literal notranslate"><span class="pre">class</span></code>.</p>
+<p>The last thing worth mentioning is the <code class="docutils literal notranslate"><span class="pre">print</span></code> in the constructor which returns a message when the user wishes to crawl a newspaper not recognized by the Crawler.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">Content</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first100</span> <span class="o">=</span> <span class="n">first100</span>
+
+<span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">journal</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">journal</span> <span class="o">=</span> <span class="n">journal</span>
+        <span class="c1"># if newspaper not recognized</span>
+        <span class="k">if</span> <span class="n">journal</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"lemonde"</span><span class="p">,</span><span class="s2">"nyt"</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Our services doesn't scrape this website for the moment.</span><span class="se">\n</span><span class="s2">Please contact us to build a scraper for this journal :D"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_parsed_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">soup</span>
+
+    <span class="k">def</span> <span class="nf">scrape_lemonde</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">body_tags</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">article</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">"p"</span><span class="p">,</span> <span class="s2">"h2"</span><span class="p">],</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">body_tags</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">+=</span> <span class="n">tag</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+        <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">scrape_nytimes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
+        <span class="n">bs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'div.StoryBodyCompanionColumn div p'</span><span class="p">)</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">])</span>
+        <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">journal</span> <span class="o">==</span> <span class="s2">"lemonde"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scrape_lemonde</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">journal</span> <span class="o">==</span> <span class="s2">"nyt"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scrape_nytimes</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Le-monde-scraper">
+<h3>Le monde scraper<a class="headerlink" href="#Le-monde-scraper" title="Permalink to this headline">¶</a></h3>
+<p>Now let’s generate a scraper for articles of the newspaper <code class="docutils literal notranslate"><span class="pre">Le</span> <span class="pre">Monde</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create the Le Monde Crawler</span>
+<span class="n">lemonde_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"lemonde"</span><span class="p">)</span>
+
+<span class="n">lemonde_content</span> <span class="o">=</span> <span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Url
+---------
+https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html
+
+Title
+----------
+Le mouvement Wiener Werkstätte, dans « Cartes postales magazine »
+
+First 100 characters
+-----------
+« Le 22 janvier 2012 décède Paul Armand, ce qui entraîne la mort de Cartes postales et collections (
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="New-York-Times-scraper">
+<h3>New York Times scraper<a class="headerlink" href="#New-York-Times-scraper" title="Permalink to this headline">¶</a></h3>
+<p>Now a scraper for articles of New York Times.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Create the New York Times Crawler</span>
+<span class="n">nyt_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"nyt"</span><span class="p">)</span>
+
+<span class="n">nyt_content</span> <span class="o">=</span> <span class="n">nyt_crawler</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://www.nytimes.com/2021/04/02/us/politics/capitol-attack.html"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nyt_content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nyt_content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nyt_content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Url
+---------
+https://www.nytimes.com/2021/04/02/us/politics/capitol-attack.html
+
+Title
+----------
+Driver Rams Into Officers at Capitol, Killing One and Injuring Another
+
+First 100 characters
+-----------
+WASHINGTON — The band of razor wire-topped fencing around the Capitol had recently come down. The he
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Unknown-journal-name">
+<h3>Unknown journal name<a class="headerlink" href="#Unknown-journal-name" title="Permalink to this headline">¶</a></h3>
+<p>When the end user enters an unknown journal, it will spit out the pre-defined message.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">bbc_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"bbc"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Our services doesn't scrape this website for the moment.
+Please contact us to build a scraper for this journal :D
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Wrap-up">
+<h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Permalink to this headline">¶</a></h2>
+<p>Bravo for having reading so far, hopefully you have:</p>
+<ol class="arabic simple">
+<li><p>Learned how to manage a little web-scraping project using class in Python</p></li>
+<li><p>Understood the benefits of object oriented programming both at the level of code structuring and at the level of software design</p></li>
+<li><p>Known the basic underlying principles of frameworks like <code class="docutils literal notranslate"><span class="pre">requests</span></code></p></li>
+</ol>
+<p>Now it’s time to build your own framework :D</p>
+<p>If you want to know more web scraping, read the wonderful book by Ryan Mitchell from which this tutorial is partly inspired.</p>
+<p><em>Web Scraping with Python: Collecting More Data from the Modern Web</em></p>
+<p>If you want to dive into object-oriented programming, be sure to check the book of Mark Lutz:</p>
+<p><em>Programming Python: Powerful Object-Oriented Programming</em></p>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="05_oop_web_scraping_cooper_en.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Be a responsible programmer when doing Object-Oriented Programming 🇬🇧</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="03_jupyter_remote_pycharm.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Connect to remote jupyter notebook in Pycharm</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Xiaoou Wang
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../sources/better_programmer/04_oop_web_scraping_en.ipynb.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧</a><ul>
+<li><a class="reference internal" href="#What-you-are-going-to-learn">What you are going to learn</a></li>
+<li><a class="reference internal" href="#A-working-example-in-requests">A working example in requests</a></li>
+<li><a class="reference internal" href="#Class,-constructor,-method-and-property">Class, constructor, method and property</a></li>
+<li><a class="reference internal" href="#Imitate-the-requests-framework">Imitate the requests framework</a><ul>
+<li><a class="reference internal" href="#Le-monde-scraper">Le monde scraper</a></li>
+<li><a class="reference internal" href="#New-York-Times-scraper">New York Times scraper</a></li>
+<li><a class="reference internal" href="#Unknown-journal-name">Unknown journal name</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Wrap-up">Wrap-up</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script src="../static/jquery.js"></script>
+    <script src="../static/underscore.js"></script>
+    <script src="../static/doctools.js"></script>
+    <script src="../static/clipboard.min.js"></script>
+    <script src="../static/copybutton.js"></script>
+    <script src="../static/tabs.js"></script>
+    <script >
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WGY2PHYB"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-58WGY2PHYB');
+</script>
+<!-- Default Statcounter code for nlpinfrench
+http://nlpinfrench.fr -->
+<script type="text/javascript">
+var sc_project=12500373;
+var sc_invisible=1;
+var sc_security="def60251";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12500373/0/def60251/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
+</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../static/custom.js"></script>
+    <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

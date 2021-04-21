@@ -1,0 +1,953 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Roadmap and cheatsheet of algorithms and data structures" href="099algo_map.html" /><link rel="prev" title="Algorithme ou plusieurs façons de résoudre un problème 🇫🇷" href="01_intro_fr.html" />
+
+    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+        <title>Data structures or many ways of organizing your stuff 🇬🇧 - NLP in French</title>
+      <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
+    <link rel="stylesheet" href="../static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+    <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NLP in French</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../static/nlp_Logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../static/nlp_Logo.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">NLP in French</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/index.html">NLP and Machine Learning-related</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/01_compara_anno_fr.html">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/02_classification_prenoms_fr.html">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/03_classification_lemonde_fr.html">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/index.html">Transformers in NLP with PyTorch, TensorFlow and Hugging Face</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_en.html">10 questions on Bert 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_fr.html">10 questions sur Bert 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/02_firstBert_fr.html">Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../better_programmer/index.html">Better Programmer</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/01_python_fr.html">Mieux programmer en Python 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/02_git3_en.html">A serious guide to git 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/03_jupyter_remote_pycharm.html">Connect to remote jupyter notebook in Pycharm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/04_oop_web_scraping_en.html">Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/05_oop_web_scraping_cooper_en.html">Be a responsible programmer when doing Object-Oriented Programming 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Algorithms and data structures by examples in Python</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_intro_en.html">Algorithm or many ways of solving a problem 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro_fr.html">Algorithme ou plusieurs façons de résoudre un problème 🇫🇷</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Data structures or many ways of organizing your stuff 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="099algo_map.html">Roadmap and cheatsheet of algorithms and data structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../web/index.html">Web Related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label for="toctree-checkbox-5"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_en.html">Complete tutorial on scraping French news from Le Monde 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_fr.html">Scraper « le monde » et construire ton propre corpus 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/02_forum_en.html">On your way to scraping French forums 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/03_django_en.html">Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linguistique_informatique/index.html">Computational Linguistics in R</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label for="toctree-checkbox-6"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/01_zipf_fr.html">La loi de Zipf illustrée avec gutenbergr en R 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/02_mca_ergatif_fr.html">Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/03_pca_inclusion_fr.html">Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/01_bash.html">My codebase for bash/shell script (macOS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/02_tmux.html">Tumux-related code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/03_python.html">My python codebase (including packages/libraries)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Data-structures-or-many-ways-of-organizing-your-stuff-🇬🇧">
+<h1>Data structures or many ways of organizing your stuff 🇬🇧<a class="headerlink" href="#Data-structures-or-many-ways-of-organizing-your-stuff-🇬🇧" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="I-ain’t-know-nothing-about-data-structures">
+<h2>I ain’t know nothing about data structures<a class="headerlink" href="#I-ain’t-know-nothing-about-data-structures" title="Permalink to this headline">¶</a></h2>
+<p>Many people, when being introduced to data structures related concepts, don’t realize that they already use extensively various kinds of data structures in their life.</p>
+<p>Check out the following example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># First way</span>
+<span class="n">x</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s2">"my name"</span>
+<span class="n">z</span> <span class="o">=</span> <span class="s2">"is Xiaoou"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+
+<span class="c1"># Second way</span>
+<span class="n">presentation</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"hello"</span><span class="p">,</span><span class="s2">"my name"</span><span class="p">,</span><span class="s2">"is Xiaoou"</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">presentation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">presentation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">presentation</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Third way</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">presentation</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">" "</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+hello my name is Xiaoou
+hello my name is Xiaoou
+hello my name is Xiaoou
+</pre></div></div>
+</div>
+<p>In the first approach you use a <code class="docutils literal notranslate"><span class="pre">string</span></code> and you’ll agree that the code, already fulfilling its mission, looks quite weird. The second one looks better because the use of <code class="docutils literal notranslate"><span class="pre">array</span></code> and the third one is the best-looking one because it takes advantage of the <code class="docutils literal notranslate"><span class="pre">iterable</span></code> property of an array.</p>
+</div>
+<div class="section" id="Data-structure,-speed-and-memory">
+<h2>Data structure, speed and memory<a class="headerlink" href="#Data-structure,-speed-and-memory" title="Permalink to this headline">¶</a></h2>
+<p>However, data structure is much more than looking organized. If you’ve read <a class="reference internal" href="01_intro_en.html"><span class="doc">the first tutorial</span></a>, it should be clear to you that speed matters when designing programs. But to what speed is related ? We all know that hardware impacts strongly the performance, however this aspect is unrelated in our discussion. More concretely, when we use the word <code class="docutils literal notranslate"><span class="pre">speed</span></code> in algorithms we are referring specifically to how many steps an algorithm takes.</p>
+<p>Note that on the Internet you will meet a bunch of terms of which I’ve made a summary.</p>
+<p><img alt="test2" src="../_images/2021-04-13-15-43-22.png"/></p>
+<p>Don’t be intimidated by these terms. Although there are some subtle differences, in most non-academic contexts they can be used interchangeably.</p>
+<p>So what do I mean by <code class="docutils literal notranslate"><span class="pre">how</span> <span class="pre">many</span> <span class="pre">steps</span></code>?</p>
+<p>For this you have to know how things are stored/organized on your computer’s memory.</p>
+<div class="section" id="How-computer-memory-works">
+<h3>How computer memory works<a class="headerlink" href="#How-computer-memory-works" title="Permalink to this headline">¶</a></h3>
+<p>Put simply, the computer memory has a lot of <code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">address</span></code>es by means of which we can store things. Some are distributed sparsely while some, like <code class="docutils literal notranslate"><span class="pre">array</span></code>, are placed on a compact memory span.</p>
+<p><img alt="test1" src="../_images/2021-04-13-15-53-53.png"/></p>
+<p>Another common data structure is called <code class="docutils literal notranslate"><span class="pre">set</span></code>. The set is very useful when we need a list of non-duplicate items. A common example is phone book.</p>
+<p>However the difference between array and set goes far beyond the aforementioned constraint. In order to understand the performance of any data structure, you need to know the 4 common ways our code might interact with that data structure.</p>
+<p><img alt="image1" src="../_images/2021-04-13-22-48-30.png"/></p>
+</div>
+</div>
+<div class="section" id="Analyse-a-data-structure-(Read,-search,-insert-and-delete)">
+<h2>Analyse a data structure (Read, search, insert and delete)<a class="headerlink" href="#Analyse-a-data-structure-(Read,-search,-insert-and-delete)" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Read refers to checking the value at a specific memory address.</p></li>
+<li><p>Search refers to checking whether a certain value exists and if so, retrieve the memory address of where this value is located.</p></li>
+<li><p>Insert refers to adding a new value at a specific position.</p></li>
+<li><p>Delete refers to removing a value.</p></li>
+</ul>
+<p>So what is the efficiency of there 4 operations when it comes to array and set?</p>
+<p>Let’s look at the operation of reading. Only 2 steps are necessary for both cases. That’s because these two structures are stored in memory as follows:</p>
+<p><img alt="image2" src="../_images/2021-04-13-22-56-14.png"/></p>
+<p>Each value (content) is retrievable via a memory address which in turn is related to an index.</p>
+<p>Quick anecdote: Do you know why in most programming languages the index starts at 0?</p>
+<p>It’s because 0 means 0 element from the beginning = the same address as the start of of the array, a value <code class="docutils literal notranslate"><span class="pre">remembered</span></code> by your computer when you create an array. Another value recorded is the length of the array.</p>
+<div class="section" id="Read-(list-vs-set)">
+<h3>Read (list vs set)<a class="headerlink" href="#Read-(list-vs-set)" title="Permalink to this headline">¶</a></h3>
+<p>Say that you want to check the value at index 3. All you need to do is:</p>
+<ol class="arabic simple">
+<li><p>Add 3 to the address of the first element.</p></li>
+<li><p>Access the value.</p></li>
+</ol>
+<p>So basically it takes 2 steps.</p>
+</div>
+<div class="section" id="Search-(list-vs-set)">
+<h3>Search (list vs set)<a class="headerlink" href="#Search-(list-vs-set)" title="Permalink to this headline">¶</a></h3>
+<p>Unluckily we don’t have instant access to each value of an array/set, so in the worst case, we’d have to check all the values = N steps to find a value/affirm its absence. This principle applies to both data structures.</p>
+</div>
+<div class="section" id="Insert-(idem)">
+<h3>Insert (idem)<a class="headerlink" href="#Insert-(idem)" title="Permalink to this headline">¶</a></h3>
+<p>Here comes the real game (in French we say ça change la donne).</p>
+<p>First of all it takes at most N steps to insert a new value into an array. Finding the right spot takes just 1 step (see the Read section), however before insertion one has to shift all the elements to make space for the new element.</p>
+<p>I know, one picture is worth a thousand words.</p>
+<p><img alt="image3" src="../_images/2021-04-13-23-18-56.png"/></p>
+<p>What is the best case? Well it happens when one inserts a new element at the end. As said before, your computer already knows the length of your array, i.e. it already knows the address of the last element. Better, no shift is required.</p>
+<p>What about set?</p>
+<p>Remember that a set is supposed to contain no duplicate elements. So first you have to make sure that the element to be inserted has no duplicate! In the worst case it takes N steps. Besides, when we’re inserting a value at the beginning of a set, another N steps are required to shift all the data to the right and another final step to insert the new value, taking the total number of steps to 2N + 1 steps.</p>
+</div>
+<div class="section" id="Deletion-(idem)">
+<h3>Deletion (idem)<a class="headerlink" href="#Deletion-(idem)" title="Permalink to this headline">¶</a></h3>
+<p>Just like the insertion, deletion requires also shifting because remember, an array should be stored on contingent memory cells. The sames applies to array-based set. So it’s not difficult to figure out that in the worst case we are bound to make N moves when the first element is deleted.</p>
+<p><img alt="image4" src="../_images/2021-04-13-23-32-36.png"/></p>
+</div>
+</div>
+<div class="section" id="Which-data-structure-to-use">
+<h2>Which data structure to use<a class="headerlink" href="#Which-data-structure-to-use" title="Permalink to this headline">¶</a></h2>
+<p>That’s a tricky question and it all depends on how well you know your data. If you are quite sure that your workflow won’t involve a lot of insertion, then it would be safe to use a set since you want some strong constraint on your data. Otherwise you should use an array-like structure since frequent insertions would considerably slow down your program’s performance.</p>
+<p>I see it coming already: but that’s only 1 operation right? Don’t hurry, the next tutorial will help you gain a solid grasp on the intricate interactions between data structures, algorithms and performance. You would also know why we distinguish best case, average and worst cases when it comes to comparing algorithms.</p>
+<p>Especially you’ll get to know a domain of extensive research in computer science: sorting.</p>
+<p>Stay tuned!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># create a random list with no duplicate values</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">generate_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">randomlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="c1"># shuffle list in place</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">randomlist</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">randomlist</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">generate_list</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+100
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">linear_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">randomlist_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">randomlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">):</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">mid</span>
+        <span class="k">elif</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+154
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>it -r1 -n100
+<span class="n">binary_search</span><span class="p">(</span><span class="n">randomlist_sorted</span><span class="p">,</span> <span class="mi">295</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+977 ns ± 0 ns per loop (mean ± std. dev. of 1 run, 100 loops each)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>it -r1 -n100
+<span class="n">linear_search</span><span class="p">(</span><span class="n">randomlist_sorted</span><span class="p">,</span><span class="mi">295</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+8.9 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 100 loops each)
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ns</span></code> stands for nanoseconds, meaning <span class="math notranslate nohighlight">\(10^{-9}\)</span>. µs means microseconds = <span class="math notranslate nohighlight">\(10^{-6}\)</span> seconds.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># sorted list in python</span>
+<span class="c1"># !pip install sortedcontainers</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sortedcontainers</span> <span class="kn">import</span> <span class="n">SortedList</span>
+<span class="n">sl</span> <span class="o">=</span> <span class="n">SortedList</span><span class="p">([</span><span class="s1">'f'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">])</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"e"</span><span class="p">)</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"f"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+5
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># bubble sort, raw version</span>
+<span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">our_list</span><span class="p">):</span>
+    <span class="c1"># We go through the list as many times as there are elements</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">our_list</span><span class="p">)):</span>
+        <span class="c1"># We want the last pair of adjacent elements to be (n-2, n-1)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="c1"># Swap</span>
+                <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">our_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">bubble_sort</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[2, 6, 8, 13, 18, 19]
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># optimization</span>
+<span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">our_list</span><span class="p">):</span>
+    <span class="n">has_swapped</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">num_of_iterations</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">has_swapped</span><span class="p">):</span>
+        <span class="n">has_swapped</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_of_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="c1"># Swap</span>
+                <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">has_swapped</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">num_of_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># selection sort the joker sort</span>
+<span class="k">def</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="c1"># i indicates how many items were sorted</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># To find the minimum value of the unsorted segment</span>
+        <span class="c1"># We first assume that the first element is the lowest</span>
+        <span class="n">min_index</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="c1"># We then use j to loop through the remaining elements</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># Update the min_index if the element at j is lower than it</span>
+            <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">min_index</span><span class="p">]:</span>
+                <span class="n">min_index</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="c1"># After finding the lowest item of the unsorted regions, swap with the first unsorted item</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">min_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">min_index</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Python program for implementation of Insertion Sort</span>
+
+<span class="c1"># Function to do insertion sort</span>
+<span class="k">def</span> <span class="nf">insertionSort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+
+    <span class="c1"># Traverse through 1 to len(arr)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+
+            <span class="n">key</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="c1"># Move elements of arr[0..i-1], that are</span>
+            <span class="c1"># greater than key, to one position ahead</span>
+            <span class="c1"># of their current position</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span>
+                            <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+
+
+<span class="c1"># Driver code to test above</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">insertionSort</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">"</span><span class="si">% d</span><span class="s2">"</span> <span class="o">%</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># This code is contributed by Mohit Kumra</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ 5
+ 6
+ 11
+ 12
+ 13
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="099algo_map.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Roadmap and cheatsheet of algorithms and data structures</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="01_intro_fr.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Algorithme ou plusieurs façons de résoudre un problème 🇫🇷</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Xiaoou Wang
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../sources/algo/02_ds_en.ipynb.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Data structures or many ways of organizing your stuff 🇬🇧</a><ul>
+<li><a class="reference internal" href="#I-ain’t-know-nothing-about-data-structures">I ain’t know nothing about data structures</a></li>
+<li><a class="reference internal" href="#Data-structure,-speed-and-memory">Data structure, speed and memory</a><ul>
+<li><a class="reference internal" href="#How-computer-memory-works">How computer memory works</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Analyse-a-data-structure-(Read,-search,-insert-and-delete)">Analyse a data structure (Read, search, insert and delete)</a><ul>
+<li><a class="reference internal" href="#Read-(list-vs-set)">Read (list vs set)</a></li>
+<li><a class="reference internal" href="#Search-(list-vs-set)">Search (list vs set)</a></li>
+<li><a class="reference internal" href="#Insert-(idem)">Insert (idem)</a></li>
+<li><a class="reference internal" href="#Deletion-(idem)">Deletion (idem)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Which-data-structure-to-use">Which data structure to use</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script src="../static/jquery.js"></script>
+    <script src="../static/underscore.js"></script>
+    <script src="../static/doctools.js"></script>
+    <script src="../static/clipboard.min.js"></script>
+    <script src="../static/copybutton.js"></script>
+    <script src="../static/tabs.js"></script>
+    <script >
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WGY2PHYB"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-58WGY2PHYB');
+</script>
+<!-- Default Statcounter code for nlpinfrench
+http://nlpinfrench.fr -->
+<script type="text/javascript">
+var sc_project=12500373;
+var sc_invisible=1;
+var sc_security="def60251";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12500373/0/def60251/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
+</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script src="../static/custom.js"></script>
+    <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

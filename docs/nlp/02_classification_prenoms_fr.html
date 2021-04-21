@@ -1,0 +1,1134 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷" href="03_classification_lemonde_fr.html" /><link rel="prev" title="Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷" href="01_compara_anno_fr.html" />
+
+    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+        <title>Classification de prénoms en genre (masculin/féminin) 🇫🇷 - NLP in French</title>
+      <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
+    <link rel="stylesheet" href="../static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+    <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NLP in French</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../static/nlp_Logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../static/nlp_Logo.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">NLP in French</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">NLP and Machine Learning-related</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_compara_anno_fr.html">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_classification_lemonde_fr.html">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/index.html">Transformers in NLP with PyTorch, TensorFlow and Hugging Face</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_en.html">10 questions on Bert 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_fr.html">10 questions sur Bert 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/02_firstBert_fr.html">Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../better_programmer/index.html">Better Programmer</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/01_python_fr.html">Mieux programmer en Python 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/02_git3_en.html">A serious guide to git 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/03_jupyter_remote_pycharm.html">Connect to remote jupyter notebook in Pycharm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/04_oop_web_scraping_en.html">Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/05_oop_web_scraping_cooper_en.html">Be a responsible programmer when doing Object-Oriented Programming 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algo/index.html">Algorithms and data structures by examples in Python</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_en.html">Algorithm or many ways of solving a problem 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_fr.html">Algorithme ou plusieurs façons de résoudre un problème 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/02_ds_en.html">Data structures or many ways of organizing your stuff 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/099algo_map.html">Roadmap and cheatsheet of algorithms and data structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../web/index.html">Web Related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label for="toctree-checkbox-5"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_en.html">Complete tutorial on scraping French news from Le Monde 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_fr.html">Scraper « le monde » et construire ton propre corpus 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/02_forum_en.html">On your way to scraping French forums 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/03_django_en.html">Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linguistique_informatique/index.html">Computational Linguistics in R</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label for="toctree-checkbox-6"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/01_zipf_fr.html">La loi de Zipf illustrée avec gutenbergr en R 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/02_mca_ergatif_fr.html">Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/03_pca_inclusion_fr.html">Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/01_bash.html">My codebase for bash/shell script (macOS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/02_tmux.html">Tumux-related code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/03_python.html">My python codebase (including packages/libraries)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷">
+<h1>Classification de prénoms en genre (masculin/féminin) 🇫🇷<a class="headerlink" href="#Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
+<p>Cet exemple très simple issu du <a class="reference external" href="https://www.amazon.fr/Natural-Language-Processing-Python-Steven/dp/0596516495/ref=sr_1_11?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;dchild=1&amp;keywords=nltk&amp;qid=1616280931&amp;sr=8-11">livre</a> de Steven Bird vous donne une idée sur à quoi ressemble le boulot d’un ingénieur junior en Machine Learning.</p>
+<p>La tâche consiste à entraîner un classifieur bayésien pour prédire le genre d’un prénom.</p>
+<div class="section" id="Sélection-de-features">
+<h2>Sélection de features<a class="headerlink" href="#Sélection-de-features" title="Permalink to this headline">¶</a></h2>
+<p>On commence par prendre la dernière lettre d’un prénom comme feature et la stocker dans un dictionnaire.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="ch">#! creation de last latter comme feature</span>
+
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">names</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">gender_features</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+     <span class="k">return</span> <span class="p">{</span><span class="s1">'last_letter'</span><span class="p">:</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"La dernière lettre du pronom Shrek est"</span><span class="p">)</span>
+<span class="n">gender_features</span><span class="p">(</span><span class="s1">'Shrek'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+La dernière lettre du prnom Shrek est
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'last_letter': 'k'}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Mise-en-forme-du-corpus">
+<h2>Mise en forme du corpus<a class="headerlink" href="#Mise-en-forme-du-corpus" title="Permalink to this headline">¶</a></h2>
+<p>Le corpus provient de <code class="docutils literal notranslate"><span class="pre">nltk</span></code>. Ici on crée une liste de tuples grâce à quelques méthodes intégrées dans <code class="docutils literal notranslate"><span class="pre">nltk.corpus</span></code>. Notez l’emploi de list comprehension ici pour rendre le code plus concis tout en gardant la lisibilité.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="ch">#! creation de datasets</span>
+
+<span class="n">labeled_names</span> <span class="o">=</span> <span class="p">([(</span><span class="n">name</span><span class="p">,</span> <span class="s1">'male'</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">'male.txt'</span><span class="p">)]</span> <span class="o">+</span>
+ <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="s1">'female'</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">'female.txt'</span><span class="p">)])</span>
+
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">labeled_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Un échantillon du corpus"</span><span class="p">)</span>
+<span class="n">labeled_names</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Un échantillon du corpus
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[('Mariam', 'female'),
+ ('Marjorie', 'female'),
+ ('Jasmin', 'female'),
+ ('Welbie', 'male'),
+ ('Modesty', 'female'),
+ ('Kanya', 'female'),
+ ('Michale', 'male'),
+ ('Antonina', 'female'),
+ ('Beulah', 'female'),
+ ('Hazel', 'female')]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Création-des-corpus-train/test">
+<h2>Création des corpus train/test<a class="headerlink" href="#Création-des-corpus-train/test" title="Permalink to this headline">¶</a></h2>
+<p>Ici on applique à la fonction de la <code class="docutils literal notranslate"><span class="pre">section</span> <span class="pre">1</span></code> à tous les noms du corpus. Les 500 premiers samples sont mis à l’écart pour servir de test.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="ch">#! creation de paire feature/label</span>
+
+<span class="n">featuresets</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">labeled_names</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="ch">#! creation de train et test</span>
+
+<span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">featuresets</span><span class="p">[</span><span class="mi">500</span><span class="p">:],</span> <span class="n">featuresets</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Première-classification">
+<h2>Première classification<a class="headerlink" href="#Première-classification" title="Permalink to this headline">¶</a></h2>
+<p>La précision est autour de 75.2%. On liste les features les plus utiles pour étudier quels sont les problèmes potentiels. Le likely ratio <code class="docutils literal notranslate"><span class="pre">male</span> <span class="pre">:</span> <span class="pre">female</span></code> signifie la probabilité exacte qu’un prénom particulier soit masculin/féminin en fonction de sa dernière lettre (donc feature).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+<span class="c1">#! classify</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">gender_features</span><span class="p">(</span><span class="s1">'Neo'</span><span class="p">))</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">gender_features</span><span class="p">(</span><span class="s1">'Trinity'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">test_set</span><span class="p">))</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">show_most_informative_features</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1">#! see likely ratio</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.752
+Most Informative Features
+             last_letter = 'k'              male : female =     45.8 : 1.0
+             last_letter = 'a'            female : male   =     33.0 : 1.0
+             last_letter = 'f'              male : female =     15.3 : 1.0
+             last_letter = 'p'              male : female =     11.2 : 1.0
+             last_letter = 'v'              male : female =     10.5 : 1.0
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Ajout-de-features-et-problème-d’overfitting">
+<h2>Ajout de features et problème d’overfitting<a class="headerlink" href="#Ajout-de-features-et-problème-d’overfitting" title="Permalink to this headline">¶</a></h2>
+<p>Si vous ajoutez trop de features, le modèle risque d’être trop adapté à tes données et se généralise mal sur des données non vues. Cela s’appelle <code class="docutils literal notranslate"><span class="pre">overfitting</span></code> et survient souvent quand le corpus est petit, ce qui est le cas ici.</p>
+</div>
+<div class="section" id="Let’s-add-features">
+<h2>Let’s add features<a class="headerlink" href="#Let’s-add-features" title="Permalink to this headline">¶</a></h2>
+<p>Dans un premier temps, nous allons essayer d’ajouter plein de features.</p>
+<p>Examinons la fonction <code class="docutils literal notranslate"><span class="pre">gender_features2</span></code>. Les features sont :</p>
+<ul class="simple">
+<li><p>La première et la dernière lettre</p></li>
+<li><p>Un booléen indiquant si une lettre de l’ensemble a-z est présent dans le prénom</p></li>
+<li><p>Un integer indiquant le nombre d’occurrences de cette lettre</p></li>
+</ul>
+<p>Donc clairement nous y mettons tout le paquet…</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="ch">#! add features</span>
+<span class="k">def</span> <span class="nf">gender_features2</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"first_letter"</span><span class="p">:</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="s2">"last_letter"</span><span class="p">:</span> <span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()}</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'abcdefghijklmnopqrstuvwxyz'</span><span class="p">:</span>
+        <span class="n">features</span><span class="p">[</span><span class="s2">"count(</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">letter</span><span class="p">)]</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+        <span class="n">features</span><span class="p">[</span><span class="s2">"has(</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">letter</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">letter</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">features</span>
+
+<span class="n">demo</span> <span class="o">=</span> <span class="n">gender_features2</span><span class="p">(</span><span class="s2">"john"</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[('count(i)', 0),
+ ('count(h)', 1),
+ ('count(x)', 0),
+ ('has(a)', False),
+ ('has(h)', True)]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="La-précision-augmente">
+<h2>La précision augmente<a class="headerlink" href="#La-précision-augmente" title="Permalink to this headline">¶</a></h2>
+<p>Avec ce nouveau featureset, la précision est montée de 75.2% à 77.4%.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">featuresets</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features2</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">labeled_names</span><span class="p">]</span>
+<span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">featuresets</span><span class="p">[</span><span class="mi">500</span><span class="p">:],</span> <span class="n">featuresets</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">test_set</span><span class="p">))</span>
+
+<span class="c1">#! 0.752 vs 0.774</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.774
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Feature-engineering-via-l’analyse-des-erreurs">
+<h2>Feature engineering via l’analyse des erreurs<a class="headerlink" href="#Feature-engineering-via-l’analyse-des-erreurs" title="Permalink to this headline">¶</a></h2>
+<p>Ici nous expliquons le processus de feature engineering qui consiste à analyser les erreurs de la machine sur la base desquelles on filtre/supprime/créé des features.</p>
+<p>L’intelligence artificielle n’est finalement pas si artificielle, non ? (Bon j’avoue que c’est pas du deep learning, mais quand même)</p>
+<p>Notons ici la création de ‘devset’. Cette répartition en 3 sets est canonique en Machine Learning. On utilise le train pour entraîner le modèle, le devset pour ajuster ce modèle. Enfin le test ne doit être utilisé que pour l’évaluation finale.</p>
+<p>La précision initiale (avant le feature engineering) est donc 76%.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">train_names</span> <span class="o">=</span> <span class="n">labeled_names</span><span class="p">[</span><span class="mi">1500</span><span class="p">:]</span>
+<span class="n">devtest_names</span> <span class="o">=</span> <span class="n">labeled_names</span><span class="p">[</span><span class="mi">500</span><span class="p">:</span><span class="mi">1500</span><span class="p">]</span>
+<span class="n">test_names</span> <span class="o">=</span> <span class="n">labeled_names</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="ch">#! use devtest</span>
+<span class="n">train_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">train_names</span><span class="p">]</span>
+<span class="n">devtest_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">devtest_names</span><span class="p">]</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">test_names</span><span class="p">]</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">devtest_set</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.76
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Premières-hypothèses-sur-les-erreurs">
+<h2>Premières hypothèses sur les erreurs<a class="headerlink" href="#Premières-hypothèses-sur-les-erreurs" title="Permalink to this headline">¶</a></h2>
+<p>Analysons les erreurs affichées ci-dessous.</p>
+<p>Les pronoms terminés par <code class="docutils literal notranslate"><span class="pre">yn</span></code> tendent à être féminins, alors que ceux terminés par <code class="docutils literal notranslate"><span class="pre">n</span></code> tendent à être masculins. Du coup deux règles serait meilleures qu’une seule.</p>
+<p>Ca semble être le même principe pour les pronoms terminés par <code class="docutils literal notranslate"><span class="pre">h</span></code> qui sont principalement féminins et ceux terminés par <code class="docutils literal notranslate"><span class="pre">ch</span></code> qui ont tendance à être masculins</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">devtest_names</span><span class="p">:</span>
+     <span class="n">guess</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+     <span class="k">if</span> <span class="n">guess</span> <span class="o">!=</span> <span class="n">tag</span><span class="p">:</span>
+         <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">guess</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">guess</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">errors</span><span class="p">):</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s1">'correct=</span><span class="si">{:&lt;8}</span><span class="s1"> guess=</span><span class="si">{:&lt;8s}</span><span class="s1"> name=</span><span class="si">{:&lt;30}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">guess</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+correct=female   guess=male     name=Aeriel
+correct=female   guess=male     name=Aeriell
+correct=female   guess=male     name=Allis
+correct=female   guess=male     name=Allsun
+correct=female   guess=male     name=Allyn
+correct=female   guess=male     name=Allys
+correct=female   guess=male     name=Amargo
+correct=female   guess=male     name=Amber
+correct=female   guess=male     name=Anne-Mar
+correct=female   guess=male     name=Aurel
+correct=female   guess=male     name=Avril
+correct=female   guess=male     name=Barb
+correct=female   guess=male     name=Beatriz
+correct=female   guess=male     name=Beilul
+correct=female   guess=male     name=Calypso
+correct=female   guess=male     name=Cameo
+correct=female   guess=male     name=Carlin
+correct=female   guess=male     name=Carol
+correct=female   guess=male     name=Carol-Jean
+correct=female   guess=male     name=Caron
+correct=female   guess=male     name=Caryl
+correct=female   guess=male     name=Cat
+correct=female   guess=male     name=Ceil
+correct=female   guess=male     name=Charin
+correct=female   guess=male     name=Charleen
+correct=female   guess=male     name=Charlott
+correct=female   guess=male     name=Charmian
+correct=female   guess=male     name=Charo
+correct=female   guess=male     name=Christal
+correct=female   guess=male     name=Christel
+correct=female   guess=male     name=Cleo
+correct=female   guess=male     name=Corliss
+correct=female   guess=male     name=Cris
+correct=female   guess=male     name=Cristabel
+correct=female   guess=male     name=Cybill
+correct=female   guess=male     name=Dael
+correct=female   guess=male     name=Daloris
+correct=female   guess=male     name=Darb
+correct=female   guess=male     name=Del
+correct=female   guess=male     name=Delores
+correct=female   guess=male     name=Dian
+correct=female   guess=male     name=Doloritas
+correct=female   guess=male     name=Dorcas
+correct=female   guess=male     name=Doreen
+correct=female   guess=male     name=Dorian
+correct=female   guess=male     name=Estell
+correct=female   guess=male     name=Esther
+correct=female   guess=male     name=Felicdad
+correct=female   guess=male     name=Gael
+correct=female   guess=male     name=Gilligan
+correct=female   guess=male     name=Gladys
+correct=female   guess=male     name=Glen
+correct=female   guess=male     name=Glynis
+correct=female   guess=male     name=Greer
+correct=female   guess=male     name=Grissel
+correct=female   guess=male     name=Heather
+correct=female   guess=male     name=Helen
+correct=female   guess=male     name=Hildegaard
+correct=female   guess=male     name=Ingeborg
+correct=female   guess=male     name=Iseabal
+correct=female   guess=male     name=Jaclin
+correct=female   guess=male     name=Janel
+correct=female   guess=male     name=Jen
+correct=female   guess=male     name=Jenifer
+correct=female   guess=male     name=Jo-Ann
+correct=female   guess=male     name=Jolyn
+correct=female   guess=male     name=Jolynn
+correct=female   guess=male     name=Joyan
+correct=female   guess=male     name=Kaitlynn
+correct=female   guess=male     name=Karilynn
+correct=female   guess=male     name=Kass
+correct=female   guess=male     name=Kathlin
+correct=female   guess=male     name=Kristan
+correct=female   guess=male     name=Kristen
+correct=female   guess=male     name=Lilian
+correct=female   guess=male     name=Lurleen
+correct=female   guess=male     name=Lynnett
+correct=female   guess=male     name=Madlen
+correct=female   guess=male     name=Margot
+correct=female   guess=male     name=Margret
+correct=female   guess=male     name=Mariam
+correct=female   guess=male     name=Marie-Ann
+correct=female   guess=male     name=Mariel
+correct=female   guess=male     name=Marilyn
+correct=female   guess=male     name=Maris
+correct=female   guess=male     name=Mead
+correct=female   guess=male     name=Meg
+correct=female   guess=male     name=Megen
+correct=female   guess=male     name=Meggan
+correct=female   guess=male     name=Meridel
+correct=female   guess=male     name=Mildred
+correct=female   guess=male     name=Moll
+correct=female   guess=male     name=Nell
+correct=female   guess=male     name=Noellyn
+correct=female   guess=male     name=Peg
+correct=female   guess=male     name=Persis
+correct=female   guess=male     name=Phil
+correct=female   guess=male     name=Piper
+correct=female   guess=male     name=Quinn
+correct=female   guess=male     name=Robbin
+correct=female   guess=male     name=Rosabel
+correct=female   guess=male     name=Rosaleen
+correct=female   guess=male     name=Rosalyn
+correct=female   guess=male     name=Sal
+correct=female   guess=male     name=Sara-Ann
+correct=female   guess=male     name=Shannon
+correct=female   guess=male     name=Sharyl
+correct=female   guess=male     name=Shell
+correct=female   guess=male     name=Starlin
+correct=female   guess=male     name=Theo
+correct=female   guess=male     name=Tiff
+correct=female   guess=male     name=Vivyan
+correct=female   guess=male     name=Willow
+correct=female   guess=male     name=Willyt
+correct=female   guess=male     name=Yehudit
+correct=male     guess=female   name=Abdullah
+correct=male     guess=female   name=Amory
+correct=male     guess=female   name=Angie
+correct=male     guess=female   name=Arne
+correct=male     guess=female   name=Ash
+correct=male     guess=female   name=Aube
+correct=male     guess=female   name=Aubrey
+correct=male     guess=female   name=Augie
+correct=male     guess=female   name=Baillie
+correct=male     guess=female   name=Bartholemy
+correct=male     guess=female   name=Bary
+correct=male     guess=female   name=Benjy
+correct=male     guess=female   name=Berke
+correct=male     guess=female   name=Berkley
+correct=male     guess=female   name=Boniface
+correct=male     guess=female   name=Boyce
+correct=male     guess=female   name=Bruce
+correct=male     guess=female   name=Carleigh
+correct=male     guess=female   name=Chevy
+correct=male     guess=female   name=Clancy
+correct=male     guess=female   name=Cobbie
+correct=male     guess=female   name=Cole
+correct=male     guess=female   name=Constantine
+correct=male     guess=female   name=Courtney
+correct=male     guess=female   name=Davidde
+correct=male     guess=female   name=Dudley
+correct=male     guess=female   name=Duffie
+correct=male     guess=female   name=Durante
+correct=male     guess=female   name=Eddie
+correct=male     guess=female   name=Eddy
+correct=male     guess=female   name=Erny
+correct=male     guess=female   name=Fairfax
+correct=male     guess=female   name=Felice
+correct=male     guess=female   name=Filipe
+correct=male     guess=female   name=Fonsie
+correct=male     guess=female   name=Freddie
+correct=male     guess=female   name=Gerry
+correct=male     guess=female   name=Godfrey
+correct=male     guess=female   name=Guthrie
+correct=male     guess=female   name=Guthry
+correct=male     guess=female   name=Haleigh
+correct=male     guess=female   name=Hamish
+correct=male     guess=female   name=Harvey
+correct=male     guess=female   name=Hersh
+correct=male     guess=female   name=Hodge
+correct=male     guess=female   name=Hy
+correct=male     guess=female   name=Isadore
+correct=male     guess=female   name=Jean-Pierre
+correct=male     guess=female   name=Jeffery
+correct=male     guess=female   name=Jeromy
+correct=male     guess=female   name=Jesse
+correct=male     guess=female   name=Johnny
+correct=male     guess=female   name=Josh
+correct=male     guess=female   name=Jule
+correct=male     guess=female   name=Julie
+correct=male     guess=female   name=Kelly
+correct=male     guess=female   name=Kelsey
+correct=male     guess=female   name=Kory
+correct=male     guess=female   name=Lemmy
+correct=male     guess=female   name=Lenny
+correct=male     guess=female   name=Lesley
+correct=male     guess=female   name=Luke
+correct=male     guess=female   name=Martie
+correct=male     guess=female   name=Marty
+correct=male     guess=female   name=Max
+correct=male     guess=female   name=Mika
+correct=male     guess=female   name=Mischa
+correct=male     guess=female   name=Mitch
+correct=male     guess=female   name=Moise
+correct=male     guess=female   name=Monte
+correct=male     guess=female   name=Morly
+correct=male     guess=female   name=Morty
+correct=male     guess=female   name=Murdoch
+correct=male     guess=female   name=Mustafa
+correct=male     guess=female   name=Neale
+correct=male     guess=female   name=Neddy
+correct=male     guess=female   name=Obie
+correct=male     guess=female   name=Paddie
+correct=male     guess=female   name=Pascale
+correct=male     guess=female   name=Pepe
+correct=male     guess=female   name=Prentice
+correct=male     guess=female   name=Quigly
+correct=male     guess=female   name=Rabi
+correct=male     guess=female   name=Rafe
+correct=male     guess=female   name=Ralph
+correct=male     guess=female   name=Rawley
+correct=male     guess=female   name=Reese
+correct=male     guess=female   name=Rey
+correct=male     guess=female   name=Ronny
+correct=male     guess=female   name=Rourke
+correct=male     guess=female   name=Rudie
+correct=male     guess=female   name=Rutledge
+correct=male     guess=female   name=Say
+correct=male     guess=female   name=Shaine
+correct=male     guess=female   name=Stacy
+correct=male     guess=female   name=Stanley
+correct=male     guess=female   name=Tabbie
+correct=male     guess=female   name=Tally
+correct=male     guess=female   name=Tarrance
+correct=male     guess=female   name=Temple
+correct=male     guess=female   name=Thayne
+correct=male     guess=female   name=Thorpe
+correct=male     guess=female   name=Torey
+correct=male     guess=female   name=Torre
+correct=male     guess=female   name=Trace
+correct=male     guess=female   name=Tracey
+correct=male     guess=female   name=Udale
+correct=male     guess=female   name=Uri
+correct=male     guess=female   name=Vassily
+correct=male     guess=female   name=Vijay
+correct=male     guess=female   name=Vinnie
+correct=male     guess=female   name=Waite
+correct=male     guess=female   name=Wallache
+correct=male     guess=female   name=Waverley
+correct=male     guess=female   name=Westbrooke
+correct=male     guess=female   name=Westleigh
+correct=male     guess=female   name=Willie
+correct=male     guess=female   name=Willy
+correct=male     guess=female   name=Yancey
+correct=male     guess=female   name=Yancy
+correct=male     guess=female   name=Yehudi
+correct=male     guess=female   name=Yuri
+correct=male     guess=female   name=Zackariah
+correct=male     guess=female   name=Zechariah
+correct=male     guess=female   name=Zollie
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Intégration-des-nouveaux-features-dans-le-classifieur">
+<h2>Intégration des nouveaux features dans le classifieur<a class="headerlink" href="#Intégration-des-nouveaux-features-dans-le-classifieur" title="Permalink to this headline">¶</a></h2>
+<p>Il semble bénéfique d’ajuster nos features en incluant les deux dernières lettres.</p>
+<p>Et youpi ! La précision est montée de 76% à 78.1%. C’est pas mal non ?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">gender_features</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+     <span class="k">return</span> <span class="p">{</span><span class="s1">'suffix1'</span><span class="p">:</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span>
+             <span class="s1">'suffix2'</span><span class="p">:</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]}</span>
+
+<span class="n">train_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">train_names</span><span class="p">]</span>
+<span class="n">devtest_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">devtest_names</span><span class="p">]</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">devtest_set</span><span class="p">))</span>
+
+<span class="c1"># 0.76 -&gt; 0.781</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.781
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Importance-de-nouveaux-splits-train/dev">
+<h2>Importance de nouveaux splits train/dev<a class="headerlink" href="#Importance-de-nouveaux-splits-train/dev" title="Permalink to this headline">¶</a></h2>
+<p>Nous pouvons donc réitérer ce processus d’analyse d’erreurs et de feature engineering jusqu’à obtenir une performance satisfaisante.</p>
+<p>Attention !:D</p>
+<p>Il vaut mieux faire un nouveau split train/dev à chaque fois qu’on intègre/supprime des features pour éviter l’overfitting.</p>
+</div>
+<div class="section" id="Conclusions">
+<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Permalink to this headline">¶</a></h2>
+<p>Bravo d’avoir fini l’article !</p>
+<p>Ce qu’il faut retenir :</p>
+<ol class="arabic simple">
+<li><p>Le machine learning traditionnel repose pas mal sur l’analyse humaine. Comme vous avez vu ici, l’analyse des erreurs de classification aide beaucoup l’intelligence “artificielle”.</p></li>
+<li><p>Il est important de faire un split train/dev/test pour éviter que le modèle soit overfitted. Dans la même ligne de pensée il est aussi conseillé de garder un nombre raisonnable de features.</p></li>
+<li><p>Vous l’aurez compris. L’analyse d’erreurs (feature engineering) et le compromis entre performance et généralisabilité font du machine learning un art qui nécessite un savoir-faire qui s’acquiert au fil des ans.</p></li>
+</ol>
+<p><a class="reference external" href="https://www.nltk.org/book/ch06.html">Reference</a></p>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="03_classification_lemonde_fr.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="01_compara_anno_fr.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Xiaoou Wang
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../sources/nlp/02_classification_prenoms_fr.ipynb.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a><ul>
+<li><a class="reference internal" href="#Sélection-de-features">Sélection de features</a></li>
+<li><a class="reference internal" href="#Mise-en-forme-du-corpus">Mise en forme du corpus</a></li>
+<li><a class="reference internal" href="#Création-des-corpus-train/test">Création des corpus train/test</a></li>
+<li><a class="reference internal" href="#Première-classification">Première classification</a></li>
+<li><a class="reference internal" href="#Ajout-de-features-et-problème-d’overfitting">Ajout de features et problème d’overfitting</a></li>
+<li><a class="reference internal" href="#Let’s-add-features">Let’s add features</a></li>
+<li><a class="reference internal" href="#La-précision-augmente">La précision augmente</a></li>
+<li><a class="reference internal" href="#Feature-engineering-via-l’analyse-des-erreurs">Feature engineering via l’analyse des erreurs</a></li>
+<li><a class="reference internal" href="#Premières-hypothèses-sur-les-erreurs">Premières hypothèses sur les erreurs</a></li>
+<li><a class="reference internal" href="#Intégration-des-nouveaux-features-dans-le-classifieur">Intégration des nouveaux features dans le classifieur</a></li>
+<li><a class="reference internal" href="#Importance-de-nouveaux-splits-train/dev">Importance de nouveaux splits train/dev</a></li>
+<li><a class="reference internal" href="#Conclusions">Conclusions</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script src="../static/jquery.js"></script>
+    <script src="../static/underscore.js"></script>
+    <script src="../static/doctools.js"></script>
+    <script src="../static/clipboard.min.js"></script>
+    <script src="../static/copybutton.js"></script>
+    <script src="../static/tabs.js"></script>
+    <script >
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WGY2PHYB"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-58WGY2PHYB');
+</script>
+<!-- Default Statcounter code for nlpinfrench
+http://nlpinfrench.fr -->
+<script type="text/javascript">
+var sc_project=12500373;
+var sc_invisible=1;
+var sc_security="def60251";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12500373/0/def60251/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
+</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../static/custom.js"></script>
+    <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

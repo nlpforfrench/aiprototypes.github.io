@@ -1,0 +1,16 @@
+Sphinx==3.5.1
+sphinx-autorun==1.1.1
+sphinx-rtd-theme==0.5.1
+sphinxcontrib-applehelp==1.0.2
+sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-htmlhelp==1.0.3
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==1.0.3
+sphinxcontrib-serializinghtml==1.1.4
+nbsphinx==0.8.2
+recommonmark==0.7.1
+furo==2021.2.28b28
+sphinx-copybutton==0.3.1
+sphinx-inline-tabs==2021.3.19b5
+myst-parser==0.13.5
+sphinx-gallery==0.8.2

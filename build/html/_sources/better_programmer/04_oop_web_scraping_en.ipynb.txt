@@ -1,0 +1,632 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "source": [
+    "# Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧\n",
+    "\n",
+    "## What you are going to learn\n",
+    "\n",
+    "`requests` is a very popular package in Python because it provides many convenient methods to handle requests, parsing and exception handling. One could also use the official `urllib` package, however for the same tasks it is overall much easier to use requests due to its code design. You can clearly see the philosophy of the creator through the website’s motto:\n",
+    "\n",
+    "![](img/image/2021-04-04-16-31-25.png)\n",
+    "\n",
+    "The objective of this tutorial is to introduce you to objected-oriented programming (OOP) by imitating a working example in `requests`. After having a grasp of the very basic principles of OOP, we would move on to a more elaborate example to make you better seize the benefits of OOP.\n",
+    "\n",
+    "At the end you will be able to build a minimal web scraping framework allowing to scrape articles of the famous French newspaper `Le Monde` and the American newspaper `New York Times`.\n",
+    "\n",
+    "Before starting this tutorial, be sure to have installed `requests` and `beautiful soup` with:\n",
+    "\n",
+    "```bash\n",
+    "pip install requests\n",
+    "pip install beautifulsoup4\n",
+    "```\n",
+    "\n",
+    "## A working example in requests\n",
+    "\n",
+    "Here is a quick starting example using `requests`, as you can see from the output.\n",
+    "\n",
+    "1. The `get` method returns a class object.\n",
+    "2. The `status code` tells us that the request is successful.\n",
+    "3. The `text` property returns the source code of Google homepage.\n",
+    "4. The `cookies` property returns your cookies."
+   ],
+   "metadata": {
+    "collapsed": false
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The get method returns a class object.\n",
+      "-------------\n",
+      "<class 'requests.models.Response'>\n",
+      "\n",
+      "The status code tells us that the request is successful.\n",
+      "-------------\n",
+      "200\n",
+      "\n",
+      "The text property returns the source code of Google homepage.\n",
+      "-------------\n",
+      "<class 'str'>\n",
+      "<!doctype html><html itemscope=\"\" itemtype=\"http://schema.org/WebPage\" lang=\"fr\"><head><meta content=\"text/html; charset=UTF-8\" http-equiv=\"Content-Type\"><meta content=\"/images/branding/googleg/1x/googleg_standard_color_128dp.png\" itemprop=\"image\"><title>Google</title><script nonce=\"EVjWNLKn/4GJbqSpNyB4Cw==\">(function(){window.google={kEI:'qs9oYJfZE5mdjLsPvseTqAY',kEXPI:'0,18167,37697,1246576,96,56873,954,756,4349,206,2414,2390,2316,383,246,5,1129,225,1300,3951,5,7674,1114836,1232,1196551,500,302679,26305,51224,16114,17444,11240,9188,8384,4859,1361,284,9007,3020,4747,12841,4020,978,13228,2677,297,873,38,10584,14528,4516,2778,919,2277,8,85,2711,887,707,1278,2212,530,149,1103,840,517,1466,56,157,4101,4120,2023,1777,520,4271,326,1284,8789,3227,419,1571,856,6,5599,6755,5096,599,7278,3748,1180,108,3407,908,2,941,2614,2397,7470,3275,3,346,230,1835,8,4616,149,5990,6299,1686,1,1,2,1528,2304,217,1019,1145,4658,1791,2892,460,1555,4067,7434,3824,1297,1409,344,2658,3903,1,339,518,912,564,1120,30,3852,1811,2466,5499,2305,638,3584,3496,9793,11,731,665,2145,376,3309,2527,479,512,871,185,907,1140,19,48,99,2276,696,6,908,3,1327,2214,1,1042,2,3133,5491,276,501,894,603,1229,1539,1814,38,245,262,650,3434,1940,618,1260,1194,2,1507,1030,1761,33,368,31,2859,424,286,77,1694,2,1394,115,379,922,109,8,27,779,2,465,1721,2,482,1922,626,21,2548,2713,284,20,150,1169,471,142,540,296,392,2,2128,108,1130,2,738,2,41,1,1,18,618,9,244,638,23,350,1,1,1,426,170,240,377,810,81,13,2044,287,411,135,51,677,318,2,2,500,108,291,119,784,204,217,449,27,1557,1717,3,333,394,186,723,5,131,205,189,37,2,791,2153,534,230,5665488,3870,35,226,5997078,2800707,882,444,1,2,80,1,1796,1,9,2,2551,1,748,141,795,563,1,4265,1,1,2,1331,3299,843,1,2608,155,17,13,72,338,13,16,46,5,39,97,41,6,4,6,16,4,47,38,8,111,3,2,2,2,2,2,2,2,2,2,2,2,2,6,2,2,2,2,2,2,2,11,1,10,2,34,66,33,7,10,40,25,2,23956273,148,4010124,267,247,26533,601,2,1223,555',kBL:'1D5i'};google.sn='webhp';google.kHL='fr';})();(function(){\n",
+      "var f,h=[];function k(a){for(var b;a&&(!a.getAttribute||!(b=a.getAttribute(\"eid\")));)a=a.parentNode;return b||f}function l(a){for(var b=null;a&&(!a.getAttribute||!(b=a.getAttribute(\"leid\")));)a=a.parentNode;return b}\n",
+      "function m(a,b,c,d,g){var e=\"\";c||-1!=b.search(\"&ei=\")||(e=\"&ei=\"+k(d),-1==b.search(\"&lei=\")&&(d=l(d))&&(e+=\"&lei=\"+d));d=\"\";!c&&window._cshid&&-1==b.search(\"&cshid=\")&&\"slh\"!=a&&(d=\"&cshid=\"+window._cshid);c=c||\"/\"+(g||\"gen_204\")+\"?atyp=i&ct=\"+a+\"&cad=\"+b+e+\"&zx=\"+Date.now()+d;/^http:/i.test(c)&&\"https:\"==window.location.protocol&&(google.ml(Error(\"a\"),!1,{src:c,glmm:1}),c=\"\");return c};f=google.kEI;google.getEI=k;google.getLEI=l;google.ml=function(){return null};google.log=function(a,b,c,d,g){if(c=m(a,b,c,d,g)){a=new Image;var e=h.length;h[e]=a;a.onerror=a.onload=a.onabort=function(){delete h[e]};a.src=c}};google.logUrl=m;}).call(this);(function(){google.y={};google.sy=[];google.x=function(a,b){if(a)var c=a.id;else{do c=Math.random();while(google.y[c])}google.y[c]=[a,b];return!1};google.sx=function(a){google.sy.push(a)};google.lm=[];google.plm=function(a){google.lm.push.apply(google.lm,a)};google.lq=[];google.load=function(a,b,c){google.lq.push([[a],b,c])};google.loadAll=function(a,b){google.lq.push([a,b])};google.bx=!1;google.lx=function(){};}).call(this);google.f={};(function(){\n",
+      "document.documentElement.addEventListener(\"submit\",function(b){var a;if(a=b.target){var c=a.getAttribute(\"data-submitfalse\");a=\"1\"==c||\"q\"==c&&!a.elements.q.value?!0:!1}else a=!1;a&&(b.preventDefault(),b.stopPropagation())},!0);document.documentElement.addEventListener(\"click\",function(b){var a;a:{for(a=b.target;a&&a!=document.documentElement;a=a.parentElement)if(\"A\"==a.tagName){a=\"1\"==a.getAttribute(\"data-nohref\");break a}a=!1}a&&b.preventDefault()},!0);}).call(this);</script><style>#gbar,#guser{font-size:13px;padding-top:1px !important;}#gbar{height:22px}#guser{padding-bottom:7px !important;text-align:right}.gbh,.gbd{border-top:1px solid #c9d7f1;font-size:1px}.gbh{height:0;position:absolute;top:24px;width:100%}@media all{.gb1{height:22px;margin-right:.5em;vertical-align:top}#gbar{float:left}}a.gb1,a.gb4{text-decoration:underline !important}a.gb1,a.gb4{color:#00c !important}.gbi .gb4{color:#dd8e27 !important}.gbf .gb4{color:#900 !important}\n",
+      "</style><style>body,td,a,p,.h{font-family:arial,sans-serif}body{margin:0;overflow-y:scroll}#gog{padding:3px 8px 0}td{line-height:.8em}.gac_m td{line-height:17px}form{margin-bottom:20px}.h{color:#1558d6}em{font-weight:bold;font-style:normal}.lst{height:25px;width:496px}.gsfi,.lst{font:18px arial,sans-serif}.gsfs{font:17px arial,sans-serif}.ds{display:inline-box;display:inline-block;margin:3px 0 4px;margin-left:4px}input{font-family:inherit}body{background:#fff;color:#000}a{color:#4b11a8;text-decoration:none}a:hover,a:active{text-decoration:underline}.fl a{color:#1558d6}a:visited{color:#4b11a8}.sblc{padding-top:5px}.sblc a{display:block;margin:2px 0;margin-left:13px;font-size:11px}.lsbb{background:#f8f9fa;border:solid 1px;border-color:#dadce0 #70757a #70757a #dadce0;height:30px}.lsbb{display:block}#WqQANb a{display:inline-block;margin:0 12px}.lsb{background:url(/images/nav_logo229.png) 0 -261px repeat-x;border:none;color:#000;cursor:pointer;height:30px;margin:0;outline:0;font:15px arial,sans-serif;vertical-align:top}.lsb:active{background:#dadce0}.lst:focus{outline:none}</style><script nonce=\"EVjWNLKn/4GJbqSpNyB4Cw==\"></script></head><body bgcolor=\"#fff\"><script nonce=\"EVjWNLKn/4GJbqSpNyB4Cw==\">(function(){var src='/images/nav_logo229.png';var iesg=false;document.body.onload = function(){window.n && window.n();if (document.images){new Image().src=src;}\n",
+      "if (!iesg){document.f&&document.f.q.focus();document.gbqf&&document.gbqf.q.focus();}\n",
+      "}\n",
+      "})();</script><div id=\"mngb\"><div id=gbar><nobr><b class=gb1>Recherche</b> <a class=gb1 href=\"https://www.google.fr/imghp?hl=fr&tab=wi\">Images</a> <a class=gb1 href=\"https://maps.google.fr/maps?hl=fr&tab=wl\">Maps</a> <a class=gb1 href=\"https://play.google.com/?hl=fr&tab=w8\">Play</a> <a class=gb1 href=\"https://www.youtube.com/?gl=FR&tab=w1\">YouTube</a> <a class=gb1 href=\"https://news.google.com/?tab=wn\">Actualités</a> <a class=gb1 href=\"https://mail.google.com/mail/?tab=wm\">Gmail</a> <a class=gb1 href=\"https://drive.google.com/?tab=wo\">Drive</a> <a class=gb1 style=\"text-decoration:none\" href=\"https://www.google.fr/intl/fr/about/products?tab=wh\"><u>Plus</u> &raquo;</a></nobr></div><div id=guser width=100%><nobr><span id=gbn class=gbi></span><span id=gbf class=gbf></span><span id=gbe></span><a href=\"http://www.google.fr/history/optout?hl=fr\" class=gb4>Historique Web</a> | <a  href=\"/preferences?hl=fr\" class=gb4>Paramètres</a> | <a target=_top id=gb_70 href=\"https://accounts.google.com/ServiceLogin?hl=fr&passive=true&continue=https://www.google.com/&ec=GAZAAQ\" class=gb4>Connexion</a></nobr></div><div class=gbh style=left:0></div><div class=gbh style=right:0></div></div><center><br clear=\"all\" id=\"lgpd\"><div id=\"lga\"><img alt=\"Google\" height=\"92\" src=\"/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png\" style=\"padding:28px 0 14px\" width=\"272\" id=\"hplogo\"><br><br></div><form action=\"/search\" name=\"f\"><table cellpadding=\"0\" cellspacing=\"0\"><tr valign=\"top\"><td width=\"25%\">&nbsp;</td><td align=\"center\" nowrap=\"\"><input name=\"ie\" value=\"ISO-8859-1\" type=\"hidden\"><input value=\"fr\" name=\"hl\" type=\"hidden\"><input name=\"source\" type=\"hidden\" value=\"hp\"><input name=\"biw\" type=\"hidden\"><input name=\"bih\" type=\"hidden\"><div class=\"ds\" style=\"height:32px;margin:4px 0\"><input class=\"lst\" style=\"margin:0;padding:5px 8px 0 6px;vertical-align:top;color:#000\" autocomplete=\"off\" value=\"\" title=\"Recherche Google\" maxlength=\"2048\" name=\"q\" size=\"57\"></div><br style=\"line-height:0\"><span class=\"ds\"><span class=\"lsbb\"><input class=\"lsb\" value=\"Recherche Google\" name=\"btnG\" type=\"submit\"></span></span><span class=\"ds\"><span class=\"lsbb\"><input class=\"lsb\" id=\"tsuid1\" value=\"J'ai de la chance\" name=\"btnI\" type=\"submit\"><script nonce=\"EVjWNLKn/4GJbqSpNyB4Cw==\">(function(){var id='tsuid1';document.getElementById(id).onclick = function(){if (this.form.q.value){this.checked = 1;if (this.form.iflsig)this.form.iflsig.disabled = false;}\n",
+      "else top.location='/doodles/';};})();</script><input value=\"AINFCbYAAAAAYGjdusjrOdF-VqxQ4Zw5EKEoanQuATTf\" name=\"iflsig\" type=\"hidden\"></span></span></td><td class=\"fl sblc\" align=\"left\" nowrap=\"\" width=\"25%\"><a href=\"/advanced_search?hl=fr&amp;authuser=0\">Recherche avancée</a></td></tr></table><input id=\"gbv\" name=\"gbv\" type=\"hidden\" value=\"1\"><script nonce=\"EVjWNLKn/4GJbqSpNyB4Cw==\">(function(){var a,b=\"1\";if(document&&document.getElementById)if(\"undefined\"!=typeof XMLHttpRequest)b=\"2\";else if(\"undefined\"!=typeof ActiveXObject){var c,d,e=[\"MSXML2.XMLHTTP.6.0\",\"MSXML2.XMLHTTP.3.0\",\"MSXML2.XMLHTTP\",\"Microsoft.XMLHTTP\"];for(c=0;d=e[c++];)try{new ActiveXObject(d),b=\"2\"}catch(h){}}a=b;if(\"2\"==a&&-1==location.search.indexOf(\"&gbv=2\")){var f=google.gbvu,g=document.getElementById(\"gbv\");g&&(g.value=a);f&&window.setTimeout(function(){location.href=f},0)};}).call(this);</script></form><div id=\"gac_scont\"></div><div style=\"font-size:83%;min-height:3.5em\"><br></div><span id=\"footer\"><div style=\"font-size:10pt\"><div style=\"margin:19px auto;text-align:center\" id=\"WqQANb\"><a href=\"/intl/fr/ads/\">Solutions publicitaires</a><a href=\"/services/\">Solutions d'entreprise</a><a href=\"/intl/fr/about.html\">À propos de Google</a><a href=\"https://www.google.com/setprefdomain?prefdom=FR&amp;prev=https://www.google.fr/&amp;sig=K_MzmiVFsLFIp3kWzbwMcpMftHbp8%3D\">Google.fr</a></div></div><p style=\"font-size:8pt;color:#70757a\">&copy; 2021 - <a href=\"/intl/fr/policies/privacy/\">Confidentialité</a> - <a href=\"/intl/fr/policies/terms/\">Conditions</a></p></span></center><script nonce=\"EVjWNLKn/4GJbqSpNyB4Cw==\">(function(){window.google.cdo={height:0,width:0};(function(){var a=window.innerWidth,b=window.innerHeight;if(!a||!b){var c=window.document,d=\"CSS1Compat\"==c.compatMode?c.documentElement:c.body;a=d.clientWidth;b=d.clientHeight}a&&b&&(a!=google.cdo.width||b!=google.cdo.height)&&google.log(\"\",\"\",\"/client_204?&atyp=i&biw=\"+a+\"&bih=\"+b+\"&ei=\"+google.kEI);}).call(this);})();(function(){var u='/xjs/_/js/k\\x3dxjs.hp.en.rMSPgVHe7zM.O/m\\x3dsb_he,d/am\\x3dAHiCOA/d\\x3d1/rs\\x3dACT90oG4raM0O3coqYKShqRNsTfGdg4Qzw';\n",
+      "var d=this||self,e=/^[\\w+/_-]+[=]{0,2}$/,f=null,g=function(a){return(a=a.querySelector&&a.querySelector(\"script[nonce]\"))&&(a=a.nonce||a.getAttribute(\"nonce\"))&&e.test(a)?a:\"\"},h=function(a){return a};var l;var n=function(a,b){this.g=b===m?a:\"\"};n.prototype.toString=function(){return this.g+\"\"};var m={};function p(){var a=u;google.lx=function(){q(a);google.lx=function(){}};google.bx||google.lx()}\n",
+      "function q(a){var b=document;var c=\"SCRIPT\";\"application/xhtml+xml\"===b.contentType&&(c=c.toLowerCase());c=b.createElement(c);if(void 0===l){b=null;var k=d.trustedTypes;if(k&&k.createPolicy){try{b=k.createPolicy(\"goog#html\",{createHTML:h,createScript:h,createScriptURL:h})}catch(r){d.console&&d.console.error(r.message)}l=b}else l=b}a=(b=l)?b.createScriptURL(a):a;a=new n(a,m);c.src=a instanceof n&&a.constructor===n?a.g:\"type_error:TrustedResourceUrl\";(a=c.ownerDocument&&c.ownerDocument.defaultView)&&\n",
+      "a!=d?a=g(a.document):(null===f&&(f=g(d.document)),a=f);a&&c.setAttribute(\"nonce\",a);google.timers&&google.timers.load&&google.tick&&google.tick(\"load\",\"xjsls\");document.body.appendChild(c)};setTimeout(function(){p()},0);})();(function(){window.google.xjsu='/xjs/_/js/k\\x3dxjs.hp.en.rMSPgVHe7zM.O/m\\x3dsb_he,d/am\\x3dAHiCOA/d\\x3d1/rs\\x3dACT90oG4raM0O3coqYKShqRNsTfGdg4Qzw';})();function _DumpException(e){throw e;}\n",
+      "function _F_installCss(c){}\n",
+      "(function(){google.jl={blt:'none',dw:false,em:[],emtn:0,ine:false,lls:'default',pdt:0,snet:true,uwp:true};})();(function(){var pmc='{\\x22d\\x22:{},\\x22sb_he\\x22:{\\x22agen\\x22:true,\\x22cgen\\x22:true,\\x22client\\x22:\\x22heirloom-hp\\x22,\\x22dh\\x22:true,\\x22dhqt\\x22:true,\\x22ds\\x22:\\x22\\x22,\\x22ffql\\x22:\\x22fr\\x22,\\x22fl\\x22:true,\\x22host\\x22:\\x22google.com\\x22,\\x22isbh\\x22:28,\\x22jsonp\\x22:true,\\x22lm\\x22:true,\\x22msgs\\x22:{\\x22cibl\\x22:\\x22Effacer la recherche\\x22,\\x22dym\\x22:\\x22Essayez avec cette orthographe :\\x22,\\x22lcky\\x22:\\x22J\\\\u0026#39;ai de la chance\\x22,\\x22lml\\x22:\\x22En savoir plus\\x22,\\x22oskt\\x22:\\x22Outils de saisie\\x22,\\x22psrc\\x22:\\x22Cette suggestion a bien été supprimée de votre \\\\u003Ca href\\x3d\\\\\\x22/history\\\\\\x22\\\\u003Ehistorique Web\\\\u003C/a\\\\u003E.\\x22,\\x22psrl\\x22:\\x22Supprimer\\x22,\\x22sbit\\x22:\\x22Recherche par image\\x22,\\x22srch\\x22:\\x22Recherche Google\\x22},\\x22nrft\\x22:false,\\x22ovr\\x22:{},\\x22pq\\x22:\\x22\\x22,\\x22refpd\\x22:true,\\x22rfs\\x22:[],\\x22sbas\\x22:\\x220 3px 8px 0 rgba(0,0,0,0.2),0 0 0 1px rgba(0,0,0,0.08)\\x22,\\x22sbpl\\x22:16,\\x22sbpr\\x22:16,\\x22scd\\x22:10,\\x22stok\\x22:\\x221lDstMgtMp9RFnSbOW3Ur5w3QBw\\x22,\\x22uhde\\x22:false}}';google.pmc=JSON.parse(pmc);})();</script>        </body></html>\n",
+      "\n",
+      "The cookies property returns your cookies.\n",
+      "-------------\n",
+      "<RequestsCookieJar[<Cookie CONSENT=PENDING+267 for .google.com/>]>\n"
+     ]
+    }
+   ],
+   "source": [
+    "import requests\n",
+    "\n",
+    "r = requests.get('https://www.google.com/')\n",
+    "\n",
+    "print(\"The get method returns a class object.\")\n",
+    "print(\"-------------\")\n",
+    "print(type(r))\n",
+    "\n",
+    "print(\"\\nThe status code tells us that the request is successful.\")\n",
+    "print(\"-------------\")\n",
+    "print(r.status_code)\n",
+    "\n",
+    "print(\"\\nThe text property returns the source code of Google homepage.\")\n",
+    "print(\"-------------\")\n",
+    "print(type(r.text))\n",
+    "print(r.text)\n",
+    "\n",
+    "print(\"\\nThe cookies property returns your cookies.\")\n",
+    "print(\"-------------\")\n",
+    "print(r.cookies)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "## Class, constructor, method and property\n",
+    "\n",
+    "When we talk about objected-oriented programming (OOP), no matter which language you are using (Some languages like Java and C++ are more natively class-based), the four most fundamental concepts are `class`, `constructor`, `method` and `property`.\n",
+    "\n",
+    "Let's construct our first class in Python. A class is a concept, a perception. Let's say we want to define what is a human being (Person).\n",
+    "\n",
+    "Typically you would start building your `Person` (capital case) class by defining it's properties (name, nationality, job) using a constructor (the `__init__` here). You would also like to define the class's method (what a human can do).\n",
+    "\n",
+    "One thing might seem odd for beginners is the `self` parameter. Roughly speaking it's a placeholder which allows your methods to access the properties.\n",
+    "\n",
+    "The code should be quite self-explanatory."
+   ],
+   "metadata": {
+    "collapsed": false
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "Hello my name is Xiaoou.\nI'm Chinese.\nI work in NLP.\nXiaoou\n"
+     ]
+    }
+   ],
+   "source": [
+    "class Person:\n",
+    "  def __init__(self, name, nationality, job):\n",
+    "    self.name = name\n",
+    "    self.nationality = nationality\n",
+    "    self.job = job\n",
+    "\n",
+    "  def greeting(self):\n",
+    "      print(f\"Hello my name is {self.name}.\\nI'm {self.nationality}.\\nI work in {self.job}.\")\n",
+    "\n",
+    "# initiate a class\n",
+    "me = Person(\"Xiaoou\", \"Chinese\", \"NLP\")\n",
+    "\n",
+    "# using the greeting method\n",
+    "me.greeting()\n",
+    "\n",
+    "# access the name property\n",
+    "print(me.name)"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "So far so good. We have built our first class. Now let's imitate the schema used in the working example of `requests` we saw at the beginning. As a reminder, the working code bloc is:"
+   ],
+   "metadata": {
+    "collapsed": false
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "outputs": [],
+   "source": [
+    "r = requests.get('https://www.google.com/')\n",
+    "print(type(r))\n",
+    "print(r.status_code)\n",
+    "print(r.text)"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "## Imitate the requests framework\n",
+    "\n",
+    "When you run `requests.get(\"https://www.google.com/\")`, you have an object of class `<class 'requests.models.Response'>`. This object has two properties: `status_code` and `text`. Let's replicate this schema with an example of article scraping.\n",
+    "\n",
+    "So basically we are trying to have an object returned after calling a function/method.\n",
+    "\n",
+    "So we first create the class `Content` and then the function `scrape_lemonde` which encapsulate the scraped url, title, and the first 100 characters in the object created by the `Content` class."
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Url\n",
+      "---------\n",
+      "https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html\n",
+      "\n",
+      "Title\n",
+      "----------\n",
+      "Le mouvement Wiener Werkstätte, dans « Cartes postales magazine »\n",
+      "\n",
+      "First 100 characters\n",
+      "-----------\n",
+      "« Le 22 janvier 2012 décède Paul Armand, ce qui entraîne la mort de Cartes postales et collections (\n"
+     ]
+    }
+   ],
+   "source": [
+    "import requests\n",
+    "from bs4 import BeautifulSoup\n",
+    "\n",
+    "class Content:\n",
+    "    def __init__(self, url, title, first100):\n",
+    "        self.url = url\n",
+    "        self.title = title\n",
+    "        self.first100 = first100\n",
+    "\n",
+    "def get_parsed_text(url):\n",
+    "    req = requests.get(url)\n",
+    "    soup = BeautifulSoup(req.text, 'html.parser')\n",
+    "    return soup\n",
+    "\n",
+    "def scrape_lemonde(url):\n",
+    "    soup = get_parsed_text(url)\n",
+    "    title = soup.find('h1').text\n",
+    "    body_tags = soup.article.find_all([\"p\", \"h2\"], recursive=False)\n",
+    "    body = \"\"\n",
+    "    for tag in body_tags:\n",
+    "        body += tag.get_text()\n",
+    "    first100 = body[:100]\n",
+    "    return Content(url, title, first100)\n",
+    "\n",
+    "url = 'https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html'\n",
+    "content = scrape_lemonde(url)\n",
+    "\n",
+    "print(\"Url\")\n",
+    "print(\"---------\")\n",
+    "print(content.url)\n",
+    "\n",
+    "print(\"\\nTitle\\n----------\")\n",
+    "print(content.title)\n",
+    "\n",
+    "print(\"\\nFirst 100 characters\\n-----------\")\n",
+    "print(content.first100)"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "What are the benefits of such an approach ?\n",
+    "\n",
+    "Let's imagine that the end user who uses your product only have the `scrape_lemonde` function. He would have to know another 3 functions `get_url`, `get_content` and `get_title` to be able to use your scraper. \n",
+    "\n",
+    "It's quite complex and counter-intuitive.\n",
+    "\n",
+    "However, an objected-oriented approach is much more comprehensible. Because a webpage naturally has a title, a url and text. Your end user doesn't need to know how you manage to get these informations, he just needs to know how to access them. That's the principle of `encapsulation`.\n",
+    "\n",
+    "Note that I've deliberately simplified some concepts relevant to `software design` as I don't want to get too deep into it. However I hope that you see already how OOP works in vivo and the benefits of such approach.\n",
+    "\n",
+    "Another benefit (besides encapsulation and better code structure) is its underlying **normalizing abilities**. Let's say you now want to scrape New York Times. It suffices to add a `scrape_nytimes` while returning **always the same object** (`Content` with 3 properties).\n",
+    "\n",
+    "This way you normalize your framework by defining an **unified output** regardless of the scraper/function that the user employs.\n",
+    "\n",
+    "Let's implement it."
+   ],
+   "metadata": {
+    "collapsed": false
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Url\n",
+      "---------\n",
+      "https://www.nytimes.com/2018/01/25/opinion/sunday/silicon-valley-immortality.html\n",
+      "\n",
+      "Title\n",
+      "----------\n",
+      "The Men Who Want to Live Forever\n",
+      "\n",
+      "First 100 characters\n",
+      "-----------\n",
+      "Would you like to live forever? Some billionaires, already invincible in every other way, have decid\n"
+     ]
+    }
+   ],
+   "source": [
+    "# The new function\n",
+    "def scrape_nytimes(url):\n",
+    "    bs = get_parsed_text(url)\n",
+    "    title = bs.find('h1').text\n",
+    "    lines = bs.select('div.StoryBodyCompanionColumn div p')\n",
+    "    body = '\\n'.join([line.text for line in lines])\n",
+    "    first100 = body[:100]\n",
+    "    return Content(url, title, first100)\n",
+    "\n",
+    "# Exactly the same schema\n",
+    "\n",
+    "url = 'https://www.nytimes.com/2018/01/25/opinion/sunday/silicon-valley-immortality.html'\n",
+    "content = scrape_nytimes(url)\n",
+    "\n",
+    "print(\"Url\")\n",
+    "print(\"---------\")\n",
+    "print(content.url)\n",
+    "\n",
+    "print(\"\\nTitle\\n----------\")\n",
+    "print(content.title)\n",
+    "\n",
+    "print(\"\\nFirst 100 characters\\n-----------\")\n",
+    "print(content.first100)"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "Isn't that beautiful?\n",
+    "\n",
+    "However the structure of our code (or product) is still one step from being totally intuitive. As a common mortal, I feel like a `scraper` class would be a perfect place to start instead of having to know the two functions `scrape_lemonde` and `scrape_nytimes`.\n",
+    "\n",
+    "Let's do it! Note that we reuse the `Content` class created earlier.\n",
+    "\n",
+    "Then we integrate the two scraper functions in a new `Crawler` class.\n",
+    "\n",
+    "The new `Crawler` class has `journal` as parameter, which allows us to adjust the scraper's behavior according to the newspaper (which uses different tags to surround text body).\n",
+    "\n",
+    "It's important to add `self` as a parameter when you create functions in a class. Actually when \"functions\" are created inside a `class` they are called `methods` and the `self` parameter suggests that these are `methods` acting on objects of the same `class`.\n",
+    "\n",
+    "The last thing worth mentioning is the `print` in the constructor which returns a message when the user wishes to crawl a newspaper not recognized by the Crawler."
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "outputs": [],
+   "source": [
+    "class Content:\n",
+    "    def __init__(self, url, title, first100):\n",
+    "        self.url = url\n",
+    "        self.title = title\n",
+    "        self.first100 = first100\n",
+    "\n",
+    "class Crawler:\n",
+    "\n",
+    "    def __init__(self, journal):\n",
+    "        self.journal = journal\n",
+    "        # if newspaper not recognized\n",
+    "        if journal not in [\"lemonde\",\"nyt\"]:\n",
+    "            print(\"Our services doesn't scrape this website for the moment.\\nPlease contact us to build a scraper for this journal :D\")\n",
+    "\n",
+    "    def get_parsed_text(self,url):\n",
+    "        req = requests.get(url)\n",
+    "        soup = BeautifulSoup(req.text, 'html.parser')\n",
+    "        return soup\n",
+    "\n",
+    "    def scrape_lemonde(self,url):\n",
+    "        soup = self.get_parsed_text(url)\n",
+    "        title = soup.find('h1').text\n",
+    "        body_tags = soup.article.find_all([\"p\", \"h2\"], recursive=False)\n",
+    "        body = \"\"\n",
+    "        for tag in body_tags:\n",
+    "            body += tag.get_text()\n",
+    "        first100 = body[:100]\n",
+    "        return Content(url, title, first100)\n",
+    "\n",
+    "    def scrape_nytimes(self,url):\n",
+    "        bs = self.get_parsed_text(url)\n",
+    "        title = bs.find('h1').text\n",
+    "        lines = bs.select('div.StoryBodyCompanionColumn div p')\n",
+    "        body = '\\n'.join([line.text for line in lines])\n",
+    "        first100 = body[:100]\n",
+    "        return Content(url, title, first100)\n",
+    "\n",
+    "    def get(self,url):\n",
+    "        if self.journal == \"lemonde\":\n",
+    "            return self.scrape_lemonde(url)\n",
+    "        elif self.journal == \"nyt\":\n",
+    "            return self.scrape_nytimes(url)"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "### Le monde scraper\n",
+    "\n",
+    "Now let's generate a scraper for articles of the newspaper `Le Monde`."
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Url\n",
+      "---------\n",
+      "https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html\n",
+      "\n",
+      "Title\n",
+      "----------\n",
+      "Le mouvement Wiener Werkstätte, dans « Cartes postales magazine »\n",
+      "\n",
+      "First 100 characters\n",
+      "-----------\n",
+      "« Le 22 janvier 2012 décède Paul Armand, ce qui entraîne la mort de Cartes postales et collections (\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create the Le Monde Crawler\n",
+    "lemonde_crawler = Crawler(\"lemonde\")\n",
+    "\n",
+    "lemonde_content = lemonde_crawler.get(\"https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html\")\n",
+    "\n",
+    "print(\"Url\")\n",
+    "print(\"---------\")\n",
+    "print(lemonde_content.url)\n",
+    "\n",
+    "print(\"\\nTitle\\n----------\")\n",
+    "print(lemonde_content.title)\n",
+    "\n",
+    "print(\"\\nFirst 100 characters\\n-----------\")\n",
+    "print(lemonde_content.first100)"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "### New York Times scraper\n",
+    "\n",
+    "Now a scraper for articles of New York Times."
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Url\n",
+      "---------\n",
+      "https://www.nytimes.com/2021/04/02/us/politics/capitol-attack.html\n",
+      "\n",
+      "Title\n",
+      "----------\n",
+      "Driver Rams Into Officers at Capitol, Killing One and Injuring Another\n",
+      "\n",
+      "First 100 characters\n",
+      "-----------\n",
+      "WASHINGTON — The band of razor wire-topped fencing around the Capitol had recently come down. The he\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create the New York Times Crawler\n",
+    "nyt_crawler = Crawler(\"nyt\")\n",
+    "\n",
+    "nyt_content = nyt_crawler.get(\"https://www.nytimes.com/2021/04/02/us/politics/capitol-attack.html\")\n",
+    "\n",
+    "print(\"Url\")\n",
+    "print(\"---------\")\n",
+    "print(nyt_content.url)\n",
+    "\n",
+    "print(\"\\nTitle\\n----------\")\n",
+    "print(nyt_content.title)\n",
+    "\n",
+    "print(\"\\nFirst 100 characters\\n-----------\")\n",
+    "print(nyt_content.first100)"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "### Unknown journal name\n",
+    "\n",
+    "When the end user enters an unknown journal, it will spit out the pre-defined message."
+   ],
+   "metadata": {
+    "collapsed": false
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Our services doesn't scrape this website for the moment.\n",
+      "Please contact us to build a scraper for this journal :D\n"
+     ]
+    }
+   ],
+   "source": [
+    "bbc_crawler = Crawler(\"bbc\")"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
+    "## Wrap-up\n",
+    "\n",
+    "Bravo for having reading so far, hopefully you have:\n",
+    "\n",
+    "1. Learned how to manage a little web-scraping project using class in Python\n",
+    "\n",
+    "2. Understood the benefits of object oriented programming both at the level of code structuring and at the level of software design\n",
+    "\n",
+    "3. Known the basic underlying principles of frameworks like `requests`\n",
+    "\n",
+    "Now it's time to build your own framework :D\n",
+    "\n",
+    "If you want to know more web scraping, read the wonderful book by Ryan Mitchell from which this tutorial is partly inspired.\n",
+    "\n",
+    "*Web Scraping with Python: Collecting More Data from the Modern Web*\n",
+    "\n",
+    "If you want to dive into object-oriented programming, be sure to check the book of Mark Lutz:\n",
+    "\n",
+    "*Programming Python: Powerful Object-Oriented Programming*"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   }
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "3.7.6-final"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}

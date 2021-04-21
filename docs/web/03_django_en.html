@@ -1,0 +1,567 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Computational Linguistics in R" href="../linguistique_informatique/index.html" /><link rel="prev" title="On your way to scraping French forums 🇬🇧" href="02_forum_en.html" />
+
+    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+        <title>Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧 - NLP in French</title>
+      <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
+    <link rel="stylesheet" href="../static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+    <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NLP in French</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../static/nlp_Logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../static/nlp_Logo.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">NLP in French</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/index.html">NLP and Machine Learning-related</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/01_compara_anno_fr.html">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/02_classification_prenoms_fr.html">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/03_classification_lemonde_fr.html">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/index.html">Transformers in NLP with PyTorch, TensorFlow and Hugging Face</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_en.html">10 questions on Bert 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_fr.html">10 questions sur Bert 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/02_firstBert_fr.html">Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../better_programmer/index.html">Better Programmer</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/01_python_fr.html">Mieux programmer en Python 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/02_git3_en.html">A serious guide to git 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/03_jupyter_remote_pycharm.html">Connect to remote jupyter notebook in Pycharm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/04_oop_web_scraping_en.html">Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/05_oop_web_scraping_cooper_en.html">Be a responsible programmer when doing Object-Oriented Programming 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algo/index.html">Algorithms and data structures by examples in Python</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_en.html">Algorithm or many ways of solving a problem 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_fr.html">Algorithme ou plusieurs façons de résoudre un problème 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/02_ds_en.html">Data structures or many ways of organizing your stuff 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/099algo_map.html">Roadmap and cheatsheet of algorithms and data structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Web Related</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label for="toctree-checkbox-5"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_lemonde_en.html">Complete tutorial on scraping French news from Le Monde 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_lemonde_fr.html">Scraper « le monde » et construire ton propre corpus 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_forum_en.html">On your way to scraping French forums 🇬🇧</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linguistique_informatique/index.html">Computational Linguistics in R</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label for="toctree-checkbox-6"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/01_zipf_fr.html">La loi de Zipf illustrée avec gutenbergr en R 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/02_mca_ergatif_fr.html">Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/03_pca_inclusion_fr.html">Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/01_bash.html">My codebase for bash/shell script (macOS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/02_tmux.html">Tumux-related code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/03_python.html">My python codebase (including packages/libraries)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate">
+<h1>Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧<a class="headerlink" href="#deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou Wang</a></p>
+<p>It can be quite frustrating/challenging for django newbies to deploy their app because a bunch of new concepts should be known in order to play the game with confidence. This tutorial gives you all the basics and further reference. The structure of the project can be seen in the following screenshot: the project <code class="docutils literal notranslate"><span class="pre">my_blog</span></code> is itself located in the <code class="docutils literal notranslate"><span class="pre">blog</span></code> folder.</p>
+<p><img alt="" src="https://i.imgur.com/FglTVf6.png"/></p>
+<div class="section" id="deployment-in-a-nutshell">
+<h2>Deployment in a nutshell<a class="headerlink" href="#deployment-in-a-nutshell" title="Permalink to this headline">¶</a></h2>
+<p>You need</p>
+<ul class="simple">
+<li><p>a web server (often Nginx or apache) to handle http requests</p></li>
+<li><p>an application server called gunicorn to serve your django app (the middle layer)</p></li>
+<li><p>a django app</p></li>
+<li><p>a database management system (often mysql or postgresql) to store information.</p></li>
+<li><p>sometimes a firewall system to block some requests</p></li>
+</ul>
+</div>
+<div class="section" id="step-by-step">
+<h2>Step by step<a class="headerlink" href="#step-by-step" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu">
+<h3>A server/droplet on digitalocean with often a Linux system as Ubuntu<a class="headerlink" href="#a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="https://i.imgur.com/a0Lf3Xp.png"/></p>
+<p>Note, some tutorials said that a password would be sent to your email. This is outdated, remember, for an easy start, to choose the password method and set your password as follows. The 5$ plan is largely sufficient for personal use.</p>
+<p><img alt="" src="https://i.imgur.com/6AYEhq2.png"/></p>
+</div>
+<div class="section" id="a-regular-user-with-some-root-privileges">
+<h3>A regular user with some root privileges<a class="headerlink" href="#a-regular-user-with-some-root-privileges" title="Permalink to this headline">¶</a></h3>
+<p>For our purpose you just need the following steps:</p>
+<p>First connect to the server using ssh, on Mac you are good to go already on Windows you can use <code class="docutils literal notranslate"><span class="pre">PuTTy</span></code>, see the reference</p>
+<blockquote>
+<div><p>ref https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/</p>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh root@your_server_ip
+</pre></div>
+</div>
+<p>The server ip can be seen here</p>
+<p><img alt="" src="https://i.imgur.com/UiJgLGx.png"/></p>
+<p>Then add a regular user with root privileges</p>
+<blockquote>
+<div><p>ref https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04</p>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>adduser sammy <span class="c1"># add a user</span>
+usermod -aG sudo sammy <span class="c1"># give sammy root privileges</span>
+</pre></div>
+</div>
+<p>Now log out and log in this regular user</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh sammy@your_server_ip
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-apt-get-to-install-the-most-recent-packages">
+<h3>Update apt-get to install the most recent packages<a class="headerlink" href="#update-apt-get-to-install-the-most-recent-packages" title="Permalink to this headline">¶</a></h3>
+<p>Here we install pip, postgresql (database tool) and nginx (web server). In simple terms, <code class="docutils literal notranslate"><span class="pre">nginx</span></code> is the server who takes http requests, another common server is <code class="docutils literal notranslate"><span class="pre">apache</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-the-database">
+<h3>Set up the database<a class="headerlink" href="#set-up-the-database" title="Permalink to this headline">¶</a></h3>
+<p>First log into postgresql</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -u postgres psql
+</pre></div>
+</div>
+<p>Then create a database, user and password.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CREATE DATABASE yourproject<span class="p">;</span> <span class="c1"># replace yourproject with your database name</span>
+CREATE USER myprojectuser WITH PASSWORD <span class="s1">'password'</span><span class="p">;</span> <span class="c1"># set username and password</span>
+ALTER ROLE myprojectuser SET client_encoding TO <span class="s1">'utf8'</span><span class="p">;</span>
+ALTER ROLE myprojectuser SET default_transaction_isolation TO <span class="s1">'read committed'</span><span class="p">;</span>
+ALTER ROLE myprojectuser SET timezone TO <span class="s1">'UTC'</span><span class="p">;</span>
+GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser<span class="p">;</span>
+<span class="se">\q</span> <span class="c1"># quit</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer">
+<h3>Add the database setting set up in step 4 into your <code class="docutils literal notranslate"><span class="pre">Settings.py</span></code> on your local computer<a class="headerlink" href="#add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
+    <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'default'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'ENGINE'</span><span class="p">:</span> <span class="s1">'django.db.backends.sqlite3'</span><span class="p">,</span>
+            <span class="s1">'NAME'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">'db.sqlite3'</span><span class="p">),</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'default'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'ENGINE'</span><span class="p">:</span> <span class="s1">'django.db.backends.postgresql_psycopg2'</span><span class="p">,</span>
+            <span class="s1">'NAME'</span><span class="p">:</span> <span class="s1">'yourdatabasename'</span><span class="p">,</span>
+            <span class="s1">'USER'</span><span class="p">:</span> <span class="s1">'yourdatabaseuser'</span><span class="p">,</span>
+            <span class="s1">'PASSWORD'</span><span class="p">:</span> <span class="s1">'yourdatabasepassword'</span><span class="p">,</span>
+            <span class="s1">'HOST'</span><span class="p">:</span> <span class="s1">'localhost'</span><span class="p">,</span>
+            <span class="s1">'PORT'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-a-virtual-environment-for-python">
+<h3>Set up a virtual environment for Python<a class="headerlink" href="#set-up-a-virtual-environment-for-python" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -H pip3 install --upgrade pip
+sudo -H pip3 install virtualenv
+</pre></div>
+</div>
+<p>Since my website’s source code is hosted on github I will use git to clone the project into the folder <code class="docutils literal notranslate"><span class="pre">blog</span></code>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">freeze</span> <span class="pre">&gt;</span> <span class="pre">requirements.txt</span></code> on your local computer then use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code> to install dependencies for your app. Remember to run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">psycopg2-binary</span> <span class="pre">gunicorn</span></code> to have these two packages in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>.</p>
+<p>Also add your service ip in <code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span></code> of your global<code class="docutils literal notranslate"><span class="pre">settings.py</span></code></p>
+<p><img alt="" src="https://i.imgur.com/fipeWqq.png"/></p>
+<p>Update your git repository, be sure to have uploaded the most recent <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. Then get the repository on the server by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone yourrepository blog
+<span class="nb">cd</span> blog
+git config credential.helper store <span class="c1"># remember your username and password</span>
+</pre></div>
+</div>
+<p>And then create a virtualenv named <code class="docutils literal notranslate"><span class="pre">env</span></code> and activate it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virtualenv env
+<span class="nb">source</span> env/bin/activate
+pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-migrate">
+<h3>Run migrate<a class="headerlink" href="#run-migrate" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-on-8000-port-with-and-without-gunicorn">
+<h3>Test on 8000 port with and without gunicorn<a class="headerlink" href="#test-on-8000-port-with-and-without-gunicorn" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ufw allow <span class="m">8000</span> <span class="c1"># allow 8000 in the firewall</span>
+python manage.py runserver <span class="m">0</span>.0.0.0:8000
+</pre></div>
+</div>
+<p>Go to <a class="reference external" href="http://server_domain_or_IP:8000">http://server_domain_or_IP:8000</a>, it’s very important to use http since you haven’t set ssl certificate (no https support)</p>
+<p>Now test the gunicorn. Gunicorn is an <code class="docutils literal notranslate"><span class="pre">application</span> <span class="pre">server</span></code> which serves your django app.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gunicorn --bind <span class="m">0</span>.0.0.0:8000 my_blog.wsgi
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-gunicorn-service-file">
+<h3>Set up Gunicorn service file<a class="headerlink" href="#set-up-gunicorn-service-file" title="Permalink to this headline">¶</a></h3>
+<p>I use vim here, but you are free to use some more beginner-friendly editor like nano. The gunicorn service file is to ensure that gunicorn is run automatically in background to serve django</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo vim /etc/systemd/system/gunicorn.service
+</pre></div>
+</div>
+<p>An example service file using sammy as user looks as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>gunicorn daemon
+<span class="nv">After</span><span class="o">=</span>network.target
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">User</span><span class="o">=</span>sammy
+<span class="nv">Group</span><span class="o">=</span>www-data
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/home/sammy/blog
+<span class="nv">ExecStart</span><span class="o">=</span>/home/sammy/blog/env/bin/gunicorn --access-logfile - --workers <span class="m">3</span> --bind unix:/home/sammy/my_blog.sock my_blog.wsgi:application
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></div>
+</div>
+<p>Now, start gunicorn!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start gunicorn.socket
+sudo systemctl <span class="nb">enable</span> gunicorn.socket
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-nginx">
+<h3>Set Nginx<a class="headerlink" href="#set-nginx" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo vim /etc/nginx/sites-available/blog
+</pre></div>
+</div>
+<p>An example setting looks as following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
+    server_name <span class="m">142</span>.93.110.76<span class="p">;</span>
+
+    <span class="nv">location</span> <span class="o">=</span> /favicon.ico <span class="o">{</span> access_log off<span class="p">;</span> log_not_found off<span class="p">;</span> <span class="o">}</span>
+    location /static/ <span class="o">{</span>
+        root /home/sammy/blog<span class="p">;</span>
+    <span class="o">}</span>
+
+    location /media/ <span class="o">{</span>
+        root /home/sammy/media<span class="p">;</span>
+    <span class="o">}</span>
+
+    location / <span class="o">{</span>
+        include proxy_params<span class="p">;</span>
+        proxy_pass http://unix:/home/sammy/my_blog.sock<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Make a symbolic link to make your setting available to nginx</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled
+</pre></div>
+</div>
+<p>Test and start your Nginx server, you are good to go!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo nginx -t
+sudo systemctl restart nginx
+<span class="c1"># stop 8000 port in the firewall</span>
+sudo ufw delete allow <span class="m">8000</span>
+sudo ufw allow <span class="s1">'Nginx Full'</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-ssl-certificate-to-make-https-available">
+<h3>Add a ssl certificate to make https available<a class="headerlink" href="#add-a-ssl-certificate-to-make-https-available" title="Permalink to this headline">¶</a></h3>
+<p>Almost nobody uses http these days. Let’s now see how to secure our site by adding a ssl certificate!</p>
+<p>To have a more solid grasp on ssl certificate, see <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04">reference here</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install certbot python3-certbot-nginx <span class="c1"># install some useful packages</span>
+sudo vim /etc/nginx/sites-available/blog
+</pre></div>
+</div>
+<p>Change the server_name line, example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server_name <span class="m">142</span>.93.110.76 nlpinpython.com www.nlpinpython.com<span class="p">;</span>
+</pre></div>
+</div>
+<p>Restart Nginx and allow https in the firewall:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl reload nginx
+sudo ufw allow <span class="s1">'Nginx Full'</span>
+sudo ufw delete allow <span class="s1">'Nginx HTTP'</span>
+</pre></div>
+</div>
+<p>Get a ssl certificat</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo certbot --nginx -d nlpinpython.com -d www.nlpinpython.com
+</pre></div>
+</div>
+<p>At the last step, select <code class="docutils literal notranslate"><span class="pre">redirect</span></code>
+<img alt="" src="https://i.imgur.com/ia658lG.png"/></p>
+<p>Congratulations to make it this far.</p>
+</div>
+</div>
+<div class="section" id="most-useful-commands">
+<h2>Most useful commands:<a class="headerlink" href="#most-useful-commands" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up nginx</span>
+sudo vim /etc/nginx/sites-available/blog
+<span class="c1"># set up gunicorn</span>
+sudo vim /etc/systemd/system/gunicorn.service
+<span class="c1"># restart gunicorn after change</span>
+sudo systemctl restart gunicorn
+<span class="c1"># restart nginx</span>
+sudo systemctl restart nginx
+</pre></div>
+</div>
+<p>Export your database for backup:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -i -u postgres -W
+pg_dump dbname &gt; dbexport.pgsql
+</pre></div>
+</div>
+<blockquote>
+<div><p>Supplementary references:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>about firewall https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04</p></li>
+<li><p>about postgresql backup https://www.digitalocean.com/community/tutorials/how-to-backup-postgresql-databases-on-an-ubuntu-vps</p></li>
+<li><p>general instructions https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04</p></li>
+</ul>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../linguistique_informatique/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Computational Linguistics in R</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="02_forum_en.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">On your way to scraping French forums 🇬🇧</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Xiaoou Wang
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../sources/web/03_django_en.md.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧</a><ul>
+<li><a class="reference internal" href="#deployment-in-a-nutshell">Deployment in a nutshell</a></li>
+<li><a class="reference internal" href="#step-by-step">Step by step</a><ul>
+<li><a class="reference internal" href="#a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu">A server/droplet on digitalocean with often a Linux system as Ubuntu</a></li>
+<li><a class="reference internal" href="#a-regular-user-with-some-root-privileges">A regular user with some root privileges</a></li>
+<li><a class="reference internal" href="#update-apt-get-to-install-the-most-recent-packages">Update apt-get to install the most recent packages</a></li>
+<li><a class="reference internal" href="#set-up-the-database">Set up the database</a></li>
+<li><a class="reference internal" href="#add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer">Add the database setting set up in step 4 into your <code class="docutils literal notranslate"><span class="pre">Settings.py</span></code> on your local computer</a></li>
+<li><a class="reference internal" href="#set-up-a-virtual-environment-for-python">Set up a virtual environment for Python</a></li>
+<li><a class="reference internal" href="#run-migrate">Run migrate</a></li>
+<li><a class="reference internal" href="#test-on-8000-port-with-and-without-gunicorn">Test on 8000 port with and without gunicorn</a></li>
+<li><a class="reference internal" href="#set-up-gunicorn-service-file">Set up Gunicorn service file</a></li>
+<li><a class="reference internal" href="#set-nginx">Set Nginx</a></li>
+<li><a class="reference internal" href="#add-a-ssl-certificate-to-make-https-available">Add a ssl certificate to make https available</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#most-useful-commands">Most useful commands:</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script src="../static/jquery.js"></script>
+    <script src="../static/underscore.js"></script>
+    <script src="../static/doctools.js"></script>
+    <script src="../static/clipboard.min.js"></script>
+    <script src="../static/copybutton.js"></script>
+    <script src="../static/tabs.js"></script>
+    <script >
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WGY2PHYB"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-58WGY2PHYB');
+</script>
+<!-- Default Statcounter code for nlpinfrench
+http://nlpinfrench.fr -->
+<script type="text/javascript">
+var sc_project=12500373;
+var sc_invisible=1;
+var sc_security="def60251";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12500373/0/def60251/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
+</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../static/custom.js"></script>
+    <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

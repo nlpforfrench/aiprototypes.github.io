@@ -1,0 +1,984 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷" href="02_mca_ergatif_fr.html" /><link rel="prev" title="Computational Linguistics in R" href="index.html" />
+
+    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+        <title>La loi de Zipf illustrée avec gutenbergr en R 🇫🇷 - NLP in French</title>
+      <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
+    <link rel="stylesheet" href="../static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+    <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NLP in French</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../static/nlp_Logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../static/nlp_Logo.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">NLP in French</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nlp/index.html">NLP and Machine Learning-related</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/01_compara_anno_fr.html">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/02_classification_prenoms_fr.html">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nlp/03_classification_lemonde_fr.html">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/index.html">Transformers in NLP with PyTorch, TensorFlow and Hugging Face</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_en.html">10 questions on Bert 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_fr.html">10 questions sur Bert 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/02_firstBert_fr.html">Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../better_programmer/index.html">Better Programmer</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/01_python_fr.html">Mieux programmer en Python 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/02_git3_en.html">A serious guide to git 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/03_jupyter_remote_pycharm.html">Connect to remote jupyter notebook in Pycharm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/04_oop_web_scraping_en.html">Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/05_oop_web_scraping_cooper_en.html">Be a responsible programmer when doing Object-Oriented Programming 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algo/index.html">Algorithms and data structures by examples in Python</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_en.html">Algorithm or many ways of solving a problem 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_fr.html">Algorithme ou plusieurs façons de résoudre un problème 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/02_ds_en.html">Data structures or many ways of organizing your stuff 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/099algo_map.html">Roadmap and cheatsheet of algorithms and data structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../web/index.html">Web Related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label for="toctree-checkbox-5"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_en.html">Complete tutorial on scraping French news from Le Monde 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_fr.html">Scraper « le monde » et construire ton propre corpus 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/02_forum_en.html">On your way to scraping French forums 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/03_django_en.html">Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Computational Linguistics in R</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label for="toctree-checkbox-6"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">La loi de Zipf illustrée avec gutenbergr en R 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_mca_ergatif_fr.html">Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_pca_inclusion_fr.html">Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/01_bash.html">My codebase for bash/shell script (macOS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/02_tmux.html">Tumux-related code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/03_python.html">My python codebase (including packages/libraries)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷">
+<h1>La loi de Zipf illustrée avec gutenbergr en R 🇫🇷<a class="headerlink" href="#La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
+<p>Il s’agit de montrer quelques aspects de la loi de Zipf avec 3 textes (Wuthering Heights, Madame Bovary et Faust) récupérés du site Gutenberg.</p>
+<div class="section" id="Packages-utilisés">
+<h2>Packages utilisés<a class="headerlink" href="#Packages-utilisés" title="Permalink to this headline">¶</a></h2>
+<p>Les trois packages/ensemble de packages utilisés sont <code class="docutils literal notranslate"><span class="pre">gutenbergr</span></code>,<code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> et <code class="docutils literal notranslate"><span class="pre">gridExtra</span></code> (pour afficher des multi-plots).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="nf">options</span><span class="p">(</span><span class="n">tidyverse.quiet</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="c1"># omettre les warnings pour ne pas encombrer le document</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">gutenbergr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">gridExtra.quiet</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="c1"># center plot title</span>
+<span class="nf">theme_update</span><span class="p">(</span><span class="n">plot.title</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">hjust</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Workflow-général">
+<h2>Workflow général<a class="headerlink" href="#Workflow-général" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>On prédéfinit les titres des 3 œuvres qui seront proposées à l’utiliseur et produit par la suite un dataframe contenant les métadatas</p></li>
+</ol>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">eng.title</span> <span class="o">&lt;-</span> <span class="s">"Wuthering Heights"</span>
+<span class="n">fr.title</span> <span class="o">&lt;-</span> <span class="s">"Madame Bovary"</span>
+<span class="n">de.title</span> <span class="o">&lt;-</span> <span class="s">"Faust: Der Tragödie erster Teil"</span>
+
+<span class="c1"># Get meta infos</span>
+<span class="n">metas</span> <span class="o">&lt;-</span> <span class="nf">get_books_meta</span><span class="p">(</span><span class="n">eng.title</span><span class="p">,</span> <span class="n">fr.title</span><span class="p">,</span> <span class="n">de.title</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>On définit une fonction main qui comprend toutes les étapes restantes allant de la saisie de l’utilisateur jusqu’à la génération et de la sauvegarde des graphes.</p></li>
+</ol>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">main</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Explication-de-la-fonction-get_books_meta">
+<h2>Explication de la fonction get_books_meta<a class="headerlink" href="#Explication-de-la-fonction-get_books_meta" title="Permalink to this headline">¶</a></h2>
+<p>La fonction <code class="docutils literal notranslate"><span class="pre">get_books_meta</span></code> prend les titres des 3 oeuvres comme entrées et produit un dataframe des informations des 3 œuvres en question en filtrant les métadatas du package <code class="docutils literal notranslate"><span class="pre">guternbergr</span></code> sur les colonnes <code class="docutils literal notranslate"><span class="pre">titre</span></code> et <code class="docutils literal notranslate"><span class="pre">language</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="n">get_books_meta</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">eng</span><span class="p">,</span> <span class="n">fr</span><span class="p">,</span> <span class="n">de</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># This function takes titles of 3 books in english</span>
+  <span class="c1"># french and german and returns a dataframe of meta information</span>
+  <span class="n">english.meta</span> <span class="o">&lt;-</span> <span class="n">gutenberg_metadata</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="n">eng</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">language</span> <span class="o">==</span> <span class="s">"en"</span><span class="p">)</span>
+  <span class="n">french.meta</span> <span class="o">&lt;-</span> <span class="n">gutenberg_metadata</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="n">fr</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">language</span> <span class="o">==</span> <span class="s">"fr"</span><span class="p">)</span>
+  <span class="n">german.meta</span> <span class="o">&lt;-</span> <span class="n">gutenberg_metadata</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="n">de</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">language</span> <span class="o">==</span> <span class="s">"de"</span><span class="p">)</span>
+  <span class="nf">return</span><span class="p">(</span><span class="nf">rbind</span><span class="p">(</span><span class="n">english.meta</span><span class="p">,</span> <span class="n">french.meta</span><span class="p">,</span> <span class="n">german.meta</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="n">eng.title</span> <span class="o">&lt;-</span> <span class="s">"Wuthering Heights"</span>
+<span class="n">fr.title</span> <span class="o">&lt;-</span> <span class="s">"Madame Bovary"</span>
+<span class="n">de.title</span> <span class="o">&lt;-</span> <span class="s">"Faust: Der Tragödie erster Teil"</span>
+
+<span class="c1"># Get meta infos</span>
+<span class="n">metas</span> <span class="o">&lt;-</span> <span class="nf">get_books_meta</span><span class="p">(</span><span class="n">eng.title</span><span class="p">,</span> <span class="n">fr.title</span><span class="p">,</span> <span class="n">de.title</span><span class="p">)</span>
+<span class="n">metas</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div class="table-wrapper"><table>
+<caption>A tibble: 3 × 8</caption>
+<thead>
+<tr><th scope="col">gutenberg_id</th><th scope="col">title</th><th scope="col">author</th><th scope="col">gutenberg_author_id</th><th scope="col">language</th><th scope="col">gutenberg_bookshelf</th><th scope="col">rights</th><th scope="col">has_text</th></tr>
+<tr><th scope="col">&lt;int&gt;</th><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;lgl&gt;</th></tr>
+</thead>
+<tbody>
+<tr><td>  768</td><td>Wuthering Heights              </td><td>Brontë, Emily              </td><td>405</td><td>en</td><td>Gothic Fiction/Movie Books/Best Books Ever Listings                         </td><td>Public domain in the USA.</td><td>TRUE</td></tr>
+<tr><td>14155</td><td>Madame Bovary                  </td><td>Flaubert, Gustave          </td><td>574</td><td>fr</td><td>Best Books Ever Listings/FR Littérature/Banned Books from Anne Haight's list</td><td>Public domain in the USA.</td><td>TRUE</td></tr>
+<tr><td> 2229</td><td>Faust: Der Tragödie erster Teil</td><td>Goethe, Johann Wolfgang von</td><td>586</td><td>de</td><td>Harvard Classics/Best Books Ever Listings/DE Drama                          </td><td>Public domain in the USA.</td><td>TRUE</td></tr>
+</tbody>
+</table></div></div>
+</div>
+</div>
+<div class="section" id="Explication-de-la-fonction-main">
+<h2>Explication de la fonction main<a class="headerlink" href="#Explication-de-la-fonction-main" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Dans <code class="docutils literal notranslate"><span class="pre">main</span></code>, on exécute la fonction <code class="docutils literal notranslate"><span class="pre">welcome_message</span></code> qui affiche les informations des 3 oeuvres.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="n">welcome_message</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># This functions takes a df of metainfo and prints the information in a human-friendly fashion #</span>
+  <span class="nf">cat</span><span class="p">(</span><span class="s">"Here are the books in our database.\n\n"</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">"%-10s%-30s%10s"</span><span class="p">,</span> <span class="s">"book id"</span><span class="p">,</span> <span class="s">"book title"</span><span class="p">,</span> <span class="s">"language"</span><span class="p">))</span>
+  <span class="nf">print</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">"%-10d%-30s%10s"</span><span class="p">,</span> <span class="n">metas</span><span class="o">$</span><span class="n">gutenberg_id</span><span class="p">,</span> <span class="n">metas</span><span class="o">$</span><span class="n">title</span><span class="p">,</span> <span class="n">metas</span><span class="o">$</span><span class="n">language</span><span class="p">))</span>
+  <span class="nf">cat</span><span class="p">(</span><span class="s">"\n\n\nTell us the book id on which you want to test the zipf's law.\n\n\n"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nf">welcome_message</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Here are the books in our database.
+
+[1] "book id   book title                      language"
+[1] "768       Wuthering Heights                     en"
+[2] "14155     Madame Bovary                         fr"
+[3] "2229      Faust: Der Tragödie erster Teil        de"
+
+
+
+Tell us the book id on which you want to test the zipf's law.
+
+
+</pre></div></div>
+</div>
+<ul class="simple">
+<li><p>Ensuite on demande à l’utilisateur de saisir le book id. Notez que si le book id ne figure pas dans la base de données on affiche un avertissement et relance la fonction <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">book.id</span> <span class="o">&lt;-</span> <span class="nf">readline</span><span class="p">()</span>
+<span class="c1"># convert the book id into integer</span>
+<span class="n">book.id</span> <span class="o">&lt;-</span> <span class="nf">as.integer</span><span class="p">(</span><span class="n">book.id</span><span class="p">)</span>
+<span class="c1"># check id validity</span>
+<span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">book.id</span> <span class="o">%in%</span> <span class="n">metas</span><span class="o">$</span><span class="n">gutenberg_id</span><span class="p">))</span> <span class="p">{</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"\n\n\U0001f609!Book id not found!\U0001f609 Please type an id existing in our database.\n\n"</span><span class="p">)</span>
+<span class="nf">main</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Si le book id figure dans la base de donnée on stocke le titre du livre et normalise le texte.</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">book.chosen</span> <span class="o">&lt;-</span> <span class="n">metas</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">gutenberg_id</span> <span class="o">==</span> <span class="n">book.id</span><span class="p">)</span>
+<span class="n">book.title</span> <span class="o">&lt;-</span> <span class="n">book.chosen</span><span class="o">$</span><span class="n">title</span>
+<span class="c1"># normalize the long text and convert to words</span>
+<span class="n">text</span> <span class="o">&lt;-</span> <span class="nf">normalize_text</span><span class="p">(</span><span class="n">book.id</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>La fonction <code class="docutils literal notranslate"><span class="pre">normalize_text</span></code> fait notamment les choses suivantes :</p>
+<ul>
+<li><p>Normalisation proprement dite : transformer toutes lettres en minuscules, remplacer les non caractères (ponctuation) et les whitespaces par l’espace, supprimer les espaces au début et à la fin des lignes de textes, supprimer les espaces multiples, supprimer les lignes vides etc.</p></li>
+<li><p>Coller les éléments du vecteur texte en un vecteur de caractères de longueur 1.</p></li>
+<li><p>Découper le vecteur de caractères de longueur 1 en mots et retourner les mots.</p></li>
+</ul>
+</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="n">normalize_text</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># This function takes a book id and returns normalized words vector #</span>
+  <span class="n">text</span> <span class="o">&lt;-</span> <span class="nf">gutenberg_download</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">mirror</span> <span class="o">=</span> <span class="s">"http://mirrors.xmission.com/gutenberg/"</span><span class="p">)</span>
+  <span class="n">body</span> <span class="o">&lt;-</span> <span class="n">text</span><span class="o">$</span><span class="n">text</span>
+  <span class="c1"># tackle non english texts</span>
+  <span class="n">body</span> <span class="o">&lt;-</span> <span class="nf">iconv</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s">"latin1"</span><span class="p">,</span> <span class="s">"UTF-8"</span><span class="p">)</span>
+  <span class="n">body.lower</span> <span class="o">&lt;-</span> <span class="nf">tolower</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+  <span class="c1"># replace whitespace characters/non words by space for easy split</span>
+  <span class="n">body.lower</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">"[^a-zA-Z\\s]"</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="n">body.lower</span><span class="p">)</span>
+  <span class="c1"># remove spaces at the beginning and end of texts</span>
+  <span class="n">body.lower</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">"(^ | +$)"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">body.lower</span><span class="p">)</span>
+  <span class="c1"># remove multiple spaces</span>
+  <span class="n">body.lower</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">" +"</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="n">body.lower</span><span class="p">)</span>
+  <span class="c1"># remove empty lines</span>
+  <span class="n">body.lower</span> <span class="o">&lt;-</span> <span class="n">body.lower</span><span class="p">[</span><span class="nf">which</span><span class="p">(</span><span class="n">body.lower</span> <span class="o">!=</span> <span class="s">""</span><span class="p">)]</span>
+  <span class="c1"># make the whole text a vector of length 1</span>
+  <span class="n">body.v</span> <span class="o">&lt;-</span> <span class="nf">paste</span><span class="p">(</span><span class="n">body.lower</span><span class="p">,</span> <span class="n">collapse</span> <span class="o">=</span> <span class="s">" "</span><span class="p">)</span>
+  <span class="c1"># split the text to words</span>
+  <span class="n">body.words</span> <span class="o">&lt;-</span> <span class="nf">unlist</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">body.v</span><span class="p">,</span> <span class="s">"\\W+"</span><span class="p">))</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">body.words</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Ensuite on passe à la fonction <code class="docutils literal notranslate"><span class="pre">get_freq</span></code> qui retourne un dataframe dont les colonnes sont :</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">mot</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fréquence</span> <span class="pre">absolue</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fréquence</span> <span class="pre">relative</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rang</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="n">get_freq</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># This function takes a words vector and returns a dataframe</span>
+  <span class="c1"># with word, count, relative freq, rank as columns</span>
+
+  <span class="c1"># get frequency table and convert to tibble</span>
+  <span class="n">text.freq</span> <span class="o">&lt;-</span> <span class="nf">table</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+  <span class="n">sorted_text.freq</span> <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="n">text.freq</span><span class="p">,</span> <span class="n">decreasing</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+  <span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">as_tibble</span><span class="p">(</span><span class="n">sorted_text.freq</span><span class="p">)</span>
+  <span class="c1"># reaarange the tibble to get rank info and relative frequency</span>
+  <span class="n">df</span> <span class="o">&lt;-</span> <span class="n">df</span> <span class="o">%&gt;%</span>
+    <span class="nf">rename</span><span class="p">(</span><span class="n">word</span> <span class="o">=</span> <span class="n">text</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="c1"># rename the default text column to word</span>
+    <span class="nf">mutate</span><span class="p">(</span><span class="n">total</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">%&gt;%</span> <span class="c1"># create a total n column</span>
+    <span class="nf">mutate</span><span class="p">(</span>
+      <span class="n">rank</span> <span class="o">=</span> <span class="nf">row_number</span><span class="p">(),</span> <span class="c1"># create rank column</span>
+      <span class="n">`term frequency`</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">total</span> <span class="c1"># create the relative frequency column</span>
+    <span class="p">)</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Ensuite la fonction <code class="docutils literal notranslate"><span class="pre">make_plots</span></code> génère un objet liste comprenant 3 graphes :</p>
+<ul>
+<li><p>Le premier affiche les 20 mots les plus fréquents du texte.</p></li>
+<li><p>Le deuxième affiche la distribution des fréquences relatives.</p></li>
+<li><p>Le troisième affiche sur l’axe X le logarithme du rang de chaque mot et l’axe Y le logarithme de sa fréquence relative.</p></li>
+</ul>
+</li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="n">make_plots</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># This function takes a df and title</span>
+  <span class="c1"># with 3 plots related to Zipf's law as output</span>
+  <span class="c1"># Plot scatterplot of top20 words (word vs freq)</span>
+  <span class="n">p.top20</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="p">],</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="nf">reorder</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="o">-</span><span class="n">n</span><span class="p">),</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">word</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">geom_text</span><span class="p">(</span><span class="n">check_overlap</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span> <span class="c1"># declare labels</span>
+    <span class="nf">ggtitle</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">"Top 20 most common words in"</span><span class="p">,</span> <span class="n">title</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">xlab</span><span class="p">(</span><span class="s">"Word"</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">ylab</span><span class="p">(</span><span class="s">"Absolute frequency"</span><span class="p">)</span>
+  <span class="c1"># plot the non-log relative frequency distribution</span>
+  <span class="n">p.nonlog</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">`term frequency`</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">geom_histogram</span><span class="p">(</span><span class="n">show.legend</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">xlim</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="m">0.0005</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">ggtitle</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">"Relative frequency distribution of words in"</span><span class="p">,</span> <span class="n">title</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">xlab</span><span class="p">(</span><span class="s">"Relative frequency"</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">ylab</span><span class="p">(</span><span class="s">"Percentage"</span><span class="p">)</span>
+  <span class="c1"># plot the log zip's distribution</span>
+  <span class="n">p.log</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">`term frequency`</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">geom_line</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">1.1</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">show.legend</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">scale_x_log10</span><span class="p">()</span> <span class="o">+</span>
+    <span class="nf">scale_y_log10</span><span class="p">()</span> <span class="o">+</span>
+    <span class="nf">ggtitle</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="s">"Standard plot of Zipf's law using words in"</span><span class="p">,</span> <span class="n">title</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">xlab</span><span class="p">(</span><span class="s">"Relative frequency (log)"</span><span class="p">)</span> <span class="o">+</span>
+    <span class="nf">ylab</span><span class="p">(</span><span class="s">"Rank"</span><span class="p">)</span>
+  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">p.top20</span><span class="p">,</span> <span class="n">p.nonlog</span><span class="p">,</span> <span class="n">p.log</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Ensemble-de-la-fonction-main">
+<h2>Ensemble de la fonction main<a class="headerlink" href="#Ensemble-de-la-fonction-main" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="n">main</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># This function asks the user to choose a book id</span>
+  <span class="c1"># displays top 20 most common words</span>
+  <span class="c1"># plot and save 3 plots illustrating the zipf's law</span>
+
+  <span class="nf">welcome_message</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span>
+  <span class="n">book.id</span> <span class="o">&lt;-</span> <span class="nf">readline</span><span class="p">()</span>
+  <span class="c1"># convert the book id into integer</span>
+  <span class="n">book.id</span> <span class="o">&lt;-</span> <span class="nf">as.integer</span><span class="p">(</span><span class="n">book.id</span><span class="p">)</span>
+  <span class="c1"># check id validity</span>
+  <span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">book.id</span> <span class="o">%in%</span> <span class="n">metas</span><span class="o">$</span><span class="n">gutenberg_id</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nf">cat</span><span class="p">(</span><span class="s">"\n\n\U0001f609!Book id not found!\U0001f609</span>
+<span class="s">    Please type an id existing in our database.\n\n"</span><span class="p">)</span>
+    <span class="nf">main</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span>
+  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+    <span class="n">book.chosen</span> <span class="o">&lt;-</span> <span class="n">metas</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">gutenberg_id</span> <span class="o">==</span> <span class="n">book.id</span><span class="p">)</span>
+    <span class="n">book.title</span> <span class="o">&lt;-</span> <span class="n">book.chosen</span><span class="o">$</span><span class="n">title</span>
+    <span class="c1"># normalize the long text and convert to words</span>
+    <span class="n">text</span> <span class="o">&lt;-</span> <span class="nf">normalize_text</span><span class="p">(</span><span class="n">book.id</span><span class="p">)</span>
+    <span class="c1"># get frequency table as dataframe</span>
+    <span class="n">df.freq</span> <span class="o">&lt;-</span> <span class="nf">get_freq</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="c1"># show top 20 most common words</span>
+    <span class="nf">cat</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">"\n\n\nThe book you chose was "</span><span class="p">,</span> <span class="n">book.title</span><span class="p">,</span> <span class="s">".\n\n\n"</span><span class="p">))</span>
+    <span class="nf">cat</span><span class="p">(</span><span class="s">"Here is the list of the top 20 most frequent words in this text.\n\n\n"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">df.freq</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span> <span class="p">])</span>
+    <span class="c1"># make plots</span>
+    <span class="n">plots</span> <span class="o">&lt;-</span> <span class="nf">make_plots</span><span class="p">(</span><span class="n">df.freq</span><span class="p">,</span> <span class="n">book.title</span><span class="p">)</span>
+    <span class="c1"># combine and show all 3 graphes</span>
+    <span class="nf">grid.arrange</span><span class="p">(</span><span class="n">plots</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="n">plots</span><span class="p">[[</span><span class="m">2</span><span class="p">]],</span> <span class="n">plots</span><span class="p">[[</span><span class="m">3</span><span class="p">]],</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+    <span class="c1"># save the plot we don't use it for the jupyter notebook illustrated on website</span>
+<span class="c1">#     g &lt;- arrangeGrob(plots[[1]], plots[[2]], plots[[3]], nrow = 3)</span>
+<span class="c1">#     ggsave(file = paste0("zipf_", book.title, "_xiaoouWang.png"), g)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Interprétations-des-graphes">
+<h2>Interprétations des graphes<a class="headerlink" href="#Interprétations-des-graphes" title="Permalink to this headline">¶</a></h2>
+<p>On utilisel ici le livre <code class="docutils literal notranslate"><span class="pre">Faust</span></code> comme exemple principal.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-r notranslate"><div class="highlight"><pre>
+<span></span><span class="nf">main</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2229
+Here are the books in our database.
+
+[1] "book id   book title                      language"
+[1] "768       Wuthering Heights                     en"
+[2] "14155     Madame Bovary                         fr"
+[3] "2229      Faust: Der Tragödie erster Teil        de"
+
+
+
+Tell us the book id on which you want to test the zipf's law.
+
+
+
+
+
+The book you chose was Faust: Der Tragödie erster Teil.
+
+
+Here is the list of the top 20 most frequent words in this text.
+
+
+<span style="color: rgb(148,148,148)"># A tibble: 20 x 5</span>
+   word               n total  rank `term frequency`
+   <span style="color: rgb(148,148,148)">&lt;chr&gt;</span>          <span style="color: rgb(148,148,148)">&lt;int&gt;</span> <span style="color: rgb(148,148,148)">&lt;int&gt;</span> <span style="color: rgb(148,148,148)">&lt;int&gt;</span>            <span style="color: rgb(148,148,148)">&lt;dbl&gt;</span>
+<span style="color: rgb(188,188,188)"> 1</span> und              919 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     1          0.027<span class="ansi-underline">7</span>
+<span style="color: rgb(188,188,188)"> 2</span> ich              701 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     2          0.021<span class="ansi-underline">1</span>
+<span style="color: rgb(188,188,188)"> 3</span> die              670 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     3          0.020<span class="ansi-underline">2</span>
+<span style="color: rgb(188,188,188)"> 4</span> der              607 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     4          0.018<span class="ansi-underline">3</span>
+<span style="color: rgb(188,188,188)"> 5</span> nicht            426 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     5          0.012<span class="ansi-underline">8</span>
+<span style="color: rgb(188,188,188)"> 6</span> das              402 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     6          0.012<span class="ansi-underline">1</span>
+<span style="color: rgb(188,188,188)"> 7</span> ein              399 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     7          0.012<span class="ansi-underline">0</span>
+<span style="color: rgb(188,188,188)"> 8</span> ist              390 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     8          0.011<span class="ansi-underline">7</span>
+<span style="color: rgb(188,188,188)"> 9</span> zu               380 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225     9          0.011<span class="ansi-underline">4</span>
+<span style="color: rgb(188,188,188)">10</span> du               319 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    10          0.009<span class="ansi-underline">6</span><span class="ansi-underline">0</span>
+<span style="color: rgb(188,188,188)">11</span> in               309 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    11          0.009<span class="ansi-underline">3</span><span class="ansi-underline">0</span>
+<span style="color: rgb(188,188,188)">12</span> sie              304 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    12          0.009<span class="ansi-underline">1</span><span class="ansi-underline">5</span>
+<span style="color: rgb(188,188,188)">13</span> es               302 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    13          0.009<span class="ansi-underline">0</span><span class="ansi-underline">9</span>
+<span style="color: rgb(188,188,188)">14</span> so               292 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    14          0.008<span class="ansi-underline">7</span><span class="ansi-underline">9</span>
+<span style="color: rgb(188,188,188)">15</span> mephistopheles   283 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    15          0.008<span class="ansi-underline">5</span><span class="ansi-underline">2</span>
+<span style="color: rgb(188,188,188)">16</span> den              279 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    16          0.008<span class="ansi-underline">4</span><span class="ansi-underline">0</span>
+<span style="color: rgb(188,188,188)">17</span> mit              274 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    17          0.008<span class="ansi-underline">2</span><span class="ansi-underline">5</span>
+<span style="color: rgb(188,188,188)">18</span> sich             267 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    18          0.008<span class="ansi-underline">0</span><span class="ansi-underline">4</span>
+<span style="color: rgb(188,188,188)">19</span> faust            266 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    19          0.008<span class="ansi-underline">0</span><span class="ansi-underline">1</span>
+<span style="color: rgb(188,188,188)">20</span> mir              264 <span class="ansi-underline">3</span><span class="ansi-underline">3</span>225    20          0.007<span class="ansi-underline">9</span><span class="ansi-underline">5</span>
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+Warning message:
+“Removed 256 rows containing non-finite values (stat_bin).”
+Warning message:
+“Removed 1 rows containing missing values (geom_bar).”
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/linguistique_informatique_01_zipf_fr_18_2.png" class="no-scaled-link" src="../_images/linguistique_informatique_01_zipf_fr_18_2.png" style="width: 420px; height: 420px;"/>
+</div>
+</div>
+<div class="section" id="6.1-Graphe-des-20-mots-les-plus-courants">
+<h3>6.1 Graphe des 20 mots les plus courants<a class="headerlink" href="#6.1-Graphe-des-20-mots-les-plus-courants" title="Permalink to this headline">¶</a></h3>
+<p>On remarquera surtout que les tokens les plus fréquents sont des mots fonctionnels, excepté <code class="docutils literal notranslate"><span class="pre">faust</span></code> et <code class="docutils literal notranslate"><span class="pre">mephistopheles</span></code> qui sont les deux personnages principaux de l’histoire.</p>
+</div>
+<div class="section" id="6.2-Gaphe-de-la-distribution-des-fréquences-relatives">
+<h3>6.2 Gaphe de la distribution des fréquences relatives<a class="headerlink" href="#6.2-Gaphe-de-la-distribution-des-fréquences-relatives" title="Permalink to this headline">¶</a></h3>
+<p>On remarquera surtout que les tokens fréquents (à gauche) et les tokens rares (à droite) coexistent dans le même texte.</p>
+<p>La distribution n’est pas du tout une distribution normale. Elle a une longue queue (beaucoup de mots rares). Les mots les plus fréquents occupent déjà une grande partie du texte.</p>
+<p>Il est à noter que le choix de <code class="docutils literal notranslate"><span class="pre">binwidth</span></code> est important pour rendre le graph plus lisse, comme on peut remarquer sur le même graphe de <code class="docutils literal notranslate"><span class="pre">Wuthering</span> <span class="pre">Heights</span></code> (plus bas). Cela montre l’intérêt du graphe 3 qui illustre mieux et en termes plus concrets la loi de Zipf.</p>
+</div>
+<div class="section" id="6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives">
+<h3>6.3 Graphe des logarithmes des rangs et des fréquences relatives<a class="headerlink" href="#6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives" title="Permalink to this headline">¶</a></h3>
+<p>En effet, la loi de Zipf (d’abord formulée par Jean-Baptiste Estoup) stipule que dans un texte donné, la fréquence d’occurrence <code class="docutils literal notranslate"><span class="pre">f(n)</span></code> (nous prenons ici la fréquence relative) d’un mot est liée à son rang <code class="docutils literal notranslate"><span class="pre">n</span></code> dans l’ordre des fréquences par une loi de la forme</p>
+<div class="math-wrapper"><div class="math notranslate nohighlight">
+\[f(n)=\frac{K}{n}\]</div></div>
+<p>où K est une constante.</p>
+<p>Si l’on prend les logarithmes de chaque côté, la relation devient linéaire et théoriquement on doit observer une ligne droite, ce qui n’est pas le cas ici. Cela montre que <code class="docutils literal notranslate"><span class="pre">bien</span> <span class="pre">que</span> <span class="pre">la</span> <span class="pre">formule</span> <span class="pre">de</span> <span class="pre">Zipf</span> <span class="pre">donne</span> <span class="pre">l’allure</span> <span class="pre">générale</span> <span class="pre">des</span> <span class="pre">courbes,</span> <span class="pre">elle</span> <span class="pre">en</span> <span class="pre">représente</span> <span class="pre">très</span> <span class="pre">mal</span> <span class="pre">les</span> <span class="pre">détails</span></code> (Mandelbrot (1954: 12)).</p>
+</div>
+</div>
+<div class="section" id="Références">
+<h2>Références<a class="headerlink" href="#Références" title="Permalink to this headline">¶</a></h2>
+<p>Mandelbrot, Benoit. 1954. Structure formelle des textes et communcation. Word 10:1–27.</p>
+<p>Cours de Guillaume Desagulier intitulé linguistique outillée et traitements statistiques : <a class="reference external" href="https://corpling.modyco.fr/workshops/M2TAL/2.descriptive.stats.html">https://corpling.modyco.fr/workshops/M2TAL/2.descriptive.stats.html</a></p>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="02_mca_ergatif_fr.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Computational Linguistics in R</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Xiaoou Wang
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../sources/linguistique_informatique/01_zipf_fr.ipynb.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">La loi de Zipf illustrée avec gutenbergr en R 🇫🇷</a><ul>
+<li><a class="reference internal" href="#Packages-utilisés">Packages utilisés</a></li>
+<li><a class="reference internal" href="#Workflow-général">Workflow général</a></li>
+<li><a class="reference internal" href="#Explication-de-la-fonction-get_books_meta">Explication de la fonction get_books_meta</a></li>
+<li><a class="reference internal" href="#Explication-de-la-fonction-main">Explication de la fonction main</a></li>
+<li><a class="reference internal" href="#Ensemble-de-la-fonction-main">Ensemble de la fonction main</a></li>
+<li><a class="reference internal" href="#Interprétations-des-graphes">Interprétations des graphes</a><ul>
+<li><a class="reference internal" href="#6.1-Graphe-des-20-mots-les-plus-courants">6.1 Graphe des 20 mots les plus courants</a></li>
+<li><a class="reference internal" href="#6.2-Gaphe-de-la-distribution-des-fréquences-relatives">6.2 Gaphe de la distribution des fréquences relatives</a></li>
+<li><a class="reference internal" href="#6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives">6.3 Graphe des logarithmes des rangs et des fréquences relatives</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Références">Références</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script src="../static/jquery.js"></script>
+    <script src="../static/underscore.js"></script>
+    <script src="../static/doctools.js"></script>
+    <script src="../static/clipboard.min.js"></script>
+    <script src="../static/copybutton.js"></script>
+    <script src="../static/tabs.js"></script>
+    <script >
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WGY2PHYB"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-58WGY2PHYB');
+</script>
+<!-- Default Statcounter code for nlpinfrench
+http://nlpinfrench.fr -->
+<script type="text/javascript">
+var sc_project=12500373;
+var sc_invisible=1;
+var sc_security="def60251";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12500373/0/def60251/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
+</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script src="../static/custom.js"></script>
+    <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

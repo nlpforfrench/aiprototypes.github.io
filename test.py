@@ -1,0 +1,2 @@
+hehe = "test"
+print(hehe)
