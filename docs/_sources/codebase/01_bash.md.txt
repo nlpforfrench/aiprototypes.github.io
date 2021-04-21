@@ -1,5 +1,27 @@
 # My codebase for bash/shell script (macOS)
 
+## NLP
+
+Excellent ressources:
+
+http://www.stanford.edu/class/cs124/kwc-unix-for-poets.pdf
+http://www.stanford.edu/class/cs124/lec/124-2021-UnixForPoets.pdf
+https://web.stanford.edu/class/cs124/inclass_activity_solutions/activity1_solutions.txt
+
+```bash
+echo "this is a test S End." > testfile # write to file
+cat testfile |tr a-z A-Z # convert to upper case
+cat testfile | tr -d aeiouAEIOU # delete all vowels
+cat testfile | tr -sc 'A-Za-z' '\n' | sort | uniq -c | head -n 5 # count and sort tokens, to downcase, | tr 'A-Z' 'a-z', tr '[:upper:]' '[:lower:]', c = complement s = squeeze ... to . (multiple to one)
+```
+
+## Cut
+
+```
+cut -c1-2 <<< 44150 # first 2 charac
+tail -5 /etc/passwd | cut -d: -f1,6,7 # delimit, -f = field
+```
+
 ## Previous code result
 
 ```bash

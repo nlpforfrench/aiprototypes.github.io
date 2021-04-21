@@ -182,6 +182,26 @@
         </label>
         <div class="section" id="my-codebase-for-bash-shell-script-macos">
 <h1>My codebase for bash/shell script (macOS)<a class="headerlink" href="#my-codebase-for-bash-shell-script-macos" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="nlp">
+<h2>NLP<a class="headerlink" href="#nlp" title="Permalink to this headline">¶</a></h2>
+<p>Excellent ressources:</p>
+<p>http://www.stanford.edu/class/cs124/kwc-unix-for-poets.pdf
+http://www.stanford.edu/class/cs124/lec/124-2021-UnixForPoets.pdf
+https://web.stanford.edu/class/cs124/inclass_activity_solutions/activity1_solutions.txt</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"this is a test S End."</span> &gt; testfile <span class="c1"># write to file</span>
+cat testfile <span class="p">|</span>tr a-z A-Z <span class="c1"># convert to upper case</span>
+cat testfile <span class="p">|</span> tr -d aeiouAEIOU <span class="c1"># delete all vowels</span>
+cat testfile <span class="p">|</span> tr -sc <span class="s1">'A-Za-z'</span> <span class="s1">'\n'</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> head -n <span class="m">5</span> <span class="c1"># count and sort tokens, to downcase, | tr 'A-Z' 'a-z', tr '[:upper:]' '[:lower:]', c = complement s = squeeze ... to . (multiple to one)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cut">
+<h2>Cut<a class="headerlink" href="#cut" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cut</span> <span class="o">-</span><span class="n">c1</span><span class="o">-</span><span class="mi">2</span> <span class="o">&lt;&lt;&lt;</span> <span class="mi">44150</span> <span class="c1"># first 2 charac</span>
+<span class="n">tail</span> <span class="o">-</span><span class="mi">5</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">passwd</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span><span class="p">:</span> <span class="o">-</span><span class="n">f1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span> <span class="c1"># delimit, -f = field</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="previous-code-result">
 <h2>Previous code result<a class="headerlink" href="#previous-code-result" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"OK"</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"NOK"</span>
@@ -361,6 +381,8 @@ grep -rl static . <span class="p">|</span> xargs gsed -i <span class="s2">"s/\im
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">My codebase for bash/shell script (macOS)</a><ul>
+<li><a class="reference internal" href="#nlp">NLP</a></li>
+<li><a class="reference internal" href="#cut">Cut</a></li>
 <li><a class="reference internal" href="#previous-code-result">Previous code result</a></li>
 <li><a class="reference internal" href="#read-a-file">Read a file</a></li>
 <li><a class="reference internal" href="#read-from-the-keyboard-fin-to-end">Read from the keyboard, FIN to end</a></li>
