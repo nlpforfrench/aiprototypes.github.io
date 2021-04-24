@@ -123,7 +123,7 @@ Le tableau suivant détaille notre choix pour convertir au maximum les étiquett
 
 ```{figure} 01_compara_annoimages/8dba10bb.png
 :align: center
-Conversion des tags de TreeTagger en tags d'UD  
+Conversion des tags de TreeTagger en tags d'UD
 ```
 
 Une dernière question porte sur la lemmatisation. Treetagger parfois attribue une sous-étiquette @card@ à des chiffres.
@@ -166,7 +166,7 @@ Cependant des difficultés considérables existent pour atteindre une précision
 difficultés nous pouvons citer le fait curieux que la plupart des types formant le vocabulaire sont non ambigus qui ne
 peuvent porter qu’une catégorie morphosyntaxique. Or, ces derniers sont les plus fréquents dans les textes.
 
-```{figure} 01_compara_annoimages/e90103e4.png 
+```{figure} 01_compara_annoimages/e90103e4.png
 :align: center
 Répartition des mots ambigus et non-ambigus dans deux corpus d’anglais (Jurafsky, 2000)
 ```

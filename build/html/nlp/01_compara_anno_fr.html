@@ -223,7 +223,7 @@ processus se trouve <span class="xref myst">ici</span>.</p>
 <p>Pour confirmer le thème de notre corpus nous avons scrapé deux autres corpus ayant comme thème <code class="docutils literal notranslate"><span class="pre">sport</span></code> et <code class="docutils literal notranslate"><span class="pre">économie</span></code>。</p>
 <p>Après avoir normalisé les textes voici les 10 mots les plus courants du corpus santé.</p>
 <div class="figure align-center" id="id1">
-<img alt="nlp/01_compara_annoimages/sante.png" src="nlp/01_compara_annoimages/sante.png"/>
+<img alt="../_images/sante.png" src="../_images/sante.png"/>
 <p class="caption"><span class="caption-text">Graphe des 10 mots les plus fréquents du corpus de santé</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>Par contraintes d’espace nous n’allons pas afficher le même type de graphes pour le corpus de forum. Notez simplement
@@ -237,7 +237,7 @@ plus il y a de mots à proximité de la ligne, plus les deux tableaux contiennen
 validité de l’hypothèse selon laquelle les articles de différents thèmes sont caractérisés par les mots non-vides les
 plus fréquents.</p>
 <div class="figure align-center" id="id2">
-<img alt="nlp/01_compara_annoimages/correlation.png" src="nlp/01_compara_annoimages/correlation.png"/>
+<img alt="../_images/correlation.png" src="../_images/correlation.png"/>
 <p class="caption"><span class="caption-text">Graphe de corrélation pour 3 corpus de différents genres</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
@@ -256,7 +256,7 @@ L’échantillonnage a été effectué avec le même principe pour le corpus de 
 quartiles de la distribution sont 16, 25, 36 et 115, à savoir que ¼ de phrases ont une longueur &lt;= 16 et ainsi de suite.
 La figure suivante illustre cette distribution :</p>
 <div class="figure align-center" id="id3">
-<img alt="nlp/01_compara_annoimages/distribution.png" src="nlp/01_compara_annoimages/distribution.png"/>
+<img alt="../_images/distribution.png" src="../_images/distribution.png"/>
 <p class="caption"><span class="caption-text">Distribution de longueurs de phrases du corpus de presse</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>Pour que ces quatre catégories de phrases soient également représentées, nous avons généré 60 nombres aléatoires par
@@ -279,10 +279,10 @@ français et de l’autre côté, l’étiquette « SYM » en UD n’a pas d’�
 la catégorie « PROPN » (nom propre) en UD.</p>
 <p>Le tableau suivant détaille notre choix pour convertir au maximum les étiquettes de Treetagger en UD.</p>
 <div class="figure align-center">
-<img alt="nlp/01_compara_annoimages/e606f6f0.png" src="nlp/01_compara_annoimages/e606f6f0.png"/>
+<img alt="../_images/e606f6f0.png" src="../_images/e606f6f0.png"/>
 </div>
 <div class="figure align-center" id="id4">
-<img alt="nlp/01_compara_annoimages/8dba10bb.png" src="nlp/01_compara_annoimages/8dba10bb.png"/>
+<img alt="../_images/8dba10bb.png" src="../_images/8dba10bb.png"/>
 <p class="caption"><span class="caption-text">Conversion des tags de TreeTagger en tags d’UD</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 <p>Une dernière question porte sur la lemmatisation. Treetagger parfois attribue une sous-étiquette @card@ à des chiffres.
@@ -312,7 +312,7 @@ normaux.</p></li>
 <p>Les taggers morphosyntaxiques sont nombreux sur le marché, ci-dessous une liste de quelques taggers pour le français
 utilisés dans la littérature :</p>
 <div class="figure align-center" id="id5">
-<img alt="nlp/01_compara_annoimages/266bcab0.png" src="nlp/01_compara_annoimages/266bcab0.png"/>
+<img alt="../_images/266bcab0.png" src="../_images/266bcab0.png"/>
 <p class="caption"><span class="caption-text">Liste non exhaustive de différents taggers disponibles pour le français (https://github.com/clement-plancq/outils-corpus)</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <p>Le principe des taggers peut être fort simple. Un algorithme simpliste qui catégorise les mots connus dans le tag le
@@ -322,7 +322,7 @@ anglais (Charniak, 1997).</p>
 difficultés nous pouvons citer le fait curieux que la plupart des types formant le vocabulaire sont non ambigus qui ne
 peuvent porter qu’une catégorie morphosyntaxique. Or, ces derniers sont les plus fréquents dans les textes.</p>
 <div class="figure align-center" id="id6">
-<img alt="nlp/01_compara_annoimages/e90103e4.png" src="nlp/01_compara_annoimages/e90103e4.png"/>
+<img alt="../_images/e90103e4.png" src="../_images/e90103e4.png"/>
 <p class="caption"><span class="caption-text">Répartition des mots ambigus et non-ambigus dans deux corpus d’anglais (Jurafsky, 2000)</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 <p>Différents types d’étiqueteurs existent.</p>
@@ -364,14 +364,14 @@ fonctions poussées comme l’analyse sentimentale. Cependant le modèle actuel 
 fonctions poussées comme l’analyse sentimentale. Cependant le modèle actuel pour le français n’a pas de lemmatisateur.</p></li>
 </ul>
 <div class="figure align-center" id="id7">
-<img alt="nlp/01_compara_annoimages/597aa052.png" src="nlp/01_compara_annoimages/597aa052.png"/>
+<img alt="../_images/597aa052.png" src="../_images/597aa052.png"/>
 <p class="caption"><span class="caption-text">Fonctionnalités disponibles de Stanford CoreNLP pour 6 langues</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 <p>Enfin StanfordNLP est un framework de Python basé sur PyTorch et applicable à 66 langues à l’heure actuelle. C’est un
 framework puissant et également un grand consommateur de capacités de calcul car il est basé sur des réseaux de
 neurones.</p>
 <div class="figure align-center" id="id8">
-<img alt="nlp/01_compara_annoimages/f9aca8e1.png" src="nlp/01_compara_annoimages/f9aca8e1.png"/>
+<img alt="../_images/f9aca8e1.png" src="../_images/f9aca8e1.png"/>
 <p class="caption"><span class="caption-text">Caractéristiques techniques de StanfordNLP par rapport à d’autres frameworks en TAL (Qi et al., 2020)</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 </div>
@@ -449,7 +449,7 @@ annotation morphosyntaxique. Le tableau suivant résume les résultats du test.<
 <p>Vitesse d’annotation de 4 taggers sur un corpus de 568000 mots</p>
 <p>Pour mieux apprécier la validité de notre test, voici les caractéristiques techniques de notre ordinateur :</p>
 <div class="figure align-center" id="id9">
-<img alt="nlp/01_compara_annoimages/d18df612.png" src="nlp/01_compara_annoimages/d18df612.png"/>
+<img alt="../_images/d18df612.png" src="../_images/d18df612.png"/>
 <p class="caption"><span class="caption-text">Configuration de l’ordinateur utilisé pour évaluer la vitesse d’annotation de 4 taggers</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 <p>Nous voyons bien que Stanford NLP est le plus lent et Spacy le plus rapide. Cependant quelques remarques préliminaires

@@ -47,7 +47,7 @@ Pour confirmer le thème de notre corpus nous avons scrapé deux autres corpus a
 
 Après avoir normalisé les textes voici les 10 mots les plus courants du corpus santé.
 
-```{figure} 01_compara_annoimages/sante.png
+```{figure} 01_compara_anno_images/sante.png
 :align: center
 Graphe des 10 mots les plus fréquents du corpus de santé
 ```
@@ -65,7 +65,7 @@ Le nombre considérable de mots de fréquence similaire entre le corpus santé s
 validité de l’hypothèse selon laquelle les articles de différents thèmes sont caractérisés par les mots non-vides les
 plus fréquents.
 
-```{figure} 01_compara_annoimages/correlation.png
+```{figure} 01_compara_anno_images/correlation.png
 :align: center
 Graphe de corrélation pour 3 corpus de différents genres
 ```
@@ -88,7 +88,7 @@ Nous avons d’abord calculé la distribution des longueurs de mots de l’ensem
 quartiles de la distribution sont 16, 25, 36 et 115, à savoir que ¼ de phrases ont une longueur <= 16 et ainsi de suite.
 La figure suivante illustre cette distribution :
 
-```{figure} 01_compara_annoimages/distribution.png
+```{figure} 01_compara_anno_images/distribution.png
 :align: center
 Distribution de longueurs de phrases du corpus de presse
 ```
@@ -117,13 +117,13 @@ la catégorie « PROPN » (nom propre) en UD.
 
 Le tableau suivant détaille notre choix pour convertir au maximum les étiquettes de Treetagger en UD.
 
-```{figure} 01_compara_annoimages/e606f6f0.png
+```{figure} 01_compara_anno_images/e606f6f0.png
 :align: center
 ```
 
-```{figure} 01_compara_annoimages/8dba10bb.png
+```{figure} 01_compara_anno_images/8dba10bb.png
 :align: center
-Conversion des tags de TreeTagger en tags d'UD  
+Conversion des tags de TreeTagger en tags d'UD
 ```
 
 Une dernière question porte sur la lemmatisation. Treetagger parfois attribue une sous-étiquette @card@ à des chiffres.
@@ -153,7 +153,7 @@ une meilleure reproductibilité de codes :
 Les taggers morphosyntaxiques sont nombreux sur le marché, ci-dessous une liste de quelques taggers pour le français
 utilisés dans la littérature :
 
-```{figure} 01_compara_annoimages/266bcab0.png
+```{figure} 01_compara_anno_images/266bcab0.png
 :align: center
 Liste non exhaustive de différents taggers disponibles pour le français (https://github.com/clement-plancq/outils-corpus)
 ```
@@ -166,7 +166,7 @@ Cependant des difficultés considérables existent pour atteindre une précision
 difficultés nous pouvons citer le fait curieux que la plupart des types formant le vocabulaire sont non ambigus qui ne
 peuvent porter qu’une catégorie morphosyntaxique. Or, ces derniers sont les plus fréquents dans les textes.
 
-```{figure} 01_compara_annoimages/e90103e4.png 
+```{figure} 01_compara_anno_images/e90103e4.png
 :align: center
 Répartition des mots ambigus et non-ambigus dans deux corpus d’anglais (Jurafsky, 2000)
 ```
@@ -215,7 +215,7 @@ repose sur des ngram utilisés pour modéliser la probabilité d’une séquence
 * Stanford CoreNLP est un framework écrit en Java applicable à 6 langues. C’est un framework puissant qui propose des
   fonctions poussées comme l’analyse sentimentale. Cependant le modèle actuel pour le français n’a pas de lemmatisateur.
 
-```{figure} 01_compara_annoimages/597aa052.png
+```{figure} 01_compara_anno_images/597aa052.png
 :align: center
 Fonctionnalités disponibles de Stanford CoreNLP pour 6 langues
 ```
@@ -224,7 +224,7 @@ Enfin StanfordNLP est un framework de Python basé sur PyTorch et applicable à 
 framework puissant et également un grand consommateur de capacités de calcul car il est basé sur des réseaux de
 neurones.
 
-```{figure} 01_compara_annoimages/f9aca8e1.png
+```{figure} 01_compara_anno_images/f9aca8e1.png
 :align: center
 Caractéristiques techniques de StanfordNLP par rapport à d’autres frameworks en TAL (Qi et al., 2020)
 ```
@@ -288,7 +288,7 @@ Vitesse d'annotation de 4 taggers sur un corpus de 568000 mots
 
 Pour mieux apprécier la validité de notre test, voici les caractéristiques techniques de notre ordinateur :
 
-```{figure} 01_compara_annoimages/d18df612.png
+```{figure} 01_compara_anno_images/d18df612.png
 :align: center
 Configuration de l’ordinateur utilisé pour évaluer la vitesse d’annotation de 4 taggers
 ```
