@@ -12,5 +12,4 @@
 
 * [2. Classification de prénoms en genre 🇫🇷](02_classification_prenoms_fr)
 
-* [3. Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷
-  ](03_classification_lemonde_fr)
+* [3. Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷](03_classification_lemonde_fr)
