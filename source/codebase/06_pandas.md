@@ -1,3 +1,7 @@
+# Pandas codebase
+
+## global settings
+
 ```py
 pd.set_option('display.max_colwidth', None) # see whole width dataframe
 

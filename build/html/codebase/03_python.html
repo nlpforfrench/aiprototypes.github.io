@@ -159,6 +159,8 @@
 <li class="toctree-l2"><a class="reference internal" href="01_bash.html">My codebase for bash/shell script (macOS)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_tmux.html">Tumux-related code</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">My python codebase (including packages/libraries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_pytorch.html">Pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_pandas.html">Pandas codebase</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -190,45 +192,6 @@
 <p>https://sphinx-themes.org/sample-sites/sphinx-ustack-theme/demo/structure.html#structural-elements-2</p>
 <p>https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Admonitions.html</p>
 <p>https://myst-parser.readthedocs.io/en/latest/index.html</p>
-</div>
-<div class="section" id="pandas">
-<h2>Pandas<a class="headerlink" href="#pandas" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_colwidth'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># see whole width dataframe</span>
-
-<span class="c1">## select columns</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">]]</span>
-
-<span class="c1">## create dataframe</span>
-<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'col1'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">'col2'</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]}</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
-
-<span class="c1">## merge</span>
-<span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">d3</span><span class="p">,</span><span class="n">d4</span><span class="p">,</span><span class="n">d5</span><span class="p">,</span><span class="n">d6</span><span class="p">]</span>
-<span class="n">frames</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
-
-<span class="c1">## add column</span>
-<span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Age"</span><span class="p">,</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
-
-<span class="c1">## del column</span>
-<span class="k">del</span> <span class="n">df</span><span class="p">[</span><span class="s1">'column_name'</span><span class="p">]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># df.columns is zero-based pd.Index</span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'column_name'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1">## to csv</span>
-<span class="n">frames</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"french/french_results_bert.csv"</span><span class="p">)</span>
-
-<span class="c1">## filter row</span>
-<span class="n">df_bert</span><span class="p">[(</span><span class="n">df_bert</span><span class="p">[</span><span class="s2">"response1"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df_bert</span><span class="p">[</span><span class="s2">"response2"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
-
-<span class="c1">## convert column NAMES to uppercase</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
-
-<span class="n">df</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-
-<span class="c1">## first row</span>
-<span class="n">df_bert</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="dictionary">
 <h2>Dictionary<a class="headerlink" href="#dictionary" title="Permalink to this headline">¶</a></h2>
@@ -371,7 +334,6 @@
             <ul>
 <li><a class="reference internal" href="#">My python codebase (including packages/libraries)</a><ul>
 <li><a class="reference internal" href="#sphinx-myst">Sphinx/MyST</a></li>
-<li><a class="reference internal" href="#pandas">Pandas</a></li>
 <li><a class="reference internal" href="#dictionary">Dictionary</a></li>
 <li><a class="reference internal" href="#sampling">Sampling</a></li>
 <li><a class="reference internal" href="#reload-a-package">Reload a package</a></li>

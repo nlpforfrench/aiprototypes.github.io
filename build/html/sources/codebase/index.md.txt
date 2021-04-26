@@ -14,4 +14,9 @@ hidden:
 
 - [Tmux](02_tmux)
 
-- [Python and packages (Pandas, Pytorch etc.)](03_python)
+- [Python](03_python)
+- [Python](03_python)
+
+- [Pandas](06_pandas)
+
+- [Pytorch](05_pytorch)

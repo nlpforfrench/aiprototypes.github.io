@@ -76,13 +76,17 @@ math/index
 
 - [3. Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷](linguistique_informatique/03_pca_inclusion_fr)
 
-## My Codebase <i class='fas fa-ribbon'></i>
+## Codebase <i class='fas fa-ribbon'></i>
 
 - [1. Bash](codebase/01_bash)
 
 - [2. Tmux](codebase/02_tmux)
 
-- [3. Python and packages (Pandas, Pytorch etc.)](codebase/03_python)
+- [Python](codebase/03_python)
+
+- [Pandas](codebase/06_pandas)
+
+- [Pytorch](codebase/05_pytorch)
 
 ## Mathematics in Machine Learning and NLP <i class='fas fa-ribbon'></i>
 
