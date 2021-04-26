@@ -82,22 +82,12 @@ math/index
 
 - [2. Tmux](codebase/02_tmux)
 
-- [Python](codebase/03_python)
+- [3. Python](codebase/03_python)
 
-- [Pandas](codebase/06_pandas)
+- [4. Pandas](codebase/06_pandas)
 
-- [Pytorch](codebase/05_pytorch)
+- [5. Pytorch](codebase/05_pytorch)
 
 ## Mathematics in Machine Learning and NLP <i class='fas fa-ribbon'></i>
 
 - [1. Machine Learning : algorithmes et mathématiques 🇫🇷](math/01_math_fr)
-
-[comment]: <> (.. .. admonition:: Message de l'auteur)
-
-[comment]: <> ( Salut ! Ce site est créé dans le but de proposer à la communauté de TAL en français des tutoriels que je rédige au fur et à mesure de ma propre formation. Les thématiques centrales seront `extraction d'information` &#40;Information Retrieval&#41;, `implication textuelle` &#40;Textual Entailment Recognition&#41; et `graphe de connaissances` &#40;knowledge graph ou `ontologie`&#41;.)
-
-[comment]: <> ( J'ai un intérêt prononcé pour la vulgarisation scientifique. Ne soyons donc pas étonnés de trouver des tutos généraux sur Machine Learning &#40;y compris Deep Learning&#41; et des techniques TAL basées sur l'architecture Transformer &#40;des modèles pré-entraînés du type Bert/Roberta&#41;.)
-
-[comment]: <> ( Je fais actuellement un stage au Lattice sur la résolution des schémas Winograd et je cherche activement un contrat cifre/une position phd. N'hésitez pas à me contacter si jamais mon profil vous intéresse.)
-
-[comment]: <> ( `Blog <http://xiaoouwang.github.io>`_/`Linkedin <https://www.linkedin.com/in/xiaoou-wang>`_/`Email <xiaoouwangfrance@gmail.com>`\_)
