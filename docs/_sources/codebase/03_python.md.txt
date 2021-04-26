@@ -12,6 +12,15 @@ https://sphinx-themes.org/sample-sites/sphinx-ustack-theme/demo/structure.html#s
 https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Admonitions.html
 
 https://myst-parser.readthedocs.io/en/latest/index.html
+
+## Virtual Environment
+
+```bash
+conda env create -f environment.yml
+source activate py33
+python -m venv advanced
+```
+
 ## Dictionary
 
 ```py

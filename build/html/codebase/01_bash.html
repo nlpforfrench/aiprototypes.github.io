@@ -216,6 +216,12 @@ cat testfile <span class="p">|</span> tr -sc <span class="s1">'A-Za-z'</span> <s
 </pre></div>
 </div>
 </div>
+<div class="section" id="find-a-file">
+<h2>Find a file<a class="headerlink" href="#find-a-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find . -type f -name *.html <span class="c1"># current folder html files</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="read-from-the-keyboard-fin-to-end">
 <h2>Read from the keyboard, FIN to end<a class="headerlink" href="#read-from-the-keyboard-fin-to-end" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!sort -n &lt;&lt; FIN <span class="c1"># remove ! to run</span>
@@ -405,6 +411,7 @@ grep -rl static . <span class="p">|</span> xargs gsed -i <span class="s2">"s/\im
 <li><a class="reference internal" href="#cut">Cut</a></li>
 <li><a class="reference internal" href="#previous-code-result">Previous code result</a></li>
 <li><a class="reference internal" href="#read-a-file">Read a file</a></li>
+<li><a class="reference internal" href="#find-a-file">Find a file</a></li>
 <li><a class="reference internal" href="#read-from-the-keyboard-fin-to-end">Read from the keyboard, FIN to end</a></li>
 <li><a class="reference internal" href="#error-append-to-the-file-as-well-as-other-messages">Error append to the file as well as other messages</a></li>
 <li><a class="reference internal" href="#print-all-the-files-folder">Print all the files folder</a></li>

@@ -36,6 +36,13 @@ command && echo "OK" || echo "NOK"
 cat < notes.csv
 ```
 
+## Find a file
+
+```bash
+find . -type f -name *.html # current folder html files
+```
+
+
 ## Read from the keyboard, FIN to end
 
 ```bash
