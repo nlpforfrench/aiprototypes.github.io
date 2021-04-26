@@ -67,6 +67,23 @@ who
 w # who is doing what
 ```
 
+## History
+
+```bash
+history > hist.txt # export command history
+```
+
+## Ssh related
+
+```bash
+# Create public and private keys using ssh-key-gen on local-host
+ssh-keygen
+# Copy your local key to remote
+ssh-copy-id -i ~/.ssh/id_rsa.pub remote-host
+# done, connect yourself without password now
+```
+
+
 ## Watch process and kill
 
 ```bash
@@ -107,6 +124,8 @@ cat \*.txt >> all.txt
 ## Watch gpu/hardware related
 
 ```bash
+/usr/local/cuda/bin/nvcc --version # check cuda version
+
 watch -d -n 0.5 nvidia-smi # https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda
 
 nvidia-smi -l 1 # will continually give you the gpu usage info, with in refresh interval of 1 second

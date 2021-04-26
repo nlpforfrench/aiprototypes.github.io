@@ -159,6 +159,8 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">My codebase for bash/shell script (macOS)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_tmux.html">Tumux-related code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_python.html">My python codebase (including packages/libraries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_pytorch.html">Pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_pandas.html">Pandas codebase</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -245,6 +247,22 @@ w <span class="c1"># who is doing what</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="history">
+<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">history</span> &gt; hist.txt <span class="c1"># export command history</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ssh-related">
+<h2>Ssh related<a class="headerlink" href="#ssh-related" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create public and private keys using ssh-key-gen on local-host</span>
+ssh-keygen
+<span class="c1"># Copy your local key to remote</span>
+ssh-copy-id -i ~/.ssh/id_rsa.pub remote-host
+<span class="c1"># done, connect yourself without password now</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="watch-process-and-kill">
 <h2>Watch process and kill<a class="headerlink" href="#watch-process-and-kill" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ps
@@ -284,7 +302,9 @@ nohup commande <span class="c1"># nonstop after disconnection/or use tumux</span
 </div>
 <div class="section" id="watch-gpu-hardware-related">
 <h2>Watch gpu/hardware related<a class="headerlink" href="#watch-gpu-hardware-related" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>watch -d -n <span class="m">0</span>.5 nvidia-smi <span class="c1"># https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/local/cuda/bin/nvcc --version <span class="c1"># check cuda version</span>
+
+watch -d -n <span class="m">0</span>.5 nvidia-smi <span class="c1"># https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda</span>
 
 nvidia-smi -l <span class="m">1</span> <span class="c1"># will continually give you the gpu usage info, with in refresh interval of 1 second</span>
 
@@ -389,6 +409,8 @@ grep -rl static . <span class="p">|</span> xargs gsed -i <span class="s2">"s/\im
 <li><a class="reference internal" href="#error-append-to-the-file-as-well-as-other-messages">Error append to the file as well as other messages</a></li>
 <li><a class="reference internal" href="#print-all-the-files-folder">Print all the files folder</a></li>
 <li><a class="reference internal" href="#who-is-there">Who is there?</a></li>
+<li><a class="reference internal" href="#history">History</a></li>
+<li><a class="reference internal" href="#ssh-related">Ssh related</a></li>
 <li><a class="reference internal" href="#watch-process-and-kill">Watch process and kill</a></li>
 <li><a class="reference internal" href="#run-background">Run background</a></li>
 <li><a class="reference internal" href="#concatenate">Concatenate</a></li>

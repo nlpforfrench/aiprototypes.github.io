@@ -192,40 +192,56 @@
 </div>
 <div class="section" id="select-columns">
 <h2>select columns<a class="headerlink" href="#select-columns" title="Permalink to this headline">¶</a></h2>
-<p>df = df[[“a”,”b”]]</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">]]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="create-dataframe">
 <h2>create dataframe<a class="headerlink" href="#create-dataframe" title="Permalink to this headline">¶</a></h2>
-<p>d = {‘col1’: [1, 2], ‘col2’: [3, 4]}
-df = pd.DataFrame(data=d)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'col1'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">'col2'</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="merge">
 <h2>merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h2>
-<p>frames = [d1,d2,d3,d4,d5,d6]
-frames = pd.concat(frames)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">d3</span><span class="p">,</span><span class="n">d4</span><span class="p">,</span><span class="n">d5</span><span class="p">,</span><span class="n">d6</span><span class="p">]</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="add-column">
 <h2>add column<a class="headerlink" href="#add-column" title="Permalink to this headline">¶</a></h2>
-<p>df.insert(2, “Age”, [21, 23, 24, 21], True)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Age"</span><span class="p">,</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="del-column">
 <h2>del column<a class="headerlink" href="#del-column" title="Permalink to this headline">¶</a></h2>
-<p>del df[‘column_name’]
-df = df.drop(df.columns[[0, 1, 3]], axis=1)  # df.columns is zero-based pd.Index
-df.drop(‘column_name’, axis=1, inplace=True)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">df</span><span class="p">[</span><span class="s1">'column_name'</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># df.columns is zero-based pd.Index</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'column_name'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="to-csv">
 <h2>to csv<a class="headerlink" href="#to-csv" title="Permalink to this headline">¶</a></h2>
-<p>frames.to_csv(“french/french_results_bert.csv”)</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"french/french_results_bert.csv"</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="filter-row">
 <h2>filter row<a class="headerlink" href="#filter-row" title="Permalink to this headline">¶</a></h2>
-<p>df_bert[(df_bert[“response1”] == 0) | (df_bert[“response2”] == 0)]</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df_bert</span><span class="p">[(</span><span class="n">df_bert</span><span class="p">[</span><span class="s2">"response1"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df_bert</span><span class="p">[</span><span class="s2">"response2"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="convert-column-names-to-uppercase">
 <h2>convert column NAMES to uppercase<a class="headerlink" href="#convert-column-names-to-uppercase" title="Permalink to this headline">¶</a></h2>
-<p>df.columns = [col.upper() for col in df.columns]</p>
-<p>df[‘name’] = df[‘name’].map(lambda name: name.upper())</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="first-row">
 <h2>first row<a class="headerlink" href="#first-row" title="Permalink to this headline">¶</a></h2>
