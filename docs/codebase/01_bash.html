@@ -184,6 +184,147 @@
         </label>
         <div class="section" id="my-codebase-for-bash-shell-script-macos">
 <h1>My codebase for bash/shell script (macOS)<a class="headerlink" href="#my-codebase-for-bash-shell-script-macos" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="xargs">
+<h2>xargs<a class="headerlink" href="#xargs" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>By default xargs reads items from standard input as separated by blanks and
+
+<span class="nb">echo</span> <span class="s1">'one two three'</span> <span class="p">|</span> xargs mkdir
+ls
+one two three
+
+When filenames contain spaces you need to use -d option to change delimiter
+
+
+files older than two weeks <span class="k">in</span> the temp folder are found and <span class="k">then</span> piped to the xargs <span class="nb">command</span> which runs the rm <span class="nb">command</span> on each file and removes them
+find /tmp -mtime +14 <span class="p">|</span> xargs rm
+
+equivalent with -exec option but xargs faster
+find ./foo -type f -name <span class="s2">"*.txt"</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
+find ./foo -type f -name <span class="s2">"*.txt"</span> <span class="p">|</span> xargs rm
+
+The -t option prints each <span class="nb">command</span>
+<span class="nb">echo</span> <span class="s1">'one two three'</span> <span class="p">|</span> xargs -t rm
+rm one two three
+
+The -p prints and asks confirmation before run
+<span class="nb">echo</span> <span class="s1">'one two three'</span> <span class="p">|</span> xargs -p touch
+touch one two three ?...
+
+<span class="nb">echo</span> <span class="s2">"one\ntwo\nthree"</span> &gt; test.txt
+cat temp.txt <span class="p">|</span> xargs -I % sh -c <span class="s1">'echo %; mkdir %'</span> <span class="c1"># % is the string to be replaced, sh = bash</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sed-expression">
+<h2>sed “expression”<a class="headerlink" href="#sed-expression" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>searching, find and replace, insertion or deletion on files
+sed <span class="s1">'s/unix/linux/'</span> test.txt <span class="c1"># first occur of each line</span>
+sed <span class="s1">'s/unix/linux/2'</span> geekfile.txt <span class="c1"># nth token</span>
+sed <span class="s1">'s/unix/linux/g'</span> geekfile.txt
+sed <span class="s1">'s/unix/linux/3g'</span> geekfile.txt <span class="c1"># from 3 to end</span>
+<span class="c1">## \b = word boundary, variable like $1 in vsc</span>
+<span class="nb">echo</span> <span class="s2">"Welcome To The Geek Stuff"</span> <span class="p">|</span> sed <span class="s1">'s/\(\b[A-Z]\)/\(\1\)/g'</span>
+sed <span class="s1">'3 s/unix/linux/'</span> geekfile.txt <span class="c1"># line 3</span>
+sed <span class="s1">'1,3 s/unix/linux/'</span> geekfile.txt
+
+delete lines
+sed <span class="s1">'5d'</span> filename.txt
+sed <span class="s1">'3,6d'</span> filename.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="awk-text-processing">
+<h2>awk text processing<a class="headerlink" href="#awk-text-processing" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>awk <span class="s1">'{print}'</span> test.txt
+awk <span class="s1">'/manager/ {print}'</span> employee.txt <span class="c1"># contains manager</span>
+<span class="c1"># fields $0 represents the whole line.</span>
+awk <span class="s1">'{print $1,$4}'</span> employee.txt
+awk <span class="s1">'{print NR,$0}'</span> employee.txt <span class="c1"># line number</span>
+<span class="c1"># Display Line From 3 to 6</span>
+awk <span class="s1">'NR==3, NR==6 {print NR,$0}'</span> employee.txt
+<span class="c1"># find the length of the longest line present in the file</span>
+awk <span class="s1">'{ if (length($0) &gt; max) max = length($0) } END { print max }'</span> geeksforgeeks.txt
+<span class="c1"># more than 10 character</span>
+awk <span class="s1">'length($0) &gt; 10'</span> geeksforgeeks.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="tr-convert">
+<h2>tr convert<a class="headerlink" href="#tr-convert" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## awk '{!seen[$0]++};END{for(i in seen) if(seen[i]==1)print i}' file # awk is faster than sort|uniq -c</span>
+cat testfile <span class="p">|</span>tr a-z A-Z <span class="c1"># convert to upper case</span>
+cat testfile <span class="p">|</span> tr -d aeiouAEIOU <span class="c1"># delete all vowels</span>
+<span class="c1"># count and sort tokens, to downcase, | tr 'A-Z' 'a-z', tr '[:upper:]' '[:lower:]', c = complement s = squeeze ... to . (consider multiple as one)</span>
+<span class="c1"># uniq -c = count, unique -u = print</span>
+cat test2.txt <span class="p">|</span> tr -sc <span class="s1">'A-Za-z'</span> <span class="s1">'\n'</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> head -n <span class="m">5</span>
+<span class="c1"># How common are different sequences of vowels, e.g., "ieu" (use tr a second time)</span>
+tr -sc <span class="s1">'A-Za-z'</span> <span class="s1">'\n'</span> &lt; nyt_200811.txt <span class="p">|</span> tr <span class="s1">'A-Z'</span> <span class="s1">'a-z'</span> <span class="p">|</span> tr -sc <span class="s1">'aeiou'</span> <span class="s1">'\n'</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c  <span class="c1"># the -s is important</span>
+
+<span class="c1">#Find the 50 most common words in the NYT (use sort a second time, then head), uniq must come after sort</span>
+<span class="c1"># sort -nr = numerical, reverse</span>
+tr -sc <span class="s1">'A-Za-z'</span> <span class="s1">'\n'</span> &lt; nyt_200811.txt <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr <span class="p">|</span> head -n <span class="m">50</span>
+<span class="c1"># find the words that end in "zz".</span>
+tr -sc <span class="s1">'A-Za-z'</span> <span class="s1">'\n'</span> &lt; nyt_200811.txt <span class="p">|</span> tr <span class="s2">"[:upper:]"</span> <span class="s2">"[:lower:]"</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -rn <span class="p">|</span> grep <span class="s1">'[a-z]*zz$'</span> <span class="p">|</span> head -n <span class="m">50</span>
+<span class="c1"># Get all bigrams</span>
+tr -sc <span class="s1">'A-Za-z'</span> <span class="s1">'\n'</span> &lt; nyt_200811.txt &gt; nyt.words
+tail -n +2 nyt.words &gt; nyt.nextwords <span class="c1"># output lines starting with the 2nd line</span>
+paste nyt.words nyt.nextwords &gt; nyt.bigrams <span class="c1"># paste using tab</span>
+head -n <span class="m">5</span> nyt.bigrams
+<span class="c1"># how many all uppercase words are there in the file</span>
+grep -E <span class="s1">'^[A-Z]+$'</span> nyt.words <span class="p">|</span> wc
+</pre></div>
+</div>
+</div>
+<div class="section" id="wc">
+<h2>wc<a class="headerlink" href="#wc" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wc -lwcm line word byte character
+<span class="m">448</span> <span class="m">3632</span> <span class="m">22226</span> <span class="c1"># lines words characters</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="grep">
+<h2>grep<a class="headerlink" href="#grep" title="Permalink to this headline">¶</a></h2>
+<p>when grep is invoked as egrep the grep binary activates its internal logic as it would be called as grep -E
+The difference is that -E option enables usage of extended regexp patterns. It will allow you using of such meta-symbols as +, ? or |</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep <span class="s2">"this"</span> demo_file
+this line is the 1st lower <span class="k">case</span> line <span class="k">in</span> this file.
+Two lines above this line is empty.
+And this is the last line.
+<span class="c1"># Case insensitive search using grep -i</span>
+<span class="c1"># Checking for full words, not for sub-strings using grep -w</span>
+grep -iw <span class="s2">"is"</span> demo_file
+<span class="c1"># search all the files</span>
+grep -r <span class="s2">"ramesh"</span> *
+<span class="c1"># display the lines which does not matches all the given pattern</span>
+grep -v <span class="s2">"go"</span> demo_text
+<span class="c1"># multiple patterns</span>
+grep -v -e <span class="s2">"pattern"</span> -e <span class="s2">"pattern"</span>
+<span class="c1"># Counting the number of matches using grep -c</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="export">
+<h2>export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> environment variables
+<span class="nb">export</span> <span class="nv">GREP_OPTIONS</span><span class="o">=</span><span class="s1">'--color=auto'</span> <span class="nv">GREP_COLOR</span><span class="o">=</span><span class="s1">'100;8'</span>
+<span class="nb">export</span> <span class="nv">MYENV</span><span class="o">=</span><span class="m">7</span> // define a variable
+<span class="nb">export</span> -p <span class="c1"># list all</span>
+<span class="c1"># set vim as a text editor</span>
+$ <span class="nb">export</span> <span class="nv">EDITOR</span><span class="o">=</span>/usr/bin/vim
+<span class="c1"># prepend/append path, prepend is better</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/some/new/path:<span class="nv">$PATH</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/some/new/path
+</pre></div>
+</div>
+</div>
+<div class="section" id="tricks">
+<h2>tricks<a class="headerlink" href="#tricks" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir -p foo/bar/zoo/andsoforth <span class="c1"># parent/recursive</span>
+<span class="c1">#regex</span>
+? <span class="m">0</span> or <span class="m">1</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="nlp">
 <h2>NLP<a class="headerlink" href="#nlp" title="Permalink to this headline">¶</a></h2>
 <p>Excellent ressources:</p>
@@ -407,6 +548,14 @@ grep -rl static . <span class="p">|</span> xargs gsed -i <span class="s2">"s/\im
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">My codebase for bash/shell script (macOS)</a><ul>
+<li><a class="reference internal" href="#xargs">xargs</a></li>
+<li><a class="reference internal" href="#sed-expression">sed “expression”</a></li>
+<li><a class="reference internal" href="#awk-text-processing">awk text processing</a></li>
+<li><a class="reference internal" href="#tr-convert">tr convert</a></li>
+<li><a class="reference internal" href="#wc">wc</a></li>
+<li><a class="reference internal" href="#grep">grep</a></li>
+<li><a class="reference internal" href="#export">export</a></li>
+<li><a class="reference internal" href="#tricks">tricks</a></li>
 <li><a class="reference internal" href="#nlp">NLP</a></li>
 <li><a class="reference internal" href="#cut">Cut</a></li>
 <li><a class="reference internal" href="#previous-code-result">Previous code result</a></li>

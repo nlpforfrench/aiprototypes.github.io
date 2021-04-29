@@ -196,7 +196,9 @@
 <div class="section" id="virtual-environment">
 <h2>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yml
+conda env remove --name myenv
 <span class="nb">source</span> activate py33
+conda deactivate
 python -m venv advanced
 </pre></div>
 </div>

@@ -17,7 +17,9 @@ https://myst-parser.readthedocs.io/en/latest/index.html
 
 ```bash
 conda env create -f environment.yml
+conda env remove --name myenv
 source activate py33
+conda deactivate
 python -m venv advanced
 ```
 
