@@ -22,7 +22,7 @@ For languages like Spanish and English it is relatively simple because the word 
 
 In 1980s, a new approach called Statistical Machine Translation becomes increasing popular. Basically people start leveraging power of machine learning and aided by some sophisticated algorithms, many systems translate parts of sentences rather than isolated words, which partially resolves the aligning problem.
 
-A lot of bilingual/parallel corpus are established during this period in order to find "sentence piece" candidates from one language to another. The most successful system is called Moses with, hold your breath, more than 100000 lines of code ! Understanding and installing such a system requires dozens of hours and only big companies can afford such a luxury.
+A lot of bilingual/parallel corpus are established during this period in order to find "sentence piece" candidates from one language to another. The most successful system is called Moses with, hold your breath, more than 100000 lines of code! Understanding and installing such a system requires dozens of hours and only big companies can afford such a luxury.
 
 ![](img/04_spell_checker_en/2021-06-07-14-55-22.png)
 
@@ -64,3 +64,11 @@ I encourage you to read [this tutorial](http://www.realworldnlpbook.com/blog/unr
 As a teaser/reminder, here is what the final system is capable of:
 
 ![](img/04_spell_checker_en/2021-06-07-15-28-58.png)
+
+## References
+
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., ... & Polosukhin, I. (2017). Attention is all you need. arXiv preprint arXiv:1706.03762.
+
+Bahdanau, D., Cho, K., & Bengio, Y. (2014). Neural machine translation by jointly learning to align and translate. arXiv preprint arXiv:1409.0473.
+
+Edunov, S., Ott, M., Auli, M., & Grangier, D. (2018). Understanding back-translation at scale. arXiv preprint arXiv:1808.09381.
