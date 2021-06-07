@@ -5,7 +5,7 @@ By [Xiaoou Wang](https://xiaoouwang.github.io)
 
 Nowadays people are all more or less familiar with the term `machine translation`, which is implemented as the main function of a website like `googletranslate` or simply as part of a larger-scale software (software as a service).
 
-However few people are aware that spell checker can also be considered using the same mindset as neural machine translation, meaning that the encoder would encode the grammatically incorrect sentences and the decoder the grammatically correct sentences.
+However few people are aware that spell checker can also be considered using the same mindset as neural machine translation, meaning that the encoder would encode the grammatically incorrect sentences and the decoder would output the grammatically correct sentences.
 
 ![](img/04_spell_checker_en/2021-06-07-15-28-58.png)
 
