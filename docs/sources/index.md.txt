@@ -25,10 +25,9 @@ math/index
 
 - [2. Classification de prénoms en genre 🇫🇷](nlp/02_classification_prenoms_fr)
 
-- [3. Text Classification : TF-IDF, Word Embedding et features expertes 🇫🇷
-  ](nlp/03_classification_lemonde_fr)
+- [3. Text Classification : TF-IDF, Word Embedding et features expertes 🇫🇷](nlp/03_classification_lemonde_fr)
 
- - [4. How to build a spell checker with deep learning 🇬🇧]A(nlp/04_spell_checker_en)
+- [4. How to build a spell checker with deep learning 🇬🇧](nlp/04_spell_checker_en)
 
 ## Transformers in NLP with PyTorch, TensorFlow and Hugging Face <i class='fas fa-ribbon'></i>
 
