@@ -57,7 +57,7 @@ Suppose you have built a small spell checker using 1G data. This is a small amou
 
 This process of actively producing wrong sentences to supply large quantity data to models is called `back-translation` in the machine translation literature.
 
-## Want some code
+## Want some code?
 
 I encourage you to read [this tutorial](http://www.realworldnlpbook.com/blog/unreasonable-effectiveness-of-transformer-spell-checker.html) to see how simple it is to build a powerful spell checker with just tens of lines.
 
