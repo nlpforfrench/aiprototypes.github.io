@@ -1,5 +1,6 @@
 # How to build a spell checker with deep learning
 
+By [Xiaoou Wang](https://xiaoouwang.github.io)
 ## Spell checker is like machine translation
 
 Nowadays people are all more or less with the term `machine translation`, which is implemented as the main function of a website like `googletranslate` or simply as part of a larger-scale software (software as a service).
