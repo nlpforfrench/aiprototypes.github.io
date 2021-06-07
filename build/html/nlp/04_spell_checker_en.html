@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷" href="01_compara_anno_fr.html" /><link rel="prev" title="NLP in French" href="../index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
-        <title>NLP and Machine Learning-related - NLP in French</title>
+        <title>How to build a spell checker with deep learning - NLP in French</title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../static/pygments_dark.css">
@@ -92,7 +92,7 @@
       <a href="../index.html"><div class="brand">NLP in French</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -114,8 +114,8 @@
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">NLP and Machine Learning-related</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">NLP and Machine Learning-related</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="01_compara_anno_fr.html">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_classification_prenoms_fr.html">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_classification_lemonde_fr.html">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</a></li>
@@ -179,45 +179,72 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="nlp-and-machine-learning-related">
-<h1>NLP and Machine Learning-related<a class="headerlink" href="#nlp-and-machine-learning-related" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
+        <div class="section" id="how-to-build-a-spell-checker-with-deep-learning">
+<h1>How to build a spell checker with deep learning<a class="headerlink" href="#how-to-build-a-spell-checker-with-deep-learning" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="spell-checker-is-like-machine-translation">
+<h2>Spell checker is like machine translation<a class="headerlink" href="#spell-checker-is-like-machine-translation" title="Permalink to this headline">¶</a></h2>
+<p>Nowadays people are all more or less with the term <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">translation</span></code>, which is implemented as the main function of a website like <code class="docutils literal notranslate"><span class="pre">googletranslate</span></code> or simply as part of a larger-scale software (software as a service).</p>
+<p>However few people are aware that spell checker can also be considered using the same mindset as neural machine translation, meaning that the encoder would encode the grammatically incorrect sentences and the decoder the grammatically correct sentences.</p>
+<p><img alt="" src="../_images/2021-06-07-15-28-58.png"/></p>
 </div>
-<ul class="simple">
-<li><p><a class="reference internal" href="01_compara_anno_fr.html"><span class="doc std std-doc">1. Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</span></a></p></li>
-<li><p><a class="reference internal" href="02_classification_prenoms_fr.html"><span class="doc std std-doc">2. Classification de prénoms en genre 🇫🇷</span></a></p></li>
-<li><p><a class="reference internal" href="03_classification_lemonde_fr.html"><span class="doc std std-doc">3. Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</span></a></p></li>
-<li><p><a class="reference internal" href="04_spell_checker_en.html"><span class="doc std std-doc">4. How to build a spell checker with deep learning 🇬🇧</span></a></p></li>
-</ul>
+<div class="section" id="brief-history-on-machine-translation">
+<h2>Brief history on machine translation<a class="headerlink" href="#brief-history-on-machine-translation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="expert-systems">
+<h3>Expert systems<a class="headerlink" href="#expert-systems" title="Permalink to this headline">¶</a></h3>
+<p>At the very beginning, machine translation systems are called expert systems. An often quoted example is the Georgetown-IBM experiment started during the Second World War. The principle is quite simple: there is a dictionary allowing to translate from word to word, and the expert’s job is to take care of the aligning problem: which is to find the right place for each word separately translated.</p>
+<p>For languages like Spanish and English it is relatively simple because the word order is unlikely to change significantly in translations, however for languages like Chinese or Japanese even the smartest experts can quickly get overwhelmed.</p>
+<p><img alt="" src="../_images/2021-06-07-14-46-42.png"/></p>
+</div>
+<div class="section" id="statistical-machine-translation">
+<h3>Statistical Machine Translation<a class="headerlink" href="#statistical-machine-translation" title="Permalink to this headline">¶</a></h3>
+<p>In 1980s, a new approach called Statistical Machine Translation becomes increasing popular. Basically people start leveraging power of machine learning and aided by some sophisticated algorithms, many systems translate parts of sentences rather than isolated words, which partially resolves the aligning problem.</p>
+<p>A lot of bilingual/parallel corpus are established during this period in order to find “sentence piece” candidates from one language to another. The most successful system is called Moses with, hold your breath, more than 100000 lines of code ! Understanding and installing such a system requires dozens of hours and only big companies can afford such a luxury.</p>
+<p><img alt="" src="../_images/2021-06-07-14-55-22.png"/></p>
+</div>
+<div class="section" id="neural-machine-translation">
+<h3>Neural Machine Translation<a class="headerlink" href="#neural-machine-translation" title="Permalink to this headline">¶</a></h3>
+<p>If you look closely at the screenshot of Moses’ Website, you can see that the software is no longer actively maintained since the end of 2015, that’s mainly because of the publication of a ground-breaking article that starts a whole new trend in Machine Translation.</p>
+<p><img alt="" src="../_images/2021-06-07-14-57-10.png"/></p>
+<p>In this paper, researchers were able to provide a nice solution to long-distance translation precision, meaning that machines were able to understand sentences much longer than before. The solution is called today as attention mechanism and often applied on RNNs. It is also the predecessor of another revolutionary paper, <code class="docutils literal notranslate"><span class="pre">attention</span> <span class="pre">is</span> <span class="pre">all</span> <span class="pre">you</span> <span class="pre">need</span></code> by Vaswani, Ashish, et al..</p>
+</div>
+</div>
+<div class="section" id="grammar-checker-as-a-transformer">
+<h2>Grammar Checker as a transformer<a class="headerlink" href="#grammar-checker-as-a-transformer" title="Permalink to this headline">¶</a></h2>
+<p>The paper of Vaswani, Ashish, et al. highlightes a new deep learning architecture called Transformer. The transformer always has an encoder and a decoder, however it get rids of recurrence and can thus be trained in much less time! In order to achieve this, a transformer uses self-attention in contrast to cross-attention used in early systems of Neural Machine Translation.</p>
+<p>At this point you should already catch a glimpse of what we are going to do:</p>
+<ol class="simple">
+<li><p>We are going to consider Spell Check as a sequence to sequence task: the encoder encodes a sequence of potentially wrong sentence and the decoder outputs the correct one.</p></li>
+<li><p>We are going to use Transformer as the Seq2Seq model.</p></li>
+</ol>
+</div>
+<div class="section" id="where-can-we-get-the-data">
+<h2>Where can we get the data ?<a class="headerlink" href="#where-can-we-get-the-data" title="Permalink to this headline">¶</a></h2>
+<p>If you know the term <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">mining</span></code>, it should be clear to you that data is essential in <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning/deep</span> <span class="pre">learning</span></code>. In our particular case, although you might get better results using Transformer rather than RNN, the margin of difference should be quite small. It is also the reason behind <a class="reference external" href="https://www.youtube.com/watch?v=06-AZXmwHjo">Andrew Ng’s calling for a more data-centric approach</a> because many people have been busy training fancy models instead of collecting more quality data.</p>
+<p>The main difficulty in constructing a high performance spell checker is to get enough data because such data are often proprietary.</p>
+<p>The good news is that we can partially circumvent this problem by being creative!</p>
+</div>
+<div class="section" id="make-data-dirty">
+<h2>Make data dirty<a class="headerlink" href="#make-data-dirty" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you have built a small spell checker using 1G data. This is a small amount of data in machine learning sense. However if you reverse the whole process, these 1G data can actually be used as a wrong sentence generator and in turn generate any amount of data that you desire.</p>
+<p>This process of actively producing wrong sentences to supply large quantity data to models is called <code class="docutils literal notranslate"><span class="pre">back-translation</span></code> in the machine translation literature.</p>
+</div>
+<div class="section" id="want-some-code">
+<h2>Want some code<a class="headerlink" href="#want-some-code" title="Permalink to this headline">¶</a></h2>
+<p>I encourage you to read <a class="reference external" href="http://www.realworldnlpbook.com/blog/unreasonable-effectiveness-of-transformer-spell-checker.html">this tutorial</a> to see how simple it is to build a powerful spell checker with just tens of lines.</p>
+<p>As a teaser/reminder, here is what the final system is capable of:</p>
+<p><img alt="" src="../_images/2021-06-07-15-28-58.png"/></p>
+</div>
 </div>
 
       </article>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="01_compara_anno_fr.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</div>
-              </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../index.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Home</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
 
         <div class="related-information">
@@ -228,7 +255,7 @@
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
             |
-            <a class="muted-link" href="../sources/nlp/index.md.txt"
+            <a class="muted-link" href="../sources/nlp/04_spell_checker_en.md.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -236,8 +263,37 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">How to build a spell checker with deep learning</a><ul>
+<li><a class="reference internal" href="#spell-checker-is-like-machine-translation">Spell checker is like machine translation</a></li>
+<li><a class="reference internal" href="#brief-history-on-machine-translation">Brief history on machine translation</a><ul>
+<li><a class="reference internal" href="#expert-systems">Expert systems</a></li>
+<li><a class="reference internal" href="#statistical-machine-translation">Statistical Machine Translation</a></li>
+<li><a class="reference internal" href="#neural-machine-translation">Neural Machine Translation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grammar-checker-as-a-transformer">Grammar Checker as a transformer</a></li>
+<li><a class="reference internal" href="#where-can-we-get-the-data">Where can we get the data ?</a></li>
+<li><a class="reference internal" href="#make-data-dirty">Make data dirty</a></li>
+<li><a class="reference internal" href="#want-some-code">Want some code</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -4,5 +4,8 @@
   ],
   "spellright.documentTypes": [
     "latex"
+  ],
+  "cSpell.enableFiletypes": [
+    "markdown"
   ]
 }

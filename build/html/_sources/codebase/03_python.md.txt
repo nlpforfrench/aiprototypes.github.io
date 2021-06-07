@@ -25,7 +25,24 @@ python -m venv advanced
 
 ## Dictionary
 
+
 ```py
+
+# get method
+
+car = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+x = car.get("price", 15000)
+car.setdefault('Age', None)
+
+print(x)
+
+# slice a dictionary
+
 l = ["english_text","correct_answer","wrong_answer","french_schema_no","pmi_able"]
 
 wino = {a dictionary}
