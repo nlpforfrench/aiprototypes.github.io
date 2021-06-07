@@ -13,9 +13,9 @@ However few people are aware that spell checker can also be considered using the
 
 ### Expert systems
 
-At the very beginning, machine translation systems are called expert systems. An often quoted example is the Georgetown-IBM experiment started during the Second World War. The principle is quite simple: there is a dictionary allowing to translate from word to word, and the expert's job is to take care of the aligning problem: which is to find the right place for each word separately translated.
+At the very beginning, machine translation systems are called expert systems. An often quoted example is the Georgetown-IBM experiment started during the Second World War. The principle is quite simple: there is a dictionary allowing to translate from word to word, and the expert's job is to take care of the aligning problem which consists of finding the right place for each word separately translated.
 
-For languages like Spanish and English it is relatively simple because the word order is unlikely to change significantly in translations, however for languages like Chinese or Japanese even the smartest experts can quickly get overwhelmed.
+For languages like Spanish and English it is relatively simple because the word order is unlikely to change significantly during translation, however for languages like Chinese or Japanese even the smartest experts can quickly get overwhelmed.
 
 ![](img/04_spell_checker_en/2021-06-07-14-46-42.png)
 
