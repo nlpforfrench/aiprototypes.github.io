@@ -3,7 +3,7 @@ make html
 cd build/html
 grep -rl _static . | xargs gsed -i "s/_static/static/g"
 grep -rl _sources . | xargs gsed -i "s/_sources/sources/g"
-# TODO if static and sources exist, remove
+# if static and sources exist, remove
 rm -rf static
 rm -rf sources
 cp -rf _static static
