@@ -2,13 +2,13 @@
 
 Logarithmic scale makes differences of small values more visible vs. diff of large values.
 
-https://www.mathsisfun.com/definitions/logarithmic-scale.html
+From [https://www.mathsisfun.com/definitions/logarithmic-scale.html](https://www.mathsisfun.com/definitions/logarithmic-scale.html)
 
-![](img/log_scale/2022-03-06-21-31-37.png)
+![](img/05_log_scale/2022-03-06-21-43-10.png)
 
-## why using log scale
+## When using log scale
 
-https://www.indeed.com/career-advice/career-development/logarithmic-scale#:~:text=You%20typically%20use%20a%20logarithmic,scales%2C%20from%20farmers%20to%20researchers.
+From [https://www.indeed.com/career-advice/career-development/logarithmic-scale#:~:text=You%20typically%20use%20a%20logarithmic,scales%2C%20from%20farmers%20to%20researchers.](https://www.indeed.com/career-advice/career-development/logarithmic-scale#:~:text=You%20typically%20use%20a%20logarithmic,scales%2C%20from%20farmers%20to%20researchers.)
 
 A logarithmic scale shows exponential growth on a graph. It's a nonlinear scale that's frequently used for analyzing a large range of quantities compactly. It is extremely useful when graphing a large variance in data.
 
@@ -18,27 +18,30 @@ You typically use a logarithmic scale for two reasons. The first reason is when 
 
 ### No Time series
 
-https://dfrieds.com/data-visualizations/when-use-log-scale.html
+From [https://dfrieds.com/data-visualizations/when-use-log-scale.html](https://dfrieds.com/data-visualizations/when-use-log-scale.html)
 
-Raw data:
+- Raw data
 
 ![](img/log_scale/2022-03-06-21-29-32.png)
 
-Linear scale (small values are smeared):
-![](img/log_scale/2022-03-06-21-29-22.png)
+- Linear scale (small values are smeared)
 
-Log scale:
-![](img/log_scale/2022-03-06-21-29-49.png)
+![](img/05_log_scale/2022-03-06-21-45-59.png)
+
+- Log scale
+
+![](img/05_log_scale/2022-03-06-21-46-16.png)
 
 ### Time series
 
-raw data:
+- Raw data
+
 ![](img/log_scale/2022-03-06-21-33-58.png)
 
-linear scale (small values smeared, looks like there was no change during the first three years)
+- Linear scale (small values smeared, looks like there was no change during the first three years)
 
-![](img/log_scale/2022-03-06-21-33-31.png)
+![](img/05_log_scale/2022-03-06-21-47-50.png)
 
-log scale (diff between small values receive more weights)
+- Log scale (diff between small values receive more weights)
 
-![](img/log_scale/2022-03-06-21-35-27.png)
+![](img/05_log_scale/2022-03-06-21-48-08.png)
