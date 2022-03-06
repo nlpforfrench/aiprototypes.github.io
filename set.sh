@@ -26,4 +26,5 @@ echo $PWD
 # git pull origin master
 git add .
 git commit -m "refresh"
-git push origin master --force
+git push origin master
+# git push origin master --force
