@@ -15,3 +15,5 @@
 * [3. Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷](03_classification_lemonde_fr)
 
 * [4. How to build a spell checker with deep learning 🇬🇧](04_spell_checker_en)
+
+* [5. Why using log scale 🇬🇧](05_log_scale)

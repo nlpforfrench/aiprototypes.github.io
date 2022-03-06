@@ -30,6 +30,8 @@ math/index
 
 - [4. How to build a spell checker with deep learning 🇬🇧](nlp/04_spell_checker_en)
 
+- [5. Why using log scale 🇬🇧](nlp/05_log_scale)
+
 ## Transformers in NLP with PyTorch, TensorFlow and Hugging Face <i class='fas fa-ribbon'></i>
 
 - [1. 10 questions on Bert 🇬🇧](transformers/01_theorie_en)
