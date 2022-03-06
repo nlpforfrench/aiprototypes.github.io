@@ -15,6 +15,7 @@ better_programmer/index
 algo/index
 web/index
 linguistique_informatique/index
+high_performance_python/index
 codebase/index
 math/index
 ```
@@ -76,6 +77,10 @@ math/index
 - [2. Analyse des Correspondances Multiples : le cas de l'ergatif en warlipiri 🇫🇷](linguistique_informatique/02_mca_ergatif_fr)
 
 - [3. Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷](linguistique_informatique/03_pca_inclusion_fr)
+
+## High performance computing <i class='fas fa-ribbon'></i>
+
+- [1. Parallelization in Python: a beginner’s guide (1, using map) 🇬🇧](high_performance_python/01_parallel_primer)
 
 ## Codebase <i class='fas fa-ribbon'></i>
 
