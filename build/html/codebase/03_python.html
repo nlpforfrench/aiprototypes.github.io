@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&lt;no title&gt;" href="04_r.html" /><link rel="prev" title="Tumux-related code" href="02_tmux.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&lt;no title&gt;" href="04_r.html" /><link rel="prev" title="Tumux-related code" href="02_tmux.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>My python codebase (including packages/libraries) - NLP in French</title>
@@ -182,9 +183,9 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="my-python-codebase-including-packages-libraries">
+        <section id="my-python-codebase-including-packages-libraries">
 <h1>My python codebase (including packages/libraries)<a class="headerlink" href="#my-python-codebase-including-packages-libraries" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="sphinx-myst">
+<section id="sphinx-myst">
 <h2>Sphinx/MyST<a class="headerlink" href="#sphinx-myst" title="Permalink to this headline">¶</a></h2>
 <!-- ```{include} snippets/include-md.md
 ``` -->
@@ -192,8 +193,8 @@
 <p>https://sphinx-themes.org/sample-sites/sphinx-ustack-theme/demo/structure.html#structural-elements-2</p>
 <p>https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/WritingReST/Admonitions.html</p>
 <p>https://myst-parser.readthedocs.io/en/latest/index.html</p>
-</div>
-<div class="section" id="virtual-environment">
+</section>
+<section id="virtual-environment">
 <h2>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yml
 conda env remove --name myenv
@@ -202,8 +203,8 @@ conda deactivate
 python -m venv advanced
 </pre></div>
 </div>
-</div>
-<div class="section" id="dictionary">
+</section>
+<section id="dictionary">
 <h2>Dictionary<a class="headerlink" href="#dictionary" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get method</span>
@@ -237,15 +238,15 @@ python -m venv advanced
 <span class="p">{</span><span class="s2">"two"</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="c1"># rename keys</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sampling">
+</section>
+<section id="sampling">
 <h2>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">v6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># list</span>
 <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">v6</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># dict</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="reload-a-package">
+</section>
+<section id="reload-a-package">
 <h2>Reload a package<a class="headerlink" href="#reload-a-package" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># import *</span>
 <span class="n">reload_package</span> <span class="o">=</span> <span class="s2">"hehe"</span>
@@ -260,8 +261,8 @@ python -m venv advanced
 <span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">some_module</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="print-list-iterator">
+</section>
+<section id="print-list-iterator">
 <h2>Print list/iterator<a class="headerlink" href="#print-list-iterator" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">list_</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">list_</span><span class="p">)</span>
@@ -269,8 +270,8 @@ python -m venv advanced
 <span class="nb">int</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="sa">f</span><span class="s1">'this is </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="watchdog-use-unit-test-as-an-exemple">
+</section>
+<section id="watchdog-use-unit-test-as-an-exemple">
 <h2>Watchdog (use unit test as an exemple)<a class="headerlink" href="#watchdog-use-unit-test-as-an-exemple" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">watch_dog</span> <span class="o">=</span> <span class="s2">"hehe"</span>
 <span class="n">watchmedo</span> <span class="n">shell</span><span class="o">-</span><span class="n">command</span> <span class="n">patterns</span><span class="o">=</span><span class="s2">"*.py;*.txt"</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">command</span><span class="o">=</span><span class="s1">'echo "$</span><span class="si">{watch_src_path}</span><span class="s1">" .</span>
@@ -278,8 +279,8 @@ python -m venv advanced
 </pre></div>
 </div>
 <p>See my <a class="reference external" href="https://xiaoouwang.medium.com/.create-a-watchdog-in-python-to-look-for-filesystem-changes-aaabefd14de4?source=your_stories_page-------------------------------------">medium post</a></p>
-</div>
-<div class="section" id="json-related">
+</section>
+<section id="json-related">
 <h2>Json related<a class="headerlink" href="#json-related" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">'records'</span><span class="p">)</span> <span class="c1"># handle headers</span>
 
@@ -287,8 +288,8 @@ python -m venv advanced
   <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dict_</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="get-text-from-web">
+</section>
+<section id="get-text-from-web">
 <h2>Get text from web<a class="headerlink" href="#get-text-from-web" title="Permalink to this headline">¶</a></h2>
 <p>See my <a class="reference external" href="https://stackoverflow.com/a/66354054/3448445">stackoverflow explanation</a>.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
@@ -297,12 +298,12 @@ python -m venv advanced
 <span class="n">hehe</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="jupyter-to-python">
+</section>
+<section id="jupyter-to-python">
 <h2>Jupyter to Python<a class="headerlink" href="#jupyter-to-python" title="Permalink to this headline">¶</a></h2>
 <p>jupyter nbconvert –to script *.ipynb</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

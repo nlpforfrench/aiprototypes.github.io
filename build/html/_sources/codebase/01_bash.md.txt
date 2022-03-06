@@ -1,5 +1,25 @@
 # My codebase for bash/shell script (macOS)
 
+## Encoding
+
+```bash
+file -I # get file encoding
+iconv -l # see convertible encoding
+iconv -f "" -t "" $filename
+```
+
+
+## check memory, os etc...
+
+```bash
+# memory
+cat /proc/meminfo
+# or
+vmstat -s
+# distribution/os
+cat /etc/*-release
+```
+
 ## xargs
 
 ```bash
@@ -250,10 +270,18 @@ uptime # working since when?
 
 ## Run background
 
-```bash
-ctrl z # pause the current process
+https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes
 
+
+```bash
+
+ctrl z # pause the current process
 bg # continue in background
+ps T # check paused process
+fg # move back to, continue process
+command & # start background
+kill %1 # kill id
+jobs # see jobs
 fg # put back to foreground
 fg %2 # foreground the second
 
@@ -287,7 +315,7 @@ lsblk # check hard disk sized and mouting point
 hostnamectl
 
 # check cpu usage
-htop
+htop # top if in linux instead of mac
 
 df -h ~ # check your own disk usage
 cat /etc/os-release # check system

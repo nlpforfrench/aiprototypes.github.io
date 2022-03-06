@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷" href="03_pca_inclusion_fr.html" /><link rel="prev" title="La loi de Zipf illustrée avec gutenbergr en R 🇫🇷" href="01_zipf_fr.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷" href="03_pca_inclusion_fr.html" /><link rel="prev" title="La loi de Zipf illustrée avec gutenbergr en R 🇫🇷" href="01_zipf_fr.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷 - NLP in French</title>
@@ -430,7 +431,7 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Analyse-des-Correspondances-Multiples-:-le-cas-de-l’ergatif-en-warlipiri-🇫🇷">
+<section id="Analyse-des-Correspondances-Multiples-:-le-cas-de-l’ergatif-en-warlipiri-🇫🇷">
 <h1>Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷<a class="headerlink" href="#Analyse-des-Correspondances-Multiples-:-le-cas-de-l’ergatif-en-warlipiri-🇫🇷" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
 <p>Dans ce tutoriel nous explorons le jeu de données <code class="docutils literal notranslate"><span class="pre">lwarlipiri.rds</span></code> à l’aide d’une méthode exploratoire multivariée adaptée afin d’investiguer dans quelle mesure l’utilisation du marqueur de cas ergatif <code class="docutils literal notranslate"><span class="pre">CaseMarking</span></code> est liée aux variables suivantes :</p>
@@ -478,11 +479,11 @@ Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/
  $ AnimacyOfSubject: Factor w/ 2 levels "animate","inanimate": 1 1 1 1 1 2 2 1 1 2 ...
 </pre></div></div>
 </div>
-<div class="section" id="Pourquoi-MCA">
+<section id="Pourquoi-MCA">
 <h2>Pourquoi MCA<a class="headerlink" href="#Pourquoi-MCA" title="Permalink to this headline">¶</a></h2>
 <p>Nous choisissons l’analyse des correspondances multiples (MCA) comme méthode car dans leur forme la plus classique <code class="docutils literal notranslate"><span class="pre">PCA</span></code> s’applique surtout aux variables continues, <code class="docutils literal notranslate"><span class="pre">CA</span></code> à une table de contingence et <code class="docutils literal notranslate"><span class="pre">MCA</span></code> à une table de variables catégorielles comme c’est le cas ici, d’autant plus que le nombre de facteurs par variable n’est pas élevé.</p>
-</div>
-<div class="section" id="Table-de-co-occurrence">
+</section>
+<section id="Table-de-co-occurrence">
 <h2>Table de co-occurrence<a class="headerlink" href="#Table-de-co-occurrence" title="Permalink to this headline">¶</a></h2>
 <p>Après maintes explorations, nous avons trouvé une cooccurrence de comptage très pratique. Nous procédons donc à la construction d’un tel tableau.</p>
 <p>On produit aussi le tableau en utilisant des proportions.</p>
@@ -581,8 +582,8 @@ Tableau 2
 </tbody>
 </table></div></div>
 </div>
-</div>
-<div class="section" id="Quelques-remarques-issues-des-tableaux-de-proportion">
+</section>
+<section id="Quelques-remarques-issues-des-tableaux-de-proportion">
 <h2>Quelques remarques issues des tableaux de proportion<a class="headerlink" href="#Quelques-remarques-issues-des-tableaux-de-proportion" title="Permalink to this headline">¶</a></h2>
 <p>Il est à noter que les remarques suivantes ne s’appliquent qu’aux données de ce tutoriel.</p>
 <ol class="arabic simple">
@@ -590,10 +591,10 @@ Tableau 2
 <li><p>L’ergatif et l’other (les autres cas) s’utilisent plus fréquemment en subInitial que subNotInitial. Si l’on regarde le tableau 2, la préférence d’ergative en subNotInitial est plus marquée qu’en subInitial.</p></li>
 <li><p>L’ergatif et l’other s’utilisent plus fréquemment en animate qu’en inanimate. L’ergative est plus lié à animate qu’other si l’on regarde le tableau 2.</p></li>
 </ol>
-</div>
-<div class="section" id="Que-nous-dit-MCA">
+</section>
+<section id="Que-nous-dit-MCA">
 <h2>Que nous dit MCA<a class="headerlink" href="#Que-nous-dit-MCA" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Choix-des-dimensions">
+<section id="Choix-des-dimensions">
 <h3>Choix des dimensions<a class="headerlink" href="#Choix-des-dimensions" title="Permalink to this headline">¶</a></h3>
 <p>Si l’on regarde les valeurs propres et les pourcentage de variance, il semble que toutes les quatres dimensions sont importantes. La discontinuité est à peine observable. La difficulté de focaliser sur uniquement 2 dimensions survient assez fréquemment en MCA.</p>
 <div class="nbinput docutils container">
@@ -689,8 +690,8 @@ Tableau 2
 </table></div></div>
 </div>
 <p>Nous voyons bien qu’ergative et other contribuent peu à la dimension 3 (avec une mauvaise qualité en plus) et que les contributions globales des catégories sur la dimension 4 sont finalement assez faibles. Nous décidons donc de nous focaliser quand même sur les deux premières dimensions.</p>
-</div>
-<div class="section" id="Corrélation-entre-variables-et-dimensions">
+</section>
+<section id="Corrélation-entre-variables-et-dimensions">
 <h3>Corrélation entre variables et dimensions<a class="headerlink" href="#Corrélation-entre-variables-et-dimensions" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -775,14 +776,14 @@ comprendre cette question.</p>
 <img alt="../images/linguistique_informatique_02_mca_ergatif_fr_18_0.png" class="no-scaled-link" src="../images/linguistique_informatique_02_mca_ergatif_fr_18_0.png" style="width: 420px; height: 420px;"/>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="Référence">
+</section>
+</section>
+<section id="Référence">
 <h2>Référence<a class="headerlink" href="#Référence" title="Permalink to this headline">¶</a></h2>
 <p>Cours de Guillaume Desagulier intitulé linguistique outillée et traitements statistiques</p>
 <p><a class="reference external" href="https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html">https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html</a></p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

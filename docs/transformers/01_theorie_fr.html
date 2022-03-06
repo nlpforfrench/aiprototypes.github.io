@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷" href="02_firstBert_fr.html" /><link rel="prev" title="10 questions on Bert 🇬🇧" href="01_theorie_en.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷" href="02_firstBert_fr.html" /><link rel="prev" title="10 questions on Bert 🇬🇧" href="01_theorie_en.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>10 questions sur Bert 🇫🇷 - NLP in French</title>
@@ -182,49 +183,49 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="questions-sur-bert">
+        <section id="questions-sur-bert">
 <h1>10 questions sur Bert 🇫🇷<a class="headerlink" href="#questions-sur-bert" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaooou Wang</a></p>
-<div class="section" id="qu-est-ce-bert">
+<section id="qu-est-ce-bert">
 <h2>Qu’est-ce Bert ?<a class="headerlink" href="#qu-est-ce-bert" title="Permalink to this headline">¶</a></h2>
 <p>La composante principale de Bert est un réseau de neurones de 12 couches qui traite du texte. La couche finale de Bert peut être adapté à ta guise pourvu qu’elle soit pertinente à tes tâches (reconnaissance des entités nommées, analyse sentimentale…).</p>
-</div>
-<div class="section" id="qu-est-ce-roberta-xlnet-et-albert">
+</section>
+<section id="qu-est-ce-roberta-xlnet-et-albert">
 <h2>Qu’est-ce RoBERTa, XLNet, et ALBERT ?<a class="headerlink" href="#qu-est-ce-roberta-xlnet-et-albert" title="Permalink to this headline">¶</a></h2>
 <p>Des modèles dérivés de Bert qui sont parvenus à de meilleures performances sur des benchmarks que Bert.</p>
-</div>
-<div class="section" id="ai-je-besoin-de-comprendre-la-recurrence-des-modeles-cnn-ou-rnn-pour-saisir-les-subtilites-de-bert">
+</section>
+<section id="ai-je-besoin-de-comprendre-la-recurrence-des-modeles-cnn-ou-rnn-pour-saisir-les-subtilites-de-bert">
 <h2>Ai-je besoin de comprendre la récurrence (des modèles CNN ou RNN) pour saisir les subtilités de Bert ?<a class="headerlink" href="#ai-je-besoin-de-comprendre-la-recurrence-des-modeles-cnn-ou-rnn-pour-saisir-les-subtilites-de-bert" title="Permalink to this headline">¶</a></h2>
 <p>Non, Bert est basé sur l’architecture transformer. En plus il n’y a que la partie encoder qui est concernée.</p>
-</div>
-<div class="section" id="c-est-quoi-alors-la-difference-entre-rnn-et-transformer">
+</section>
+<section id="c-est-quoi-alors-la-difference-entre-rnn-et-transformer">
 <h2>C’est quoi alors la différence entre RNN et Transformer ?<a class="headerlink" href="#c-est-quoi-alors-la-difference-entre-rnn-et-transformer" title="Permalink to this headline">¶</a></h2>
 <p>Les réseaux de neurones récurrents ne “regardent” qu’un seul mot à la fois et utilisent des hidden states pour stocker, filtrer et intégrer les informations du passé. Cela rend le modèle très compliqué rien qu’au niveau de la backpropagation (rétropropagation du gradient).</p>
 <p>Attention, les RNNs constituent un champ de recherches à part entière. Cela mérite une autre série de tutoriels.</p>
-</div>
-<div class="section" id="lien-entre-pre-training-fine-tuning-et-apprentissage-de-transfert">
+</section>
+<section id="lien-entre-pre-training-fine-tuning-et-apprentissage-de-transfert">
 <h2>Lien entre Pre-training, Fine-Tuning et apprentissage de transfert ?<a class="headerlink" href="#lien-entre-pre-training-fine-tuning-et-apprentissage-de-transfert" title="Permalink to this headline">¶</a></h2>
 <p>Bert est pré-entraîné sur un énorme corpus avec deux tâches. Vu la spécificité de ces deux tâches il est supposé (attention c’est juste une hypothèse) que le modèle acquerra une compréhension profondément contextualisée des mots (concrètement ce sont des embeddings). Mais ce modèle out-of-box n’est pas apte à des tâches en aval (downstream tasks) qui demandent un réapprentissage sur des corpus spécifiques (fine-tuning). L’étude de ceux deux processus relève de l’apprentissage de transfert.</p>
-</div>
-<div class="section" id="quels-interets">
+</section>
+<section id="quels-interets">
 <h2>Quels intérêts ?<a class="headerlink" href="#quels-interets" title="Permalink to this headline">¶</a></h2>
 <p>Entraîner un modèle pour une tâche spécifique demande souvent un énorme corpus d’un domaine particulier qui n’est pas forcément disponible. En plus c’est très couteux en termes de temps et de calcul. Le processus de fine-tuning, en plus d’économiser du temps, arrive à de meilleures performances qu’un modèle entraîné à partir de zéro et fait maison.</p>
 <p>Attention ! Cela ne signifie pas que le fine-tuning prend quelques secondes, il est juste rapide par rapport au pré-entrainement de Bert et aux modèles faits maison. Si l’on remonte un peu dans le temps, les bénéfices de cette approche ont été d’abord constatés en reconnaissance d’images (branche de computer vision <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">traduction</span> <span class="pre">en</span> <span class="pre">français,</span> <span class="pre">vision</span> <span class="pre">par</span> <span class="pre">ordinateur,</span> <span class="pre">est</span> <span class="pre">maladroite</span> <span class="pre">à</span> <span class="pre">mon</span> <span class="pre">avis</span></code>). Théoriquement cela a peu de choses de nouveau.</p>
-</div>
-<div class="section" id="sur-quelles-taches-est-entraine-bert">
+</section>
+<section id="sur-quelles-taches-est-entraine-bert">
 <h2>Sur quelles tâches est entraîné Bert ?<a class="headerlink" href="#sur-quelles-taches-est-entraine-bert" title="Permalink to this headline">¶</a></h2>
 <p><img alt="" src="../images/0b53924e.png"/></p>
 <p>Tout comme pour word embedding de Mikolov, ce sont des fake tasks ou tâches de pré-entraînement. La première (Masked Language Model) consiste à deviner un mot masqué dans une phrase (comme le mot cool) et la deuxième (Next Sentence Prediction) à déterminer si la deuxième d’une paire de phrases (comme la phrase en orange) constitue la suite de la première.</p>
-</div>
-<div class="section" id="quels-avantages-des-embeddings-bert">
+</section>
+<section id="quels-avantages-des-embeddings-bert">
 <h2>Quels avantages des embeddings Bert ?<a class="headerlink" href="#quels-avantages-des-embeddings-bert" title="Permalink to this headline">¶</a></h2>
 <p>Comme le mot est masqué à l’intérieur de la phrase, Bert est censé acquérir une représentation contextualisée utilisant aussi bien le contexte de gauche et celui de droite. C’est aussi le cas de BiLSTM mais le contexte exploité par ce dernier est plus restreint. Aussi il est à noter que Bert a un vocabulaire fixe constitué de “wordpiece” (tokens, sous-tokens, caractères), ce qui permet de traiter des problèmes d’out of vocabulary (OOV) de manière plus efficace.</p>
-</div>
-<div class="section" id="pourquoi-wordpiece">
+</section>
+<section id="pourquoi-wordpiece">
 <h2>Pourquoi WordPiece ?<a class="headerlink" href="#pourquoi-wordpiece" title="Permalink to this headline">¶</a></h2>
 <p>Prenons <code class="docutils literal notranslate"><span class="pre">anticonstitutionnellement</span></code>. Si l’on entraîne un vecteur pour ce mot il y a peu de chances qu’on en trouve beaucoup d’occurrences. Ce mot sera par la suite sous-représenté. En revanche si l’on le décompose en “anti”, “constitution” et “ment”. Ces trois subtokens seraient plus fréquents (donc plus de samples) dans un grand corpus et la recomposition de ces 3 subtokens constitueraient une meilleure représentation.</p>
-</div>
-<div class="section" id="comment-le-fine-tuning-marche-concretement">
+</section>
+<section id="comment-le-fine-tuning-marche-concretement">
 <h2>Comment le fine-tuning marche concrètement ?<a class="headerlink" href="#comment-le-fine-tuning-marche-concretement" title="Permalink to this headline">¶</a></h2>
 <p>Cette question est liée à la question. Le processus de fine-tuning dépend de la dernière couche que vous rajoutez à Bert. Prenons l’analyse sentimentale comme un exemple. La figure créée par nos soins illustre ce principe fort simple. A la suite de 12 couches Bert on rajoute un classifieur qui, en fonction du embedding du token CLS (qui englobe l’info de toute la phrase), prédit s’il s’agit d’un commentaire positif ou négatif.</p>
 <p><img alt="" src="../images/3ed81414.png"/></p>
@@ -238,8 +239,8 @@
 </ul>
 <p>Stay tuned!</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

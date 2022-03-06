@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷" href="02_mca_ergatif_fr.html" /><link rel="prev" title="Computational Linguistics in R" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷" href="02_mca_ergatif_fr.html" /><link rel="prev" title="Computational Linguistics in R" href="index.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>La loi de Zipf illustrée avec gutenbergr en R 🇫🇷 - NLP in French</title>
@@ -430,11 +431,11 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷">
+<section id="La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷">
 <h1>La loi de Zipf illustrée avec gutenbergr en R 🇫🇷<a class="headerlink" href="#La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
 <p>Il s’agit de montrer quelques aspects de la loi de Zipf avec 3 textes (Wuthering Heights, Madame Bovary et Faust) récupérés du site Gutenberg.</p>
-<div class="section" id="Packages-utilisés">
+<section id="Packages-utilisés">
 <h2>Packages utilisés<a class="headerlink" href="#Packages-utilisés" title="Permalink to this headline">¶</a></h2>
 <p>Les trois packages/ensemble de packages utilisés sont <code class="docutils literal notranslate"><span class="pre">gutenbergr</span></code>,<code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> et <code class="docutils literal notranslate"><span class="pre">gridExtra</span></code> (pour afficher des multi-plots).</p>
 <div class="nbinput nblast docutils container">
@@ -452,8 +453,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Workflow-général">
+</section>
+<section id="Workflow-général">
 <h2>Workflow général<a class="headerlink" href="#Workflow-général" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>On prédéfinit les titres des 3 œuvres qui seront proposées à l’utiliseur et produit par la suite un dataframe contenant les métadatas</p></li>
@@ -472,8 +473,8 @@ div.rendered_html tbody tr:hover {
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">main</span><span class="p">(</span><span class="n">metas</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="Explication-de-la-fonction-get_books_meta">
+</section>
+<section id="Explication-de-la-fonction-get_books_meta">
 <h2>Explication de la fonction get_books_meta<a class="headerlink" href="#Explication-de-la-fonction-get_books_meta" title="Permalink to this headline">¶</a></h2>
 <p>La fonction <code class="docutils literal notranslate"><span class="pre">get_books_meta</span></code> prend les titres des 3 oeuvres comme entrées et produit un dataframe des informations des 3 œuvres en question en filtrant les métadatas du package <code class="docutils literal notranslate"><span class="pre">guternbergr</span></code> sur les colonnes <code class="docutils literal notranslate"><span class="pre">titre</span></code> et <code class="docutils literal notranslate"><span class="pre">language</span></code>.</p>
 <div class="nbinput docutils container">
@@ -523,8 +524,8 @@ div.rendered_html tbody tr:hover {
 </tbody>
 </table></div></div>
 </div>
-</div>
-<div class="section" id="Explication-de-la-fonction-main">
+</section>
+<section id="Explication-de-la-fonction-main">
 <h2>Explication de la fonction main<a class="headerlink" href="#Explication-de-la-fonction-main" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Dans <code class="docutils literal notranslate"><span class="pre">main</span></code>, on exécute la fonction <code class="docutils literal notranslate"><span class="pre">welcome_message</span></code> qui affiche les informations des 3 oeuvres.</p></li>
@@ -704,8 +705,8 @@ Tell us the book id on which you want to test the zipf's law.
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Ensemble-de-la-fonction-main">
+</section>
+<section id="Ensemble-de-la-fonction-main">
 <h2>Ensemble de la fonction main<a class="headerlink" href="#Ensemble-de-la-fonction-main" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
@@ -749,8 +750,8 @@ Tell us the book id on which you want to test the zipf's law.
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Interprétations-des-graphes">
+</section>
+<section id="Interprétations-des-graphes">
 <h2>Interprétations des graphes<a class="headerlink" href="#Interprétations-des-graphes" title="Permalink to this headline">¶</a></h2>
 <p>On utilisel ici le livre <code class="docutils literal notranslate"><span class="pre">Faust</span></code> comme exemple principal.</p>
 <div class="nbinput docutils container">
@@ -834,31 +835,31 @@ Warning message:
 <img alt="../_images/linguistique_informatique_01_zipf_fr_18_2.png" class="no-scaled-link" src="../_images/linguistique_informatique_01_zipf_fr_18_2.png" style="width: 420px; height: 420px;"/>
 </div>
 </div>
-<div class="section" id="6.1-Graphe-des-20-mots-les-plus-courants">
+<section id="6.1-Graphe-des-20-mots-les-plus-courants">
 <h3>6.1 Graphe des 20 mots les plus courants<a class="headerlink" href="#6.1-Graphe-des-20-mots-les-plus-courants" title="Permalink to this headline">¶</a></h3>
 <p>On remarquera surtout que les tokens les plus fréquents sont des mots fonctionnels, excepté <code class="docutils literal notranslate"><span class="pre">faust</span></code> et <code class="docutils literal notranslate"><span class="pre">mephistopheles</span></code> qui sont les deux personnages principaux de l’histoire.</p>
-</div>
-<div class="section" id="6.2-Gaphe-de-la-distribution-des-fréquences-relatives">
+</section>
+<section id="6.2-Gaphe-de-la-distribution-des-fréquences-relatives">
 <h3>6.2 Gaphe de la distribution des fréquences relatives<a class="headerlink" href="#6.2-Gaphe-de-la-distribution-des-fréquences-relatives" title="Permalink to this headline">¶</a></h3>
 <p>On remarquera surtout que les tokens fréquents (à gauche) et les tokens rares (à droite) coexistent dans le même texte.</p>
 <p>La distribution n’est pas du tout une distribution normale. Elle a une longue queue (beaucoup de mots rares). Les mots les plus fréquents occupent déjà une grande partie du texte.</p>
 <p>Il est à noter que le choix de <code class="docutils literal notranslate"><span class="pre">binwidth</span></code> est important pour rendre le graph plus lisse, comme on peut remarquer sur le même graphe de <code class="docutils literal notranslate"><span class="pre">Wuthering</span> <span class="pre">Heights</span></code> (plus bas). Cela montre l’intérêt du graphe 3 qui illustre mieux et en termes plus concrets la loi de Zipf.</p>
-</div>
-<div class="section" id="6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives">
+</section>
+<section id="6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives">
 <h3>6.3 Graphe des logarithmes des rangs et des fréquences relatives<a class="headerlink" href="#6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives" title="Permalink to this headline">¶</a></h3>
 <p>En effet, la loi de Zipf (d’abord formulée par Jean-Baptiste Estoup) stipule que dans un texte donné, la fréquence d’occurrence <code class="docutils literal notranslate"><span class="pre">f(n)</span></code> (nous prenons ici la fréquence relative) d’un mot est liée à son rang <code class="docutils literal notranslate"><span class="pre">n</span></code> dans l’ordre des fréquences par une loi de la forme</p>
 <div class="math-wrapper"><div class="math notranslate nohighlight">
 \[f(n)=\frac{K}{n}\]</div></div>
 <p>où K est une constante.</p>
 <p>Si l’on prend les logarithmes de chaque côté, la relation devient linéaire et théoriquement on doit observer une ligne droite, ce qui n’est pas le cas ici. Cela montre que <code class="docutils literal notranslate"><span class="pre">bien</span> <span class="pre">que</span> <span class="pre">la</span> <span class="pre">formule</span> <span class="pre">de</span> <span class="pre">Zipf</span> <span class="pre">donne</span> <span class="pre">l’allure</span> <span class="pre">générale</span> <span class="pre">des</span> <span class="pre">courbes,</span> <span class="pre">elle</span> <span class="pre">en</span> <span class="pre">représente</span> <span class="pre">très</span> <span class="pre">mal</span> <span class="pre">les</span> <span class="pre">détails</span></code> (Mandelbrot (1954: 12)).</p>
-</div>
-</div>
-<div class="section" id="Références">
+</section>
+</section>
+<section id="Références">
 <h2>Références<a class="headerlink" href="#Références" title="Permalink to this headline">¶</a></h2>
 <p>Mandelbrot, Benoit. 1954. Structure formelle des textes et communcation. Word 10:1–27.</p>
 <p>Cours de Guillaume Desagulier intitulé linguistique outillée et traitements statistiques : <a class="reference external" href="https://corpling.modyco.fr/workshops/M2TAL/2.descriptive.stats.html">https://corpling.modyco.fr/workshops/M2TAL/2.descriptive.stats.html</a></p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

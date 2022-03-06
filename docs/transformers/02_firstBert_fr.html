@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Better Programmer" href="../better_programmer/index.html" /><link rel="prev" title="10 questions sur Bert 🇫🇷" href="01_theorie_fr.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Better Programmer" href="../better_programmer/index.html" /><link rel="prev" title="10 questions sur Bert 🇫🇷" href="01_theorie_fr.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷 - NLP in French</title>
@@ -430,10 +431,10 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Classification-de-commentaires-avec-Camembert-sans-prise-de-tête-:-les-fondamentaux-🇫🇷">
+<section id="Classification-de-commentaires-avec-Camembert-sans-prise-de-tête-:-les-fondamentaux-🇫🇷">
 <h1>Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷<a class="headerlink" href="#Classification-de-commentaires-avec-Camembert-sans-prise-de-tête-:-les-fondamentaux-🇫🇷" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="xiaoouwang.github.io">Xiaoou WANG</a></p>
-<div class="section" id="Motivation">
+<section id="Motivation">
 <h2>Motivation<a class="headerlink" href="#Motivation" title="Permalink to this headline">¶</a></h2>
 <p>Camembert a été publié en juin 2020. Cependant force est de constater que l’emploi de Bert en français (Il s’agit plutôt de Roberta pour Camembert, voir <a class="reference external" href="01_theorie">10 questions rapides sur Bert</a>) n’est pas encore une tendance. Nous pensons que cela est en partie dû au manque de tutoriels sur l’emploi des modèles pré-entraînés.</p>
 <p>Ceci est le deuxième d’une série de 10 tutoriels sur Camembert. Dans ce tuto nous allons voir notamment comment utiliser Camembert sans fine-tuning, ce dernier présupposant des connaissances relativement plus poussées.</p>
@@ -459,8 +460,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Données">
+</section>
+<section id="Données">
 <h2>Données<a class="headerlink" href="#Données" title="Permalink to this headline">¶</a></h2>
 <p>Ensuite nous importons les données. Il s’agit d’un petit jeu de données que j’ai trouvé <a class="reference external" href="https://medium.com/@vitalshchutski/french-nlp-entamez-le-camembert-avec-les-librairies-fast-bert-et-transformers-14e65f84c148">ici</a>. Cela vous permettra notamment de répliquer ce tutoriel sur votre propre ordinateur, tant l’usage de GPU est peu nécessaire.</p>
 <p>La structure du dataframe est simple. Il y a une colonne commentaire avec quelques autres colonnes annotant la classe de ce commentaire. J’ai filtré les autres classes en ne gardant que <code class="docutils literal notranslate"><span class="pre">temps</span></code> pour utiliser une simple régression logistique sur les données. 1 signifie que le commentaire est lié à des problèmes de temps d’attente et 0 non.</p>
@@ -546,8 +547,8 @@ Number of sentences: 322
 </table></div>
 </div></div>
 </div>
-</div>
-<div class="section" id="Modèle-et-Tokenizer">
+</section>
+<section id="Modèle-et-Tokenizer">
 <h2>Modèle et Tokenizer<a class="headerlink" href="#Modèle-et-Tokenizer" title="Permalink to this headline">¶</a></h2>
 <p>Ensuite nous allons importer le modèle, le tokenizer et les weights pré-entraînés. Les weights sont comme les word embeddings. Deux choses à noter :</p>
 <ol class="arabic simple">
@@ -610,8 +611,8 @@ Max sentence length:  556
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Padding">
+</section>
+<section id="Padding">
 <h2>Padding<a class="headerlink" href="#Padding" title="Permalink to this headline">¶</a></h2>
 <p>Maintenant que la phrase la plus longue enlevée, nous faisons un padding de 472 tokens pour homogénéiser la longueur de phrases. Cela rendra l’entraînement plus simple. Nous indiquons aussi où se trouve les paddings avec <code class="docutils literal notranslate"><span class="pre">np.where</span></code> pour que Bert sache traiter les tokens de padding.</p>
 <div class="nbinput docutils container">
@@ -658,8 +659,8 @@ Max sentence length:  556
 (321, 472)
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Utiliser-l’encodeur-(encoder)">
+</section>
+<section id="Utiliser-l’encodeur-(encoder)">
 <h2>Utiliser l’encodeur (encoder)<a class="headerlink" href="#Utiliser-l’encodeur-(encoder)" title="Permalink to this headline">¶</a></h2>
 <p>Enfin nous transformer les tokens en tensor pour les passer dans le fameux transformer. Seule la dernière couche est conservée pour faire la classification.</p>
 <div class="nbinput nblast docutils container">
@@ -675,8 +676,8 @@ Max sentence length:  556
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Entraîner-un-modèle-logistique">
+</section>
+<section id="Entraîner-un-modèle-logistique">
 <h2>Entraîner un modèle logistique<a class="headerlink" href="#Entraîner-un-modèle-logistique" title="Permalink to this headline">¶</a></h2>
 <p>Comme nous avons seulement besoin du premier token (CLS qui signifie classification) pour le modèle logistique, nous faisons en slice avec <code class="docutils literal notranslate"><span class="pre">[:,0,:]</span></code>.</p>
 <div class="nbinput nblast docutils container">
@@ -749,8 +750,8 @@ LogisticRegression(C=5.263252631578947, class_weight=None, dual=False,
                    warm_start=False)
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Résultats-et-conclusions">
+</section>
+<section id="Résultats-et-conclusions">
 <h2>Résultats et conclusions<a class="headerlink" href="#Résultats-et-conclusions" title="Permalink to this headline">¶</a></h2>
 <p>Nous arrivons donc à une précision de 91.36%. Si nous avions utilisé un classifieur aléatoire la précision aurait été autour de 60%.</p>
 <p>Voilà ! Bravo d’avoir lu jusqu’ici. Nous espérons que vous avez vu que finalement Bert n’était pas si difficile à comprendre. Il s’agit juste d’un encoder auquel on ajoute un algorithme de classification.</p>
@@ -794,13 +795,13 @@ LogisticRegression(C=5.263252631578947, class_weight=None, dual=False,
 Dummy classifier score: 0.621 (+/- 0.15)
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Références-principales-:">
+</section>
+<section id="Références-principales-:">
 <h2>Références principales :<a class="headerlink" href="#Références-principales-:" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/</a></p>
 <p><a class="reference external" href="https://camembert-model.fr/">https://camembert-model.fr/</a></p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

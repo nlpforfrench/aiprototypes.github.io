@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧" href="03_django_en.html" /><link rel="prev" title="Scraper « le monde » et construire ton propre corpus 🇫🇷" href="01_lemonde_fr.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧" href="03_django_en.html" /><link rel="prev" title="Scraper « le monde » et construire ton propre corpus 🇫🇷" href="01_lemonde_fr.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>On your way to scraping French forums 🇬🇧 - NLP in French</title>
@@ -430,11 +431,11 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="On-your-way-to-scraping-French-forums-🇬🇧">
+<section id="On-your-way-to-scraping-French-forums-🇬🇧">
 <h1>On your way to scraping French forums 🇬🇧<a class="headerlink" href="#On-your-way-to-scraping-French-forums-🇬🇧" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
 <p>Be sure to have read the first tutorial <a class="reference internal" href="01_lemonde_en.html"><span class="doc">here</span></a>.</p>
-<div class="section" id="Get-pages">
+<section id="Get-pages">
 <h2>Get pages<a class="headerlink" href="#Get-pages" title="Permalink to this headline">¶</a></h2>
 <p>The construction of the scraper for the forum <code class="docutils literal notranslate"><span class="pre">doctissimo</span></code> is actually simpler. Let’s look at the link of the second page of the “pain dos” section as an example:</p>
 <p><a class="reference external" href="https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-2.htm">https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-2.htm</a></p>
@@ -499,8 +500,8 @@ div.rendered_html tbody tr:hover {
 'https://forum.doctissimo.fr/sante/douleur-dos/osteopathie-sujet_165606_1.htm'
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Scrape-interactions/posts">
+</section>
+<section id="Scrape-interactions/posts">
 <h2>Scrape interactions/posts<a class="headerlink" href="#Scrape-interactions/posts" title="Permalink to this headline">¶</a></h2>
 <p>Now it’s just a matter of scrape the posts from the first page of each thread. It is quite straightforward because the text of each post is in a span tag where the itemprop property equals text. The code says a little more about tag structure.</p>
 <p>The code block below allows to print:</p>
@@ -557,12 +558,12 @@ div.rendered_html tbody tr:hover {
         Bonjour,Comme j'ai répondu dans un autre post je ne vais pas faire de doublon. Tu pourras lire si tu veux.L'ostéopathe va t'étirer et te soulager. J'en voyais un pour mes maux de dos. Mais une fois par mois. Trop peu, les douleurs revenaient vite...L'idéal est de s'étirer tous les jours le matin dans le lit. Pas sur un sol dur. Muscles chauds.Et le soir également au début dans le lit pour s'endormir, le temps que les douleurs disparaissent.Et surtout, bien gérer sa respiration afin de se détendre.Pour les étirements du dos, il y a pleins de liens sur le net.Mais au besoin, je peux rechercher pour te donner ceux que je fais. Qui sont basiques pour la plupart.Mais depuis que je m'étire tous les jours, plus de douleur.Bien cordialement.
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Perspectives">
+</section>
+<section id="Perspectives">
 <h2>Perspectives<a class="headerlink" href="#Perspectives" title="Permalink to this headline">¶</a></h2>
 <p>Now it’s up to you to do some corpus analysis :D</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

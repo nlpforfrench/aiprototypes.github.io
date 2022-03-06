@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="On your way to scraping French forums 🇬🇧" href="02_forum_en.html" /><link rel="prev" title="Complete tutorial on scraping French news from Le Monde 🇬🇧" href="01_lemonde_en.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="On your way to scraping French forums 🇬🇧" href="02_forum_en.html" /><link rel="prev" title="Complete tutorial on scraping French news from Le Monde 🇬🇧" href="01_lemonde_en.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Scraper « le monde » et construire ton propre corpus 🇫🇷 - NLP in French</title>
@@ -430,20 +431,20 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Scraper-«-le-monde-»-et-construire-ton-propre-corpus-🇫🇷">
+<section id="Scraper-«-le-monde-»-et-construire-ton-propre-corpus-🇫🇷">
 <h1>Scraper « le monde » et construire ton propre corpus 🇫🇷<a class="headerlink" href="#Scraper-«-le-monde-»-et-construire-ton-propre-corpus-🇫🇷" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
-<div class="section" id="Pourquoi-tu-aurais-besoin-de-scraper">
+<section id="Pourquoi-tu-aurais-besoin-de-scraper">
 <h2>Pourquoi tu aurais besoin de scraper<a class="headerlink" href="#Pourquoi-tu-aurais-besoin-de-scraper" title="Permalink to this headline">¶</a></h2>
 <p>Parfois tu te trouves dans la situation où tu dois constituer ton propre corpus pour y mener des tests de classifieur/parseur/etc.</p>
-</div>
-<div class="section" id="Problèmes-légaux">
+</section>
+<section id="Problèmes-légaux">
 <h2>Problèmes légaux<a class="headerlink" href="#Problèmes-légaux" title="Permalink to this headline">¶</a></h2>
 <p>Il est à noter que le scraping peut soulever des problèmes légaux liés surtout aux droits d’auteurs. Je te conseille donc de bien te renseigner avant de faire du scraping. Un bon point de départ serait un site comme <a class="reference external" href="https://soshace.com/responsible-web-scraping-gathering-data-ethically-and-legally/">celui-ci</a>.</p>
-</div>
-<div class="section" id="Scraper-le-monde">
+</section>
+<section id="Scraper-le-monde">
 <h2>Scraper le monde<a class="headerlink" href="#Scraper-le-monde" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Obtenir-des-liens-d’archives">
+<section id="Obtenir-des-liens-d’archives">
 <h3>Obtenir des liens d’archives<a class="headerlink" href="#Obtenir-des-liens-d’archives" title="Permalink to this headline">¶</a></h3>
 <p>La première chose à faire est de générer un lien d’archives. A titre d’exemple, le lien <code class="docutils literal notranslate"><span class="pre">https://www.lemonde.fr/archives-du-monde/01-01-2020/</span></code> contient tous les articles publiés le 1er janvier 2020. La fonction <code class="docutils literal notranslate"><span class="pre">create_archive_link</span></code> prend starting ear/month/day et ending year/month/day comme entrées et retourne un dictionnaire sous forme de <code class="docutils literal notranslate"><span class="pre">year:links</span></code>.</p>
 <div class="nbinput docutils container">
@@ -488,12 +489,12 @@ div.rendered_html tbody tr:hover {
 <li><p><code class="docutils literal notranslate"><span class="pre">urlopen</span></code> pour ouvrir des pages webs</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> pour parse</p></li>
 </ol>
-</div>
-<div class="section" id="Quand-les-exceptions-agissent-en-ta-faveur">
+</section>
+<section id="Quand-les-exceptions-agissent-en-ta-faveur">
 <h3>Quand les exceptions agissent en ta faveur<a class="headerlink" href="#Quand-les-exceptions-agissent-en-ta-faveur" title="Permalink to this headline">¶</a></h3>
 <p>Les exceptions sont pratiques dans notre cas car nous avons généré des liens pour des dates comme 02-31, c’est beaucoup facile de catcher ces exceptions que de générer des liens correspondant seulement à des dates existantes. Chaque lien d’article est dans un tag <code class="docutils literal notranslate"><span class="pre">&lt;section&gt;</span></code> contenant une <code class="docutils literal notranslate"><span class="pre">class</span></code> nommé <code class="docutils literal notranslate"><span class="pre">teaser</span></code>.</p>
 <p>Il est important de filtrer tous les articles non gratuits avec un <code class="docutils literal notranslate"><span class="pre">span</span> <span class="pre">&gt;</span> <span class="pre">class</span> <span class="pre">icon__premium</span></code> (à moins que tu aies un compte premium). Tous les liens contenant le mot-clé <code class="docutils literal notranslate"><span class="pre">en-direct</span></code> sont aussi à filtrer car ce sont des vidéos. Tu aurais compris que web scraping demande des capacités d’analyse des pages webs.</p>
-<p><img alt="image1" src="../images/957b6f67.png"/></p>
+<img alt="../images/4404a12e.png" src="../images/4404a12e.png"/>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -524,8 +525,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Sauvegarder-les-liens-d’articles-dans-un-fichier-txt">
+</section>
+<section id="Sauvegarder-les-liens-d’articles-dans-un-fichier-txt">
 <h3>Sauvegarder les liens d’articles dans un fichier txt<a class="headerlink" href="#Sauvegarder-les-liens-d’articles-dans-un-fichier-txt" title="Permalink to this headline">¶</a></h3>
 <p>Je te propose d’écrire une fonction pour stocker les liens existants car il est peu probable qu’ils ne changent. Ici la date de publication est utilisée pour nommer les fichiers.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">write_links</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">links</span><span class="p">,</span> <span class="n">year_fn</span><span class="p">):</span>
@@ -542,8 +543,8 @@ div.rendered_html tbody tr:hover {
     <span class="n">write_links</span><span class="p">(</span><span class="n">corpus_path</span><span class="p">,</span><span class="n">article_links_list</span><span class="p">,</span><span class="n">year</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="Scraper-un-seul-article">
+</section>
+<section id="Scraper-un-seul-article">
 <h3>Scraper un seul article<a class="headerlink" href="#Scraper-un-seul-article" title="Permalink to this headline">¶</a></h3>
 <p>Maintenant tu peux commencer à scraper les textes. Il suffit de scraper tous les éléments <code class="docutils literal notranslate"><span class="pre">h1,</span> <span class="pre">h2</span> <span class="pre">et</span> <span class="pre">p</span></code>. Mets <code class="docutils literal notranslate"><span class="pre">recursive=False</span></code> car tu veux que le “scrapeur” arrête de fouiller dans les structures plus profondes dès qu’il trouve le texte.</p>
 <p>Par souci de modularité, écrivons une fonction scrapant un seul article :</p>
@@ -559,8 +560,8 @@ div.rendered_html tbody tr:hover {
         <span class="k">return</span> <span class="p">(</span><span class="n">text_title</span><span class="p">,</span> <span class="n">text_body</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="Classifier-les-textes-par-thème">
+</section>
+<section id="Classifier-les-textes-par-thème">
 <h3>Classifier les textes par thème<a class="headerlink" href="#Classifier-les-textes-par-thème" title="Permalink to this headline">¶</a></h3>
 <p>La classification par thème est très courante comme tâche en machine learning. Je te propose donc une fonction attribuant à chaque article une catégorie. L’information est déjà contenue dans le lien : <code class="docutils literal notranslate"><span class="pre">https://www.lemonde.fr/politique/article/2020/01/01/reforme-des-retraites-macron-reste-inflexible-aucune-issue-ne-se-profile_6024550_823448.html</span></code> contient par exemple le mot-clé <code class="docutils literal notranslate"><span class="pre">politique</span></code>.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_theme</span><span class="p">(</span><span class="n">link</span><span class="p">):</span>
@@ -572,11 +573,11 @@ div.rendered_html tbody tr:hover {
         <span class="k">return</span> <span class="n">theme_text</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="Scraper-tout">
+</section>
+<section id="Scraper-tout">
 <h3>Scraper tout<a class="headerlink" href="#Scraper-tout" title="Permalink to this headline">¶</a></h3>
 <p>C’est enfin le moment de tout scraper ! Pour ce faire je te conseille d’utiliser le package <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> car le scraping peut être long et tu voudras savoir où il en est. Voici à quoi ressemble la barre de progression :</p>
-<p><img alt="image1" src="../images/957b6f67.png"/></p>
+<img alt="../images/957b6f67.png" src="../images/957b6f67.png"/>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scrape_articles</span><span class="p">(</span><span class="n">dict_links</span><span class="p">):</span>
     <span class="n">themes</span> <span class="o">=</span> <span class="n">dict_links</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="n">themes</span><span class="p">:</span>
@@ -614,13 +615,13 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <p>Voilà. Happy Scraping ! Et n’oublie pas de te renseigner pour des problèmes légaux !</p>
-</div>
-</div>
-<div class="section" id="Gist">
+</section>
+</section>
+<section id="Gist">
 <h2>Gist<a class="headerlink" href="#Gist" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://gist.github.com/xiaoouwang/0f054840af560488f2162c110b6045b5#file-lemondescraper-py">https://gist.github.com/xiaoouwang/0f054840af560488f2162c110b6045b5#file-lemondescraper-py</a></p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

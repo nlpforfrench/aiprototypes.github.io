@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Classification de prénoms en genre (masculin/féminin) 🇫🇷" href="02_classification_prenoms_fr.html" /><link rel="prev" title="NLP and Machine Learning-related" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Classification de prénoms en genre (masculin/féminin) 🇫🇷" href="02_classification_prenoms_fr.html" /><link rel="prev" title="NLP and Machine Learning-related" href="index.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷 - NLP in French</title>
@@ -182,10 +183,10 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="comparer-spacy-stanfordnlp-et-treetagger-sur-un-corpus-oral-et-un-corpus-de-presse">
+        <section id="comparer-spacy-stanfordnlp-et-treetagger-sur-un-corpus-oral-et-un-corpus-de-presse">
 <h1>Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷<a class="headerlink" href="#comparer-spacy-stanfordnlp-et-treetagger-sur-un-corpus-oral-et-un-corpus-de-presse" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a>, <a class="reference external" href="https://www.linkedin.com/in/xingyu-liu-aba896a1/">Xingyu LIU</a></p>
-<div class="section" id="motivation">
+<section id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
 <p>L’annotation morphosyntaxique est une tâche consistant à assigner des informations grammaticales à chaque mot d’un
 texte. Un tagger (ou étiqueteur) est typiquement couplé à un outil de segmentation en phrases et en mots et/ou à un
@@ -207,27 +208,29 @@ mesures de précision, rappel et F-mesure). Mais une vue plus globale sur les pa
 étiqueteurs : temps d’exécution, méthodes d’entraînement, possibilités de customisation est plus utile pour apprécier
 tant de facteurs contribuant à la décision finale d’un tel ou tel étiqueteur.</p></li>
 </ol>
-</div>
-<div class="section" id="etiqueteurs-parseurs-choisis">
+</section>
+<section id="etiqueteurs-parseurs-choisis">
 <h2>Étiqueteurs/parseurs choisis<a class="headerlink" href="#etiqueteurs-parseurs-choisis" title="Permalink to this headline">¶</a></h2>
 <p>Les 3 étiqueteurs sont Treetagger (Schmid, 1994), Spacy (Explosion, 2017) et StanfordNLP, rebaptisé aujourd’hui en
 Stanza (Qi et al., 2020).</p>
-</div>
-<div class="section" id="constitution-du-corpus">
+</section>
+<section id="constitution-du-corpus">
 <h2>Constitution du corpus<a class="headerlink" href="#constitution-du-corpus" title="Permalink to this headline">¶</a></h2>
 <p>Nous avons construit deux corpus en aspirant des textes de la rubrique santé
 de <code class="docutils literal notranslate"><span class="pre">le</span> <span class="pre">monde</span></code>(https://www.lemonde.fr/sante/) et <code class="docutils literal notranslate"><span class="pre">doctissimo</span></code>(https://forum.doctissimo.fr/sante/). La documentation de ce
 processus se trouve <span class="xref myst">ici</span>.</p>
 <p>100 articles journalistiques et 100 posts de forum ont été utilisés comme corpus de base.</p>
-</div>
-<div class="section" id="analyses-textuelles-exploratoires">
+</section>
+<section id="analyses-textuelles-exploratoires">
 <h2>Analyses textuelles exploratoires<a class="headerlink" href="#analyses-textuelles-exploratoires" title="Permalink to this headline">¶</a></h2>
 <p>Pour confirmer le thème de notre corpus nous avons scrapé deux autres corpus ayant comme thème <code class="docutils literal notranslate"><span class="pre">sport</span></code> et <code class="docutils literal notranslate"><span class="pre">économie</span></code>。</p>
 <p>Après avoir normalisé les textes voici les 10 mots les plus courants du corpus santé.</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <img alt="../_images/sante.png" src="../_images/sante.png"/>
-<p class="caption"><span class="caption-text">Graphe des 10 mots les plus fréquents du corpus de santé</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Graphe des 10 mots les plus fréquents du corpus de santé</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>Par contraintes d’espace nous n’allons pas afficher le même type de graphes pour le corpus de forum. Notez simplement
 que les 3 mots les plus courants sont « médecin », « dos » et « lombago », ce qui tend à confirmer la validité de ce
 corpus aussi.</p>
@@ -238,14 +241,16 @@ plus il y a de mots à proximité de la ligne, plus les deux tableaux contiennen
 <p>Le nombre considérable de mots de fréquence similaire entre le corpus santé séparé en deux montre encore une fois la
 validité de l’hypothèse selon laquelle les articles de différents thèmes sont caractérisés par les mots non-vides les
 plus fréquents.</p>
-<div class="figure align-center" id="id2">
+<figure class="align-center" id="id2">
 <img alt="../_images/correlation.png" src="../_images/correlation.png"/>
-<p class="caption"><span class="caption-text">Graphe de corrélation pour 3 corpus de différents genres</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="echantillonnage-des-corpus-et-standardisation-des-etiquettes-d-annotation">
+<figcaption>
+<p><span class="caption-text">Graphe de corrélation pour 3 corpus de différents genres</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="echantillonnage-des-corpus-et-standardisation-des-etiquettes-d-annotation">
 <h2>Échantillonnage des corpus et standardisation des étiquettes d’annotation<a class="headerlink" href="#echantillonnage-des-corpus-et-standardisation-des-etiquettes-d-annotation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="strategie-dechantillonnage-des-deux-corpus">
+<section id="strategie-dechantillonnage-des-deux-corpus">
 <h3>Stratégie d’échantillonnage des deux corpus<a class="headerlink" href="#strategie-dechantillonnage-des-deux-corpus" title="Permalink to this headline">¶</a></h3>
 <p>Vu la quantité de textes et le manque de personnel il nous a paru impossible d’annoter tous les deux corpus. Il n’est
 pas pour autant préférable d’annoter uniquement quelques articles ou quelques posts pour faire l’évaluation car
@@ -257,17 +262,19 @@ L’échantillonnage a été effectué avec le même principe pour le corpus de 
 <p>Nous avons d’abord calculé la distribution des longueurs de mots de l’ensemble des phrases du corpus de presse. Les 4
 quartiles de la distribution sont 16, 25, 36 et 115, à savoir que ¼ de phrases ont une longueur &lt;= 16 et ainsi de suite.
 La figure suivante illustre cette distribution :</p>
-<div class="figure align-center" id="id3">
+<figure class="align-center" id="id3">
 <img alt="../_images/distribution.png" src="../_images/distribution.png"/>
-<p class="caption"><span class="caption-text">Distribution de longueurs de phrases du corpus de presse</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Distribution de longueurs de phrases du corpus de presse</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>Pour que ces quatre catégories de phrases soient également représentées, nous avons généré 60 nombres aléatoires par
 catégorie pour extraire aléatoirement 60 phrases par catégorie.</p>
 <p>À la fin de cette phase nous avons pu recenser 6798 mots pour le corpus de presse et 6094 pour le corpus de forum. Ces
 deux échantillons constituent une bonne base pour garantir la comparabilité concernant l’annotation de ces deux types de
 corpus.</p>
-</div>
-<div class="section" id="standardisation-des-etiquettes">
+</section>
+<section id="standardisation-des-etiquettes">
 <h3>Standardisation des étiquettes<a class="headerlink" href="#standardisation-des-etiquettes" title="Permalink to this headline">¶</a></h3>
 <p>Si les deux taggers Spacy et StanfordNLP ont recours aux étiquettes de Universal Dependencies (
 UD, <a class="reference external" href="https://universaldependencies.org/u/pos/all.html#al-u-pos/NUM">Nivre et al., 2016</a>), Treetagger utilise des
@@ -280,17 +287,19 @@ français et de l’autre côté, l’étiquette « SYM » en UD n’a pas d’�
 <p>Treetagger aussi propose une étiquette « ABR » (abréviation) qui est difficilement définissable, nous l’avons assimilé à
 la catégorie « PROPN » (nom propre) en UD.</p>
 <p>Le tableau suivant détaille notre choix pour convertir au maximum les étiquettes de Treetagger en UD.</p>
-<div class="figure align-center">
+<figure class="align-center">
 <img alt="../_images/e606f6f0.png" src="../_images/e606f6f0.png"/>
-</div>
-<div class="figure align-center" id="id4">
+</figure>
+<figure class="align-center" id="id4">
 <img alt="../_images/8dba10bb.png" src="../_images/8dba10bb.png"/>
-<p class="caption"><span class="caption-text">Conversion des tags de TreeTagger en tags d’UD</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Conversion des tags de TreeTagger en tags d’UD</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>Une dernière question porte sur la lemmatisation. Treetagger parfois attribue une sous-étiquette @card@ à des chiffres.
 Nous avons transformé systématiquement ce lemme en token original pour garantir la fiabilité des mesures ultérieures.</p>
-</div>
-<div class="section" id="quelques-problemes-mineurs">
+</section>
+<section id="quelques-problemes-mineurs">
 <h3>Quelques problèmes mineurs<a class="headerlink" href="#quelques-problemes-mineurs" title="Permalink to this headline">¶</a></h3>
 <p>Il nous a paru utile de préciser ici quelques problèmes rencontrés durant la standardisation d’étiquettes pour permettre
 une meilleure reproductibilité de codes :</p>
@@ -305,28 +314,32 @@ de les faire annoter automatiquement.</p></li>
 <li><p>Les espaces insécables peuvent aussi causer des problèmes d’annotation. Nous les avons remplacés tous par des espaces
 normaux.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="evaluation-des-taggers">
+</section>
+</section>
+<section id="evaluation-des-taggers">
 <h2>Évaluation des taggers<a class="headerlink" href="#evaluation-des-taggers" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="presentation-generale-des-taggers">
+<section id="presentation-generale-des-taggers">
 <h3>Présentation générale des taggers<a class="headerlink" href="#presentation-generale-des-taggers" title="Permalink to this headline">¶</a></h3>
 <p>Les taggers morphosyntaxiques sont nombreux sur le marché, ci-dessous une liste de quelques taggers pour le français
 utilisés dans la littérature :</p>
-<div class="figure align-center" id="id5">
+<figure class="align-center" id="id5">
 <img alt="../_images/266bcab0.png" src="../_images/266bcab0.png"/>
-<p class="caption"><span class="caption-text">Liste non exhaustive de différents taggers disponibles pour le français (https://github.com/clement-plancq/outils-corpus)</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Liste non exhaustive de différents taggers disponibles pour le français (https://github.com/clement-plancq/outils-corpus)</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>Le principe des taggers peut être fort simple. Un algorithme simpliste qui catégorise les mots connus dans le tag le
 plus courant et les mots inconnus dans les noms propres peut atteindre une précision globale de 90% sur des données en
 anglais (Charniak, 1997).</p>
 <p>Cependant des difficultés considérables existent pour atteindre une précision plus élevée. Entre les principales
 difficultés nous pouvons citer le fait curieux que la plupart des types formant le vocabulaire sont non ambigus qui ne
 peuvent porter qu’une catégorie morphosyntaxique. Or, ces derniers sont les plus fréquents dans les textes.</p>
-<div class="figure align-center" id="id6">
+<figure class="align-center" id="id6">
 <img alt="../_images/e90103e4.png" src="../_images/e90103e4.png"/>
-<p class="caption"><span class="caption-text">Répartition des mots ambigus et non-ambigus dans deux corpus d’anglais (Jurafsky, 2000)</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Répartition des mots ambigus et non-ambigus dans deux corpus d’anglais (Jurafsky, 2000)</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>Différents types d’étiqueteurs existent.</p>
 <p>Des étiqueteurs à bases de règles qui utilisent lexique (forme fléchie, POS, morpho, lemme) et de grammaires locales (
 ex : Unitex). Ce type d’étiqueteurs ont notamment l’avantage d’avoir des règles explicites et modifiables aisément et
@@ -338,8 +351,8 @@ Markov sont au cœur de la plupart des algorithmes utilisés et de nombreuses va
 SVM, CRF, etc.)</p>
 <p>Cependant les taggers basés sur l’apprentissage statistique nécessitent un corpus de référence annoté. Ce type de
 protocoles nécessitent un grand investissement de temps. De plus, il n’est pas toujours aisé d’analyser les erreurs.</p>
-</div>
-<div class="section" id="spacy-treetagger-et-stanfordnlp">
+</section>
+<section id="spacy-treetagger-et-stanfordnlp">
 <h3>Spacy, TreeTagger et StanfordNLP<a class="headerlink" href="#spacy-treetagger-et-stanfordnlp" title="Permalink to this headline">¶</a></h3>
 <p>Les taggers morphosyntaxiques utilisés ici sont Spacy, TreeTagger et StanfordNLP (désormais appelé Stanza). Il est à
 noter que le nom du dernier tagger peut prêter à confusion car il existe aussi un framework appelé Stanford CoreNLP (
@@ -365,19 +378,23 @@ fonctions poussées comme l’analyse sentimentale. Cependant le modèle actuel 
 <li><p>Stanford CoreNLP est un framework écrit en Java applicable à 6 langues. C’est un framework puissant qui propose des
 fonctions poussées comme l’analyse sentimentale. Cependant le modèle actuel pour le français n’a pas de lemmatisateur.</p></li>
 </ul>
-<div class="figure align-center" id="id7">
+<figure class="align-center" id="id7">
 <img alt="../_images/597aa052.png" src="../_images/597aa052.png"/>
-<p class="caption"><span class="caption-text">Fonctionnalités disponibles de Stanford CoreNLP pour 6 langues</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Fonctionnalités disponibles de Stanford CoreNLP pour 6 langues</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>Enfin StanfordNLP est un framework de Python basé sur PyTorch et applicable à 66 langues à l’heure actuelle. C’est un
 framework puissant et également un grand consommateur de capacités de calcul car il est basé sur des réseaux de
 neurones.</p>
-<div class="figure align-center" id="id8">
+<figure class="align-center" id="id8">
 <img alt="../_images/f9aca8e1.png" src="../_images/f9aca8e1.png"/>
-<p class="caption"><span class="caption-text">Caractéristiques techniques de StanfordNLP par rapport à d’autres frameworks en TAL (Qi et al., 2020)</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="evaluation-sur-le-plan-de-la-vitesse-de-traitement">
+<figcaption>
+<p><span class="caption-text">Caractéristiques techniques de StanfordNLP par rapport à d’autres frameworks en TAL (Qi et al., 2020)</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="evaluation-sur-le-plan-de-la-vitesse-de-traitement">
 <h3>Évaluation sur le plan de la vitesse de traitement<a class="headerlink" href="#evaluation-sur-le-plan-de-la-vitesse-de-traitement" title="Permalink to this headline">¶</a></h3>
 <p>Pour cette tâche nous avons construit un gros corpus de 568 000 mots en dupliquant simplement un corpus de base. Les
 commandes utilisées pour évaluer les 4 taggers sont :</p>
@@ -450,10 +467,12 @@ annotation morphosyntaxique. Le tableau suivant résume les résultats du test.<
 </table></div>
 <p>Vitesse d’annotation de 4 taggers sur un corpus de 568000 mots</p>
 <p>Pour mieux apprécier la validité de notre test, voici les caractéristiques techniques de notre ordinateur :</p>
-<div class="figure align-center" id="id9">
+<figure class="align-center" id="id9">
 <img alt="../_images/d18df612.png" src="../_images/d18df612.png"/>
-<p class="caption"><span class="caption-text">Configuration de l’ordinateur utilisé pour évaluer la vitesse d’annotation de 4 taggers</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Configuration de l’ordinateur utilisé pour évaluer la vitesse d’annotation de 4 taggers</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>Nous voyons bien que Stanford NLP est le plus lent et Spacy le plus rapide. Cependant quelques remarques préliminaires
 méritent d’être avancées ici. Tout d’abord Spacy est un modèle mettant l’accent sur la vitesse, comme fait remarquer
 avec pertinence l’auteur de Stanford NLP dans son article (Qi et al., 2020). Nous verrons par la suite qu’au niveau de
@@ -468,8 +487,8 @@ plus il faut rappeler qu’ici nous avons utilisé le préfixe java -Xmx6g, à s
 programme pour la tâche en question. En effet nous avons fait plusieurs tests et il s’est avéré que 6g de mémoires est
 un minimum pour que le programme puisse aboutir. Compte tenu de ces facteurs nous avons décidé d’examiner uniquement
 StanfordNLP pour la suite de l’évaluation.</p>
-</div>
-<div class="section" id="evaluation-sur-le-plan-de-la-precision">
+</section>
+<section id="evaluation-sur-le-plan-de-la-precision">
 <h3>Évaluation sur le plan de la précision<a class="headerlink" href="#evaluation-sur-le-plan-de-la-precision" title="Permalink to this headline">¶</a></h3>
 <p>Dans les sous-sections qui suivent nous présentons notamment les mesures de précision, de rappel et le F-mesure tout en
 sachant que dans des tâches d’annotation on met en avant la précision.</p>
@@ -649,9 +668,9 @@ dans cette sous-section.</p>
 </tbody>
 </table></div>
 <p>Tableau des mesures de précision de TreeTagger sur le corpus de forum</p>
-</div>
-</div>
-<div class="section" id="discussions-generales">
+</section>
+</section>
+<section id="discussions-generales">
 <h2>Discussions générales<a class="headerlink" href="#discussions-generales" title="Permalink to this headline">¶</a></h2>
 <p>Nous commençons par quelques remarques générales valables pour les deux types de corpus :</p>
 <p>Sur les plans de la mesure de précision, de la mesure de rappel et de F-mesure :</p>
@@ -767,15 +786,15 @@ pas encore satisfaisante.</p></li>
 pallier manque d’outils adéquats en vue de la transcription des corpus de forum. Comme nous avons vu dans le rapport,
 ce type de corpus recèle des particularités comparables ni au français formel, ni au français oral.</p></li>
 </ol>
-</div>
-<div class="section" id="notes-supplementaires">
+</section>
+<section id="notes-supplementaires">
 <h2>Notes supplémentaires<a class="headerlink" href="#notes-supplementaires" title="Permalink to this headline">¶</a></h2>
 <p>Les difficultés des parseurs actuels proviennent principalement du fait que la plupart des étiqueteurs ont été entraînés
 sur des données utilisant un français relativement soutenu. A titre d’exemples, French Treebank (Abeillé et al., 2003) a
 été construit sur un corpus tiré de « le monde ». Sequoia Treebank quant à lui a été construit sur un mélange de textes
 journalistiques et de textes de Wikipedia (Candito &amp; Seddah, 2012).</p>
-</div>
-<div class="section" id="references">
+</section>
+<section id="references">
 <h2>Références<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>Abeillé, A., Clément, L., &amp; Toussenel, F. (2003). Building a treebank for French. In Treebanks (pp. 165–187). Springer.</p>
 <p>Benzitoun, C., Fort, K., &amp; Sagot, B. (2012). TCOF-POS: Un corpus libre de français parlé annoté en morphosyntaxe.</p>
@@ -801,8 +820,8 @@ International Conference on Language Resources and Evaluation (LREC’16), 1659�
 <p>Qi, P., Zhang, Y., Zhang, Y., Bolton, J., &amp; Manning, C. D. (2020). Stanza: A Python Natural Language Processing Toolkit
 for Many Human Languages. ArXiv Preprint ArXiv:2003.07082.</p>
 <p>Schmid, H. (1994). TreeTagger-a language independent part-of-speech tagger.</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

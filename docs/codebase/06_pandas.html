@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Mathematics in Machine Learning and NLP" href="../math/index.html" /><link rel="prev" title="Pytorch" href="05_pytorch.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Mathematics in Machine Learning and NLP" href="../math/index.html" /><link rel="prev" title="Pytorch" href="05_pytorch.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Pandas codebase - NLP in French</title>
@@ -182,74 +183,74 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="pandas-codebase">
+        <section id="pandas-codebase">
 <h1>Pandas codebase<a class="headerlink" href="#pandas-codebase" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="global-settings">
+<section id="global-settings">
 <h2>global settings<a class="headerlink" href="#global-settings" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_colwidth'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="c1"># see whole width dataframe</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="select-columns">
+</section>
+<section id="select-columns">
 <h2>select columns<a class="headerlink" href="#select-columns" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">]]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="create-dataframe">
+</section>
+<section id="create-dataframe">
 <h2>create dataframe<a class="headerlink" href="#create-dataframe" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'col1'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">'col2'</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]}</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="merge">
+</section>
+<section id="merge">
 <h2>merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">d3</span><span class="p">,</span><span class="n">d4</span><span class="p">,</span><span class="n">d5</span><span class="p">,</span><span class="n">d6</span><span class="p">]</span>
 <span class="n">frames</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="add-column">
+</section>
+<section id="add-column">
 <h2>add column<a class="headerlink" href="#add-column" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Age"</span><span class="p">,</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="del-column">
+</section>
+<section id="del-column">
 <h2>del column<a class="headerlink" href="#del-column" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">df</span><span class="p">[</span><span class="s1">'column_name'</span><span class="p">]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># df.columns is zero-based pd.Index</span>
 <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'column_name'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="to-csv">
+</section>
+<section id="to-csv">
 <h2>to csv<a class="headerlink" href="#to-csv" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">frames</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"french/french_results_bert.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="filter-row">
+</section>
+<section id="filter-row">
 <h2>filter row<a class="headerlink" href="#filter-row" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df_bert</span><span class="p">[(</span><span class="n">df_bert</span><span class="p">[</span><span class="s2">"response1"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df_bert</span><span class="p">[</span><span class="s2">"response2"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-column-names-to-uppercase">
+</section>
+<section id="convert-column-names-to-uppercase">
 <h2>convert column NAMES to uppercase<a class="headerlink" href="#convert-column-names-to-uppercase" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="first-row">
+</section>
+<section id="first-row">
 <h2>first row<a class="headerlink" href="#first-row" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df_bert</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

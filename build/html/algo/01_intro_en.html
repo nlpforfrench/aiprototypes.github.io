@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Algorithme ou plusieurs façons de résoudre un problème 🇫🇷" href="01_intro_fr.html" /><link rel="prev" title="Algorithms and data structures by examples in Python" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Algorithme ou plusieurs façons de résoudre un problème 🇫🇷" href="01_intro_fr.html" /><link rel="prev" title="Algorithms and data structures by examples in Python" href="index.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Algorithm or many ways of solving a problem 🇬🇧 - NLP in French</title>
@@ -430,12 +431,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Algorithm-or-many-ways-of-solving-a-problem-🇬🇧">
+<section id="Algorithm-or-many-ways-of-solving-a-problem-🇬🇧">
 <h1>Algorithm or many ways of solving a problem 🇬🇧<a class="headerlink" href="#Algorithm-or-many-ways-of-solving-a-problem-🇬🇧" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
 <p>See <a class="reference internal" href="index.html"><span class="doc">my manga</span></a> to have an idea on why I wrote these tutorials.</p>
 <p>In a similar spirit as the math series, this series of tutorial is an introduction to algorithms and data structures. It targets students in the humanities and social sciences but not only because I think that learning by examples can benefit all those who like coding and top-down learning.</p>
-<div class="section" id="A-simplistic-example">
+<section id="A-simplistic-example">
 <h2>A simplistic example<a class="headerlink" href="#A-simplistic-example" title="Permalink to this headline">¶</a></h2>
 <p>Let’s first consider a simple example for illustrative purpose.</p>
 <p>One day you need a function filtering all the even numbers smaller than <span class="math notranslate nohighlight">\(n\)</span>.</p>
@@ -492,11 +493,11 @@ CPU times: user 27 µs, sys: 1 µs, total: 28 µs
 Wall time: 30 µs
 </pre></div></div>
 </div>
-<div class="section" id="What-time-is-it">
+<section id="What-time-is-it">
 <h3>What time is it<a class="headerlink" href="#What-time-is-it" title="Permalink to this headline">¶</a></h3>
 <p>In the output above, you should mainly focus on the wall time. Roughly speaking, <code class="docutils literal notranslate"><span class="pre">wall</span> <span class="pre">time</span></code>, also called <code class="docutils literal notranslate"><span class="pre">real</span></code>, represents actual elapsed time, while <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">sys</span></code> values represent CPU execution time. See <a class="reference external" href="https://stackoverflow.com/questions/3432085/how-to-understand-the-output-of-time-command">here</a> for more explanations.</p>
-</div>
-<div class="section" id="More-loops-please">
+</section>
+<section id="More-loops-please">
 <h3>More loops please<a class="headerlink" href="#More-loops-please" title="Permalink to this headline">¶</a></h3>
 <p>As you see the <code class="docutils literal notranslate"><span class="pre">print_evens_fast</span></code> is slightly fast than the second one. The difference, however, seems trivial. If you have a critical mind, you will object, rightly so, that a single trial is quite subject to randomness.</p>
 <p>A practical trick would be using the <code class="docutils literal notranslate"><span class="pre">timeit%%</span></code> magic command in Ipython. In this case I’ll use <code class="docutils literal notranslate"><span class="pre">r1</span> <span class="pre">n100</span></code> meaning 1 run of 100 loops.</p>
@@ -553,9 +554,9 @@ Wall time: 30 µs
 <p>The same conclusion still stands.</p>
 <p>One major drawback of the present example is its artificial flavour and the trivial benefits of choosing the slightly faster algorithm.</p>
 <p>You might wonder: are such <code class="docutils literal notranslate"><span class="pre">tricks</span></code> really useful/necessary in real-life scenarios?</p>
-</div>
-</div>
-<div class="section" id="A-real-life-example">
+</section>
+</section>
+<section id="A-real-life-example">
 <h2>A real-life example<a class="headerlink" href="#A-real-life-example" title="Permalink to this headline">¶</a></h2>
 <p>Let’s take a look at another example, this time much more practical.</p>
 <p>Websites often use ID to manage customers. Every day some IDs are used and some are freed. When some client tries to acquire a new ID, we want to always allocate it the smallest available one.</p>
@@ -636,14 +637,14 @@ Wall time: 4.51 ms
 </pre></div></div>
 </div>
 <p>As you can see the min_free version spits the same ID, however it takes only 4.51 ms. Note that, given the huge gap, we can save ourselves from running multiple loops.</p>
-</div>
-<div class="section" id="Quantifying-speed-and-space">
+</section>
+<section id="Quantifying-speed-and-space">
 <h2>Quantifying speed and space<a class="headerlink" href="#Quantifying-speed-and-space" title="Permalink to this headline">¶</a></h2>
 <p>There remains a minor issue. Isn’t it tedious to run the program each time or even multiple times to have an idea of the speed ? Besides, the performance can differ quite significantly according to one’s computer configuration.</p>
 <p>Luckily people figured out an easier and more objective way of quantifying time called Big O notation (actually it quantifies the time complexity of an algorithm).</p>
 <p>For this particular case the time complexity of the brute force one is <span class="math notranslate nohighlight">\(O(n^2)\)</span> and the other one <span class="math notranslate nohighlight">\(O(n)\)</span>. However the faster one uses more memory (consider the list <code class="docutils literal notranslate"><span class="pre">a</span></code> set aside as a bookkeeper), we say that the space complexity is <span class="math notranslate nohighlight">\(O(n)\)</span>.</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Be a responsible programmer when doing Object-Oriented Programming 🇬🇧" href="05_oop_web_scraping_cooper_en.html" /><link rel="prev" title="Connect to remote jupyter notebook in Pycharm" href="03_jupyter_remote_pycharm.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Be a responsible programmer when doing Object-Oriented Programming 🇬🇧" href="05_oop_web_scraping_cooper_en.html" /><link rel="prev" title="Connect to remote jupyter notebook in Pycharm" href="03_jupyter_remote_pycharm.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧 - NLP in French</title>
@@ -430,12 +431,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧">
+<section id="Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧">
 <h1>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧<a class="headerlink" href="#Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="What-you-are-going-to-learn">
+<section id="What-you-are-going-to-learn">
 <h2>What you are going to learn<a class="headerlink" href="#What-you-are-going-to-learn" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">requests</span></code> is a very popular package in Python because it provides many convenient methods to handle requests, parsing and exception handling. One could also use the official <code class="docutils literal notranslate"><span class="pre">urllib</span></code> package, however for the same tasks it is overall much easier to use requests due to its code design. You can clearly see the philosophy of the creator through the website’s motto:</p>
-<p><img alt="image1" src="../_images/2021-04-30-20-25-11.png"/></p>
+<img alt="../_images/2021-04-30-20-25-11.png" src="../_images/2021-04-30-20-25-11.png"/>
 <p>The objective of this tutorial is to introduce you to objected-oriented programming (OOP) by imitating a working example in <code class="docutils literal notranslate"><span class="pre">requests</span></code>. After having a grasp of the very basic principles of OOP, we would move on to a more elaborate example to make you better seize the benefits of OOP.</p>
 <p>At the end you will be able to build a minimal web scraping framework allowing to scrape articles of the famous French newspaper <code class="docutils literal notranslate"><span class="pre">Le</span> <span class="pre">Monde</span></code> and the American newspaper <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">York</span> <span class="pre">Times</span></code>.</p>
 <p>Before starting this tutorial, be sure to have installed <code class="docutils literal notranslate"><span class="pre">requests</span></code> and <code class="docutils literal notranslate"><span class="pre">beautiful</span> <span class="pre">soup</span></code> with:</p>
@@ -443,8 +444,8 @@ div.rendered_html tbody tr:hover {
 pip install beautifulsoup4
 </pre></div>
 </div>
-</div>
-<div class="section" id="A-working-example-in-requests">
+</section>
+<section id="A-working-example-in-requests">
 <h2>A working example in requests<a class="headerlink" href="#A-working-example-in-requests" title="Permalink to this headline">¶</a></h2>
 <p>Here is a quick starting example using <code class="docutils literal notranslate"><span class="pre">requests</span></code>, as you can see from the output.</p>
 <ol class="arabic simple">
@@ -517,8 +518,8 @@ The cookies property returns your cookies.
 &lt;RequestsCookieJar[&lt;Cookie CONSENT=PENDING+267 for .google.com/&gt;]&gt;
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Class,-constructor,-method-and-property">
+</section>
+<section id="Class,-constructor,-method-and-property">
 <h2>Class, constructor, method and property<a class="headerlink" href="#Class,-constructor,-method-and-property" title="Permalink to this headline">¶</a></h2>
 <p>When we talk about objected-oriented programming (OOP), no matter which language you are using (Some languages like Java and C++ are more natively class-based), the four most fundamental concepts are <code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">constructor</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code> and <code class="docutils literal notranslate"><span class="pre">property</span></code>.</p>
 <p>Let’s construct our first class in Python. A class is a concept, a perception. Let’s say we want to define what is a human being (Person).</p>
@@ -574,8 +575,8 @@ Xiaoou
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Imitate-the-requests-framework">
+</section>
+<section id="Imitate-the-requests-framework">
 <h2>Imitate the requests framework<a class="headerlink" href="#Imitate-the-requests-framework" title="Permalink to this headline">¶</a></h2>
 <p>When you run <code class="docutils literal notranslate"><span class="pre">requests.get("https://www.google.com/")</span></code>, you have an object of class <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">'requests.models.Response'&gt;</span></code>. This object has two properties: <code class="docutils literal notranslate"><span class="pre">status_code</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code>. Let’s replicate this schema with an example of article scraping.</p>
 <p>So basically we are trying to have an object returned after calling a function/method.</p>
@@ -756,7 +757,7 @@ Would you like to live forever? Some billionaires, already invincible in every o
 </pre></div>
 </div>
 </div>
-<div class="section" id="Le-monde-scraper">
+<section id="Le-monde-scraper">
 <h3>Le monde scraper<a class="headerlink" href="#Le-monde-scraper" title="Permalink to this headline">¶</a></h3>
 <p>Now let’s generate a scraper for articles of the newspaper <code class="docutils literal notranslate"><span class="pre">Le</span> <span class="pre">Monde</span></code>.</p>
 <div class="nbinput docutils container">
@@ -799,8 +800,8 @@ First 100 characters
 « Le 22 janvier 2012 décède Paul Armand, ce qui entraîne la mort de Cartes postales et collections (
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="New-York-Times-scraper">
+</section>
+<section id="New-York-Times-scraper">
 <h3>New York Times scraper<a class="headerlink" href="#New-York-Times-scraper" title="Permalink to this headline">¶</a></h3>
 <p>Now a scraper for articles of New York Times.</p>
 <div class="nbinput docutils container">
@@ -843,8 +844,8 @@ First 100 characters
 WASHINGTON — The band of razor wire-topped fencing around the Capitol had recently come down. The he
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Unknown-journal-name">
+</section>
+<section id="Unknown-journal-name">
 <h3>Unknown journal name<a class="headerlink" href="#Unknown-journal-name" title="Permalink to this headline">¶</a></h3>
 <p>When the end user enters an unknown journal, it will spit out the pre-defined message.</p>
 <div class="nbinput docutils container">
@@ -865,9 +866,9 @@ Our services doesn't scrape this website for the moment.
 Please contact us to build a scraper for this journal :D
 </pre></div></div>
 </div>
-</div>
-</div>
-<div class="section" id="Wrap-up">
+</section>
+</section>
+<section id="Wrap-up">
 <h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Permalink to this headline">¶</a></h2>
 <p>Bravo for having reading so far, hopefully you have:</p>
 <ol class="arabic simple">
@@ -880,8 +881,8 @@ Please contact us to build a scraper for this journal :D
 <p><em>Web Scraping with Python: Collecting More Data from the Modern Web</em></p>
 <p>If you want to dive into object-oriented programming, be sure to check the book of Mark Lutz:</p>
 <p><em>Programming Python: Powerful Object-Oriented Programming</em></p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

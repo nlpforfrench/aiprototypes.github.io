@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Algorithms and data structures by examples in Python" href="../algo/index.html" /><link rel="prev" title="Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧" href="04_oop_web_scraping_en.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Algorithms and data structures by examples in Python" href="../algo/index.html" /><link rel="prev" title="Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧" href="04_oop_web_scraping_en.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Be a responsible programmer when doing Object-Oriented Programming 🇬🇧 - NLP in French</title>
@@ -430,9 +431,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Be-a-responsible-programmer-when-doing-Object-Oriented-Programming-🇬🇧">
+<section id="Be-a-responsible-programmer-when-doing-Object-Oriented-Programming-🇬🇧">
 <h1>Be a responsible programmer when doing Object-Oriented Programming 🇬🇧<a class="headerlink" href="#Be-a-responsible-programmer-when-doing-Object-Oriented-Programming-🇬🇧" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="What-you-will-learn">
+<section id="What-you-will-learn">
 <h2>What you will learn<a class="headerlink" href="#What-you-will-learn" title="Permalink to this headline">¶</a></h2>
 <p>After a first tutorial on Object-Oriented Programming in Python, I feel like it’s necessary to write more on OOP because when you read source code of many popular frameworks (like <code class="docutils literal notranslate"><span class="pre">requests</span></code>), inevitably you will come across some more advanced concepts relevant to collaborative programming.</p>
 <p>No, I’m not talking about stuff like <code class="docutils literal notranslate"><span class="pre">inheritance</span></code> and <code class="docutils literal notranslate"><span class="pre">polymorphism</span></code>. These convoluted terms are actually the easiest ones to understand and I’m sure that you’ll find tons of tutorials on these subjects.</p>
@@ -447,8 +448,8 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>There are the minimal vocabulary that you should master before participating in collaborative projects.</p>
 <p>I will implement these concepts by simplifying the web scraping framework example built in the previous tutorial. Check <a class="reference internal" href="04_oop_web_scraping_en.html"><span class="doc">here</span></a> if interested.</p>
-</div>
-<div class="section" id="Class-and-instance-variable">
+</section>
+<section id="Class-and-instance-variable">
 <h2>Class and instance variable<a class="headerlink" href="#Class-and-instance-variable" title="Permalink to this headline">¶</a></h2>
 <p>The scraper class that I built last time is a scraper capable of adjusting its behaviour according the newspaper.</p>
 <p>Let’s say that this scraper is created by a company which offers all sorts of service related to web. The CEO wants every object instantiated by this class to be endowed with a property called <code class="docutils literal notranslate"><span class="pre">company</span></code> so that the clients know where the scraper comes from.</p>
@@ -494,8 +495,8 @@ Web Crawling®, nlpinfrench.fr
 Web Crawling®, nlpinfrench.fr
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Be-visible">
+</section>
+<section id="Be-visible">
 <h2>Be visible<a class="headerlink" href="#Be-visible" title="Permalink to this headline">¶</a></h2>
 <p>Now imagine that the CEO is not satisfied with this branding strategy and he wishes something even more visible so that one doesn’t even need to know the <code class="docutils literal notranslate"><span class="pre">company</span></code> property. How can you achieve it?</p>
 <p>Let’s observe the following code.</p>
@@ -581,8 +582,8 @@ Web Crawling®, nlpinfrench.fr
 Web Crawling®, nlpinfrench.fr
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Be-control-freak">
+</section>
+<section id="Be-control-freak">
 <h2>Be control freak<a class="headerlink" href="#Be-control-freak" title="Permalink to this headline">¶</a></h2>
 <p>Now that your CEO is happy with his self-branding strategy, you show your code to the senior software engineer who objects, rightly so, that the company name can be changed by anyone!</p>
 <p>Yes, one can easily changes the class variable to, I don’t know, tell others that the spirit of prank is still alive.</p>
@@ -708,22 +709,22 @@ nlpinfrench.fr
 Hello! April fool x3 :DDDD
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="We’re-all-consenting-adults-here">
+</section>
+<section id="We’re-all-consenting-adults-here">
 <h2>We’re all consenting adults here<a class="headerlink" href="#We’re-all-consenting-adults-here" title="Permalink to this headline">¶</a></h2>
 <p>So what’s the point of <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">mangling</span></code>?</p>
 <p>The objective is really informative rather than restrictive. In Python programming, there is a commonly used phrase that says “we’re all consenting adults here”. We are all expected to behave like an adult.</p>
 <p>In practice you are not to expected to fully embrace these naming rules as novice. Just keep in mind that you should think twice before modifying values of a mangled variable if you are in an open-source project.</p>
-</div>
-<div class="section" id="Time-to-become-a-senior-engineer">
+</section>
+<section id="Time-to-become-a-senior-engineer">
 <h2>Time to become a senior engineer<a class="headerlink" href="#Time-to-become-a-senior-engineer" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="Wrap-up">
+</section>
+<section id="Wrap-up">
 <h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Permalink to this headline">¶</a></h2>
 <p>As always, I recommend the book by Mark Lutz if you want to dive deep into OOP :</p>
 <p><em>Programming Python: Powerful Object-Oriented Programming</em></p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

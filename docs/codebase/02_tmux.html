@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="My python codebase (including packages/libraries)" href="03_python.html" /><link rel="prev" title="My codebase for bash/shell script (macOS)" href="01_bash.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="My python codebase (including packages/libraries)" href="03_python.html" /><link rel="prev" title="My codebase for bash/shell script (macOS)" href="01_bash.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Tumux-related code - NLP in French</title>
@@ -182,22 +183,22 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="tumux-related-code">
+        <section id="tumux-related-code">
 <h1>Tumux-related code<a class="headerlink" href="#tumux-related-code" title="Permalink to this headline">¶</a></h1>
 <p>If you check <a class="reference internal" href="01_bash.html"><span class="doc std std-doc">my bash codebase</span></a>, you’ll see that it’s possible to run a task/process in background with <code class="docutils literal notranslate"><span class="pre">nohup</span></code> and in the comment i said <code class="docutils literal notranslate"><span class="pre">or</span> <span class="pre">use</span> <span class="pre">tumux</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nohup commande <span class="c1"># nonstop after disconnection/or use tumux</span>
 </pre></div>
 </div>
-<div class="section" id="so-why-using-tumux">
+<section id="so-why-using-tumux">
 <h2>So why using tumux?<a class="headerlink" href="#so-why-using-tumux" title="Permalink to this headline">¶</a></h2>
 <p>Well put simply, it makes your life easier.</p>
-</div>
-<div class="section" id="detaching">
+</section>
+<section id="detaching">
 <h2>Detaching<a class="headerlink" href="#detaching" title="Permalink to this headline">¶</a></h2>
 <p>Tmux keeps all the windows and panes in a session. You can exit a session at any point. This is called “detaching”. The wonderful part is that Tmux will keep this session alive until you kill the tmux server (e.g. when you reboot) so that at any later point in time you can pick that session up exactly from where you left it by simply “attaching” to that session.</p>
 <p>Those who have done web development/remote scripting/ssh will see what I mean.</p>
-</div>
-<div class="section" id="my-code-base">
+</section>
+<section id="my-code-base">
 <h2>My Code base<a class="headerlink" href="#my-code-base" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><p>c = ctrl</p>
@@ -215,12 +216,12 @@ tmux rename-session -t <span class="m">0</span> database <span class="c1"># rena
 C-b d <span class="c1"># detach a session</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="reference">
+</section>
+<section id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <p>https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

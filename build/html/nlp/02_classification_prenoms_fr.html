@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷" href="03_classification_lemonde_fr.html" /><link rel="prev" title="Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷" href="01_compara_anno_fr.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷" href="03_classification_lemonde_fr.html" /><link rel="prev" title="Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷" href="01_compara_anno_fr.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Classification de prénoms en genre (masculin/féminin) 🇫🇷 - NLP in French</title>
@@ -430,12 +431,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷">
+<section id="Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷">
 <h1>Classification de prénoms en genre (masculin/féminin) 🇫🇷<a class="headerlink" href="#Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
 <p>Cet exemple très simple issu du <a class="reference external" href="https://www.amazon.fr/Natural-Language-Processing-Python-Steven/dp/0596516495/ref=sr_1_11?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;dchild=1&amp;keywords=nltk&amp;qid=1616280931&amp;sr=8-11">livre</a> de Steven Bird vous donne une idée sur à quoi ressemble le boulot d’un ingénieur junior en Machine Learning.</p>
 <p>La tâche consiste à entraîner un classifieur bayésien pour prédire le genre d’un prénom.</p>
-<div class="section" id="Sélection-de-features">
+<section id="Sélection-de-features">
 <h2>Sélection de features<a class="headerlink" href="#Sélection-de-features" title="Permalink to this headline">¶</a></h2>
 <p>On commence par prendre la dernière lettre d’un prénom comme feature et la stocker dans un dictionnaire.</p>
 <div class="nbinput docutils container">
@@ -474,8 +475,8 @@ La dernière lettre du prnom Shrek est
 {'last_letter': 'k'}
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Mise-en-forme-du-corpus">
+</section>
+<section id="Mise-en-forme-du-corpus">
 <h2>Mise en forme du corpus<a class="headerlink" href="#Mise-en-forme-du-corpus" title="Permalink to this headline">¶</a></h2>
 <p>Le corpus provient de <code class="docutils literal notranslate"><span class="pre">nltk</span></code>. Ici on crée une liste de tuples grâce à quelques méthodes intégrées dans <code class="docutils literal notranslate"><span class="pre">nltk.corpus</span></code>. Notez l’emploi de list comprehension ici pour rendre le code plus concis tout en gardant la lisibilité.</p>
 <div class="nbinput docutils container">
@@ -520,8 +521,8 @@ Un échantillon du corpus
  ('Hazel', 'female')]
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Création-des-corpus-train/test">
+</section>
+<section id="Création-des-corpus-train/test">
 <h2>Création des corpus train/test<a class="headerlink" href="#Création-des-corpus-train/test" title="Permalink to this headline">¶</a></h2>
 <p>Ici on applique à la fonction de la <code class="docutils literal notranslate"><span class="pre">section</span> <span class="pre">1</span></code> à tous les noms du corpus. Les 500 premiers samples sont mis à l’écart pour servir de test.</p>
 <div class="nbinput nblast docutils container">
@@ -546,8 +547,8 @@ Un échantillon du corpus
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Première-classification">
+</section>
+<section id="Première-classification">
 <h2>Première classification<a class="headerlink" href="#Première-classification" title="Permalink to this headline">¶</a></h2>
 <p>La précision est autour de 75.2%. On liste les features les plus utiles pour étudier quels sont les problèmes potentiels. Le likely ratio <code class="docutils literal notranslate"><span class="pre">male</span> <span class="pre">:</span> <span class="pre">female</span></code> signifie la probabilité exacte qu’un prénom particulier soit masculin/féminin en fonction de sa dernière lettre (donc feature).</p>
 <div class="nbinput docutils container">
@@ -579,12 +580,12 @@ Most Informative Features
              last_letter = 'v'              male : female =     10.5 : 1.0
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Ajout-de-features-et-problème-d’overfitting">
+</section>
+<section id="Ajout-de-features-et-problème-d’overfitting">
 <h2>Ajout de features et problème d’overfitting<a class="headerlink" href="#Ajout-de-features-et-problème-d’overfitting" title="Permalink to this headline">¶</a></h2>
 <p>Si vous ajoutez trop de features, le modèle risque d’être trop adapté à tes données et se généralise mal sur des données non vues. Cela s’appelle <code class="docutils literal notranslate"><span class="pre">overfitting</span></code> et survient souvent quand le corpus est petit, ce qui est le cas ici.</p>
-</div>
-<div class="section" id="Let’s-add-features">
+</section>
+<section id="Let’s-add-features">
 <h2>Let’s add features<a class="headerlink" href="#Let’s-add-features" title="Permalink to this headline">¶</a></h2>
 <p>Dans un premier temps, nous allons essayer d’ajouter plein de features.</p>
 <p>Examinons la fonction <code class="docutils literal notranslate"><span class="pre">gender_features2</span></code>. Les features sont :</p>
@@ -625,8 +626,8 @@ Most Informative Features
  ('has(h)', True)]
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="La-précision-augmente">
+</section>
+<section id="La-précision-augmente">
 <h2>La précision augmente<a class="headerlink" href="#La-précision-augmente" title="Permalink to this headline">¶</a></h2>
 <p>Avec ce nouveau featureset, la précision est montée de 75.2% à 77.4%.</p>
 <div class="nbinput docutils container">
@@ -651,8 +652,8 @@ Most Informative Features
 0.774
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Feature-engineering-via-l’analyse-des-erreurs">
+</section>
+<section id="Feature-engineering-via-l’analyse-des-erreurs">
 <h2>Feature engineering via l’analyse des erreurs<a class="headerlink" href="#Feature-engineering-via-l’analyse-des-erreurs" title="Permalink to this headline">¶</a></h2>
 <p>Ici nous expliquons le processus de feature engineering qui consiste à analyser les erreurs de la machine sur la base desquelles on filtre/supprime/créé des features.</p>
 <p>L’intelligence artificielle n’est finalement pas si artificielle, non ? (Bon j’avoue que c’est pas du deep learning, mais quand même)</p>
@@ -692,8 +693,8 @@ Most Informative Features
 0.76
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Premières-hypothèses-sur-les-erreurs">
+</section>
+<section id="Premières-hypothèses-sur-les-erreurs">
 <h2>Premières hypothèses sur les erreurs<a class="headerlink" href="#Premières-hypothèses-sur-les-erreurs" title="Permalink to this headline">¶</a></h2>
 <p>Analysons les erreurs affichées ci-dessous.</p>
 <p>Les pronoms terminés par <code class="docutils literal notranslate"><span class="pre">yn</span></code> tendent à être féminins, alors que ceux terminés par <code class="docutils literal notranslate"><span class="pre">n</span></code> tendent à être masculins. Du coup deux règles serait meilleures qu’une seule.</p>
@@ -961,8 +962,8 @@ correct=male     guess=female   name=Zechariah
 correct=male     guess=female   name=Zollie
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Intégration-des-nouveaux-features-dans-le-classifieur">
+</section>
+<section id="Intégration-des-nouveaux-features-dans-le-classifieur">
 <h2>Intégration des nouveaux features dans le classifieur<a class="headerlink" href="#Intégration-des-nouveaux-features-dans-le-classifieur" title="Permalink to this headline">¶</a></h2>
 <p>Il semble bénéfique d’ajuster nos features en incluant les deux dernières lettres.</p>
 <p>Et youpi ! La précision est montée de 76% à 78.1%. C’est pas mal non ?</p>
@@ -992,14 +993,14 @@ correct=male     guess=female   name=Zollie
 0.781
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Importance-de-nouveaux-splits-train/dev">
+</section>
+<section id="Importance-de-nouveaux-splits-train/dev">
 <h2>Importance de nouveaux splits train/dev<a class="headerlink" href="#Importance-de-nouveaux-splits-train/dev" title="Permalink to this headline">¶</a></h2>
 <p>Nous pouvons donc réitérer ce processus d’analyse d’erreurs et de feature engineering jusqu’à obtenir une performance satisfaisante.</p>
 <p>Attention !:D</p>
 <p>Il vaut mieux faire un nouveau split train/dev à chaque fois qu’on intègre/supprime des features pour éviter l’overfitting.</p>
-</div>
-<div class="section" id="Conclusions">
+</section>
+<section id="Conclusions">
 <h2>Conclusions<a class="headerlink" href="#Conclusions" title="Permalink to this headline">¶</a></h2>
 <p>Bravo d’avoir fini l’article !</p>
 <p>Ce qu’il faut retenir :</p>
@@ -1009,8 +1010,8 @@ correct=male     guess=female   name=Zollie
 <li><p>Vous l’aurez compris. L’analyse d’erreurs (feature engineering) et le compromis entre performance et généralisabilité font du machine learning un art qui nécessite un savoir-faire qui s’acquiert au fil des ans.</p></li>
 </ol>
 <p><a class="reference external" href="https://www.nltk.org/book/ch06.html">Reference</a></p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

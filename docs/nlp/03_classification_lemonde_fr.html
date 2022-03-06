@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Transformers in NLP with PyTorch, TensorFlow and Hugging Face" href="../transformers/index.html" /><link rel="prev" title="Classification de prénoms en genre (masculin/féminin) 🇫🇷" href="02_classification_prenoms_fr.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Transformers in NLP with PyTorch, TensorFlow and Hugging Face" href="../transformers/index.html" /><link rel="prev" title="Classification de prénoms en genre (masculin/féminin) 🇫🇷" href="02_classification_prenoms_fr.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷 - NLP in French</title>
@@ -182,10 +183,10 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="text-classification-du-tf-idf-aux-word-embeddings-en-passant-par-features-expertes">
+        <section id="text-classification-du-tf-idf-aux-word-embeddings-en-passant-par-features-expertes">
 <h1>Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷<a class="headerlink" href="#text-classification-du-tf-idf-aux-word-embeddings-en-passant-par-features-expertes" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a>, <a class="reference external" href="https://www.linkedin.com/in/xingyu-liu-aba896a1/">Xingyu LIU</a></p>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>La classification de textes est une tâche courante en traitement automatique des langues (TAL). Dans ce tutoriel nous allons explorer diverses features (TF-IDF, plongement lexical, features linguistiques) alimentant à leur tour des modèles variés dont entre autres la régression logistique, classification naïve bayésienne et perceptron multicouche.</p>
 <p>Le but de ce tutoriel est de construire un classifieur qui permet de catégoriser correctement des textes en 3 classes : société, économie et politique.</p>
@@ -203,8 +204,8 @@
 <p>La répartition des tâches est illustrée succinctement par la Figure 1 :</p>
 <p><img alt="" src="../images/ac2e3489.png"/></p>
 <p>Figure 1 : Répartition des tâches pendant l’écriture de ce tutoriel</p>
-</div>
-<div class="section" id="structure-du-tutoriel">
+</section>
+<section id="structure-du-tutoriel">
 <h2>Structure du tutoriel<a class="headerlink" href="#structure-du-tutoriel" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>Nous présentons le prétraitement de notre corpus.</p></li>
@@ -212,8 +213,8 @@
 <li><p>La baseline établie, divers modèles vectoriels sont entraînés sur des corpus de différentes tailles en utilisant différents paramètres. Cela nous a permis d’étudier les effets des paramètres et de la taille du corpus d’entraînement.</p></li>
 <li><p>Enfin pour davantage augmenter la précision de classification nous introduisons quelques features linguistiques expertes, ces dernières étant soumises à un test basé sur la régression logistique pour que les features les plus pertinentes puissent être mises en avant.</p></li>
 </ol>
-</div>
-<div class="section" id="pretraitement-du-corpus">
+</section>
+<section id="pretraitement-du-corpus">
 <h2>Prétraitement du corpus<a class="headerlink" href="#pretraitement-du-corpus" title="Permalink to this headline">¶</a></h2>
 <p>Nous avons scrapé 9000 articles par thème. Les thèmes principaux sont : société, sport, économie, culture et politique. Nous avons ensuite sélectionné aléatoirement 1000 articles pour la tâche de classification.</p>
 <p>La tokenisation a été effectuée avec le package Stanza (Qi et al., 2020). Ce tokeniseur a notamment l’avantage de regrouper par défaut des mots séparés par tiret du type « gratte-ciel », alors que dans Spacy un tel comportement nécessite une configuration ad hoc engendrant d’autres problèmes.</p>
@@ -225,18 +226,20 @@
 <p>Notons que nous avons aussi préparé une version enrichie du corpus en xml pour calculer des features expertes. Il y a en tout 6 colonnes signifiant id, token, lemme, partie du discours, tête et relation de dépendance. Par contraintes d’espace nous ne détaillons pas la procédure de préparation. Chaque article est enchâssé dans le tag <code class="docutils literal notranslate"><span class="pre">&lt;art&gt;</span></code> avec label comme attribut et classe comme valeur. Ensuite chaque phrase est contenue dans un tag <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code>. La Figure 3 montre la structure du fichier xml :</p>
 <p><img alt="" src="../images/c6849494.png"/></p>
 <p>Figure 3 : Structure du corpus enrichi en xml</p>
-</div>
-<div class="section" id="classification-de-textes">
+</section>
+<section id="classification-de-textes">
 <h2>Classification de textes<a class="headerlink" href="#classification-de-textes" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="etablissement-dune-baseline">
+<section id="etablissement-dune-baseline">
 <h3>Établissement d’une baseline<a class="headerlink" href="#etablissement-dune-baseline" title="Permalink to this headline">¶</a></h3>
 <p>Vu que notre classifieur recourra principalement au plongement lexical, il nous a paru utile d’établir une baseline en utilisant un vecteur TF-IDF.</p>
 <p>Un document peut être représenté de diverses façons selon le traitement des mots contenus dans le document. Le modèle le plus simple est le sac de mots qui compte l’occurrence de chaque token afin de générer une matrice documents-termes (MDT). Ce modèle est quelque peu simpliste car l’occurrence des tokens augmente en fonction de la longueur du document. Pour remédier à ce défaut la MDT peut être modifiée pour représenter non plus la fréquence absolue mais la fréquence relative des tokens. Cependant il subsiste toujours le problème des mots vides car ces derniers sont quasiment toujours les plus fréquents (cf. la loi de Zipf à ce propos).</p>
 <p>Pour faire face à ce problème une autre mesure est proposée : celle de TF-IDF, la formule de cette mesure est la suivante :</p>
-<div class="figure align-center" id="id1">
+<figure class="align-center" id="id1">
 <img alt="../images/a322e8b3.png" src="../images/a322e8b3.png"/>
-<p class="caption"><span class="caption-text">Figure 4 : Formule de TF-IDF</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Figure 4 : Formule de TF-IDF</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>L’efficacité de cette mesure est basée sur l’hypothèse selon laquelle un terme doit être à la fois fréquent et spécifique à un document pour caractériser ce dernier. Notons que cette feature est peu gourmande en termes de calcul.</p>
 <p>Nous avons utilisé scikit-learn pour implémenter la classification. La feature est représentée par le vecteur TF-IDF et le classifieur utilisé est le classifieur bayésien. Nous avons utilisé un split de 0.3, ce qui fait qu’environ 300 articles par thème ont été utilisés comme test. Le random state a été configuré à 42 pour garantir la reproductibilité de notre travail.</p>
 <p>Dans un premier temps nous avons essayé de classifier tous les 5 thèmes pour en sélectionner ceux qui présentent le plus de difficultés. La Figure 5 montre la performance du classifieur sur les articles de 5 thèmes :</p>
@@ -250,8 +253,8 @@
 <p><img alt="" src="../images/e1cb0478.png"/></p>
 <p>Figure 7 : Contribution des termes à la classification d’un article</p>
 <p>Les fonctionnalités proposées par Lime nous ont incités à faire un post-traitement susceptible d’augmenter la performance du classifieur. Nous avons extrait les 3 premiers termes de chaque prédiction de classe au cas où la prédiction serait mauvaise. Cette liste de termes constitue par la suite une liste de « mots inadéquats » avec laquelle nous filtrons le texte de chaque article. Nous avons ensuite ré-entraîné le classifieur, portant l’accuracy global de 0.82 à 0.85. Ce score de 0.85 a été retenu par la suite comme benchmark pour notre tâche de classification.</p>
-</div>
-<div class="section" id="classification-a-base-du-plongement-lexical">
+</section>
+<section id="classification-a-base-du-plongement-lexical">
 <h3>Classification à base du plongement lexical<a class="headerlink" href="#classification-a-base-du-plongement-lexical" title="Permalink to this headline">¶</a></h3>
 <p>Dans cette sous-section nous allons utiliser le plongement lexical pour caractériser un mot et par la suite un article en prenant la moyenne de tous les vecteurs lexicaux constituant l’article.</p>
 <p>Le plongement lexical vise à représenter un mot par un vecteur de nombres réels. Autrement dit, le principe fondamental consiste à représenter un concept linguistique par l’intermédiaire d’une représentation mathématique. Le mot « chien » serait représenté par exemple par un vecteur à 3 dimensions [1.3, 2.2, 4,1].</p>
@@ -358,15 +361,15 @@
 <p>Table 3 : Performance des classifieurs multi-classes en fonction du modèle vectoriel</p>
 <p>L’importance du corpus pour l’entraînement des vecteurs mérite d’être soulignée. En augmentant le nombre d’articles de 3000 à 24000, l’accuracy est passé de 0.74 à 0.82, dépassant le score du modèle FrWac entraîné sur 1.6 milliards de mots. Cela montre qu’un corpus spécifique est important et ce corpus peut s’avérer plus pertinent qu’un corpus de grande taille pour la tâche de classification de textes.</p>
 <p>Cependant, les F1 scores des classes politique et société restent bas. Ils sont respectivement 0.75 et 0.76, ce qui fait que l’accuracy général du classifieur SVM est inférieur au benchmark TF-IDF (0.82 vs 0.85).</p>
-</div>
-<div class="section" id="elaboration-des-features-dites-expertes">
+</section>
+<section id="elaboration-des-features-dites-expertes">
 <h3>Elaboration des features dites expertes<a class="headerlink" href="#elaboration-des-features-dites-expertes" title="Permalink to this headline">¶</a></h3>
 <p>Pour améliorer davantage notre classifieur SVM, nous avons calculé 5 features supplémentaires : diversité lexicale, distance cosinus entre un article et 4 termes les plus fréquents à chaque classe et enfin, un vecteur one-hot à 12 dimensions construit sur l’absence et la présence des 4 termes mentionnés plus haut. La diversité lexicale a été calculée en divisant le nombre de tokens uniques par le nombre de tokens total.</p>
 <p>Pour évaluer l’effet de chaque feature, nous avons tout d’abord exclu le vecteur du document et utilisé la régression logistique (méthode Newton-conjugate gradient) en gardant uniquement les features expertes. Les valeurs P&gt;|z| nous indiquent que la diversité lexicale est peu probable de contribuer à la classification (0.986). En revanche, les distances cosinus et le vecteur one-hot sont tous pertinents (toutes les valeurs sont inférieures à 0.05).</p>
 <p>Nous avons donc intégré ces deux features dans le classifieur SVM. L’accuracy général est monté à 0.85 et les F1 scores montés à 0.80 pour les classes politique et société.</p>
-</div>
-</div>
-<div class="section" id="conclusions-et-perspectives">
+</section>
+</section>
+<section id="conclusions-et-perspectives">
 <h2>Conclusions et perspectives<a class="headerlink" href="#conclusions-et-perspectives" title="Permalink to this headline">¶</a></h2>
 <p>Nous avons donc construit un corpus de 5 thèmes, appliqué un prétraitement typique sur les textes de chaque article, extrait et élaboré des features et enfin testé les features sur divers classifieurs.</p>
 <p>Quelques points méritent d’être mentionnés :</p>
@@ -375,13 +378,13 @@
 <li><p>Les features expertes sont utiles pour augmenter la performance de classification. Cela met en évidence l’importance des connaissances spécifiques au domaine (Domain-Specific Knowledge).</p></li>
 <li><p>Lime permet d’expliquer les méthodes de machine learning et d’améliorer la performance des méthodes. Dans la section 4.1, nous avons montré que la suppression des mots non pertinents à la classification permet d’augmenter l’accuracy de 0.82 à 0.85.</p></li>
 </ol>
-</div>
-<div class="section" id="tutoriels-a-venir">
+</section>
+<section id="tutoriels-a-venir">
 <h2>Tutoriels à venir<a class="headerlink" href="#tutoriels-a-venir" title="Permalink to this headline">¶</a></h2>
 <p>Dans le domaine de la classification de textes, les réseaux de neurones du type RNN ont fait preuve d’efficacité. Des modèles de langues pré-entraînés du type Bert (Vaswani et al., 2017) ont davantage poussé les limites de performance. Des features linguistiques basés sur les propriétés morpho-syntaxiques des tokens peuvent aussi s’avérer utiles.</p>
 <p>A très bientôt pour plus de tutoriels :D</p>
-</div>
-<div class="section" id="references">
+</section>
+<section id="references">
 <h2>Références<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>Fauconnier, J.-P. (2015). French word embeddings.</p>
 <p>Firth, J. R. (1957). A synopsis of linguistic theory, 1930-1955. Studies in Linguistic Analysis.</p>
@@ -392,8 +395,8 @@ Qi, P., Zhang, Y., Zhang, Y., Bolton, J., &amp; Manning, C. D. (2020). Stanza: A
 .
 Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016). “Why Should I Trust You?”: Explaining the Predictions of Any Classifier. ArXiv:1602.04938 [Cs, Stat]. http://arxiv.org/abs/1602.04938</p>
 <p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., &amp; Polosukhin, I. (2017). Attention is all you need. ArXiv Preprint ArXiv:1706.03762.</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

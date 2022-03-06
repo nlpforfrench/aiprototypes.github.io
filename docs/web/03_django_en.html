@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Computational Linguistics in R" href="../linguistique_informatique/index.html" /><link rel="prev" title="On your way to scraping French forums 🇬🇧" href="02_forum_en.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Computational Linguistics in R" href="../linguistique_informatique/index.html" /><link rel="prev" title="On your way to scraping French forums 🇬🇧" href="02_forum_en.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧 - NLP in French</title>
@@ -182,12 +183,12 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate">
+        <section id="deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate">
 <h1>Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧<a class="headerlink" href="#deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou Wang</a></p>
 <p>It can be quite frustrating/challenging for django newbies to deploy their app because a bunch of new concepts should be known in order to play the game with confidence. This tutorial gives you all the basics and further reference. The structure of the project can be seen in the following screenshot: the project <code class="docutils literal notranslate"><span class="pre">my_blog</span></code> is itself located in the <code class="docutils literal notranslate"><span class="pre">blog</span></code> folder.</p>
 <p><img alt="" src="https://i.imgur.com/FglTVf6.png"/></p>
-<div class="section" id="deployment-in-a-nutshell">
+<section id="deployment-in-a-nutshell">
 <h2>Deployment in a nutshell<a class="headerlink" href="#deployment-in-a-nutshell" title="Permalink to this headline">¶</a></h2>
 <p>You need</p>
 <ul class="simple">
@@ -197,16 +198,16 @@
 <li><p>a database management system (often mysql or postgresql) to store information.</p></li>
 <li><p>sometimes a firewall system to block some requests</p></li>
 </ul>
-</div>
-<div class="section" id="step-by-step">
+</section>
+<section id="step-by-step">
 <h2>Step by step<a class="headerlink" href="#step-by-step" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu">
+<section id="a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu">
 <h3>A server/droplet on digitalocean with often a Linux system as Ubuntu<a class="headerlink" href="#a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu" title="Permalink to this headline">¶</a></h3>
 <p><img alt="" src="https://i.imgur.com/a0Lf3Xp.png"/></p>
 <p>Note, some tutorials said that a password would be sent to your email. This is outdated, remember, for an easy start, to choose the password method and set your password as follows. The 5$ plan is largely sufficient for personal use.</p>
 <p><img alt="" src="https://i.imgur.com/6AYEhq2.png"/></p>
-</div>
-<div class="section" id="a-regular-user-with-some-root-privileges">
+</section>
+<section id="a-regular-user-with-some-root-privileges">
 <h3>A regular user with some root privileges<a class="headerlink" href="#a-regular-user-with-some-root-privileges" title="Permalink to this headline">¶</a></h3>
 <p>For our purpose you just need the following steps:</p>
 <p>First connect to the server using ssh, on Mac you are good to go already on Windows you can use <code class="docutils literal notranslate"><span class="pre">PuTTy</span></code>, see the reference</p>
@@ -230,16 +231,16 @@ usermod -aG sudo sammy <span class="c1"># give sammy root privileges</span>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh sammy@your_server_ip
 </pre></div>
 </div>
-</div>
-<div class="section" id="update-apt-get-to-install-the-most-recent-packages">
+</section>
+<section id="update-apt-get-to-install-the-most-recent-packages">
 <h3>Update apt-get to install the most recent packages<a class="headerlink" href="#update-apt-get-to-install-the-most-recent-packages" title="Permalink to this headline">¶</a></h3>
 <p>Here we install pip, postgresql (database tool) and nginx (web server). In simple terms, <code class="docutils literal notranslate"><span class="pre">nginx</span></code> is the server who takes http requests, another common server is <code class="docutils literal notranslate"><span class="pre">apache</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
 sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx
 </pre></div>
 </div>
-</div>
-<div class="section" id="set-up-the-database">
+</section>
+<section id="set-up-the-database">
 <h3>Set up the database<a class="headerlink" href="#set-up-the-database" title="Permalink to this headline">¶</a></h3>
 <p>First log into postgresql</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -u postgres psql
@@ -255,8 +256,8 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser<span class="p">;</sp
 <span class="se">\q</span> <span class="c1"># quit</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer">
+</section>
+<section id="add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer">
 <h3>Add the database setting set up in step 4 into your <code class="docutils literal notranslate"><span class="pre">Settings.py</span></code> on your local computer<a class="headerlink" href="#add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
     <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
@@ -278,8 +279,8 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser<span class="p">;</sp
     <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="set-up-a-virtual-environment-for-python">
+</section>
+<section id="set-up-a-virtual-environment-for-python">
 <h3>Set up a virtual environment for Python<a class="headerlink" href="#set-up-a-virtual-environment-for-python" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -H pip3 install --upgrade pip
 sudo -H pip3 install virtualenv
@@ -301,15 +302,15 @@ git config credential.helper store <span class="c1"># remember your username and
 pip install -r requirements.txt
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-migrate">
+</section>
+<section id="run-migrate">
 <h3>Run migrate<a class="headerlink" href="#run-migrate" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="test-on-8000-port-with-and-without-gunicorn">
+</section>
+<section id="test-on-8000-port-with-and-without-gunicorn">
 <h3>Test on 8000 port with and without gunicorn<a class="headerlink" href="#test-on-8000-port-with-and-without-gunicorn" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ufw allow <span class="m">8000</span> <span class="c1"># allow 8000 in the firewall</span>
 python manage.py runserver <span class="m">0</span>.0.0.0:8000
@@ -320,8 +321,8 @@ python manage.py runserver <span class="m">0</span>.0.0.0:8000
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gunicorn --bind <span class="m">0</span>.0.0.0:8000 my_blog.wsgi
 </pre></div>
 </div>
-</div>
-<div class="section" id="set-up-gunicorn-service-file">
+</section>
+<section id="set-up-gunicorn-service-file">
 <h3>Set up Gunicorn service file<a class="headerlink" href="#set-up-gunicorn-service-file" title="Permalink to this headline">¶</a></h3>
 <p>I use vim here, but you are free to use some more beginner-friendly editor like nano. The gunicorn service file is to ensure that gunicorn is run automatically in background to serve django</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo vim /etc/systemd/system/gunicorn.service
@@ -347,8 +348,8 @@ python manage.py runserver <span class="m">0</span>.0.0.0:8000
 sudo systemctl <span class="nb">enable</span> gunicorn.socket
 </pre></div>
 </div>
-</div>
-<div class="section" id="set-nginx">
+</section>
+<section id="set-nginx">
 <h3>Set Nginx<a class="headerlink" href="#set-nginx" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo vim /etc/nginx/sites-available/blog
 </pre></div>
@@ -385,8 +386,8 @@ sudo ufw delete allow <span class="m">8000</span>
 sudo ufw allow <span class="s1">'Nginx Full'</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="add-a-ssl-certificate-to-make-https-available">
+</section>
+<section id="add-a-ssl-certificate-to-make-https-available">
 <h3>Add a ssl certificate to make https available<a class="headerlink" href="#add-a-ssl-certificate-to-make-https-available" title="Permalink to this headline">¶</a></h3>
 <p>Almost nobody uses http these days. Let’s now see how to secure our site by adding a ssl certificate!</p>
 <p>To have a more solid grasp on ssl certificate, see <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04">reference here</a>.</p>
@@ -411,9 +412,9 @@ sudo ufw delete allow <span class="s1">'Nginx HTTP'</span>
 <p>At the last step, select <code class="docutils literal notranslate"><span class="pre">redirect</span></code>
 <img alt="" src="https://i.imgur.com/ia658lG.png"/></p>
 <p>Congratulations to make it this far.</p>
-</div>
-</div>
-<div class="section" id="most-useful-commands">
+</section>
+</section>
+<section id="most-useful-commands">
 <h2>Most useful commands:<a class="headerlink" href="#most-useful-commands" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up nginx</span>
 sudo vim /etc/nginx/sites-available/blog
@@ -438,8 +439,8 @@ pg_dump dbname &gt; dbexport.pgsql
 <li><p>about postgresql backup https://www.digitalocean.com/community/tutorials/how-to-backup-postgresql-databases-on-an-ubuntu-vps</p></li>
 <li><p>general instructions https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

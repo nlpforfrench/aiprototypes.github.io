@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="My Codebase" href="../codebase/index.html" /><link rel="prev" title="Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷" href="02_mca_ergatif_fr.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="My Codebase" href="../codebase/index.html" /><link rel="prev" title="Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷" href="02_mca_ergatif_fr.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷 - NLP in French</title>
@@ -430,10 +431,10 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Analyse-en-composantes-principales-(PCA)-:-prépositions-d’inclusion-en-français-🇫🇷">
+<section id="Analyse-en-composantes-principales-(PCA)-:-prépositions-d’inclusion-en-français-🇫🇷">
 <h1>Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷<a class="headerlink" href="#Analyse-en-composantes-principales-(PCA)-:-prépositions-d’inclusion-en-français-🇫🇷" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
-<div class="section" id="Question">
+<section id="Question">
 <h2>Question<a class="headerlink" href="#Question" title="Permalink to this headline">¶</a></h2>
 <p>Gréa (2017) compare 5 prépositions qui dénotent l’inclusion en français :</p>
 <ul class="simple">
@@ -444,8 +445,8 @@ div.rendered_html tbody tr:hover {
 <li><p>au sein de</p></li>
 </ul>
 <p>Quel est donc le profil sémantique de chaque préposition ? Plus concrètement, avec quel type d’entités tendent à apparaître ces prépositions ?</p>
-</div>
-<div class="section" id="Métrique">
+</section>
+<section id="Métrique">
 <h2>Métrique<a class="headerlink" href="#Métrique" title="Permalink to this headline">¶</a></h2>
 <p>Gréa utilise une mesure d’association appelée calcul des spécificités basées sur une distribution hypergéométrique.</p>
 <p>En gros plus la valeur est grande, plus des éléments sont proches. Il a appliqué cette mesure sur le corpus FrWac. Pour plus de détails, allez sur le lien ci-dessous.</p>
@@ -480,10 +481,10 @@ div.rendered_html tbody tr:hover {
 </tbody>
 </table></div></div>
 </div>
-</div>
-<div class="section" id="PCA">
+</section>
+<section id="PCA">
 <h2>PCA<a class="headerlink" href="#PCA" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Combien-de-dimensions">
+<section id="Combien-de-dimensions">
 <h3>Combien de dimensions<a class="headerlink" href="#Combien-de-dimensions" title="Permalink to this headline">¶</a></h3>
 <p>De toute évidence, les trois premières dimensions suffisent pour représenter les variables.</p>
 <div class="nbinput docutils container">
@@ -526,8 +527,8 @@ div.rendered_html tbody tr:hover {
 <img alt="../images/linguistique_informatique_03_pca_inclusion_fr_4_1.png" class="no-scaled-link" src="../images/linguistique_informatique_03_pca_inclusion_fr_4_1.png" style="width: 420px; height: 420px;"/>
 </div>
 </div>
-</div>
-<div class="section" id="Graphe-des-variables">
+</section>
+<section id="Graphe-des-variables">
 <h3>Graphe des variables<a class="headerlink" href="#Graphe-des-variables" title="Permalink to this headline">¶</a></h3>
 <p>Grâce au graphe des variables, vous pouvez voir se dessiner 3 profils :</p>
 <ul class="simple">
@@ -561,8 +562,8 @@ div.rendered_html tbody tr:hover {
 <img alt="../images/linguistique_informatique_03_pca_inclusion_fr_6_1.png" class="no-scaled-link" src="../images/linguistique_informatique_03_pca_inclusion_fr_6_1.png" style="width: 420px; height: 420px;"/>
 </div>
 </div>
-</div>
-<div class="section" id="Graphe-des-individus">
+</section>
+<section id="Graphe-des-individus">
 <h3>Graphe des individus<a class="headerlink" href="#Graphe-des-individus" title="Permalink to this headline">¶</a></h3>
 <p>Cependant, le graphe des individus est à peine lisible car il y a trop d’items. De ce fait nous devons filtrer les items peu utiles aux 3 profils mentionnés plus haut.</p>
 <p>En mettant <code class="docutils literal notranslate"><span class="pre">select="coord</span> <span class="pre">20"</span></code> comme option, seuls les 20 items aux valeurs les plus extrêmes sont affichés.</p>
@@ -582,9 +583,9 @@ div.rendered_html tbody tr:hover {
 <img alt="../images/linguistique_informatique_03_pca_inclusion_fr_8_0.png" class="no-scaled-link" src="../images/linguistique_informatique_03_pca_inclusion_fr_8_0.png" style="width: 420px; height: 420px;"/>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="Remarques-et-Conclusions">
+</section>
+</section>
+<section id="Remarques-et-Conclusions">
 <h2>Remarques et Conclusions<a class="headerlink" href="#Remarques-et-Conclusions" title="Permalink to this headline">¶</a></h2>
 <p>En combinant les informations provenant des variables et des individus, nous pouvons voir que :</p>
 <ul class="simple">
@@ -593,15 +594,15 @@ div.rendered_html tbody tr:hover {
 <li><p>Enfin, <code class="docutils literal notranslate"><span class="pre">au</span> <span class="pre">milieu</span> <span class="pre">de</span> <span class="pre">et</span> <span class="pre">parmi</span></code> tend à apparaître avec des noms dénotant des groupes d’individus (hommes, personnes, members).</p></li>
 </ul>
 <p>Cependant, la distinction entre les types d’une même catégorie rest peu apparente. <code class="docutils literal notranslate"><span class="pre">Au</span> <span class="pre">centre</span> <span class="pre">du</span> <span class="pre">conflit</span></code> désigne par exemple un humain qui est soit l’enquêteur soit la partie directement concernée d’un conflit, alors que <code class="docutils literal notranslate"><span class="pre">au</span> <span class="pre">coeur</span> <span class="pre">du</span> <span class="pre">conflit</span></code> dénote plutôt quelque chose de temporel ou de spatial comme <code class="docutils literal notranslate"><span class="pre">au</span> <span class="pre">pic</span> <span class="pre">du</span> <span class="pre">conflit</span></code>/<code class="docutils literal notranslate"><span class="pre">en</span> <span class="pre">plein</span> <span class="pre">conflit</span></code>.</p>
-</div>
-<div class="section" id="Références-principales">
+</section>
+<section id="Références-principales">
 <h2>Références principales<a class="headerlink" href="#Références-principales" title="Permalink to this headline">¶</a></h2>
 <p>Gréa, Philippe. 2017. “Inside in French.” Cognitive Linguistics 28 (1): 77–130.</p>
 <p>Cours de Guillaume Desagulier intitulé linguistique outillée et traitements statistiques : <a class="reference external" href="https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html">https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html</a></p>
 <p>Guillaume Desagulier. Multivariate Exploratory Approaches. 2020. ffhalshs-01926339v3ff</p>
 <p>Paquot, M., &amp; Gries, S. (2020). The practical handbook of corpus linguistics.</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>

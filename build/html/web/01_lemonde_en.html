@@ -1,7 +1,8 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Scraper « le monde » et construire ton propre corpus 🇫🇷" href="01_lemonde_fr.html" /><link rel="prev" title="Web Related" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Scraper « le monde » et construire ton propre corpus 🇫🇷" href="01_lemonde_fr.html" /><link rel="prev" title="Web Related" href="index.html" />
 
     <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
         <title>Complete tutorial on scraping French news from Le Monde 🇬🇧 - NLP in French</title>
@@ -182,19 +183,19 @@
         <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        <div class="section" id="complete-tutorial-on-scraping-french-news-from-le-monde">
+        <section id="complete-tutorial-on-scraping-french-news-from-le-monde">
 <h1>Complete tutorial on scraping French news from Le Monde 🇬🇧<a class="headerlink" href="#complete-tutorial-on-scraping-french-news-from-le-monde" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou WANG</a></p>
-<div class="section" id="why-you-need-web-scraping-and-why-i-wrote-this-tutorial">
+<section id="why-you-need-web-scraping-and-why-i-wrote-this-tutorial">
 <h2>Why you need web scraping and why I wrote this tutorial<a class="headerlink" href="#why-you-need-web-scraping-and-why-i-wrote-this-tutorial" title="Permalink to this headline">¶</a></h2>
 <p>Sooner or later in your career you will find yourself in a situation where you need to build your own corpus for common nlp tests.</p>
 <p>Some days ago I wrote a tutorial on scraping news on the French journal <code class="docutils literal notranslate"><span class="pre">le</span> <span class="pre">monde</span></code>. I didn’t finish the whole tutorial and today while refreshing some web scraping skills I find the best way to keep a personal knowledge base is writing complete, well documented tutorials. It creates a more robuste and contextualised documentation (like <code class="docutils literal notranslate"><span class="pre">Bert</span></code> :D) than simply commenting code.</p>
-</div>
-<div class="section" id="legal-issues">
+</section>
+<section id="legal-issues">
 <h2>Legal issues<a class="headerlink" href="#legal-issues" title="Permalink to this headline">¶</a></h2>
 <p>Note that web scraping can cause some legal issues. I just provide a coding tutorial here, please use it at your own risk and read some articles like <a class="reference external" href="https://soshace.com/responsible-web-scraping-gathering-data-ethically-and-legally/">this one</a>.</p>
-</div>
-<div class="section" id="get-article-links">
+</section>
+<section id="get-article-links">
 <h2>Get article links<a class="headerlink" href="#get-article-links" title="Permalink to this headline">¶</a></h2>
 <p>So the first thing to do is to generate archive links, basically an archive link is a page on which we can scrape article links. For instance, the link <code class="docutils literal notranslate"><span class="pre">https://www.lemonde.fr/archives-du-monde/01-01-2020/</span></code> contains all the articles published for <code class="docutils literal notranslate"><span class="pre">2020–01–01</span></code>. Here I create the function <code class="docutils literal notranslate"><span class="pre">create_archive_link</span></code> which requires starting year/month/day and ending year/month/day as input. The output is a dictionary in the form of <code class="docutils literal notranslate"><span class="pre">year:links</span></code>.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_archive_links</span><span class="p">(</span><span class="n">year_start</span><span class="p">,</span> <span class="n">year_end</span><span class="p">,</span> <span class="n">month_start</span><span class="p">,</span> <span class="n">month_end</span><span class="p">,</span> <span class="n">day_start</span><span class="p">,</span> <span class="n">day_end</span><span class="p">):</span>
@@ -211,8 +212,8 @@
 <p>Example output of <code class="docutils literal notranslate"><span class="pre">create_archive_links(2006,2020,1,</span> <span class="pre">12,</span> <span class="pre">1,</span> <span class="pre">31)</span></code>:</p>
 <p><img alt="" src="../_images/2021-02-20-19-38-41.png"/></p>
 <p>The next step is to get all the article links on the archive page. For this you need 3 modules: <code class="docutils literal notranslate"><span class="pre">HTTPError</span></code> to handle exceptions, <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> to open webpages and <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> to parse webpages.</p>
-</div>
-<div class="section" id="the-magic-power-of-exception-handling">
+</section>
+<section id="the-magic-power-of-exception-handling">
 <h2>The magic power of exception handling<a class="headerlink" href="#the-magic-power-of-exception-handling" title="Permalink to this headline">¶</a></h2>
 <p>The exception handling is necessary because we have archive pages for dates like 02–31, it’s much easier to handle exceptions than generating links corresponding only to existent dates. Each article is in a <code class="docutils literal notranslate"><span class="pre">&lt;section&gt;</span></code> having a <code class="docutils literal notranslate"><span class="pre">class</span></code> named <code class="docutils literal notranslate"><span class="pre">teaser</span></code>.</p>
 <p>I also filter out all the non-free articles having a span with class <code class="docutils literal notranslate"><span class="pre">icon__premium</span></code>. All the links containing the word <code class="docutils literal notranslate"><span class="pre">en-direct</span></code> are also filtered because they are videos. This is to say that web scraping requires not only programming skills but also some elementary web analysis.</p>
@@ -240,8 +241,8 @@
     <span class="k">return</span> <span class="n">links_non_abonne</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="you-don-t-want-to-scrape-more-than-once">
+</section>
+<section id="you-don-t-want-to-scrape-more-than-once">
 <h2>You don’t want to scrape more than once<a class="headerlink" href="#you-don-t-want-to-scrape-more-than-once" title="Permalink to this headline">¶</a></h2>
 <p>Since no body wants to scrape the same links again and again (they are not very likely to change), a handy function can be created to save links into files. Here the publication year is used to name files.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">write_links</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">links</span><span class="p">,</span> <span class="n">year_fn</span><span class="p">):</span>
@@ -260,8 +261,8 @@
 </div>
 <p>This would produce something like this:</p>
 <p><img alt="" src="../_images/2021-02-20-19-42-03.png"/></p>
-</div>
-<div class="section" id="let-s-scrape">
+</section>
+<section id="let-s-scrape">
 <h2>Let’s scrape<a class="headerlink" href="#let-s-scrape" title="Permalink to this headline">¶</a></h2>
 <p>Now you can scrape article contents, it’s surprisingly straightforward. In fact you just need to get all the <code class="docutils literal notranslate"><span class="pre">h1,h2</span> <span class="pre">and</span> <span class="pre">p</span></code> elements. The <code class="docutils literal notranslate"><span class="pre">recursive=False</span></code> is important here because you don’t want to dig any deeper once you find the text at some first level.</p>
 <p>For concerns of modularity you should first write a function to scrape a single page.</p>
@@ -364,13 +365,13 @@
     <span class="k">return</span> <span class="n">dict_corpus</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="resources">
+</section>
+<section id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <p>Here you are. Happy scraping! And mind the potential legal issues!</p>
 <p>You can find source code <a class="reference external" href="https://gist.github.com/xiaoouwang/0f054840af560488f2162c110b6045b5#file-lemondescraper-py">here</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
       </article>
       <footer>
