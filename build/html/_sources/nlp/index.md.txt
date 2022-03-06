@@ -18,4 +18,4 @@
 
 - [5. Why using log scale 🇬🇧](05_log_scale)
 
-- [6. How to build a LSTM-based Neural Machine Translation model with fairseq](06_machine_translation)
+- [6. How to build a LSTM-based Neural Machine Translation model with fairseq 🇬🇧](06_machine_translation)
