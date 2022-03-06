@@ -1,0 +1,787 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+        <title>How to build a LSTM-based Neural Machine Translation model with fairseq - NLP for French</title>
+      <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
+    <link rel="stylesheet" href="../static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+    <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NLP for French</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../static/nlp_Logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../static/nlp_Logo.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">NLP for French</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">NLP and Machine Learning-related</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label for="toctree-checkbox-1"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_compara_anno_fr.html">Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_classification_prenoms_fr.html">Classification de prénoms en genre (masculin/féminin) 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_classification_lemonde_fr.html">Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/index.html">Transformers in NLP with PyTorch, TensorFlow and Hugging Face</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label for="toctree-checkbox-2"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_en.html">10 questions on Bert 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_theorie_fr.html">10 questions sur Bert 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/02_firstBert_fr.html">Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../better_programmer/index.html">Better Programmer</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label for="toctree-checkbox-3"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/01_python_fr.html">Mieux programmer en Python 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/02_git3_en.html">A serious guide to git 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/03_jupyter_remote_pycharm.html">Connect to remote jupyter notebook in Pycharm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/04_oop_web_scraping_en.html">Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../better_programmer/05_oop_web_scraping_cooper_en.html">Be a responsible programmer when doing Object-Oriented Programming 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algo/index.html">Algorithms and data structures by examples in Python</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label for="toctree-checkbox-4"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_en.html">Algorithm or many ways of solving a problem 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/01_intro_fr.html">Algorithme ou plusieurs façons de résoudre un problème 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/02_ds_en.html">Data structures or many ways of organizing your stuff 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algo/099algo_map.html">Roadmap and cheatsheet of algorithms and data structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../web/index.html">Web Related</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label for="toctree-checkbox-5"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_en.html">Complete tutorial on scraping French news from Le Monde 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/01_lemonde_fr.html">Scraper « le monde » et construire ton propre corpus 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/02_forum_en.html">On your way to scraping French forums 🇬🇧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../web/03_django_en.html">Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linguistique_informatique/index.html">Computational Linguistics in R</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label for="toctree-checkbox-6"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/01_zipf_fr.html">La loi de Zipf illustrée avec gutenbergr en R 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/02_mca_ergatif_fr.html">Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linguistique_informatique/03_pca_inclusion_fr.html">Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../high_performance_python/index.html">High performance computing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/01_bash.html">My codebase for bash/shell script (macOS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/02_tmux.html">Tumux-related code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/03_python.html">My python codebase (including packages/libraries)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/05_pytorch.html">Pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../codebase/06_pandas.html">Pandas codebase</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/index.html">Mathematics in Machine Learning and NLP</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label for="toctree-checkbox-9"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/01_math_fr.html">Machine Learning : algorithmes et mathématiques 🇫🇷</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="How-to-build-a-LSTM-based-Neural-Machine-Translation-model-with-fairseq">
+<h1>How to build a LSTM-based Neural Machine Translation model with fairseq<a class="headerlink" href="#How-to-build-a-LSTM-based-Neural-Machine-Translation-model-with-fairseq" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou Wang</a></p>
+<p>Neural Machine Translation (NMT) is often an end-to-end pipeline requiring less code and training time compared to Statistical Machine Translation (SMT). Two open-source libraries are often used in this domain: <code class="docutils literal notranslate"><span class="pre">opennmt</span></code> and <code class="docutils literal notranslate"><span class="pre">fairseq</span></code>. In this tutorial, we will see how to quickly train a NMT model using LSTM, a type of RNN capable of retaining more information on long range dependencies.</p>
+<p>It should be noted that NMT uses often a sequence to sequence model (Seq2Seq), meaning that it takes a sequence of words as inputs, encodes them (encoder) and outputs another sequence of words (decoder). The length of the inputs and outputs needs not to be the same, contrary to tasks like part-of-speech tagging.</p>
+<section id="RNN,-typical-use-(before-attention)-and-major-downside">
+<h2>RNN, typical use (before attention) and major downside<a class="headerlink" href="#RNN,-typical-use-(before-attention)-and-major-downside" title="Permalink to this headline">¶</a></h2>
+<p>We mentioned that LSTM was a type of RNN. One of the main drawbacks of the traditional way of using RNN in Seq2Seq (in our case both the encoder and the decoder use LSTMs) is that the encoder transforms a sentence into a single vector (the last hidden state) regardless of the sentence’s length. The state-of-the-art use the transformer architecture that we will introduce later in another article.</p>
+</section>
+<section id="Data-preparation">
+<h2>Data preparation<a class="headerlink" href="#Data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>In machine translation, one would typically has a parallel text corpus (also called bitexts) in the following fashion:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Let's</span> <span class="pre">try</span> <span class="pre">something.\tPermíteme</span> <span class="pre">intentarlo.</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">\t</span></code> is the tab separator. Then the whole corpus is separated into two files containing each some monolingual texts. Each text is then filtered to remove sentences containing errors (too long or not good translation) and tokenized (since most models take words as inputs). Then the two separatef files are transformed into a binary format to faciliate training. Which can be easily done in <code class="docutils literal notranslate"><span class="pre">fairseq</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--thresholdtgt</span></code> and <code class="docutils literal notranslate"><span class="pre">--thresholdsrc</span></code> options map words appearing less than threshold times to unknown.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq-preprocess <span class="se">\</span>
+--source-lang es <span class="se">\</span>
+--target-lang en <span class="se">\</span>
+--trainpref data/tatoeba.eng_spa.train.tok <span class="se">\</span>
+--validpref data/tatoeba.eng_spa.valid.tok <span class="se">\</span>
+--testpref data/tatoeba.eng_spa.test.tok <span class="se">\</span>
+--destdir data/mt-bin <span class="se">\</span>
+--thresholdsrc <span class="m">3</span> <span class="se">\</span>
+--thresholdtgt <span class="m">3</span>
+</pre></div>
+</div>
+<p>Please note that it’s important to specify source and target language because these informations are contained in the filenames. See the structure of the data folder.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>tree ./data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-blue-intense-fg ansi-bold">./data</span>
+├── tatoeba.eng_spa.test.tok.en
+├── tatoeba.eng_spa.test.tok.es
+├── tatoeba.eng_spa.train.tok.en
+├── tatoeba.eng_spa.train.tok.es
+├── tatoeba.eng_spa.valid.tok.en
+└── tatoeba.eng_spa.valid.tok.es
+
+0 directories, 6 files
+</pre></div></div>
+</div>
+<p>Now let’s see the files created by the preprocessing script. Notice the files ended by <code class="docutils literal notranslate"><span class="pre">.bin</span></code> meaning that it’s a binary format and the two dict files containing all the English/Spanish words in the corpus and their IDs. The two dict files contain 11412 English words and 16828 Spanish words for 200,000 bitext sentences, which is rather expected because there are more verb forms/types in Spanish (conjugation in Spanish is richer).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="ch">#!bash preprocess.sh</span>
+<span class="o">!</span>tree ./data/mt-bin
+<span class="o">!</span>head -n <span class="m">5</span> ./data/mt-bin/dict.en.txt
+<span class="o">!</span>wc -l ./data/mt-bin/dict.en.txt
+<span class="o">!</span>wc -l ./data/mt-bin/dict.es.txt
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-blue-intense-fg ansi-bold">./data/mt-bin</span>
+├── dict.en.txt
+├── dict.es.txt
+├── preprocess.log
+├── test.es-en.en.bin
+├── test.es-en.en.idx
+├── test.es-en.es.bin
+├── test.es-en.es.idx
+├── train.es-en.en.bin
+├── train.es-en.en.idx
+├── train.es-en.es.bin
+├── train.es-en.es.idx
+├── valid.es-en.en.bin
+├── valid.es-en.en.idx
+├── valid.es-en.es.bin
+└── valid.es-en.es.idx
+
+0 directories, 15 files
+. 136457
+I 43210
+the 36227
+to 34736
+a 25625
+   11412 ./data/mt-bin/dict.en.txt
+   16828 ./data/mt-bin/dict.es.txt
+</pre></div></div>
+</div>
+</section>
+<section id="Training">
+<h2>Training<a class="headerlink" href="#Training" title="Permalink to this headline">¶</a></h2>
+<p>Let’s kick-start the training process. It’s easy to see from the bash script that we use lstm (default embedding size is 512) as building units, together with the use of adam optimizer and a learning rate of 1.0e-3. The choice of hyperparameters is a tricky engineering problem better tackled using <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>, see for example <a class="reference external" href="https://github.com/tensorflow/tensor2tensor#translation">https://github.com/tensorflow/tensor2tensor#translation</a>. In this tutorial, we will use some random values. Also note the <code class="docutils literal notranslate"><span class="pre">save-dir</span></code> option specifying the output path
+for models. The training would continue infinitely and each time an epoch ends, the checkpoint (model’s parameters) is saved in <code class="docutils literal notranslate"><span class="pre">data/mt-cp</span></code>. Also, after each epoch, the loss is automatically calculated on the train and val. Whenever you pressed <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code>, the training is stopped. The number of epochs you wait until <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> is called <strong>patience</strong>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>cat train.sh
+<span class="c1">#!bash train.sh</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+fairseq-train \
+data/mt-bin \
+--arch lstm \
+--share-decoder-input-output-embed \
+--optimizer adam \
+--lr 1.0e-3 \
+--max-tokens 4096 \
+--save-dir data/mt-cp
+</pre></div></div>
+</div>
+<p>Below is the curve of training and validation loss. This U-shaped curve is very common and the usual practice is to stop the training when validation loss starts to rise (<code class="docutils literal notranslate"><span class="pre">early</span> <span class="pre">stopping</span></code>).</p>
+<img alt="nlp/img/machine_translation/2022-03-06-22-45-24.png" src="nlp/img/machine_translation/2022-03-06-22-45-24.png"/>
+<p>Since training NMT models is very computer-intensive and time-consuming without GPU. I only trained for two epochs on my own machine, resulting in the following folder structure.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>tree ./data/mt-pt/
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-blue-intense-fg ansi-bold">./data/mt-pt/</span>
+├── checkpoint1.pt
+├── checkpoint2.pt
+├── checkpoint_best.pt
+└── checkpoint_last.pt
+
+0 directories, 4 files
+</pre></div></div>
+</div>
+<section id="So-how-the-model-is-trained?">
+<h3>So how the model is trained?<a class="headerlink" href="#So-how-the-model-is-trained?" title="Permalink to this headline">¶</a></h3>
+<p>If one can do some multiclass classification, the term <code class="docutils literal notranslate"><span class="pre">cross</span> <span class="pre">entropy</span></code> should be familiar and it’s a kind of loss used to calculate how a probability distribution <strong>p</strong> is different from another <strong>q</strong> (or how p diverges from q or what is the relative entropy of p with respect to q).</p>
+<p>More concretely, the decoder takes a <code class="docutils literal notranslate"><span class="pre">&lt;START&gt;</span></code> token and the last hidden state of the encoder as input and calculate a probability distribution for the next word.</p>
+<p>Let’s say the Spanish text is <code class="docutils literal notranslate"><span class="pre">María</span> <span class="pre">es</span> <span class="pre">hermosa.</span></code> A hidden state <code class="docutils literal notranslate"><span class="pre">x</span></code> is generated by the encoder and is feeded into the decoder with a <code class="docutils literal notranslate"><span class="pre">&lt;START&gt;</span></code> token since it’s the first word. Then the model would compute a probability distribution for each word in the dictionary. Say there are 3 words in the dict: <code class="docutils literal notranslate"><span class="pre">Mary,</span> <span class="pre">a,</span> <span class="pre">b</span></code> . The probability calculated by the model would probably be <code class="docutils literal notranslate"><span class="pre">30%,</span> <span class="pre">40%,</span> <span class="pre">50%</span></code>. This is obviously wrong, so the model would try to adjust/learn the right distribution based on
+the difference between this distribution and the true distribution (cross entropy).</p>
+<p>It’s important to note that for the word <code class="docutils literal notranslate"><span class="pre">es</span></code>, the model would calculate the probability distribution for candidate translations by assuming the previous word is <code class="docutils literal notranslate"><span class="pre">Mary</span></code>, regardless of the actual distribution. Otherwise it would be very difficult for the model to learn.</p>
+</section>
+</section>
+<section id="Inference/translate">
+<h2>Inference/translate<a class="headerlink" href="#Inference/translate" title="Permalink to this headline">¶</a></h2>
+<p>The following script can be used to translate new sentences. Each new sentence occupies a new line in the file <code class="docutils literal notranslate"><span class="pre">source.txt</span></code> and the translations are redirected to <code class="docutils literal notranslate"><span class="pre">target.txt</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq-interactive --input<span class="o">=</span>source.txt <span class="se">\</span>
+data/mt-bin <span class="se">\</span>
+--path data/mt-pt/checkpoint_best.pt <span class="se">\</span>
+--beam <span class="m">5</span> <span class="se">\</span>
+--source-lang es <span class="se">\</span>
+--target-lang en &gt; target.txt
+</pre></div>
+</div>
+<section id="What-is-–beam?">
+<h3>What is –beam?<a class="headerlink" href="#What-is-–beam?" title="Permalink to this headline">¶</a></h3>
+<p>There are commonly two ways for the decoder (of translation model) to translate new sentences. Remember that contrary to the training period where the model knows the right translation, the decoder now doesn’t know the right answer for new sentences.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">greedy</span> <span class="pre">decoding</span></code> makes a bold assumption: the quality of the whole translated sentence can be optimized by taking each time the word with the largest score. Let’s say you want to translate the sentence <code class="docutils literal notranslate"><span class="pre">María</span> <span class="pre">es</span> <span class="pre">hermosa</span></code>. This means that at each step where a new word is to be translated, the model always select the word with the maximum possibility.</p>
+<p>Howeven, this local view can be non ideal. Sometimes you want to consider long-term benefits and it’s exactly the case here because we want a overall good quality at the sentence level. This is the <code class="docutils literal notranslate"><span class="pre">Beam</span> <span class="pre">search</span> <span class="pre">decoding</span></code>.</p>
+<p>This kind of long-term thinking is prevalent in life. Let’s say that you want to go from A to Z. The first possibility (A-B-C-Z) has the score (1-4-2-2) and the second option (A-D-E-Z) has the score (1-3-4-5). If you take the first itinerary, you are using the <code class="docutils literal notranslate"><span class="pre">greedy</span> <span class="pre">decoding</span></code> because <code class="docutils literal notranslate"><span class="pre">B</span></code> gives a better score than <code class="docutils literal notranslate"><span class="pre">D</span></code> (4&gt;3). However, the second option gives a much higher total score (13&gt;9).</p>
+</section>
+<section id="We-can’t-try-out-every-possibility">
+<h3>We can’t try out every possibility<a class="headerlink" href="#We-can’t-try-out-every-possibility" title="Permalink to this headline">¶</a></h3>
+<p>Since the total words in a dictionary is often huge and it is impossible to test each path possible (for each new word there are n possibilities). It is often necessary to make a compromise and choose a maximum option at each time step (word step for translation). Here we choose 5, meaning that at each new word we choose 5 possible words.</p>
+<p>Let’s see the translations :) We use the interactive mode here because the input file is raw text. For binarized data, use <code class="docutils literal notranslate"><span class="pre">fairseq-generate</span></code>. See <a class="reference external" href="https://fairseq.readthedocs.io/en/latest/getting_started.html">here</a>.</p>
+<p>A line prefixed with O is a copy of the original source sentence; H is the hypothesis along with an average log-likelihood; D (same as H here), the detokenized hypothesis; and P is the positional score per token position, including the <code class="docutils literal notranslate"><span class="pre">end-of-sentence</span></code> marker which is omitted from the text. Since the translation of <code class="docutils literal notranslate"><span class="pre">Hola</span></code> is <code class="docutils literal notranslate"><span class="pre">Hi</span> <span class="pre">!</span></code>, there are 3 positional score for the whole sentence (+<code class="docutils literal notranslate"><span class="pre">end-of-sentence</span></code>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>cat target.txt
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+S-0     Hola
+W-0     0.052   seconds
+H-0     -1.278975486755371      Hi !
+D-0     -1.278975486755371      Hi !
+P-0     -1.3579 -2.1726 -0.3064
+S-1     Me llamo John
+W-1     0.048   seconds
+H-1     -1.3514807224273682     I &amp;apos;m called John .
+D-1     -1.3514807224273682     I &amp;apos;m called John .
+P-1     -0.3346 -1.4456 -4.4575 -0.7365 -1.1340 -0.0007
+S-2     Encantado de conocerte
+W-2     0.061   seconds
+H-2     -1.2823961973190308     Try to meet you again .
+D-2     -1.2823961973190308     Try to meet you again .
+P-2     -3.4609 -0.1466 -1.5243 -0.2264 -3.3591 -0.2586 -0.0009
+S-3     Últimamente llueve mucho
+W-3     0.060   seconds
+H-3     -1.3773524761199951     It &amp;apos;s raining a lot of time .
+D-3     -1.3773524761199951     It &amp;apos;s raining a lot of time .
+P-3     -2.1072 -1.2201 -0.8574 -2.9196 -0.7664 -0.1294 -3.8994 -0.4957 -0.0010
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Conclusion,-possible-improvements-and-variations">
+<h2>Conclusion, possible improvements and variations<a class="headerlink" href="#Conclusion,-possible-improvements-and-variations" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we go through the whole process of training a NMT model. We use LSTM as building blocks for both the encoder and the decoder. We hope that you can see how simple it is to use <code class="docutils literal notranslate"><span class="pre">fairseq</span></code> for NMT tasks.</p>
+<p>Multiple improvements are however possible, mainly:</p>
+<ol class="arabic simple">
+<li><p>Hyperparameter tuning.</p></li>
+<li><p>More bitexts.</p></li>
+<li><p>Using other architectures than LSTM-based single embedding approach.</p></li>
+</ol>
+<p>The third point is especially important. As we mentioned in the first section <code class="docutils literal notranslate"><span class="pre">RNN</span> <span class="pre">and</span> <span class="pre">its</span> <span class="pre">major</span> <span class="pre">downside</span></code>, it was usual to encode the whole sentence as a single vector despite the length. It’s easy to see that the longer a sentence is, the much information would be lost and the more difficult it is to translate. For how this issue is tackled, see the following article:</p>
+<p>Bahdanau, D., Cho, K., &amp; Bengio, Y. (2016). Neural Machine Translation by Jointly Learning to Align and Translate. ArXiv:1409.0473 [Cs, Stat]. http://arxiv.org/abs/1409.0473</p>
+<p>Also, it is very common to rephrase some other NLP tasks as a translation problem, such as:</p>
+<ol class="arabic simple">
+<li><p>Chatbot</p></li>
+<li><p>Question Answering</p></li>
+<li><p>Grammatical Error Correction</p></li>
+</ol>
+<p>We’ll talk about these different perspectives in other tutorials using other architectures such as Transformer.</p>
+<p>Stay tuned :)</p>
+</section>
+</section>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2022, Xiaoou Wang
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="../sources/nlp/06_machine_translation.ipynb.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">How to build a LSTM-based Neural Machine Translation model with fairseq</a><ul>
+<li><a class="reference internal" href="#RNN,-typical-use-(before-attention)-and-major-downside">RNN, typical use (before attention) and major downside</a></li>
+<li><a class="reference internal" href="#Data-preparation">Data preparation</a></li>
+<li><a class="reference internal" href="#Training">Training</a><ul>
+<li><a class="reference internal" href="#So-how-the-model-is-trained?">So how the model is trained?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Inference/translate">Inference/translate</a><ul>
+<li><a class="reference internal" href="#What-is-–beam?">What is –beam?</a></li>
+<li><a class="reference internal" href="#We-can’t-try-out-every-possibility">We can’t try out every possibility</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Conclusion,-possible-improvements-and-variations">Conclusion, possible improvements and variations</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script src="../static/jquery.js"></script>
+    <script src="../static/underscore.js"></script>
+    <script src="../static/doctools.js"></script>
+    <script src="../static/clipboard.min.js"></script>
+    <script src="../static/copybutton.js"></script>
+    <script src="../static/tabs.js"></script>
+    <script >
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WGY2PHYB"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-58WGY2PHYB');
+</script>
+<!-- Default Statcounter code for nlpinfrench
+http://nlpinfrench.fr -->
+<script type="text/javascript">
+var sc_project=12500373;
+var sc_invisible=1;
+var sc_security="def60251";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/12500373/0/def60251/1/"
+alt="Web Analytics Made Easy -
+StatCounter"></a></div></noscript>
+<!-- End of Statcounter Code -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
+</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../static/custom.js"></script>
+    <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

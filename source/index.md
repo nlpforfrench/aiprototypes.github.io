@@ -32,6 +32,8 @@ math/index
 
 - [5. Why using log scale 🇬🇧](nlp/05_log_scale)
 
+- [6. How to build a LSTM-based Neural Machine Translation model with fairseq](nlp/06_machine_translation)
+
 ## Transformers in NLP with PyTorch, TensorFlow and Hugging Face <i class='fas fa-ribbon'></i>
 
 - [1. 10 questions on Bert 🇬🇧](transformers/01_theorie_en)
