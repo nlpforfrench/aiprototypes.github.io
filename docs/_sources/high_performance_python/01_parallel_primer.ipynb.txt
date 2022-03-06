@@ -58,7 +58,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Get the filenames and have a peek at the size of each file\n",
+    "## Get the filenames and have a peek at the size of each file\n",
     "\n",
     "In our case, their extensions are `.7z` and they are located in the `/Users/xiaoou/Downloads/frwac_7z/` directory. We can use `glob` to get the list of filenames. As you can see from the output, these files are quite huge and can take some time if we unzip them one by one."
    ]
@@ -96,7 +96,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Run the test with multiple cores and 1 single core\n",
+    "## Run the test with multiple cores and 1 single core\n",
     "\n",
     "So let’s use multiprocessing. The key component here is Pool which specifies how many cores that we want to use to process files at the same time (1 core per file). See the unzip_7z function which is quite self-explainable. Here I use the map function to run the extract_7z function on each .7z file.\n",
     "\n",
@@ -148,7 +148,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "When using 16 cores, the total time of unzipping these 18 files is 42 seconds, while using only 1 core takes 262 seconds!\n",
+    "When using 16 cores, the total time of unzipping these 4 files is 12.4 seconds, while using only 1 core takes 45.8 seconds!\n",
     "\n",
     "## Conclusion\n",
     "\n",
