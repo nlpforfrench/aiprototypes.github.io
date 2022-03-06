@@ -18,8 +18,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'NLP in French'
-copyright = '2021, Xiaoou Wang'
+project = 'NLP for French'
+copyright = '2022, Xiaoou Wang'
 author = 'Xiaoou Wang'
 
 # html_theme_options = {
@@ -79,7 +79,7 @@ templates_path = ['templates']
 # html_theme = 'sphinx_rtd_theme'
 # html_theme = 'asteroid_sphinx_theme'
 html_theme = 'furo'
-html_title = "NLP in French"
+html_title = "NLP for French"
 
 nbsphinx_execute = 'auto'
 
