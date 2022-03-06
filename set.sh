@@ -17,7 +17,7 @@ grep -rl sources . | xargs gsed -i "s/_images/images/g"
 rm -rf images
 cp -rf _images images
 #find . -type f -print0 | xargs -0 perl -pi -e 's/\'
-echo "nlpinfrench.fr" > CNAME
+echo "nlpforfrench.fr" > CNAME
 cd ..
 cp ./gumshoe-5.1.2-patched.js build/html/static/scripts/
 cp ./gumshoe-5.1.2-patched.js docs/static/scripts/

@@ -1,4 +1,4 @@
-# [NLP in French](https://nlpforfrench.fr)
+# [NLP for French](https://nlpforfrench.fr)
 
 ## A buffet of awesome NLP tutorials in French/English
 
