@@ -1,3 +1,5 @@
+# Why using log scale?
+
 ## What is the function of log scale
 
 Logarithmic scale makes differences of small values more visible vs. diff of large values.
