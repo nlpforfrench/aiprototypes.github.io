@@ -601,6 +601,7 @@ the difference between this distribution and the true distribution (cross entrop
 <section id="Inference/translate">
 <h2>Inference/translate<a class="headerlink" href="#Inference/translate" title="Permalink to this headline">¶</a></h2>
 <p>The following script can be used to translate new sentences. Each new sentence occupies a new line in the file <code class="docutils literal notranslate"><span class="pre">source.txt</span></code> and the translations are redirected to <code class="docutils literal notranslate"><span class="pre">target.txt</span></code>.</p>
+<p>Since the decoder uses the output of the encoder to generate new texts, the model is called <code class="docutils literal notranslate"><span class="pre">conditional</span> <span class="pre">language</span> <span class="pre">model</span></code>. Also, it’s a <code class="docutils literal notranslate"><span class="pre">auroregressive</span></code> model because ot always generate text from left to right.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq-interactive --input<span class="o">=</span>source.txt <span class="se">\</span>
 data/mt-bin <span class="se">\</span>
 --path data/mt-pt/checkpoint_best.pt <span class="se">\</span>
