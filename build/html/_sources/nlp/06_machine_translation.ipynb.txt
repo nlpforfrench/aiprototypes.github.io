@@ -14,7 +14,7 @@
     "\n",
     "## RNN, typical use (before attention) and major downside\n",
     "\n",
-    "We mentioned that LSTM was a type of RNN. One of the main drawbacks of the traditional way of using RNN in Seq2Seq (in our case both the encoder and the decoder use LSTMs) is that the encoder transforms a sentence into a single vector (the last hidden state) regardless of the sentence's length. The state-of-the-art use the transformer architecture that we will introduce later in another article."
+    "We mentioned that LSTM was a type of RNN. One of the main drawbacks of the traditional way of using RNN in Seq2Seq (in our case both the encoder and the decoder use LSTMs) is that the encoder transforms a sentence into a single vector (the last hidden state) regardless of the sentence's length. The state-of-the-art uses the transformer architecture that we will introduce later in another article."
    ]
   },
   {
@@ -23,7 +23,7 @@
    "source": [
     "## Data preparation\n",
     "\n",
-    "In machine translation, one would typically has a parallel text corpus (also called bitexts) in the following fashion:\n",
+    "In machine translation, one would typically have a parallel text corpus (also called bitexts) in the following fashion:\n",
     "\n",
     "`Let's try something.\\tPermíteme intentarlo.`\n",
     "\n",
@@ -134,7 +134,7 @@
    "source": [
     "## Training\n",
     "\n",
-    "Let's kick-start the training process. It's easy to see from the bash script that we use lstm (default embedding size is 512) as building units, together with the use of adam optimizer and a learning rate of 1.0e-3. The choice of hyperparameters is a tricky engineering problem better tackled using `tensorflow`, see for example [https://github.com/tensorflow/tensor2tensor#translation](https://github.com/tensorflow/tensor2tensor#translation). In this tutorial, we will use some random values. Also note the `save-dir` option specifying the output path for models. The training would continue infinitely and each time an epoch ends, the checkpoint (model's parameters) is saved in `data/mt-cp`. Also, after each epoch, the loss is automatically calculated on the train and val. Whenever you pressed `Ctrl-C`, the training is stopped. The number of epochs you wait until `Ctrl-C` is called **patience**."
+    "Let's kick-start the training process. It's easy to see from the bash script that we use lstm (default embedding size is 512) as building units, together with the use of adam optimizer and a learning rate of 1.0e-3. `max-tokens` defines the number of tokens loaded on a single batch.The choice of hyperparameters is a tricky engineering problem better tackled using `tensorflow`, see for example [https://github.com/tensorflow/tensor2tensor#translation](https://github.com/tensorflow/tensor2tensor#translation). In this tutorial, we will use some random values. Also note the `save-dir` option specifying the output path for models. The training would continue infinitely and each time an epoch ends, the checkpoint (model's parameters) is saved in `data/mt-cp`. Also, after each epoch, the loss is automatically calculated on the train and val. Whenever you pressed `Ctrl-C`, the training is stopped. The number of epochs you wait until `Ctrl-C` is called **patience**."
    ]
   },
   {
@@ -224,7 +224,7 @@
     "\n",
     "The following script can be used to translate new sentences. Each new sentence occupies a new line in the file `source.txt` and the translations are redirected to `target.txt`. \n",
     "\n",
-    "Since the decoder uses the output of the encoder to generate new texts, the model is called `conditional language model`. Also, it's a `auroregressive` model because ot always generate text from left to right.\n",
+    "Since the decoder uses the output of the encoder to generate new texts, the model is called `conditional language model`. Also, it's a `auroregressive` model because it always generate text from left to right.\n",
     "\n",
     "```bash\n",
     "fairseq-interactive --input=source.txt \\\n",
@@ -320,9 +320,11 @@
     "2) More bitexts.\n",
     "3) Using other architectures than LSTM-based single embedding approach.\n",
     "\n",
-    "The third point is especially important. As we mentioned in the first section `RNN and its major downside`, it was usual to encode the whole sentence as a single vector despite the length. It's easy to see that the longer a sentence is, the much information would be lost and the more difficult it is to translate. For how this issue is tackled, see the following article:\n",
+    "The third point is especially important. As we mentioned in the first section `RNN and its major downside`, it was usual to encode the whole sentence as a single vector despite the length. So the longer a sentence is, more information would be lost and more difficult it is to translate. For how this issue is tackled, see the following article:\n",
     "\n",
     "Bahdanau, D., Cho, K., & Bengio, Y. (2016). Neural Machine Translation by Jointly Learning to Align and Translate. ArXiv:1409.0473 [Cs, Stat]. http://arxiv.org/abs/1409.0473\n",
+    "\n",
+    "In fact, the `lstm` option used in `fairseq` implements already an attention mechanism (technically it's a form of cross-attention) because the latter is now a de facto standard in machine translation. Later we will see how to use `self-attention`, an architecture which has literally revolutionized the way to tackle most NLP tasks.\n",
     "\n",
     "Also, it is very common to rephrase some other NLP tasks as a translation problem, such as:\n",
     "\n",
