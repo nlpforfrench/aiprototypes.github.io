@@ -34,6 +34,8 @@ math/index
 
 - [6. How to build a LSTM-based Neural Machine Translation model with fairseq 🇬🇧](nlp/06_machine_translation)
 
+- [7. Everything is translation, build a chatbot using attention and self-attention in fairseq 🇬🇧](nlp/07_chatbot)
+
 ## Transformers in NLP with PyTorch, TensorFlow and Hugging Face <i class='fas fa-ribbon'></i>
 
 - [1. 10 questions on Bert 🇬🇧](transformers/01_theorie_en)
