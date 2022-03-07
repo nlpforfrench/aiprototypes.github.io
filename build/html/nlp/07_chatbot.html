@@ -437,12 +437,13 @@ div.rendered_html tbody tr:hover {
 </style>
 <section id="Everything-is-translation-(Build-a-chatbot-using-attention-and-self-attention-in-fairseq)">
 <h1>Everything is translation (Build a chatbot using attention and self-attention in fairseq)<a class="headerlink" href="#Everything-is-translation-(Build-a-chatbot-using-attention-and-self-attention-in-fairseq)" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://xiaoouwang.github.io">Xiaoou Wang</a></p>
 <section id="Build-a-simple-chatbot-using-NMT-model">
 <h2>Build a simple chatbot using NMT model<a class="headerlink" href="#Build-a-simple-chatbot-using-NMT-model" title="Permalink to this headline">¶</a></h2>
 <p>Chatbots are quite popular these days. Modern models can even tell corny jokes (like <a class="reference external" href="https://ai.googleblog.com/2020/01/towards-conversational-agent-that-can.html">Google’s Meena</a>).</p>
 <p>If you followed <a class="reference external" href="./06_machine_translation">the tutorial on build Neural translation model</a>, you have actually learnt the basics needed for building a chatbot. Surprising? Maybe not :) Actually, in a chatbot setting, it’s common to consider the question as the text to be “translated” and the answer as an translation.</p>
 <p>The bitext is thus a file consisting of lines separated often by <code class="docutils literal notranslate"><span class="pre">\t</span></code>: the first item being the question and the last item the response.</p>
-<p>For the sake of simplicity, I’m not going to review the essential concepts again, do see the previous tutorial and come back here if there are some terms appearing cryptic to you.</p>
+<p>For the sake of simplicity, I’m not going to review the essential concepts again, do read the previous tutorial and come back here if there are some terms appearing cryptic to you.</p>
 <p>Just like NMT task, it’s common to have two files, one for the questions and another for the answers. If we use the translation terminology, the questions are <code class="docutils literal notranslate"><span class="pre">fr</span></code> (foreign) and the answers are <code class="docutils literal notranslate"><span class="pre">en</span></code> (English, since early translation systems mostly translate to English).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -581,7 +582,7 @@ time step of translation, the decoder has access to a different, weighted repres
 </section>
 <section id="And-the-self-attention-?">
 <h2>And the self-attention ?<a class="headerlink" href="#And-the-self-attention-?" title="Permalink to this headline">¶</a></h2>
-<p>The attention mechanism solves the issue of the single vector representation. However, it is still facing another problem: long-range dependence. As a sentence’s length increases, it would be more and more difficult to “remember” relations between different elements inside a sentence.</p>
+<p>The attention mechanism is designed to tackle the issue of the single vector representation. However, it is still facing another problem: long-range dependence. As a sentence’s length increases, it would be more and more difficult to “remember” relations between different elements inside a sentence.</p>
 <p>For instance, in the sentence “The neighbor is not here today because of the vacation, that’s why his cat keeps meowing.”. It is very difficult for a RNN unit to know that <code class="docutils literal notranslate"><span class="pre">his</span></code> is related to <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">neighbor</span></code> since too many words lie between these two phrases. However, a simple rule like <code class="docutils literal notranslate"><span class="pre">his</span></code> is always related to the nearest human pronoun should work.</p>
 <p>In another words, this kind of <code class="docutils literal notranslate"><span class="pre">random</span> <span class="pre">access</span></code> is more efficient than the <code class="docutils literal notranslate"><span class="pre">linear</span> <span class="pre">access</span></code> way of RNNs.</p>
 <p>On a higher level, one could say that the context vector is the inputs themselves. So this form of attention is called <code class="docutils literal notranslate"><span class="pre">self-attention</span></code>, the use of the latter in encoder and decoder has led to a new neural network architecture called transformer. The use of transformer and transfer learning in a variety of nlp tasks has enabled researchers to achieve new scores on leadboards.</p>
@@ -619,15 +620,11 @@ data/chatbot-bin \
 --save-dir data/chatbot-cp-transformer
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
-</div>
+</section>
+<section id="Conclusions">
+<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Permalink to this headline">¶</a></h2>
+<p>That’s it :) You know how to build a simple chatbot right now. Next time we will talk about how to use NMT models to implement Grammatical Error Correction (GEC) and especially, how the whole architecture can be used to produce <code class="docutils literal notranslate"><span class="pre">noisy</span> <span class="pre">texts</span></code> (texts containing errors).</p>
+<p>Stay tuned :)</p>
 </section>
 </section>
 
@@ -672,6 +669,7 @@ data/chatbot-bin \
 <li><a class="reference internal" href="#So-what-is-attention">So what is attention</a></li>
 <li><a class="reference internal" href="#And-the-self-attention-?">And the self-attention ?</a></li>
 <li><a class="reference internal" href="#How-to-use-self-attention-in-fairseq?">How to use self-attention in fairseq?</a></li>
+<li><a class="reference internal" href="#Conclusions">Conclusions</a></li>
 </ul>
 </li>
 </ul>
