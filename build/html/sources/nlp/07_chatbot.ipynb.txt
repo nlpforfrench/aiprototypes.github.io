@@ -17,7 +17,7 @@
     "\n",
     "Chatbots are quite popular these days. Modern models can even tell corny jokes (like [Google's Meena](https://ai.googleblog.com/2020/01/towards-conversational-agent-that-can.html)).\n",
     "\n",
-    "If you followed [the tutorial on build Neural translation model](./06_machine_translation), you have actually learnt the basics needed for building a chatbot. Surprising? Maybe not :) Actually, in a chatbot setting, it's common to consider the question as the text to be \"translated\" and the answer as an translation.\n",
+    "If you followed [the tutorial on build Neural translation model](./06_machine_translation), you have actually learned the basics needed for building a chatbot. Surprising? Maybe not :) Actually, in a chatbot setting, it's common to consider the question as the text to be \"translated\" and the answer as an translation.\n",
     "\n",
     "The bitext is thus a file consisting of lines separated often by `\\t`: the first item being the question and the last item the response."
    ]
