@@ -14,3 +14,4 @@ sphinx-copybutton==0.3.1
 sphinx-inline-tabs==2021.3.19b5
 myst-parser==0.13.5
 sphinx-gallery==0.8.2
+sphinx_autorun
