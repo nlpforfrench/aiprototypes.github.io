@@ -6,7 +6,8 @@ $('.hide-eng').click(function () {
 $('.hide-fr').click(function () {
   $('a[href*="en.html"]').parent().parent().not('ul').show();
   $('a[href*="fr.html"]').parent().parent().not('ul').hide();
-  $('a:contains(.fr)').parent().parent().not('ul').hide();
+  $('a[href*=".fr"]').parent().parent().not('ul').hide();
+  //   $('a:contains(.fr)').parent().parent().not('ul').hide();
 });
 
 $('.show-all').click(function () {
