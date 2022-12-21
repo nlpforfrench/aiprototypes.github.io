@@ -20,14 +20,16 @@ codebase/index
 math/index
 ```
 
-## Case studies written for [DemoTal](https://demotal.fr/), a project of APIL-French tech du NLP supported by the French Ministry of Culture <i class='fas fa-ribbon'></i>
-
+## Case studies developed for [DemoTal](https://demotal.fr/), a project of APIL-French tech du NLP supported by the French Ministry of Culture <i class='fas fa-ribbon'></i>
 
 - [1. Semi-automatic analysis of biomedical text 🇫🇷](https://www.demotal.fr/etudes-de-cas/exploiter-les-textes-biomedicaux-de-maniere-semi-automatisee/)
 - [2. Better understand spell checkers to make informed decisions 🇫🇷](https://www.demotal.fr/etudes-de-cas/comprendre-pour-mieux-choisir-le-cas-des-correcteurs-orthographiques/)
-<!-- - [3. Argue instead of blocking: moderating online comments while promoting debate 🇫🇷](nlp/01_compara_anno_fr)
-- [1. Semi-automatic analysis of biomedical text 🇫🇷](nlp/01_compara_anno_fr)
-- [1. Semi-automatic analysis of biomedical text 🇫🇷](nlp/01_compara_anno_fr) -->
+- [3. Argue instead of blocking: moderating online comments while promoting debate 🇫🇷](https://www.demotal.fr/etudes-de-cas/argumenter-au-lieu-de-bloquer-moderer-des-commentaires-en-ligne-tout-en-promouvant-le-debat/)
+- [3. Argue instead of blocking: moderating online comments while promoting debate 🇫🇷](https://www.demotal.fr/etudes-de-cas/argumenter-au-lieu-de-bloquer-moderer-des-commentaires-en-ligne-tout-en-promouvant-le-debat/)
+- [4. Beyond the simple positive-negative dichotomy, discover the aspect-based sentiment analysis (ABSA)](https://www.demotal.fr/etudes-de-cas/au-dela-de-la-simple-dichotomie-positif-negatif-decouvrez-lanalyse-de-sentiments-a-base-daspects/)
+- [5. Extractive question answering from customer reviews](https://www.demotal.fr/etudes-de-cas/extraire-des-reponses-a-des-questions-de-prospects-a-partir-des-avis-clients/)
+- [6. Conducting POCs with limited data? From data quality to zero-shot learning](https://www.demotal.fr/etudes-de-cas/que-faire-en-cas-de-donnees-insuffisantes-approche-centree-sur-les-donnees-et-few-shot-learning/)
+
 ## NLP and Machine Learning-related <i class='fas fa-ribbon'></i>
 
 - [1. Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷](nlp/01_compara_anno_fr)
