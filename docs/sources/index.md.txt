@@ -1,6 +1,6 @@
-# [NLP for French](https://nlpforfrench.fr)
+# [AI prototypes](aiprototypes.com)
 
-## A buffet of awesome NLP tutorials in French/English
+## Fast prototypes for Artificial Intelligence Projects
 
 ```{raw} html
 :file: profile.html
@@ -25,10 +25,9 @@ math/index
 - [1. Semi-automatic analysis of biomedical text 🇫🇷](https://www.demotal.fr/etudes-de-cas/exploiter-les-textes-biomedicaux-de-maniere-semi-automatisee/)
 - [2. Better understand spell checkers to make informed decisions 🇫🇷](https://www.demotal.fr/etudes-de-cas/comprendre-pour-mieux-choisir-le-cas-des-correcteurs-orthographiques/)
 - [3. Argue instead of blocking: moderating online comments while promoting debate 🇫🇷](https://www.demotal.fr/etudes-de-cas/argumenter-au-lieu-de-bloquer-moderer-des-commentaires-en-ligne-tout-en-promouvant-le-debat/)
-- [3. Argue instead of blocking: moderating online comments while promoting debate 🇫🇷](https://www.demotal.fr/etudes-de-cas/argumenter-au-lieu-de-bloquer-moderer-des-commentaires-en-ligne-tout-en-promouvant-le-debat/)
-- [4. Beyond the simple positive-negative dichotomy, discover the aspect-based sentiment analysis (ABSA)](https://www.demotal.fr/etudes-de-cas/au-dela-de-la-simple-dichotomie-positif-negatif-decouvrez-lanalyse-de-sentiments-a-base-daspects/)
-- [5. Extractive question answering from customer reviews](https://www.demotal.fr/etudes-de-cas/extraire-des-reponses-a-des-questions-de-prospects-a-partir-des-avis-clients/)
-- [6. Conducting POCs with limited data? From data quality to zero-shot learning](https://www.demotal.fr/etudes-de-cas/que-faire-en-cas-de-donnees-insuffisantes-approche-centree-sur-les-donnees-et-few-shot-learning/)
+- [4. Beyond the simple positive-negative dichotomy, discover the aspect-based sentiment analysis (ABSA) 🇫🇷](https://www.demotal.fr/etudes-de-cas/au-dela-de-la-simple-dichotomie-positif-negatif-decouvrez-lanalyse-de-sentiments-a-base-daspects/)
+- [5. Extractive question answering from customer reviews 🇫🇷](https://www.demotal.fr/etudes-de-cas/extraire-des-reponses-a-des-questions-de-prospects-a-partir-des-avis-clients/)
+- [6. Conducting POCs with limited data? From data quality to zero-shot learning 🇫🇷](https://www.demotal.fr/etudes-de-cas/que-faire-en-cas-de-donnees-insuffisantes-approche-centree-sur-les-donnees-et-few-shot-learning/)
 
 ## NLP and Machine Learning-related <i class='fas fa-ribbon'></i>
 
