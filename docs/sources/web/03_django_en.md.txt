@@ -1,6 +1,6 @@
 # Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧
 
-[Xiaoou Wang](https://xiaoouwang.github.io)
+[Xiaoou Wang](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
 
 It can be quite frustrating/challenging for django newbies to deploy their app because a bunch of new concepts should be known in order to play the game with confidence. This tutorial gives you all the basics and further reference. The structure of the project can be seen in the following screenshot: the project `my_blog` is itself located in the `blog` folder.
 
@@ -154,7 +154,7 @@ python manage.py runserver 0.0.0.0:8000
 
 Go to [http://server_domain_or_IP:8000](http://server_domain_or_IP:8000), it's very important to use http since you haven't set ssl certificate (no https support)
 
-Now test the gunicorn. Gunicorn is an `application server` which serves your django app. 
+Now test the gunicorn. Gunicorn is an `application server` which serves your django app.
 
 ```bash
 gunicorn --bind 0.0.0.0:8000 my_blog.wsgi

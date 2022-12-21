@@ -1,10 +1,10 @@
 # Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷
 
-[Xiaoou WANG](https://xiaoouwang.github.io), [Xingyu LIU](https://www.linkedin.com/in/xingyu-liu-aba896a1/) 
+[Xiaoou WANG](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en), [Xingyu LIU](https://www.linkedin.com/in/xingyu-liu-aba896a1/)
 
 ## Introduction
 
-La classification de textes est une tâche courante en traitement automatique des langues (TAL). Dans ce tutoriel nous allons explorer diverses features (TF-IDF, plongement lexical, features linguistiques) alimentant à leur tour des modèles variés dont entre autres la régression logistique, classification naïve bayésienne et perceptron multicouche. 
+La classification de textes est une tâche courante en traitement automatique des langues (TAL). Dans ce tutoriel nous allons explorer diverses features (TF-IDF, plongement lexical, features linguistiques) alimentant à leur tour des modèles variés dont entre autres la régression logistique, classification naïve bayésienne et perceptron multicouche.
 
 Le but de ce tutoriel est de construire un classifieur qui permet de catégoriser correctement des textes en 3 classes : société, économie et politique.
 
@@ -13,13 +13,13 @@ Exclusivités :D
 ```
 
 1)	Le corpus a été construit grâce au site des archives de « le monde ». Regardez [ici](../web/01_lemonde) pour un tutoriel rapide.
-      
+
 2)	Une mise en parallèle a été soigneusement construite pour montrer l’efficacité des vecteurs lexicaux entraînés sur un corpus spécifique qui atteint la même performance d’un modèle à partir du corpus frWac de 1.6 milliards de mots  (Fauconnier, 2015).
-      
-3)	Le package Lime (Ribeiro et al., 2016) a été utilisé pour comprendre et par la suite améliorer les features. 
-      
-4)	Quelques features linguistiques dites expertes ont été construites pour améliorer la performance de classification suite à une sélection manuelle s’appuyant sur la régression logistique. 
-      
+
+3)	Le package Lime (Ribeiro et al., 2016) a été utilisé pour comprendre et par la suite améliorer les features.
+
+4)	Quelques features linguistiques dites expertes ont été construites pour améliorer la performance de classification suite à une sélection manuelle s’appuyant sur la régression logistique.
+
 5)	Ce tutoriel est un issu d'un travail d'équipe, nous avons veillé au bon déroulement et à la bonne répartition des tâches en mettant en place toute une panoplie d’outils en logistique comme `la méthode agile`, [Github](https://github.com/xiaoouwang/tuto_classification), `Omniplan` (outil de gestion de projet) et un document [Google Docs](https://docs.google.com/document/d/11vaB74HV0GxerkVm9Pv_mgnhXN27QVegFYPdPA34t5g/edit?usp=sharing) auquel vous pouvez vous référer pour revoir comment ce tutoriel d'équipe a été réalisé pendant plus d'un mois.
 
 La répartition des tâches est illustrée succinctement par la Figure 1 :
@@ -30,21 +30,21 @@ Figure 1 : Répartition des tâches pendant l'écriture de ce tutoriel
 
 ## Structure du tutoriel
 
-1. Nous présentons le prétraitement de notre corpus. 
+1. Nous présentons le prétraitement de notre corpus.
 
-2. Ensuite nous utilisons TF-IDF comme feature et un classifieur bayésien pour établir une baseline. Le package `Lime` est utilisé pour comprendre le fonctionnement du classifieur qui a ensuite permis une légère amélioration de performance. 
+2. Ensuite nous utilisons TF-IDF comme feature et un classifieur bayésien pour établir une baseline. Le package `Lime` est utilisé pour comprendre le fonctionnement du classifieur qui a ensuite permis une légère amélioration de performance.
 
 3. La baseline établie, divers modèles vectoriels sont entraînés sur des corpus de différentes tailles en utilisant différents paramètres. Cela nous a permis d'étudier les effets des paramètres et de la taille du corpus d'entraînement.
 
 4. Enfin pour davantage augmenter la précision de classification nous introduisons quelques features linguistiques expertes, ces dernières étant soumises à un test basé sur la régression logistique pour que les features les plus pertinentes puissent être mises en avant.
 
-## Prétraitement du corpus 
+## Prétraitement du corpus
 
 Nous avons scrapé 9000 articles par thème. Les thèmes principaux sont : société, sport, économie, culture et politique. Nous avons ensuite sélectionné aléatoirement 1000 articles pour la tâche de classification.
 
 La tokenisation a été effectuée avec le package Stanza (Qi et al., 2020). Ce tokeniseur a notamment l’avantage de regrouper par défaut des mots séparés par tiret du type « gratte-ciel », alors que dans Spacy un tel comportement nécessite une configuration ad hoc engendrant d’autres problèmes.
 
-Nous avons aussi essayé de regrouper les entités nommées dans un seul token car cela permet de garder des informations sémantiques intactes. Dans Spacy il est facile d’y procéder ainsi mais dans Stanza il n’existe pas de fonction pré-définie. Nous avons donc soumis un [issue](https://github.com/stanfordnlp/stanza/issues/583) sur Github et proposé notre propre solution sur le même lien au cas où cela pourrait servir la communauté. 
+Nous avons aussi essayé de regrouper les entités nommées dans un seul token car cela permet de garder des informations sémantiques intactes. Dans Spacy il est facile d’y procéder ainsi mais dans Stanza il n’existe pas de fonction pré-définie. Nous avons donc soumis un [issue](https://github.com/stanfordnlp/stanza/issues/583) sur Github et proposé notre propre solution sur le même lien au cas où cela pourrait servir la communauté.
 
 Ensuite nous avons lemmatisé les tokens et enlevé les mots vides et ponctuation. Pour la liste des mots vides nous avons combiné les ensembles proposés par `NLTK` et `Spacy`. Notons que cette étape, en enlevant les tokens peu pertinents à chaque document, constitue en essence une tentative de réduction de dimensionnalité.
 
@@ -64,13 +64,13 @@ Figure 3 : Structure du corpus enrichi en xml
 
 ### Établissement d’une baseline
 
-Vu que notre classifieur recourra principalement au plongement lexical, il nous a paru utile d’établir une baseline en utilisant un vecteur TF-IDF. 
+Vu que notre classifieur recourra principalement au plongement lexical, il nous a paru utile d’établir une baseline en utilisant un vecteur TF-IDF.
 
 Un document peut être représenté de diverses façons selon le traitement des mots contenus dans le document. Le modèle le plus simple est le sac de mots qui compte l'occurrence de chaque token afin de générer une matrice documents-termes (MDT). Ce modèle est quelque peu simpliste car l'occurrence des tokens augmente en fonction de la longueur du document. Pour remédier à ce défaut la MDT peut être modifiée pour représenter non plus la fréquence absolue mais la fréquence relative des tokens. Cependant il subsiste toujours le problème des mots vides car ces derniers sont quasiment toujours les plus fréquents (cf. la loi de Zipf à ce propos).
 
 Pour faire face à ce problème une autre mesure est proposée : celle de TF-IDF, la formule de cette mesure est la suivante :
 
-```{figure} 02_classification_lemonde_images/a322e8b3.png 
+```{figure} 02_classification_lemonde_images/a322e8b3.png
 :align: center
 Figure 4 : Formule de TF-IDF
 ```
@@ -85,7 +85,7 @@ Dans un premier temps nous avons essayé de classifier tous les 5 thèmes pour e
 
 Figure 5 : Matrice de confusion du classifieur bayésien sur les articles de 5 thèmes
 
-Le fait que les classes `économie, politique et société` sont les plus faciles à confondre pour le classifieur nous a décidés à choisir ces 3 thèmes pour notre projet. La Figure 6 rapporte les métriques principales à l’issue de cette sélection : 
+Le fait que les classes `économie, politique et société` sont les plus faciles à confondre pour le classifieur nous a décidés à choisir ces 3 thèmes pour notre projet. La Figure 6 rapporte les métriques principales à l’issue de cette sélection :
 
 ![](02_classification_lemonde_images/12d5a6a6.png)
 
@@ -133,13 +133,13 @@ Pour évaluer l’effet de modèle sur la performance de classification, nous av
 
 Table 2 : Performance des classifieurs binaires en fonction du modèle vectoriel
 
-Cette table nous permet de faire deux remarques : 
+Cette table nous permet de faire deux remarques :
 
 1) l’augmentation de la dimensionnalité ne s’accompagne pas d’une augmentation de performance.
 
 2) l’augmentation du nombre d’articles augmente la performance des vecteurs dans la tâche de classification. Cependant nous pouvons voir que l’accuracy des classes politique et société reste bas et le changement de modèle aussi bien sur le plan dimensionnel que sur le plan du nombre d’articles, apporte un gain de performance plus faible par rapport à d’autres combinaisons de classes.
 
-Nous utilisons ensuite divers classifieurs multi-classes (onevsRest, kNeighbors, SVM, Bayésien, Perceptron multicouche, etc.) pour mener la même comparaison de modèles, sans inclure l’effet de dimensionnalité. 
+Nous utilisons ensuite divers classifieurs multi-classes (onevsRest, kNeighbors, SVM, Bayésien, Perceptron multicouche, etc.) pour mener la même comparaison de modèles, sans inclure l’effet de dimensionnalité.
 
 Nous présentons ici que les meilleurs résultats obtenus par SVM car le but de ce travail n’est pas d’étudier les différences d’algorithmes, d’autant plus qu’il existe aujourd'hui un champ d’études appelé automated machine learning qui permet de chercher automatiquement le meilleur algorithme avec les meilleurs paramètres pour une tâche donnée.
 

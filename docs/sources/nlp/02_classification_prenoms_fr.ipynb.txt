@@ -1,801 +1,801 @@
 {
- "cells": [
-  {
-   "cell_type": "markdown",
-   "source": [
-    "# Classification de prénoms en genre (masculin/féminin) 🇫🇷\n",
-    "\n",
-    "[Xiaoou WANG](https://xiaoouwang.github.io)\n",
-    "\n",
-    "Cet exemple très simple issu du [livre](https://www.amazon.fr/Natural-Language-Processing-Python-Steven/dp/0596516495/ref=sr_1_11?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=nltk&qid=1616280931&sr=8-11) de Steven Bird vous donne une idée sur à quoi ressemble le boulot d'un ingénieur junior en Machine Learning.\n",
-    "\n",
-    "La tâche consiste à entraîner un classifieur bayésien pour prédire le genre d'un prénom.\n"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%% md\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Sélection de features\n",
-    "\n",
-    "On commence par prendre la dernière lettre d'un prénom comme feature et la stocker dans un dictionnaire."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "metadata": {
-    "ExecuteTime": {
-     "end_time": "2021-03-12T13:57:46.133538Z",
-     "start_time": "2021-03-12T13:57:46.130908Z"
-    }
-   },
-   "outputs": [
+  "cells": [
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "La dernière lettre du prnom Shrek est\n"
-     ]
+      "cell_type": "markdown",
+      "source": [
+        "# Classification de prénoms en genre (masculin/féminin) 🇫🇷\n",
+        "\n",
+        "[Xiaoou WANG](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)\n",
+        "\n",
+        "Cet exemple très simple issu du [livre](https://www.amazon.fr/Natural-Language-Processing-Python-Steven/dp/0596516495/ref=sr_1_11?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=nltk&qid=1616280931&sr=8-11) de Steven Bird vous donne une idée sur à quoi ressemble le boulot d'un ingénieur junior en Machine Learning.\n",
+        "\n",
+        "La tâche consiste à entraîner un classifieur bayésien pour prédire le genre d'un prénom.\n"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%% md\n"
+        }
+      }
     },
     {
-     "data": {
-      "text/plain": "{'last_letter': 'k'}"
-     },
-     "execution_count": 3,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "#! creation de last latter comme feature\n",
-    "\n",
-    "import nltk\n",
-    "from nltk.corpus import names\n",
-    "import random\n",
-    "random.seed(13)\n",
-    "def gender_features(word):\n",
-    "     return {'last_letter': word[-1]}\n",
-    "\n",
-    "print(\"La dernière lettre du pronom Shrek est\")\n",
-    "gender_features('Shrek')"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Mise en forme du corpus\n",
-    "\n",
-    "Le corpus provient de `nltk`. Ici on crée une liste de tuples grâce à quelques méthodes intégrées dans `nltk.corpus`. Notez l'emploi de list comprehension ici pour rendre le code plus concis tout en gardant la lisibilité."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 6,
-   "metadata": {
-    "ExecuteTime": {
-     "end_time": "2021-03-12T13:59:12.603355Z",
-     "start_time": "2021-03-12T13:59:11.440907Z"
-    }
-   },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Un échantillon du corpus\n"
-     ]
+      "cell_type": "markdown",
+      "source": [
+        "## Sélection de features\n",
+        "\n",
+        "On commence par prendre la dernière lettre d'un prénom comme feature et la stocker dans un dictionnaire."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
     },
     {
-     "data": {
-      "text/plain": "[('Mariam', 'female'),\n ('Marjorie', 'female'),\n ('Jasmin', 'female'),\n ('Welbie', 'male'),\n ('Modesty', 'female'),\n ('Kanya', 'female'),\n ('Michale', 'male'),\n ('Antonina', 'female'),\n ('Beulah', 'female'),\n ('Hazel', 'female')]"
-     },
-     "execution_count": 6,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "#! creation de datasets\n",
-    "\n",
-    "labeled_names = ([(name, 'male') for name in names.words('male.txt')] +\n",
-    " [(name, 'female') for name in names.words('female.txt')])\n",
-    "\n",
-    "random.shuffle(labeled_names)\n",
-    "print(\"Un échantillon du corpus\")\n",
-    "labeled_names[:10]"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Création des corpus train/test\n",
-    "\n",
-    "Ici on applique à la fonction de la `section 1` à tous les noms du corpus. Les 500 premiers samples sont mis à l'écart pour servir de test."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 10,
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "#! creation de paire feature/label\n",
-    "\n",
-    "featuresets = [(gender_features(n), gender) for (n, gender) in labeled_names]"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 11,
-   "outputs": [],
-   "source": [
-    "#! creation de train et test\n",
-    "\n",
-    "train_set, test_set = featuresets[500:], featuresets[:500]"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Première classification\n",
-    "\n",
-    "La précision est autour de 75.2%. On liste les features les plus utiles pour étudier quels sont les problèmes potentiels. Le likely ratio `male : female` signifie la probabilité exacte qu'un prénom particulier soit masculin/féminin en fonction de sa dernière lettre (donc feature)."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 12,
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "0.752\n",
-      "Most Informative Features\n",
-      "             last_letter = 'k'              male : female =     45.8 : 1.0\n",
-      "             last_letter = 'a'            female : male   =     33.0 : 1.0\n",
-      "             last_letter = 'f'              male : female =     15.3 : 1.0\n",
-      "             last_letter = 'p'              male : female =     11.2 : 1.0\n",
-      "             last_letter = 'v'              male : female =     10.5 : 1.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
-    "#! classify\n",
-    "classifier.classify(gender_features('Neo'))\n",
-    "classifier.classify(gender_features('Trinity'))\n",
-    "print(nltk.classify.accuracy(classifier, test_set))\n",
-    "classifier.show_most_informative_features(5)\n",
-    "#! see likely ratio"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Ajout de features et problème d'overfitting\n",
-    "\n",
-    "Si vous ajoutez trop de features, le modèle risque d'être trop adapté à tes données et se généralise mal sur des données non vues. Cela s'appelle `overfitting` et survient souvent quand le corpus est petit, ce qui est le cas ici."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Let's add features\n",
-    "\n",
-    "Dans un premier temps, nous allons essayer d'ajouter plein de features.\n",
-    "\n",
-    "Examinons la fonction `gender_features2`. Les features sont :\n",
-    "\n",
-    "* La première et la dernière lettre\n",
-    "* Un booléen indiquant si une lettre de l'ensemble a-z est présent dans le prénom\n",
-    "* Un integer indiquant le nombre d'occurrences de cette lettre\n",
-    "\n",
-    "Donc clairement nous y mettons tout le paquet..."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 13,
-   "outputs": [
-    {
-     "data": {
-      "text/plain": "[('count(i)', 0),\n ('count(h)', 1),\n ('count(x)', 0),\n ('has(a)', False),\n ('has(h)', True)]"
-     },
-     "execution_count": 13,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "#! add features\n",
-    "def gender_features2(name):\n",
-    "    features = {\"first_letter\": name[0].lower(), \"last_letter\": name[-1].lower()}\n",
-    "    for letter in 'abcdefghijklmnopqrstuvwxyz':\n",
-    "        features[\"count({})\".format(letter)] = name.lower().count(letter)\n",
-    "        features[\"has({})\".format(letter)] = (letter in name.lower())\n",
-    "    return features\n",
-    "\n",
-    "demo = gender_features2(\"john\")\n",
-    "random.sample(demo.items(),5)"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## La précision augmente\n",
-    "\n",
-    "Avec ce nouveau featureset, la précision est montée de 75.2% à 77.4%."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 14,
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "0.774\n"
-     ]
-    }
-   ],
-   "source": [
-    "featuresets = [(gender_features2(n), gender) for (n, gender) in labeled_names]\n",
-    "train_set, test_set = featuresets[500:], featuresets[:500]\n",
-    "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
-    "print(nltk.classify.accuracy(classifier, test_set))\n",
-    "\n",
-    "#! 0.752 vs 0.774"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Feature engineering via l'analyse des erreurs\n",
-    "\n",
-    "Ici nous expliquons le processus de feature engineering qui consiste à analyser les erreurs de la machine sur la base desquelles on filtre/supprime/créé des features.\n",
-    "\n",
-    "L'intelligence artificielle n'est finalement pas si artificielle, non ? (Bon j'avoue que c'est pas du deep learning, mais quand même)\n",
-    "\n",
-    "Notons ici la création de 'devset'. Cette répartition en 3 sets est canonique en Machine Learning. On utilise le train pour entraîner le modèle, le devset pour ajuster ce modèle. Enfin le test ne doit être utilisé que pour l'évaluation finale.\n",
-    "\n",
-    "La précision initiale (avant le feature engineering) est donc 76%."
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 15,
-   "outputs": [],
-   "source": [
-    "train_names = labeled_names[1500:]\n",
-    "devtest_names = labeled_names[500:1500]\n",
-    "test_names = labeled_names[:500]"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 16,
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "0.76\n"
-     ]
-    }
-   ],
-   "source": [
-    "#! use devtest\n",
-    "train_set = [(gender_features(n), gender) for (n, gender) in train_names]\n",
-    "devtest_set = [(gender_features(n), gender) for (n, gender) in devtest_names]\n",
-    "test_set = [(gender_features(n), gender) for (n, gender) in test_names]\n",
-    "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
-    "\n",
-    "print(nltk.classify.accuracy(classifier, devtest_set))"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Premières hypothèses sur les erreurs\n",
-    "\n",
-    "Analysons les erreurs affichées ci-dessous.\n",
-    "\n",
-    "Les pronoms terminés par `yn` tendent à être féminins, alors que ceux terminés par `n` tendent à être masculins. Du coup deux règles serait meilleures qu'une seule.\n",
-    "\n",
-    "Ca semble être le même principe pour les pronoms terminés par `h` qui sont principalement féminins et ceux terminés par `ch` qui ont tendance à être masculins"
-   ],
-   "metadata": {
-    "collapsed": false
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 17,
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "correct=female   guess=male     name=Aeriel                        \n",
-      "correct=female   guess=male     name=Aeriell                       \n",
-      "correct=female   guess=male     name=Allis                         \n",
-      "correct=female   guess=male     name=Allsun                        \n",
-      "correct=female   guess=male     name=Allyn                         \n",
-      "correct=female   guess=male     name=Allys                         \n",
-      "correct=female   guess=male     name=Amargo                        \n",
-      "correct=female   guess=male     name=Amber                         \n",
-      "correct=female   guess=male     name=Anne-Mar                      \n",
-      "correct=female   guess=male     name=Aurel                         \n",
-      "correct=female   guess=male     name=Avril                         \n",
-      "correct=female   guess=male     name=Barb                          \n",
-      "correct=female   guess=male     name=Beatriz                       \n",
-      "correct=female   guess=male     name=Beilul                        \n",
-      "correct=female   guess=male     name=Calypso                       \n",
-      "correct=female   guess=male     name=Cameo                         \n",
-      "correct=female   guess=male     name=Carlin                        \n",
-      "correct=female   guess=male     name=Carol                         \n",
-      "correct=female   guess=male     name=Carol-Jean                    \n",
-      "correct=female   guess=male     name=Caron                         \n",
-      "correct=female   guess=male     name=Caryl                         \n",
-      "correct=female   guess=male     name=Cat                           \n",
-      "correct=female   guess=male     name=Ceil                          \n",
-      "correct=female   guess=male     name=Charin                        \n",
-      "correct=female   guess=male     name=Charleen                      \n",
-      "correct=female   guess=male     name=Charlott                      \n",
-      "correct=female   guess=male     name=Charmian                      \n",
-      "correct=female   guess=male     name=Charo                         \n",
-      "correct=female   guess=male     name=Christal                      \n",
-      "correct=female   guess=male     name=Christel                      \n",
-      "correct=female   guess=male     name=Cleo                          \n",
-      "correct=female   guess=male     name=Corliss                       \n",
-      "correct=female   guess=male     name=Cris                          \n",
-      "correct=female   guess=male     name=Cristabel                     \n",
-      "correct=female   guess=male     name=Cybill                        \n",
-      "correct=female   guess=male     name=Dael                          \n",
-      "correct=female   guess=male     name=Daloris                       \n",
-      "correct=female   guess=male     name=Darb                          \n",
-      "correct=female   guess=male     name=Del                           \n",
-      "correct=female   guess=male     name=Delores                       \n",
-      "correct=female   guess=male     name=Dian                          \n",
-      "correct=female   guess=male     name=Doloritas                     \n",
-      "correct=female   guess=male     name=Dorcas                        \n",
-      "correct=female   guess=male     name=Doreen                        \n",
-      "correct=female   guess=male     name=Dorian                        \n",
-      "correct=female   guess=male     name=Estell                        \n",
-      "correct=female   guess=male     name=Esther                        \n",
-      "correct=female   guess=male     name=Felicdad                      \n",
-      "correct=female   guess=male     name=Gael                          \n",
-      "correct=female   guess=male     name=Gilligan                      \n",
-      "correct=female   guess=male     name=Gladys                        \n",
-      "correct=female   guess=male     name=Glen                          \n",
-      "correct=female   guess=male     name=Glynis                        \n",
-      "correct=female   guess=male     name=Greer                         \n",
-      "correct=female   guess=male     name=Grissel                       \n",
-      "correct=female   guess=male     name=Heather                       \n",
-      "correct=female   guess=male     name=Helen                         \n",
-      "correct=female   guess=male     name=Hildegaard                    \n",
-      "correct=female   guess=male     name=Ingeborg                      \n",
-      "correct=female   guess=male     name=Iseabal                       \n",
-      "correct=female   guess=male     name=Jaclin                        \n",
-      "correct=female   guess=male     name=Janel                         \n",
-      "correct=female   guess=male     name=Jen                           \n",
-      "correct=female   guess=male     name=Jenifer                       \n",
-      "correct=female   guess=male     name=Jo-Ann                        \n",
-      "correct=female   guess=male     name=Jolyn                         \n",
-      "correct=female   guess=male     name=Jolynn                        \n",
-      "correct=female   guess=male     name=Joyan                         \n",
-      "correct=female   guess=male     name=Kaitlynn                      \n",
-      "correct=female   guess=male     name=Karilynn                      \n",
-      "correct=female   guess=male     name=Kass                          \n",
-      "correct=female   guess=male     name=Kathlin                       \n",
-      "correct=female   guess=male     name=Kristan                       \n",
-      "correct=female   guess=male     name=Kristen                       \n",
-      "correct=female   guess=male     name=Lilian                        \n",
-      "correct=female   guess=male     name=Lurleen                       \n",
-      "correct=female   guess=male     name=Lynnett                       \n",
-      "correct=female   guess=male     name=Madlen                        \n",
-      "correct=female   guess=male     name=Margot                        \n",
-      "correct=female   guess=male     name=Margret                       \n",
-      "correct=female   guess=male     name=Mariam                        \n",
-      "correct=female   guess=male     name=Marie-Ann                     \n",
-      "correct=female   guess=male     name=Mariel                        \n",
-      "correct=female   guess=male     name=Marilyn                       \n",
-      "correct=female   guess=male     name=Maris                         \n",
-      "correct=female   guess=male     name=Mead                          \n",
-      "correct=female   guess=male     name=Meg                           \n",
-      "correct=female   guess=male     name=Megen                         \n",
-      "correct=female   guess=male     name=Meggan                        \n",
-      "correct=female   guess=male     name=Meridel                       \n",
-      "correct=female   guess=male     name=Mildred                       \n",
-      "correct=female   guess=male     name=Moll                          \n",
-      "correct=female   guess=male     name=Nell                          \n",
-      "correct=female   guess=male     name=Noellyn                       \n",
-      "correct=female   guess=male     name=Peg                           \n",
-      "correct=female   guess=male     name=Persis                        \n",
-      "correct=female   guess=male     name=Phil                          \n",
-      "correct=female   guess=male     name=Piper                         \n",
-      "correct=female   guess=male     name=Quinn                         \n",
-      "correct=female   guess=male     name=Robbin                        \n",
-      "correct=female   guess=male     name=Rosabel                       \n",
-      "correct=female   guess=male     name=Rosaleen                      \n",
-      "correct=female   guess=male     name=Rosalyn                       \n",
-      "correct=female   guess=male     name=Sal                           \n",
-      "correct=female   guess=male     name=Sara-Ann                      \n",
-      "correct=female   guess=male     name=Shannon                       \n",
-      "correct=female   guess=male     name=Sharyl                        \n",
-      "correct=female   guess=male     name=Shell                         \n",
-      "correct=female   guess=male     name=Starlin                       \n",
-      "correct=female   guess=male     name=Theo                          \n",
-      "correct=female   guess=male     name=Tiff                          \n",
-      "correct=female   guess=male     name=Vivyan                        \n",
-      "correct=female   guess=male     name=Willow                        \n",
-      "correct=female   guess=male     name=Willyt                        \n",
-      "correct=female   guess=male     name=Yehudit                       \n",
-      "correct=male     guess=female   name=Abdullah                      \n",
-      "correct=male     guess=female   name=Amory                         \n",
-      "correct=male     guess=female   name=Angie                         \n",
-      "correct=male     guess=female   name=Arne                          \n",
-      "correct=male     guess=female   name=Ash                           \n",
-      "correct=male     guess=female   name=Aube                          \n",
-      "correct=male     guess=female   name=Aubrey                        \n",
-      "correct=male     guess=female   name=Augie                         \n",
-      "correct=male     guess=female   name=Baillie                       \n",
-      "correct=male     guess=female   name=Bartholemy                    \n",
-      "correct=male     guess=female   name=Bary                          \n",
-      "correct=male     guess=female   name=Benjy                         \n",
-      "correct=male     guess=female   name=Berke                         \n",
-      "correct=male     guess=female   name=Berkley                       \n",
-      "correct=male     guess=female   name=Boniface                      \n",
-      "correct=male     guess=female   name=Boyce                         \n",
-      "correct=male     guess=female   name=Bruce                         \n",
-      "correct=male     guess=female   name=Carleigh                      \n",
-      "correct=male     guess=female   name=Chevy                         \n",
-      "correct=male     guess=female   name=Clancy                        \n",
-      "correct=male     guess=female   name=Cobbie                        \n",
-      "correct=male     guess=female   name=Cole                          \n",
-      "correct=male     guess=female   name=Constantine                   \n",
-      "correct=male     guess=female   name=Courtney                      \n",
-      "correct=male     guess=female   name=Davidde                       \n",
-      "correct=male     guess=female   name=Dudley                        \n",
-      "correct=male     guess=female   name=Duffie                        \n",
-      "correct=male     guess=female   name=Durante                       \n",
-      "correct=male     guess=female   name=Eddie                         \n",
-      "correct=male     guess=female   name=Eddy                          \n",
-      "correct=male     guess=female   name=Erny                          \n",
-      "correct=male     guess=female   name=Fairfax                       \n",
-      "correct=male     guess=female   name=Felice                        \n",
-      "correct=male     guess=female   name=Filipe                        \n",
-      "correct=male     guess=female   name=Fonsie                        \n",
-      "correct=male     guess=female   name=Freddie                       \n",
-      "correct=male     guess=female   name=Gerry                         \n",
-      "correct=male     guess=female   name=Godfrey                       \n",
-      "correct=male     guess=female   name=Guthrie                       \n",
-      "correct=male     guess=female   name=Guthry                        \n",
-      "correct=male     guess=female   name=Haleigh                       \n",
-      "correct=male     guess=female   name=Hamish                        \n",
-      "correct=male     guess=female   name=Harvey                        \n",
-      "correct=male     guess=female   name=Hersh                         \n",
-      "correct=male     guess=female   name=Hodge                         \n",
-      "correct=male     guess=female   name=Hy                            \n",
-      "correct=male     guess=female   name=Isadore                       \n",
-      "correct=male     guess=female   name=Jean-Pierre                   \n",
-      "correct=male     guess=female   name=Jeffery                       \n",
-      "correct=male     guess=female   name=Jeromy                        \n",
-      "correct=male     guess=female   name=Jesse                         \n",
-      "correct=male     guess=female   name=Johnny                        \n",
-      "correct=male     guess=female   name=Josh                          \n",
-      "correct=male     guess=female   name=Jule                          \n",
-      "correct=male     guess=female   name=Julie                         \n",
-      "correct=male     guess=female   name=Kelly                         \n",
-      "correct=male     guess=female   name=Kelsey                        \n",
-      "correct=male     guess=female   name=Kory                          \n",
-      "correct=male     guess=female   name=Lemmy                         \n",
-      "correct=male     guess=female   name=Lenny                         \n",
-      "correct=male     guess=female   name=Lesley                        \n",
-      "correct=male     guess=female   name=Luke                          \n",
-      "correct=male     guess=female   name=Martie                        \n",
-      "correct=male     guess=female   name=Marty                         \n",
-      "correct=male     guess=female   name=Max                           \n",
-      "correct=male     guess=female   name=Mika                          \n",
-      "correct=male     guess=female   name=Mischa                        \n",
-      "correct=male     guess=female   name=Mitch                         \n",
-      "correct=male     guess=female   name=Moise                         \n",
-      "correct=male     guess=female   name=Monte                         \n",
-      "correct=male     guess=female   name=Morly                         \n",
-      "correct=male     guess=female   name=Morty                         \n",
-      "correct=male     guess=female   name=Murdoch                       \n",
-      "correct=male     guess=female   name=Mustafa                       \n",
-      "correct=male     guess=female   name=Neale                         \n",
-      "correct=male     guess=female   name=Neddy                         \n",
-      "correct=male     guess=female   name=Obie                          \n",
-      "correct=male     guess=female   name=Paddie                        \n",
-      "correct=male     guess=female   name=Pascale                       \n",
-      "correct=male     guess=female   name=Pepe                          \n",
-      "correct=male     guess=female   name=Prentice                      \n",
-      "correct=male     guess=female   name=Quigly                        \n",
-      "correct=male     guess=female   name=Rabi                          \n",
-      "correct=male     guess=female   name=Rafe                          \n",
-      "correct=male     guess=female   name=Ralph                         \n",
-      "correct=male     guess=female   name=Rawley                        \n",
-      "correct=male     guess=female   name=Reese                         \n",
-      "correct=male     guess=female   name=Rey                           \n",
-      "correct=male     guess=female   name=Ronny                         \n",
-      "correct=male     guess=female   name=Rourke                        \n",
-      "correct=male     guess=female   name=Rudie                         \n",
-      "correct=male     guess=female   name=Rutledge                      \n",
-      "correct=male     guess=female   name=Say                           \n",
-      "correct=male     guess=female   name=Shaine                        \n",
-      "correct=male     guess=female   name=Stacy                         \n",
-      "correct=male     guess=female   name=Stanley                       \n",
-      "correct=male     guess=female   name=Tabbie                        \n",
-      "correct=male     guess=female   name=Tally                         \n",
-      "correct=male     guess=female   name=Tarrance                      \n",
-      "correct=male     guess=female   name=Temple                        \n",
-      "correct=male     guess=female   name=Thayne                        \n",
-      "correct=male     guess=female   name=Thorpe                        \n",
-      "correct=male     guess=female   name=Torey                         \n",
-      "correct=male     guess=female   name=Torre                         \n",
-      "correct=male     guess=female   name=Trace                         \n",
-      "correct=male     guess=female   name=Tracey                        \n",
-      "correct=male     guess=female   name=Udale                         \n",
-      "correct=male     guess=female   name=Uri                           \n",
-      "correct=male     guess=female   name=Vassily                       \n",
-      "correct=male     guess=female   name=Vijay                         \n",
-      "correct=male     guess=female   name=Vinnie                        \n",
-      "correct=male     guess=female   name=Waite                         \n",
-      "correct=male     guess=female   name=Wallache                      \n",
-      "correct=male     guess=female   name=Waverley                      \n",
-      "correct=male     guess=female   name=Westbrooke                    \n",
-      "correct=male     guess=female   name=Westleigh                     \n",
-      "correct=male     guess=female   name=Willie                        \n",
-      "correct=male     guess=female   name=Willy                         \n",
-      "correct=male     guess=female   name=Yancey                        \n",
-      "correct=male     guess=female   name=Yancy                         \n",
-      "correct=male     guess=female   name=Yehudi                        \n",
-      "correct=male     guess=female   name=Yuri                          \n",
-      "correct=male     guess=female   name=Zackariah                     \n",
-      "correct=male     guess=female   name=Zechariah                     \n",
-      "correct=male     guess=female   name=Zollie                        \n"
-     ]
-    }
-   ],
-   "source": [
-    "errors = []\n",
-    "for (name, tag) in devtest_names:\n",
-    "     guess = classifier.classify(gender_features(name))\n",
-    "     if guess != tag:\n",
-    "         errors.append( (tag, guess, name) )\n",
-    "\n",
-    "for (tag, guess, name) in sorted(errors):\n",
-    "     print('correct={:<8} guess={:<8s} name={:<30}'.format(tag, guess, name))"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Intégration des nouveaux features dans le classifieur\n",
-    "\n",
-    "Il semble bénéfique d'ajuster nos features en incluant les deux dernières lettres.\n",
-    "\n",
-    "Et youpi ! La précision est montée de 76% à 78.1%. C'est pas mal non ?"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%% md\n"
-    }
-   }
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 19,
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "0.781\n"
-     ]
-    }
-   ],
-   "source": [
-    "def gender_features(word):\n",
-    "     return {'suffix1': word[-1:],\n",
-    "             'suffix2': word[-2:]}\n",
-    "\n",
-    "train_set = [(gender_features(n), gender) for (n, gender) in train_names]\n",
-    "devtest_set = [(gender_features(n), gender) for (n, gender) in devtest_names]\n",
-    "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
-    "print(nltk.classify.accuracy(classifier, devtest_set))\n",
-    "\n",
-    "# 0.76 -> 0.781"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%%\n"
-    }
-   }
-  },
-  {
-   "cell_type": "markdown",
-   "source": [
-    "## Importance de nouveaux splits train/dev\n",
-    "\n",
-    "Nous pouvons donc réitérer ce processus d'analyse d'erreurs et de feature engineering jusqu'à obtenir une performance satisfaisante.\n",
-    "\n",
-    "Attention !:D\n",
-    "\n",
-    "Il vaut mieux faire un nouveau split train/dev à chaque fois qu'on intègre/supprime des features pour éviter l'overfitting.\n",
-    "\n",
-    "\n",
-    "## Conclusions\n",
-    "\n",
-    "Bravo d'avoir fini l'article !\n",
-    "\n",
-    "Ce qu'il faut retenir :\n",
-    "\n",
-    "1. Le machine learning traditionnel repose pas mal sur l'analyse humaine. Comme vous avez vu ici, l'analyse des erreurs de classification aide beaucoup l'intelligence \"artificielle\".\n",
-    "\n",
-    "2. Il est important de faire un split train/dev/test pour éviter que le modèle soit overfitted. Dans la même ligne de pensée il est aussi conseillé de garder un nombre raisonnable de features.\n",
-    "\n",
-    "3. Vous l'aurez compris. L'analyse d'erreurs (feature engineering) et le compromis entre performance et généralisabilité font du machine learning un art qui nécessite un savoir-faire qui s'acquiert au fil des ans.\n",
-    "\n",
-    "[Reference](https://www.nltk.org/book/ch06.html)\n"
-   ],
-   "metadata": {
-    "collapsed": false,
-    "pycharm": {
-     "name": "#%% md\n"
-    }
-   }
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python (myenv)",
-   "language": "python",
-   "name": "myenv"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.7.6"
-  },
-  "nbTranslate": {
-   "displayLangs": [
-    "*"
-   ],
-   "hotkey": "alt-t",
-   "langInMainMenu": true,
-   "sourceLang": "en",
-   "targetLang": "fr",
-   "useGoogleTranslate": true
-  },
-  "toc": {
-   "base_numbering": 1,
-   "nav_menu": {},
-   "number_sections": true,
-   "sideBar": false,
-   "skip_h1_title": true,
-   "title_cell": "Table des matières",
-   "title_sidebar": "Contents",
-   "toc_cell": false,
-   "toc_position": {},
-   "toc_section_display": true,
-   "toc_window_display": false
-  },
-  "varInspector": {
-   "cols": {
-    "lenName": 16,
-    "lenType": 16,
-    "lenVar": 40
-   },
-   "kernels_config": {
-    "python": {
-     "delete_cmd_postfix": "",
-     "delete_cmd_prefix": "del ",
-     "library": "var_list.py",
-     "varRefreshCmd": "print(var_dic_list())"
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "ExecuteTime": {
+          "end_time": "2021-03-12T13:57:46.133538Z",
+          "start_time": "2021-03-12T13:57:46.130908Z"
+        }
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "La dernière lettre du prnom Shrek est\n"
+          ]
+        },
+        {
+          "data": {
+            "text/plain": "{'last_letter': 'k'}"
+          },
+          "execution_count": 3,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "#! creation de last latter comme feature\n",
+        "\n",
+        "import nltk\n",
+        "from nltk.corpus import names\n",
+        "import random\n",
+        "random.seed(13)\n",
+        "def gender_features(word):\n",
+        "     return {'last_letter': word[-1]}\n",
+        "\n",
+        "print(\"La dernière lettre du pronom Shrek est\")\n",
+        "gender_features('Shrek')"
+      ]
     },
-    "r": {
-     "delete_cmd_postfix": ") ",
-     "delete_cmd_prefix": "rm(",
-     "library": "var_list.r",
-     "varRefreshCmd": "cat(var_dic_list()) "
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Mise en forme du corpus\n",
+        "\n",
+        "Le corpus provient de `nltk`. Ici on crée une liste de tuples grâce à quelques méthodes intégrées dans `nltk.corpus`. Notez l'emploi de list comprehension ici pour rendre le code plus concis tout en gardant la lisibilité."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 6,
+      "metadata": {
+        "ExecuteTime": {
+          "end_time": "2021-03-12T13:59:12.603355Z",
+          "start_time": "2021-03-12T13:59:11.440907Z"
+        }
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Un échantillon du corpus\n"
+          ]
+        },
+        {
+          "data": {
+            "text/plain": "[('Mariam', 'female'),\n ('Marjorie', 'female'),\n ('Jasmin', 'female'),\n ('Welbie', 'male'),\n ('Modesty', 'female'),\n ('Kanya', 'female'),\n ('Michale', 'male'),\n ('Antonina', 'female'),\n ('Beulah', 'female'),\n ('Hazel', 'female')]"
+          },
+          "execution_count": 6,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "#! creation de datasets\n",
+        "\n",
+        "labeled_names = ([(name, 'male') for name in names.words('male.txt')] +\n",
+        " [(name, 'female') for name in names.words('female.txt')])\n",
+        "\n",
+        "random.shuffle(labeled_names)\n",
+        "print(\"Un échantillon du corpus\")\n",
+        "labeled_names[:10]"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Création des corpus train/test\n",
+        "\n",
+        "Ici on applique à la fonction de la `section 1` à tous les noms du corpus. Les 500 premiers samples sont mis à l'écart pour servir de test."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 10,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "#! creation de paire feature/label\n",
+        "\n",
+        "featuresets = [(gender_features(n), gender) for (n, gender) in labeled_names]"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 11,
+      "outputs": [],
+      "source": [
+        "#! creation de train et test\n",
+        "\n",
+        "train_set, test_set = featuresets[500:], featuresets[:500]"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Première classification\n",
+        "\n",
+        "La précision est autour de 75.2%. On liste les features les plus utiles pour étudier quels sont les problèmes potentiels. Le likely ratio `male : female` signifie la probabilité exacte qu'un prénom particulier soit masculin/féminin en fonction de sa dernière lettre (donc feature)."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 12,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "0.752\n",
+            "Most Informative Features\n",
+            "             last_letter = 'k'              male : female =     45.8 : 1.0\n",
+            "             last_letter = 'a'            female : male   =     33.0 : 1.0\n",
+            "             last_letter = 'f'              male : female =     15.3 : 1.0\n",
+            "             last_letter = 'p'              male : female =     11.2 : 1.0\n",
+            "             last_letter = 'v'              male : female =     10.5 : 1.0\n"
+          ]
+        }
+      ],
+      "source": [
+        "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
+        "#! classify\n",
+        "classifier.classify(gender_features('Neo'))\n",
+        "classifier.classify(gender_features('Trinity'))\n",
+        "print(nltk.classify.accuracy(classifier, test_set))\n",
+        "classifier.show_most_informative_features(5)\n",
+        "#! see likely ratio"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Ajout de features et problème d'overfitting\n",
+        "\n",
+        "Si vous ajoutez trop de features, le modèle risque d'être trop adapté à tes données et se généralise mal sur des données non vues. Cela s'appelle `overfitting` et survient souvent quand le corpus est petit, ce qui est le cas ici."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Let's add features\n",
+        "\n",
+        "Dans un premier temps, nous allons essayer d'ajouter plein de features.\n",
+        "\n",
+        "Examinons la fonction `gender_features2`. Les features sont :\n",
+        "\n",
+        "* La première et la dernière lettre\n",
+        "* Un booléen indiquant si une lettre de l'ensemble a-z est présent dans le prénom\n",
+        "* Un integer indiquant le nombre d'occurrences de cette lettre\n",
+        "\n",
+        "Donc clairement nous y mettons tout le paquet..."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 13,
+      "outputs": [
+        {
+          "data": {
+            "text/plain": "[('count(i)', 0),\n ('count(h)', 1),\n ('count(x)', 0),\n ('has(a)', False),\n ('has(h)', True)]"
+          },
+          "execution_count": 13,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "#! add features\n",
+        "def gender_features2(name):\n",
+        "    features = {\"first_letter\": name[0].lower(), \"last_letter\": name[-1].lower()}\n",
+        "    for letter in 'abcdefghijklmnopqrstuvwxyz':\n",
+        "        features[\"count({})\".format(letter)] = name.lower().count(letter)\n",
+        "        features[\"has({})\".format(letter)] = (letter in name.lower())\n",
+        "    return features\n",
+        "\n",
+        "demo = gender_features2(\"john\")\n",
+        "random.sample(demo.items(),5)"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## La précision augmente\n",
+        "\n",
+        "Avec ce nouveau featureset, la précision est montée de 75.2% à 77.4%."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 14,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "0.774\n"
+          ]
+        }
+      ],
+      "source": [
+        "featuresets = [(gender_features2(n), gender) for (n, gender) in labeled_names]\n",
+        "train_set, test_set = featuresets[500:], featuresets[:500]\n",
+        "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
+        "print(nltk.classify.accuracy(classifier, test_set))\n",
+        "\n",
+        "#! 0.752 vs 0.774"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Feature engineering via l'analyse des erreurs\n",
+        "\n",
+        "Ici nous expliquons le processus de feature engineering qui consiste à analyser les erreurs de la machine sur la base desquelles on filtre/supprime/créé des features.\n",
+        "\n",
+        "L'intelligence artificielle n'est finalement pas si artificielle, non ? (Bon j'avoue que c'est pas du deep learning, mais quand même)\n",
+        "\n",
+        "Notons ici la création de 'devset'. Cette répartition en 3 sets est canonique en Machine Learning. On utilise le train pour entraîner le modèle, le devset pour ajuster ce modèle. Enfin le test ne doit être utilisé que pour l'évaluation finale.\n",
+        "\n",
+        "La précision initiale (avant le feature engineering) est donc 76%."
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 15,
+      "outputs": [],
+      "source": [
+        "train_names = labeled_names[1500:]\n",
+        "devtest_names = labeled_names[500:1500]\n",
+        "test_names = labeled_names[:500]"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 16,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "0.76\n"
+          ]
+        }
+      ],
+      "source": [
+        "#! use devtest\n",
+        "train_set = [(gender_features(n), gender) for (n, gender) in train_names]\n",
+        "devtest_set = [(gender_features(n), gender) for (n, gender) in devtest_names]\n",
+        "test_set = [(gender_features(n), gender) for (n, gender) in test_names]\n",
+        "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
+        "\n",
+        "print(nltk.classify.accuracy(classifier, devtest_set))"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Premières hypothèses sur les erreurs\n",
+        "\n",
+        "Analysons les erreurs affichées ci-dessous.\n",
+        "\n",
+        "Les pronoms terminés par `yn` tendent à être féminins, alors que ceux terminés par `n` tendent à être masculins. Du coup deux règles serait meilleures qu'une seule.\n",
+        "\n",
+        "Ca semble être le même principe pour les pronoms terminés par `h` qui sont principalement féminins et ceux terminés par `ch` qui ont tendance à être masculins"
+      ],
+      "metadata": {
+        "collapsed": false
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 17,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "correct=female   guess=male     name=Aeriel                        \n",
+            "correct=female   guess=male     name=Aeriell                       \n",
+            "correct=female   guess=male     name=Allis                         \n",
+            "correct=female   guess=male     name=Allsun                        \n",
+            "correct=female   guess=male     name=Allyn                         \n",
+            "correct=female   guess=male     name=Allys                         \n",
+            "correct=female   guess=male     name=Amargo                        \n",
+            "correct=female   guess=male     name=Amber                         \n",
+            "correct=female   guess=male     name=Anne-Mar                      \n",
+            "correct=female   guess=male     name=Aurel                         \n",
+            "correct=female   guess=male     name=Avril                         \n",
+            "correct=female   guess=male     name=Barb                          \n",
+            "correct=female   guess=male     name=Beatriz                       \n",
+            "correct=female   guess=male     name=Beilul                        \n",
+            "correct=female   guess=male     name=Calypso                       \n",
+            "correct=female   guess=male     name=Cameo                         \n",
+            "correct=female   guess=male     name=Carlin                        \n",
+            "correct=female   guess=male     name=Carol                         \n",
+            "correct=female   guess=male     name=Carol-Jean                    \n",
+            "correct=female   guess=male     name=Caron                         \n",
+            "correct=female   guess=male     name=Caryl                         \n",
+            "correct=female   guess=male     name=Cat                           \n",
+            "correct=female   guess=male     name=Ceil                          \n",
+            "correct=female   guess=male     name=Charin                        \n",
+            "correct=female   guess=male     name=Charleen                      \n",
+            "correct=female   guess=male     name=Charlott                      \n",
+            "correct=female   guess=male     name=Charmian                      \n",
+            "correct=female   guess=male     name=Charo                         \n",
+            "correct=female   guess=male     name=Christal                      \n",
+            "correct=female   guess=male     name=Christel                      \n",
+            "correct=female   guess=male     name=Cleo                          \n",
+            "correct=female   guess=male     name=Corliss                       \n",
+            "correct=female   guess=male     name=Cris                          \n",
+            "correct=female   guess=male     name=Cristabel                     \n",
+            "correct=female   guess=male     name=Cybill                        \n",
+            "correct=female   guess=male     name=Dael                          \n",
+            "correct=female   guess=male     name=Daloris                       \n",
+            "correct=female   guess=male     name=Darb                          \n",
+            "correct=female   guess=male     name=Del                           \n",
+            "correct=female   guess=male     name=Delores                       \n",
+            "correct=female   guess=male     name=Dian                          \n",
+            "correct=female   guess=male     name=Doloritas                     \n",
+            "correct=female   guess=male     name=Dorcas                        \n",
+            "correct=female   guess=male     name=Doreen                        \n",
+            "correct=female   guess=male     name=Dorian                        \n",
+            "correct=female   guess=male     name=Estell                        \n",
+            "correct=female   guess=male     name=Esther                        \n",
+            "correct=female   guess=male     name=Felicdad                      \n",
+            "correct=female   guess=male     name=Gael                          \n",
+            "correct=female   guess=male     name=Gilligan                      \n",
+            "correct=female   guess=male     name=Gladys                        \n",
+            "correct=female   guess=male     name=Glen                          \n",
+            "correct=female   guess=male     name=Glynis                        \n",
+            "correct=female   guess=male     name=Greer                         \n",
+            "correct=female   guess=male     name=Grissel                       \n",
+            "correct=female   guess=male     name=Heather                       \n",
+            "correct=female   guess=male     name=Helen                         \n",
+            "correct=female   guess=male     name=Hildegaard                    \n",
+            "correct=female   guess=male     name=Ingeborg                      \n",
+            "correct=female   guess=male     name=Iseabal                       \n",
+            "correct=female   guess=male     name=Jaclin                        \n",
+            "correct=female   guess=male     name=Janel                         \n",
+            "correct=female   guess=male     name=Jen                           \n",
+            "correct=female   guess=male     name=Jenifer                       \n",
+            "correct=female   guess=male     name=Jo-Ann                        \n",
+            "correct=female   guess=male     name=Jolyn                         \n",
+            "correct=female   guess=male     name=Jolynn                        \n",
+            "correct=female   guess=male     name=Joyan                         \n",
+            "correct=female   guess=male     name=Kaitlynn                      \n",
+            "correct=female   guess=male     name=Karilynn                      \n",
+            "correct=female   guess=male     name=Kass                          \n",
+            "correct=female   guess=male     name=Kathlin                       \n",
+            "correct=female   guess=male     name=Kristan                       \n",
+            "correct=female   guess=male     name=Kristen                       \n",
+            "correct=female   guess=male     name=Lilian                        \n",
+            "correct=female   guess=male     name=Lurleen                       \n",
+            "correct=female   guess=male     name=Lynnett                       \n",
+            "correct=female   guess=male     name=Madlen                        \n",
+            "correct=female   guess=male     name=Margot                        \n",
+            "correct=female   guess=male     name=Margret                       \n",
+            "correct=female   guess=male     name=Mariam                        \n",
+            "correct=female   guess=male     name=Marie-Ann                     \n",
+            "correct=female   guess=male     name=Mariel                        \n",
+            "correct=female   guess=male     name=Marilyn                       \n",
+            "correct=female   guess=male     name=Maris                         \n",
+            "correct=female   guess=male     name=Mead                          \n",
+            "correct=female   guess=male     name=Meg                           \n",
+            "correct=female   guess=male     name=Megen                         \n",
+            "correct=female   guess=male     name=Meggan                        \n",
+            "correct=female   guess=male     name=Meridel                       \n",
+            "correct=female   guess=male     name=Mildred                       \n",
+            "correct=female   guess=male     name=Moll                          \n",
+            "correct=female   guess=male     name=Nell                          \n",
+            "correct=female   guess=male     name=Noellyn                       \n",
+            "correct=female   guess=male     name=Peg                           \n",
+            "correct=female   guess=male     name=Persis                        \n",
+            "correct=female   guess=male     name=Phil                          \n",
+            "correct=female   guess=male     name=Piper                         \n",
+            "correct=female   guess=male     name=Quinn                         \n",
+            "correct=female   guess=male     name=Robbin                        \n",
+            "correct=female   guess=male     name=Rosabel                       \n",
+            "correct=female   guess=male     name=Rosaleen                      \n",
+            "correct=female   guess=male     name=Rosalyn                       \n",
+            "correct=female   guess=male     name=Sal                           \n",
+            "correct=female   guess=male     name=Sara-Ann                      \n",
+            "correct=female   guess=male     name=Shannon                       \n",
+            "correct=female   guess=male     name=Sharyl                        \n",
+            "correct=female   guess=male     name=Shell                         \n",
+            "correct=female   guess=male     name=Starlin                       \n",
+            "correct=female   guess=male     name=Theo                          \n",
+            "correct=female   guess=male     name=Tiff                          \n",
+            "correct=female   guess=male     name=Vivyan                        \n",
+            "correct=female   guess=male     name=Willow                        \n",
+            "correct=female   guess=male     name=Willyt                        \n",
+            "correct=female   guess=male     name=Yehudit                       \n",
+            "correct=male     guess=female   name=Abdullah                      \n",
+            "correct=male     guess=female   name=Amory                         \n",
+            "correct=male     guess=female   name=Angie                         \n",
+            "correct=male     guess=female   name=Arne                          \n",
+            "correct=male     guess=female   name=Ash                           \n",
+            "correct=male     guess=female   name=Aube                          \n",
+            "correct=male     guess=female   name=Aubrey                        \n",
+            "correct=male     guess=female   name=Augie                         \n",
+            "correct=male     guess=female   name=Baillie                       \n",
+            "correct=male     guess=female   name=Bartholemy                    \n",
+            "correct=male     guess=female   name=Bary                          \n",
+            "correct=male     guess=female   name=Benjy                         \n",
+            "correct=male     guess=female   name=Berke                         \n",
+            "correct=male     guess=female   name=Berkley                       \n",
+            "correct=male     guess=female   name=Boniface                      \n",
+            "correct=male     guess=female   name=Boyce                         \n",
+            "correct=male     guess=female   name=Bruce                         \n",
+            "correct=male     guess=female   name=Carleigh                      \n",
+            "correct=male     guess=female   name=Chevy                         \n",
+            "correct=male     guess=female   name=Clancy                        \n",
+            "correct=male     guess=female   name=Cobbie                        \n",
+            "correct=male     guess=female   name=Cole                          \n",
+            "correct=male     guess=female   name=Constantine                   \n",
+            "correct=male     guess=female   name=Courtney                      \n",
+            "correct=male     guess=female   name=Davidde                       \n",
+            "correct=male     guess=female   name=Dudley                        \n",
+            "correct=male     guess=female   name=Duffie                        \n",
+            "correct=male     guess=female   name=Durante                       \n",
+            "correct=male     guess=female   name=Eddie                         \n",
+            "correct=male     guess=female   name=Eddy                          \n",
+            "correct=male     guess=female   name=Erny                          \n",
+            "correct=male     guess=female   name=Fairfax                       \n",
+            "correct=male     guess=female   name=Felice                        \n",
+            "correct=male     guess=female   name=Filipe                        \n",
+            "correct=male     guess=female   name=Fonsie                        \n",
+            "correct=male     guess=female   name=Freddie                       \n",
+            "correct=male     guess=female   name=Gerry                         \n",
+            "correct=male     guess=female   name=Godfrey                       \n",
+            "correct=male     guess=female   name=Guthrie                       \n",
+            "correct=male     guess=female   name=Guthry                        \n",
+            "correct=male     guess=female   name=Haleigh                       \n",
+            "correct=male     guess=female   name=Hamish                        \n",
+            "correct=male     guess=female   name=Harvey                        \n",
+            "correct=male     guess=female   name=Hersh                         \n",
+            "correct=male     guess=female   name=Hodge                         \n",
+            "correct=male     guess=female   name=Hy                            \n",
+            "correct=male     guess=female   name=Isadore                       \n",
+            "correct=male     guess=female   name=Jean-Pierre                   \n",
+            "correct=male     guess=female   name=Jeffery                       \n",
+            "correct=male     guess=female   name=Jeromy                        \n",
+            "correct=male     guess=female   name=Jesse                         \n",
+            "correct=male     guess=female   name=Johnny                        \n",
+            "correct=male     guess=female   name=Josh                          \n",
+            "correct=male     guess=female   name=Jule                          \n",
+            "correct=male     guess=female   name=Julie                         \n",
+            "correct=male     guess=female   name=Kelly                         \n",
+            "correct=male     guess=female   name=Kelsey                        \n",
+            "correct=male     guess=female   name=Kory                          \n",
+            "correct=male     guess=female   name=Lemmy                         \n",
+            "correct=male     guess=female   name=Lenny                         \n",
+            "correct=male     guess=female   name=Lesley                        \n",
+            "correct=male     guess=female   name=Luke                          \n",
+            "correct=male     guess=female   name=Martie                        \n",
+            "correct=male     guess=female   name=Marty                         \n",
+            "correct=male     guess=female   name=Max                           \n",
+            "correct=male     guess=female   name=Mika                          \n",
+            "correct=male     guess=female   name=Mischa                        \n",
+            "correct=male     guess=female   name=Mitch                         \n",
+            "correct=male     guess=female   name=Moise                         \n",
+            "correct=male     guess=female   name=Monte                         \n",
+            "correct=male     guess=female   name=Morly                         \n",
+            "correct=male     guess=female   name=Morty                         \n",
+            "correct=male     guess=female   name=Murdoch                       \n",
+            "correct=male     guess=female   name=Mustafa                       \n",
+            "correct=male     guess=female   name=Neale                         \n",
+            "correct=male     guess=female   name=Neddy                         \n",
+            "correct=male     guess=female   name=Obie                          \n",
+            "correct=male     guess=female   name=Paddie                        \n",
+            "correct=male     guess=female   name=Pascale                       \n",
+            "correct=male     guess=female   name=Pepe                          \n",
+            "correct=male     guess=female   name=Prentice                      \n",
+            "correct=male     guess=female   name=Quigly                        \n",
+            "correct=male     guess=female   name=Rabi                          \n",
+            "correct=male     guess=female   name=Rafe                          \n",
+            "correct=male     guess=female   name=Ralph                         \n",
+            "correct=male     guess=female   name=Rawley                        \n",
+            "correct=male     guess=female   name=Reese                         \n",
+            "correct=male     guess=female   name=Rey                           \n",
+            "correct=male     guess=female   name=Ronny                         \n",
+            "correct=male     guess=female   name=Rourke                        \n",
+            "correct=male     guess=female   name=Rudie                         \n",
+            "correct=male     guess=female   name=Rutledge                      \n",
+            "correct=male     guess=female   name=Say                           \n",
+            "correct=male     guess=female   name=Shaine                        \n",
+            "correct=male     guess=female   name=Stacy                         \n",
+            "correct=male     guess=female   name=Stanley                       \n",
+            "correct=male     guess=female   name=Tabbie                        \n",
+            "correct=male     guess=female   name=Tally                         \n",
+            "correct=male     guess=female   name=Tarrance                      \n",
+            "correct=male     guess=female   name=Temple                        \n",
+            "correct=male     guess=female   name=Thayne                        \n",
+            "correct=male     guess=female   name=Thorpe                        \n",
+            "correct=male     guess=female   name=Torey                         \n",
+            "correct=male     guess=female   name=Torre                         \n",
+            "correct=male     guess=female   name=Trace                         \n",
+            "correct=male     guess=female   name=Tracey                        \n",
+            "correct=male     guess=female   name=Udale                         \n",
+            "correct=male     guess=female   name=Uri                           \n",
+            "correct=male     guess=female   name=Vassily                       \n",
+            "correct=male     guess=female   name=Vijay                         \n",
+            "correct=male     guess=female   name=Vinnie                        \n",
+            "correct=male     guess=female   name=Waite                         \n",
+            "correct=male     guess=female   name=Wallache                      \n",
+            "correct=male     guess=female   name=Waverley                      \n",
+            "correct=male     guess=female   name=Westbrooke                    \n",
+            "correct=male     guess=female   name=Westleigh                     \n",
+            "correct=male     guess=female   name=Willie                        \n",
+            "correct=male     guess=female   name=Willy                         \n",
+            "correct=male     guess=female   name=Yancey                        \n",
+            "correct=male     guess=female   name=Yancy                         \n",
+            "correct=male     guess=female   name=Yehudi                        \n",
+            "correct=male     guess=female   name=Yuri                          \n",
+            "correct=male     guess=female   name=Zackariah                     \n",
+            "correct=male     guess=female   name=Zechariah                     \n",
+            "correct=male     guess=female   name=Zollie                        \n"
+          ]
+        }
+      ],
+      "source": [
+        "errors = []\n",
+        "for (name, tag) in devtest_names:\n",
+        "     guess = classifier.classify(gender_features(name))\n",
+        "     if guess != tag:\n",
+        "         errors.append( (tag, guess, name) )\n",
+        "\n",
+        "for (tag, guess, name) in sorted(errors):\n",
+        "     print('correct={:<8} guess={:<8s} name={:<30}'.format(tag, guess, name))"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Intégration des nouveaux features dans le classifieur\n",
+        "\n",
+        "Il semble bénéfique d'ajuster nos features en incluant les deux dernières lettres.\n",
+        "\n",
+        "Et youpi ! La précision est montée de 76% à 78.1%. C'est pas mal non ?"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%% md\n"
+        }
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 19,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "0.781\n"
+          ]
+        }
+      ],
+      "source": [
+        "def gender_features(word):\n",
+        "     return {'suffix1': word[-1:],\n",
+        "             'suffix2': word[-2:]}\n",
+        "\n",
+        "train_set = [(gender_features(n), gender) for (n, gender) in train_names]\n",
+        "devtest_set = [(gender_features(n), gender) for (n, gender) in devtest_names]\n",
+        "classifier = nltk.NaiveBayesClassifier.train(train_set)\n",
+        "print(nltk.classify.accuracy(classifier, devtest_set))\n",
+        "\n",
+        "# 0.76 -> 0.781"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%%\n"
+        }
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Importance de nouveaux splits train/dev\n",
+        "\n",
+        "Nous pouvons donc réitérer ce processus d'analyse d'erreurs et de feature engineering jusqu'à obtenir une performance satisfaisante.\n",
+        "\n",
+        "Attention !:D\n",
+        "\n",
+        "Il vaut mieux faire un nouveau split train/dev à chaque fois qu'on intègre/supprime des features pour éviter l'overfitting.\n",
+        "\n",
+        "\n",
+        "## Conclusions\n",
+        "\n",
+        "Bravo d'avoir fini l'article !\n",
+        "\n",
+        "Ce qu'il faut retenir :\n",
+        "\n",
+        "1. Le machine learning traditionnel repose pas mal sur l'analyse humaine. Comme vous avez vu ici, l'analyse des erreurs de classification aide beaucoup l'intelligence \"artificielle\".\n",
+        "\n",
+        "2. Il est important de faire un split train/dev/test pour éviter que le modèle soit overfitted. Dans la même ligne de pensée il est aussi conseillé de garder un nombre raisonnable de features.\n",
+        "\n",
+        "3. Vous l'aurez compris. L'analyse d'erreurs (feature engineering) et le compromis entre performance et généralisabilité font du machine learning un art qui nécessite un savoir-faire qui s'acquiert au fil des ans.\n",
+        "\n",
+        "[Reference](https://www.nltk.org/book/ch06.html)\n"
+      ],
+      "metadata": {
+        "collapsed": false,
+        "pycharm": {
+          "name": "#%% md\n"
+        }
+      }
     }
-   },
-   "types_to_exclude": [
-    "module",
-    "function",
-    "builtin_function_or_method",
-    "instance",
-    "_Feature"
-   ],
-   "window_display": false
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 1
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python (myenv)",
+      "language": "python",
+      "name": "myenv"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.7.6"
+    },
+    "nbTranslate": {
+      "displayLangs": [
+        "*"
+      ],
+      "hotkey": "alt-t",
+      "langInMainMenu": true,
+      "sourceLang": "en",
+      "targetLang": "fr",
+      "useGoogleTranslate": true
+    },
+    "toc": {
+      "base_numbering": 1,
+      "nav_menu": {},
+      "number_sections": true,
+      "sideBar": false,
+      "skip_h1_title": true,
+      "title_cell": "Table des matières",
+      "title_sidebar": "Contents",
+      "toc_cell": false,
+      "toc_position": {},
+      "toc_section_display": true,
+      "toc_window_display": false
+    },
+    "varInspector": {
+      "cols": {
+        "lenName": 16,
+        "lenType": 16,
+        "lenVar": 40
+      },
+      "kernels_config": {
+        "python": {
+          "delete_cmd_postfix": "",
+          "delete_cmd_prefix": "del ",
+          "library": "var_list.py",
+          "varRefreshCmd": "print(var_dic_list())"
+        },
+        "r": {
+          "delete_cmd_postfix": ") ",
+          "delete_cmd_prefix": "rm(",
+          "library": "var_list.r",
+          "varRefreshCmd": "cat(var_dic_list()) "
+        }
+      },
+      "types_to_exclude": [
+        "module",
+        "function",
+        "builtin_function_or_method",
+        "instance",
+        "_Feature"
+      ],
+      "window_display": false
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 1
 }

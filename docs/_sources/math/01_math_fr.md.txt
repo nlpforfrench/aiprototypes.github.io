@@ -1,6 +1,6 @@
 # Machine Learning : algorithmes et mathématiques 🇫🇷
 
-[Xiaoou WANG](https://xiaoouwang.github.io)
+[Xiaoou WANG](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
 
 Sur la page Wikipédia de Gradient Descent vous pouvez lire : l'algorithme du gradient désigne un algorithme d'optimisation différentiable. En termes mathématiques cette phrase est magnifiquement formulée avec une telle concision qu'à chaque fois je la vois ça me donne la chair de poule.
 

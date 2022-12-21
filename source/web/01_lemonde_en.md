@@ -1,6 +1,6 @@
 # Complete tutorial on scraping French news from Le Monde 🇬🇧
 
-[Xiaoou WANG](https://xiaoouwang.github.io)
+[Xiaoou WANG](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
 
 ## Why you need web scraping and why I wrote this tutorial
 

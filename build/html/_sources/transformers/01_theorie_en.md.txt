@@ -1,6 +1,6 @@
 # 10 questions on Bert 🇬🇧
 
-[Xiaooou Wang](https://xiaoouwang.github.io)
+[Xiaooou Wang](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
 
 ## What is Bert?
 
@@ -54,11 +54,11 @@ This question is related to the question. The fine-tuning process depends on the
 ```{admonition} Next ?
 :class: note
 
-Tutorials on 
+Tutorials on
 
 * NER (named entity recognition)
 * text classification
 * fine-tuning on specific corpora
- 
-Stay tuned! 
+
+Stay tuned!
 ```
