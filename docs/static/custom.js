@@ -1,27 +1,26 @@
 $('.hide-eng').click(function () {
-    $('a[href*="en.html"]').parent().parent().not('ul').hide();
-    $('a[href*="fr.html"]').parent().parent().not('ul').show();
+  $('a[href*="en.html"]').parent().parent().not('ul').hide();
+  $('a[href*="fr.html"]').parent().parent().not('ul').show();
 });
 
 $('.hide-fr').click(function () {
-    $('a[href*="en.html"]').parent().parent().not('ul').show();
-    $('a[href*="fr.html"]').parent().parent().not('ul').hide();
+  $('a[href*="en.html"]').parent().parent().not('ul').show();
+  $('a[href*="fr.html"]').parent().parent().not('ul').hide();
+  $('a:contains(.fr)').parent().parent().not('ul').hide();
 });
 
 $('.show-all').click(function () {
-    $('a[href*="en.html"]').parent().parent().not('ul').show();
-    $('a[href*="fr.html"]').parent().parent().not('ul').show();
+  $('a[href*="en.html"]').parent().parent().not('ul').show();
+  $('a[href*="fr.html"]').parent().parent().not('ul').show();
 });
-
 
 var links = document.links;
 
 for (var i = 0, linksLength = links.length; i < linksLength; i++) {
-    if (links[i].hostname != window.location.hostname) {
-        links[i].target = '_blank';
-    }
+  if (links[i].hostname != window.location.hostname) {
+    links[i].target = '_blank';
+  }
 }
-
 
 // var _hmt = _hmt || [];
 // (function() {
