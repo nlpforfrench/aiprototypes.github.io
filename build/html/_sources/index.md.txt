@@ -2,7 +2,7 @@
 <!-- ![AI Prototypes](static/nlp_Logo.png) -->
 <!-- <a href="http://google.com.au/" rel="AI P">![Foo](http://www.google.com.au/images/nav_logo7.png)</a> -->
 
-<a href="aiprototypes.com"><img src="static/nlp_Logo.png" width="380" height="360" ></a>
+<a href="aiprototypes.com"><img src="static/nlp_Logo.png" width="180" height="160" ></a>
 
 <h2 style="text-align:center;font-weight:bold;"> Fast Prototypes for Artificial Intelligence Projects</h2>
 
