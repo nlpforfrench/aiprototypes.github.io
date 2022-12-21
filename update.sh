@@ -2,8 +2,8 @@
 rm -rf docs
 make html
 cd build/html
-# grep -rl _static . | xargs gsed -i "s/_static/static/g"
-# grep -rl _sources . | xargs gsed -i "s/_sources/sources/g"
+grep -rl _static . | xargs gsed -i "s/_static/static/g"
+grep -rl _sources . | xargs gsed -i "s/_sources/sources/g"
 # if static and sources exist, remove
 rm -rf static
 rm -rf sources

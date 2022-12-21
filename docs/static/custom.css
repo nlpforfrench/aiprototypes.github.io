@@ -1,0 +1,218 @@
+p {
+    font-size: 1.1rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+ol li p {
+    margin-top: 0.5rem !important;
+}
+
+article h2 {
+    font-weight: 600;
+}
+
+.sidebar-brand-text, .sidebar-logo-container {
+    text-align: center;
+}
+
+article h3 {
+    font-weight: 600;
+}
+
+.blogs-img h3 {
+    font-weight: normal;
+}
+
+#a-buffet-of-awesome-nlp-tutorials-in-french-english h2 {
+    font-weight: normal;
+    text-align: center;
+}
+
+#qui {
+    text-align: center;
+}
+
+.sidebar-tree .toctree-l1 > .reference {
+    font-size: 0.9rem;
+}
+
+.figure > .caption > .caption-text {
+    font-size: 0.7rem;
+}
+
+.toc-tree .reference {
+    font-size: 1rem;
+}
+
+span.caption-text {
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+}
+
+span.qui {
+    margin-bottom: 1rem;
+    /*font-size: var(--sidebar-caption-font-size);*/
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: var(--sidebar-caption-space-above) 0 0 0;
+    padding: var(--sidebar-item-spacing-vertical) var(--sidebar-item-spacing-horizontal);
+    color: var(--color-sidebar-caption-text)
+}
+
+p.caption {
+    margin-bottom: 1rem;
+    font-size: var(--sidebar-caption-font-size);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: var(--sidebar-caption-space-above) 0 0 0;
+    padding: var(--sidebar-item-spacing-vertical) var(--sidebar-item-spacing-horizontal);
+    color: var(--color-sidebar-caption-text)
+}
+
+#nlp-in-french ul {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+#nlp-in-french h2 {
+    margin-bottom: 1rem;
+    font-size: var(--sidebar-caption-font-size);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: var(--sidebar-caption-space-above) 0 0 0;
+    padding: var(--sidebar-item-spacing-vertical) var(--sidebar-item-spacing-horizontal);
+    color: var(--color-sidebar-caption-text);
+    /*font-size: 0.75rem;*/
+    /*margin-bottom: 2rem;*/
+    margin-top: 1rem;
+}
+
+.sidebar .reference {
+    font-size: 0.8rem;
+}
+
+.toctree-wrapper.compound
+.caption {
+    /*text-align: center;*/
+}
+
+.toctree-wrapper.compound > ul {
+    /*text-align: center;*/
+    /*list-style-type:none;*/
+    font-size: 1rem;
+}
+
+
+.button-wrapper {
+    display: flex;
+    justify-content: space-around;
+    max-width: 70%;
+    margin: auto;
+}
+
+/*----------button--------------*/
+#english {
+
+}
+
+.button {
+    text-align: center;
+    padding: 5px 5px;
+    transition: 0.3s;
+    opacity: 1;
+    cursor: pointer;
+    /*background-color: #007bff;*/
+    /*color: white;*/
+    /*border-color: #007bff;*/
+    border-radius: 0.8rem;
+
+    /*transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
+}
+
+.button:hover {
+    opacity: 0.6;
+    background-color: blue;
+    color: white;
+}
+
+
+#bilingual {
+
+}
+
+#french {
+
+}
+
+/*------------*/
+
+.blogs-wrapper {
+    /*flex-basis: 38%;*/
+    /*flex:auto;*/
+    /*flex-grow: 0;*/
+    /*padding: 0.2vw;*/
+    /*font-size: 0;*/
+    flex-flow: row wrap;
+    display: flex;
+    align-items: center;
+    /*align-content: flex-start;*/
+}
+
+.blogs-wrapper .blogs-img {
+    flex: auto;
+    width: 150px;
+    text-align: center;
+    /*margin: 0.5vw;*/
+}
+
+@media screen and (max-width: 800px) {
+    .blogs-wrapper .blogs-img {
+        margin: 0;
+        width: auto;
+    }
+
+    /*#qui {*/
+    /* margin: 0;*/
+    /*  }*/
+    h3 {
+        /*margin: 0;*/
+    }
+
+    h1 {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    span.qui {
+        font-size: 0.9rem;
+    }
+
+    .blogs-img h3 {
+        font-size: medium;
+    }
+
+    .blogs-wrapper {
+        padding: 0;
+        flex-direction: column;
+    }
+}
+
+/*.simple {*/
+/*    text-align: center;*/
+/*list-style-type: none;*/
+/*}*/
+
+/*.content {*/
+/*    width: 100%;*/
+/*}*/
