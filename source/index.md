@@ -24,7 +24,7 @@ codebase/index
 math/index
 ```
 
-## Case studies developed for [DemoTal](https://demotal.fr/), a project of APIL-French tech du NLP supported by the French Ministry of Culture <i class='fas fa-ribbon'></i>
+## Case studies developed for [DemoTal](https://demotal.fr/) APIL Les French tech du NLP<i class='fas fa-ribbon'></i>
 
 - [1. Semi-automatic analysis of biomedical text 🇫🇷](https://www.demotal.fr/etudes-de-cas/exploiter-les-textes-biomedicaux-de-maniere-semi-automatisee/)
 
