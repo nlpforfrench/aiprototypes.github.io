@@ -1,6 +1,7 @@
-# <p style="font-weight:bold;">[AI prototypes](aiprototypes.com)<p>
+<!-- # <p style="font-weight:bold;">[AI prototypes](aiprototypes.com)<p> -->
+![AI Prototypes](static/nlp_Logo.png)
 
-<h2 style="text-align:center"> Fast Prototypes for Artificial Intelligence Projects</h2>
+<h2 style="text-align:center;font-weight:bold;"> Fast Prototypes for Artificial Intelligence Projects</h2>
 
 ```{raw} html
 :file: profile.html
