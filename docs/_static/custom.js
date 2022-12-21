@@ -1,6 +1,7 @@
 $('.hide-eng').click(function () {
   $('a[href*="en.html"]').parent().parent().not('ul').hide();
   $('a[href*="fr.html"]').parent().parent().not('ul').show();
+  $('a[href*=".fr"]').parent().parent().not('ul').show();
 });
 
 $('.hide-fr').click(function () {
@@ -13,6 +14,7 @@ $('.hide-fr').click(function () {
 $('.show-all').click(function () {
   $('a[href*="en.html"]').parent().parent().not('ul').show();
   $('a[href*="fr.html"]').parent().parent().not('ul').show();
+  $('a[href*=".fr"]').parent().parent().not('ul').show();
 });
 
 var links = document.links;
