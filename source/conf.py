@@ -35,7 +35,7 @@ author = 'Xiaoou Wang'
 # extensions = []
 # extensions = ['sphinx_autorun',
 extensions = ['sphinx.ext.mathjax', 'sphinx_autorun',
-              'nbsphinx', 'sphinx_copybutton',"sphinx_inline_tabs",'sphinx.ext.autosectionlabel',"myst_parser",'sphinx_gallery.load_style']
+              'nbsphinx', 'sphinx_copybutton', "sphinx_inline_tabs", 'sphinx.ext.autosectionlabel', "myst_parser", 'sphinx_gallery.load_style']
 # extensions = ['myst_parser']
 # extensions = ['myst_parser',"nbsphinx"]
 #   'numpydoc']
@@ -73,13 +73,13 @@ templates_path = ['templates']
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#n themes.
+# n themes.
 #
 # html_theme = 'alabaster'
 # html_theme = 'sphinx_rtd_theme'
 # html_theme = 'asteroid_sphinx_theme'
 html_theme = 'furo'
-html_title = "NLP for French"
+html_title = "AI Prototypes"
 
 nbsphinx_execute = 'auto'
 
@@ -121,10 +121,11 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 """
 
+
 def setup(app):
     # 3. Tell Sphinx to add your JS code. Sphinx will insert
     #    the `body` into the html inside a <script> tag:
-    app.add_js_file(None,body=GOOGlE)
+    app.add_js_file(None, body=GOOGlE)
 
 
 html_css_files = [

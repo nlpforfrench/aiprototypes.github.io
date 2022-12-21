@@ -1,6 +1,6 @@
 # [AI prototypes](aiprototypes.com)
 
-## Fast prototypes for Artificial Intelligence Projects
+## Fast Prototypes for Artificial Intelligence Projects
 
 ```{raw} html
 :file: profile.html
