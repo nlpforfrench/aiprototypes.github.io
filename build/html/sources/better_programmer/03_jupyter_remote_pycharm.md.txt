@@ -1,6 +1,6 @@
 # Connect to remote jupyter notebook in Pycharm
 
-By [Xiaoou Wang](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
+By [Xiaoou Wang](https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
 
 I love working in Pycharm when it comes to jupyter notebooks because there is extensive support for common IDE features and a fantastic debugger.
 

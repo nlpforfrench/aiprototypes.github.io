@@ -6,7 +6,7 @@
       "source": [
         "# Everything is translation (Build a chatbot using attention and self-attention in fairseq)\n",
         "\n",
-        "[Xiaoou Wang](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)"
+        "[Xiaoou Wang](https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)"
       ]
     },
     {

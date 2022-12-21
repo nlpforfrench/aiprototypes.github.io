@@ -1,6 +1,6 @@
 # Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷
 
-[Xiaoou WANG](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en), [Xingyu LIU](https://www.linkedin.com/in/xingyu-liu-aba896a1/)
+[Xiaoou WANG](https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en), [Xingyu LIU](https://www.linkedin.com/in/xingyu-liu-aba896a1/)
 
 ## Introduction
 

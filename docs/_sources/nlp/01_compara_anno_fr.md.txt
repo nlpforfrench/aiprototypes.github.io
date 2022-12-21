@@ -1,6 +1,6 @@
 # Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷
 
-[Xiaoou WANG](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en), [Xingyu LIU](https://www.linkedin.com/in/xingyu-liu-aba896a1/)
+[Xiaoou WANG](https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en), [Xingyu LIU](https://www.linkedin.com/in/xingyu-liu-aba896a1/)
 
 ## Motivation
 

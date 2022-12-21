@@ -1,6 +1,6 @@
 # 10 questions sur Bert 🇫🇷
 
-[Xiaooou Wang](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
+[Xiaooou Wang](https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
 
 ## Qu'est-ce Bert ?
 

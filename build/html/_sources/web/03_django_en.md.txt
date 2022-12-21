@@ -1,6 +1,6 @@
 # Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧
 
-[Xiaoou Wang](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
+[Xiaoou Wang](https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)
 
 It can be quite frustrating/challenging for django newbies to deploy their app because a bunch of new concepts should be known in order to play the game with confidence. This tutorial gives you all the basics and further reference. The structure of the project can be seen in the following screenshot: the project `my_blog` is itself located in the `blog` folder.
 

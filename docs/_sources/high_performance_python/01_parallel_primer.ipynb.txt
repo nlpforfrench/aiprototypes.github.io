@@ -6,7 +6,7 @@
       "source": [
         "# Parallelization in Python: a beginner’s guide (1, using map)\n",
         "\n",
-        "[Xiaoou WANG](https://https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)\n",
+        "[Xiaoou WANG](https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&hl=en)\n",
         "\n",
         "Parallelization is very useful in a lot of daily tasks, however tutorials often begin with obscure explanations about multithreading and multiprocessing. Don’t get me wrong, these concepts are crucial in complex scenarios, however they are intimidating and unnecessary for beginners.\n",
         "\n",
