@@ -79,7 +79,7 @@ templates_path = ['templates']
 # html_theme = 'sphinx_rtd_theme'
 # html_theme = 'asteroid_sphinx_theme'
 html_theme = 'furo'
-html_title = "AI Prototypes"
+# html_title = "AI Prototypes"
 
 nbsphinx_execute = 'auto'
 
