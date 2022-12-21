@@ -1,4 +1,4 @@
-# [AI prototypes](aiprototypes.com)
+# <p style="font-weight:bold;">[AI prototypes](aiprototypes.com)<p>
 
 <h2 style="text-align:center"> Fast Prototypes for Artificial Intelligence Projects</h2>
 
