@@ -137,11 +137,11 @@ html_css_files = [
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 htmlstatic_path = ['static']
-html_logo = "nlp_Logo.png"
+# html_logo = "nlp_Logo.png"
 
-html_theme_options = {
-    "light_logo": "nlp_Logo.png",
-    "dark_logo": "nlp_Logo.png",
-}
+# html_theme_options = {
+#     "light_logo": "nlp_Logo.png",
+#     "dark_logo": "nlp_Logo.png",
+# }
 # exclude_patterns = [r'*/image.md',r'better_programmer/*','ml/index.md','transformers/index.md']
 #

@@ -1,3 +1,4 @@
+rm -rf build/html
 rm -rf docs
 make html
 cd build/html
