@@ -1,10 +1,7 @@
-<!-- # [AI prototypes](aiprototypes.com) -->
+# [AI prototypes](aiprototypes.com)
 
-<!-- ## Fast Prototypes for Artificial Intelligence Projects -->
+Fast Prototypes for Artificial Intelligence Projects
 
-<h1 style="text-align:center;"> <a href="aiprototypes.com">AI Prototypes</a>
- </h1>
-<h2 style="text-align:center;">Fast Prototypes for Artificial Intelligence Projects</h2>
 
 
 ```{raw} html
