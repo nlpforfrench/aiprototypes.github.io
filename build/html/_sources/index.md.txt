@@ -45,11 +45,11 @@ math/index
 
 - [4. How to build a spell checker with deep learning 🇬🇧](nlp/04_spell_checker_en)
 
-- [5. Why using log scale 🇬🇧](nlp/05_log_scale)
+- [5. Why using log scale 🇬🇧](nlp/05_log_scale_en)
 
-- [6. How to build a LSTM-based Neural Machine Translation model with fairseq 🇬🇧](nlp/06_machine_translation)
+- [6. How to build a LSTM-based Neural Machine Translation model with fairseq 🇬🇧](nlp/06_machine_translation_en)
 
-- [7. Everything is translation, build a chatbot using attention and self-attention in fairseq 🇬🇧](nlp/07_chatbot)
+- [7. Everything is translation, build a chatbot using attention and self-attention in fairseq 🇬🇧](nlp/07_chatbot_en)
 
 ## Transformers in NLP with PyTorch, TensorFlow and Hugging Face <i class='fas fa-ribbon'></i>
 

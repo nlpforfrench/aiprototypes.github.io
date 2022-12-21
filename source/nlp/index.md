@@ -16,8 +16,8 @@
 
 - [4. How to build a spell checker with deep learning 🇬🇧](04_spell_checker_en)
 
-- [5. Why using log scale 🇬🇧](05_log_scale)
+- [5. Why using log scale 🇬🇧](05_log_scale_en)
 
-- [6. How to build a LSTM-based Neural Machine Translation model with fairseq 🇬🇧](06_machine_translation)
+- [6. How to build a LSTM-based Neural Machine Translation model with fairseq 🇬🇧](06_machine_translation_en)
 
-- [7. Everything is translation, build a chatbot using attention and self-attention in fairseq 🇬🇧](07_chatbot)
+- [7. Everything is translation, build a chatbot using attention and self-attention in fairseq 🇬🇧](07_chatbot_en)
