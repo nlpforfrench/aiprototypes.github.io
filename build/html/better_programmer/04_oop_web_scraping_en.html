@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Be a responsible programmer when doing Object-Oriented Programming 🇬🇧" href="05_oop_web_scraping_cooper_en.html" /><link rel="prev" title="Connect to remote jupyter notebook in Pycharm" href="03_jupyter_remote_pycharm.html" />
 
-    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
         <title>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,7 +37,9 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../static/custom.css" />
@@ -153,7 +155,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../high_performance_python/index.html">High performance computing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer_en.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -432,21 +434,21 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧">
-<h1>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧<a class="headerlink" href="#Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧" title="Permalink to this headline">¶</a></h1>
+<h1>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧<a class="headerlink" href="#Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧" title="Permalink to this heading">¶</a></h1>
 <section id="What-you-are-going-to-learn">
-<h2>What you are going to learn<a class="headerlink" href="#What-you-are-going-to-learn" title="Permalink to this headline">¶</a></h2>
+<h2>What you are going to learn<a class="headerlink" href="#What-you-are-going-to-learn" title="Permalink to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">requests</span></code> is a very popular package in Python because it provides many convenient methods to handle requests, parsing and exception handling. One could also use the official <code class="docutils literal notranslate"><span class="pre">urllib</span></code> package, however for the same tasks it is overall much easier to use requests due to its code design. You can clearly see the philosophy of the creator through the website’s motto:</p>
 <img alt="../_images/2021-04-30-20-25-11.png" src="../_images/2021-04-30-20-25-11.png"/>
 <p>The objective of this tutorial is to introduce you to objected-oriented programming (OOP) by imitating a working example in <code class="docutils literal notranslate"><span class="pre">requests</span></code>. After having a grasp of the very basic principles of OOP, we would move on to a more elaborate example to make you better seize the benefits of OOP.</p>
 <p>At the end you will be able to build a minimal web scraping framework allowing to scrape articles of the famous French newspaper <code class="docutils literal notranslate"><span class="pre">Le</span> <span class="pre">Monde</span></code> and the American newspaper <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">York</span> <span class="pre">Times</span></code>.</p>
 <p>Before starting this tutorial, be sure to have installed <code class="docutils literal notranslate"><span class="pre">requests</span></code> and <code class="docutils literal notranslate"><span class="pre">beautiful</span> <span class="pre">soup</span></code> with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install requests
-pip install beautifulsoup4
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>requests
+pip<span class="w"> </span>install<span class="w"> </span>beautifulsoup4
 </pre></div>
 </div>
 </section>
 <section id="A-working-example-in-requests">
-<h2>A working example in requests<a class="headerlink" href="#A-working-example-in-requests" title="Permalink to this headline">¶</a></h2>
+<h2>A working example in requests<a class="headerlink" href="#A-working-example-in-requests" title="Permalink to this heading">¶</a></h2>
 <p>Here is a quick starting example using <code class="docutils literal notranslate"><span class="pre">requests</span></code>, as you can see from the output.</p>
 <ol class="arabic simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">get</span></code> method returns a class object.</p></li>
@@ -520,7 +522,7 @@ The cookies property returns your cookies.
 </div>
 </section>
 <section id="Class,-constructor,-method-and-property">
-<h2>Class, constructor, method and property<a class="headerlink" href="#Class,-constructor,-method-and-property" title="Permalink to this headline">¶</a></h2>
+<h2>Class, constructor, method and property<a class="headerlink" href="#Class,-constructor,-method-and-property" title="Permalink to this heading">¶</a></h2>
 <p>When we talk about objected-oriented programming (OOP), no matter which language you are using (Some languages like Java and C++ are more natively class-based), the four most fundamental concepts are <code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">constructor</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code> and <code class="docutils literal notranslate"><span class="pre">property</span></code>.</p>
 <p>Let’s construct our first class in Python. A class is a concept, a perception. Let’s say we want to define what is a human being (Person).</p>
 <p>Typically you would start building your <code class="docutils literal notranslate"><span class="pre">Person</span></code> (capital case) class by defining it’s properties (name, nationality, job) using a constructor (the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> here). You would also like to define the class’s method (what a human can do).</p>
@@ -577,7 +579,7 @@ Xiaoou
 </div>
 </section>
 <section id="Imitate-the-requests-framework">
-<h2>Imitate the requests framework<a class="headerlink" href="#Imitate-the-requests-framework" title="Permalink to this headline">¶</a></h2>
+<h2>Imitate the requests framework<a class="headerlink" href="#Imitate-the-requests-framework" title="Permalink to this heading">¶</a></h2>
 <p>When you run <code class="docutils literal notranslate"><span class="pre">requests.get("https://www.google.com/")</span></code>, you have an object of class <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">'requests.models.Response'&gt;</span></code>. This object has two properties: <code class="docutils literal notranslate"><span class="pre">status_code</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code>. Let’s replicate this schema with an example of article scraping.</p>
 <p>So basically we are trying to have an object returned after calling a function/method.</p>
 <p>So we first create the class <code class="docutils literal notranslate"><span class="pre">Content</span></code> and then the function <code class="docutils literal notranslate"><span class="pre">scrape_lemonde</span></code> which encapsulate the scraped url, title, and the first 100 characters in the object created by the <code class="docutils literal notranslate"><span class="pre">Content</span></code> class.</p>
@@ -758,7 +760,7 @@ Would you like to live forever? Some billionaires, already invincible in every o
 </div>
 </div>
 <section id="Le-monde-scraper">
-<h3>Le monde scraper<a class="headerlink" href="#Le-monde-scraper" title="Permalink to this headline">¶</a></h3>
+<h3>Le monde scraper<a class="headerlink" href="#Le-monde-scraper" title="Permalink to this heading">¶</a></h3>
 <p>Now let’s generate a scraper for articles of the newspaper <code class="docutils literal notranslate"><span class="pre">Le</span> <span class="pre">Monde</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
@@ -802,7 +804,7 @@ First 100 characters
 </div>
 </section>
 <section id="New-York-Times-scraper">
-<h3>New York Times scraper<a class="headerlink" href="#New-York-Times-scraper" title="Permalink to this headline">¶</a></h3>
+<h3>New York Times scraper<a class="headerlink" href="#New-York-Times-scraper" title="Permalink to this heading">¶</a></h3>
 <p>Now a scraper for articles of New York Times.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
@@ -846,7 +848,7 @@ WASHINGTON — The band of razor wire-topped fencing around the Capitol had rece
 </div>
 </section>
 <section id="Unknown-journal-name">
-<h3>Unknown journal name<a class="headerlink" href="#Unknown-journal-name" title="Permalink to this headline">¶</a></h3>
+<h3>Unknown journal name<a class="headerlink" href="#Unknown-journal-name" title="Permalink to this heading">¶</a></h3>
 <p>When the end user enters an unknown journal, it will spit out the pre-defined message.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
@@ -869,7 +871,7 @@ Please contact us to build a scraper for this journal :D
 </section>
 </section>
 <section id="Wrap-up">
-<h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Permalink to this headline">¶</a></h2>
+<h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Permalink to this heading">¶</a></h2>
 <p>Bravo for having reading so far, hopefully you have:</p>
 <ol class="arabic simple">
 <li><p>Learned how to manage a little web-scraping project using class in Python</p></li>
@@ -962,13 +964,13 @@ Please contact us to build a scraper for this journal :D
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script src="../static/jquery.js"></script>
-    <script src="../static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
     <script src="../static/doctools.js"></script>
+    <script src="../static/sphinx_highlight.js"></script>
     <script src="../static/clipboard.min.js"></script>
     <script src="../static/copybutton.js"></script>
     <script src="../static/tabs.js"></script>
-    <script >
+    <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <!-- Global site tag (gtag.js) - Google Analytics -->

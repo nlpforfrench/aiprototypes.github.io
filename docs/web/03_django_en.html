@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Computational Linguistics in R" href="../linguistique_informatique/index.html" /><link rel="prev" title="On your way to scraping French forums 🇬🇧" href="02_forum_en.html" />
 
-    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
         <title>Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,7 +37,9 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../static/custom.css" />
@@ -153,7 +155,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../high_performance_python/index.html">High performance computing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer_en.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -184,12 +186,12 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate">
-<h1>Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧<a class="headerlink" href="#deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate" title="Permalink to this headline">¶</a></h1>
+<h1>Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧<a class="headerlink" href="#deploying-django-app-on-ubuntu-at-digitalocean-ssl-certificate" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou Wang</a></p>
 <p>It can be quite frustrating/challenging for django newbies to deploy their app because a bunch of new concepts should be known in order to play the game with confidence. This tutorial gives you all the basics and further reference. The structure of the project can be seen in the following screenshot: the project <code class="docutils literal notranslate"><span class="pre">my_blog</span></code> is itself located in the <code class="docutils literal notranslate"><span class="pre">blog</span></code> folder.</p>
 <p><img alt="" src="https://i.imgur.com/FglTVf6.png"/></p>
 <section id="deployment-in-a-nutshell">
-<h2>Deployment in a nutshell<a class="headerlink" href="#deployment-in-a-nutshell" title="Permalink to this headline">¶</a></h2>
+<h2>Deployment in a nutshell<a class="headerlink" href="#deployment-in-a-nutshell" title="Permalink to this heading">¶</a></h2>
 <p>You need</p>
 <ul class="simple">
 <li><p>a web server (often Nginx or apache) to handle http requests</p></li>
@@ -200,21 +202,21 @@
 </ul>
 </section>
 <section id="step-by-step">
-<h2>Step by step<a class="headerlink" href="#step-by-step" title="Permalink to this headline">¶</a></h2>
+<h2>Step by step<a class="headerlink" href="#step-by-step" title="Permalink to this heading">¶</a></h2>
 <section id="a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu">
-<h3>A server/droplet on digitalocean with often a Linux system as Ubuntu<a class="headerlink" href="#a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu" title="Permalink to this headline">¶</a></h3>
+<h3>A server/droplet on digitalocean with often a Linux system as Ubuntu<a class="headerlink" href="#a-server-droplet-on-digitalocean-with-often-a-linux-system-as-ubuntu" title="Permalink to this heading">¶</a></h3>
 <p><img alt="" src="https://i.imgur.com/a0Lf3Xp.png"/></p>
 <p>Note, some tutorials said that a password would be sent to your email. This is outdated, remember, for an easy start, to choose the password method and set your password as follows. The 5$ plan is largely sufficient for personal use.</p>
 <p><img alt="" src="https://i.imgur.com/6AYEhq2.png"/></p>
 </section>
 <section id="a-regular-user-with-some-root-privileges">
-<h3>A regular user with some root privileges<a class="headerlink" href="#a-regular-user-with-some-root-privileges" title="Permalink to this headline">¶</a></h3>
+<h3>A regular user with some root privileges<a class="headerlink" href="#a-regular-user-with-some-root-privileges" title="Permalink to this heading">¶</a></h3>
 <p>For our purpose you just need the following steps:</p>
 <p>First connect to the server using ssh, on Mac you are good to go already on Windows you can use <code class="docutils literal notranslate"><span class="pre">PuTTy</span></code>, see the reference</p>
 <blockquote>
 <div><p>ref https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/</p>
 </div></blockquote>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh root@your_server_ip
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>root@your_server_ip
 </pre></div>
 </div>
 <p>The server ip can be seen here</p>
@@ -223,42 +225,42 @@
 <blockquote>
 <div><p>ref https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04</p>
 </div></blockquote>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>adduser sammy <span class="c1"># add a user</span>
-usermod -aG sudo sammy <span class="c1"># give sammy root privileges</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>adduser<span class="w"> </span>sammy<span class="w"> </span><span class="c1"># add a user</span>
+usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>sammy<span class="w"> </span><span class="c1"># give sammy root privileges</span>
 </pre></div>
 </div>
 <p>Now log out and log in this regular user</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh sammy@your_server_ip
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>sammy@your_server_ip
 </pre></div>
 </div>
 </section>
 <section id="update-apt-get-to-install-the-most-recent-packages">
-<h3>Update apt-get to install the most recent packages<a class="headerlink" href="#update-apt-get-to-install-the-most-recent-packages" title="Permalink to this headline">¶</a></h3>
+<h3>Update apt-get to install the most recent packages<a class="headerlink" href="#update-apt-get-to-install-the-most-recent-packages" title="Permalink to this heading">¶</a></h3>
 <p>Here we install pip, postgresql (database tool) and nginx (web server). In simple terms, <code class="docutils literal notranslate"><span class="pre">nginx</span></code> is the server who takes http requests, another common server is <code class="docutils literal notranslate"><span class="pre">apache</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
-sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>python3-dev<span class="w"> </span>libpq-dev<span class="w"> </span>postgresql<span class="w"> </span>postgresql-contrib<span class="w"> </span>nginx
 </pre></div>
 </div>
 </section>
 <section id="set-up-the-database">
-<h3>Set up the database<a class="headerlink" href="#set-up-the-database" title="Permalink to this headline">¶</a></h3>
+<h3>Set up the database<a class="headerlink" href="#set-up-the-database" title="Permalink to this heading">¶</a></h3>
 <p>First log into postgresql</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -u postgres psql
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql
 </pre></div>
 </div>
 <p>Then create a database, user and password.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CREATE DATABASE yourproject<span class="p">;</span> <span class="c1"># replace yourproject with your database name</span>
-CREATE USER myprojectuser WITH PASSWORD <span class="s1">'password'</span><span class="p">;</span> <span class="c1"># set username and password</span>
-ALTER ROLE myprojectuser SET client_encoding TO <span class="s1">'utf8'</span><span class="p">;</span>
-ALTER ROLE myprojectuser SET default_transaction_isolation TO <span class="s1">'read committed'</span><span class="p">;</span>
-ALTER ROLE myprojectuser SET timezone TO <span class="s1">'UTC'</span><span class="p">;</span>
-GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser<span class="p">;</span>
-<span class="se">\q</span> <span class="c1"># quit</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CREATE<span class="w"> </span>DATABASE<span class="w"> </span>yourproject<span class="p">;</span><span class="w"> </span><span class="c1"># replace yourproject with your database name</span>
+CREATE<span class="w"> </span>USER<span class="w"> </span>myprojectuser<span class="w"> </span>WITH<span class="w"> </span>PASSWORD<span class="w"> </span><span class="s1">'password'</span><span class="p">;</span><span class="w"> </span><span class="c1"># set username and password</span>
+ALTER<span class="w"> </span>ROLE<span class="w"> </span>myprojectuser<span class="w"> </span>SET<span class="w"> </span>client_encoding<span class="w"> </span>TO<span class="w"> </span><span class="s1">'utf8'</span><span class="p">;</span>
+ALTER<span class="w"> </span>ROLE<span class="w"> </span>myprojectuser<span class="w"> </span>SET<span class="w"> </span>default_transaction_isolation<span class="w"> </span>TO<span class="w"> </span><span class="s1">'read committed'</span><span class="p">;</span>
+ALTER<span class="w"> </span>ROLE<span class="w"> </span>myprojectuser<span class="w"> </span>SET<span class="w"> </span>timezone<span class="w"> </span>TO<span class="w"> </span><span class="s1">'UTC'</span><span class="p">;</span>
+GRANT<span class="w"> </span>ALL<span class="w"> </span>PRIVILEGES<span class="w"> </span>ON<span class="w"> </span>DATABASE<span class="w"> </span>myproject<span class="w"> </span>TO<span class="w"> </span>myprojectuser<span class="p">;</span>
+<span class="se">\q</span><span class="w"> </span><span class="c1"># quit</span>
 </pre></div>
 </div>
 </section>
 <section id="add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer">
-<h3>Add the database setting set up in step 4 into your <code class="docutils literal notranslate"><span class="pre">Settings.py</span></code> on your local computer<a class="headerlink" href="#add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer" title="Permalink to this headline">¶</a></h3>
+<h3>Add the database setting set up in step 4 into your <code class="docutils literal notranslate"><span class="pre">Settings.py</span></code> on your local computer<a class="headerlink" href="#add-the-database-setting-set-up-in-step-4-into-your-settings-py-on-your-local-computer" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
     <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">'default'</span><span class="p">:</span> <span class="p">{</span>
@@ -281,9 +283,9 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser<span class="p">;</sp
 </div>
 </section>
 <section id="set-up-a-virtual-environment-for-python">
-<h3>Set up a virtual environment for Python<a class="headerlink" href="#set-up-a-virtual-environment-for-python" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -H pip3 install --upgrade pip
-sudo -H pip3 install virtualenv
+<h3>Set up a virtual environment for Python<a class="headerlink" href="#set-up-a-virtual-environment-for-python" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-H<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+sudo<span class="w"> </span>-H<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>virtualenv
 </pre></div>
 </div>
 <p>Since my website’s source code is hosted on github I will use git to clone the project into the folder <code class="docutils literal notranslate"><span class="pre">blog</span></code>.</p>
@@ -291,122 +293,122 @@ sudo -H pip3 install virtualenv
 <p>Also add your service ip in <code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span></code> of your global<code class="docutils literal notranslate"><span class="pre">settings.py</span></code></p>
 <p><img alt="" src="https://i.imgur.com/fipeWqq.png"/></p>
 <p>Update your git repository, be sure to have uploaded the most recent <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. Then get the repository on the server by running:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone yourrepository blog
-<span class="nb">cd</span> blog
-git config credential.helper store <span class="c1"># remember your username and password</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>yourrepository<span class="w"> </span>blog
+<span class="nb">cd</span><span class="w"> </span>blog
+git<span class="w"> </span>config<span class="w"> </span>credential.helper<span class="w"> </span>store<span class="w"> </span><span class="c1"># remember your username and password</span>
 </pre></div>
 </div>
 <p>And then create a virtualenv named <code class="docutils literal notranslate"><span class="pre">env</span></code> and activate it</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virtualenv env
-<span class="nb">source</span> env/bin/activate
-pip install -r requirements.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virtualenv<span class="w"> </span>env
+<span class="nb">source</span><span class="w"> </span>env/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
 </section>
 <section id="run-migrate">
-<h3>Run migrate<a class="headerlink" href="#run-migrate" title="Permalink to this headline">¶</a></h3>
+<h3>Run migrate<a class="headerlink" href="#run-migrate" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
 <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
 </pre></div>
 </div>
 </section>
 <section id="test-on-8000-port-with-and-without-gunicorn">
-<h3>Test on 8000 port with and without gunicorn<a class="headerlink" href="#test-on-8000-port-with-and-without-gunicorn" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ufw allow <span class="m">8000</span> <span class="c1"># allow 8000 in the firewall</span>
-python manage.py runserver <span class="m">0</span>.0.0.0:8000
+<h3>Test on 8000 port with and without gunicorn<a class="headerlink" href="#test-on-8000-port-with-and-without-gunicorn" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">8000</span><span class="w"> </span><span class="c1"># allow 8000 in the firewall</span>
+python<span class="w"> </span>manage.py<span class="w"> </span>runserver<span class="w"> </span><span class="m">0</span>.0.0.0:8000
 </pre></div>
 </div>
 <p>Go to <a class="reference external" href="http://server_domain_or_IP:8000">http://server_domain_or_IP:8000</a>, it’s very important to use http since you haven’t set ssl certificate (no https support)</p>
 <p>Now test the gunicorn. Gunicorn is an <code class="docutils literal notranslate"><span class="pre">application</span> <span class="pre">server</span></code> which serves your django app.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gunicorn --bind <span class="m">0</span>.0.0.0:8000 my_blog.wsgi
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gunicorn<span class="w"> </span>--bind<span class="w"> </span><span class="m">0</span>.0.0.0:8000<span class="w"> </span>my_blog.wsgi
 </pre></div>
 </div>
 </section>
 <section id="set-up-gunicorn-service-file">
-<h3>Set up Gunicorn service file<a class="headerlink" href="#set-up-gunicorn-service-file" title="Permalink to this headline">¶</a></h3>
+<h3>Set up Gunicorn service file<a class="headerlink" href="#set-up-gunicorn-service-file" title="Permalink to this heading">¶</a></h3>
 <p>I use vim here, but you are free to use some more beginner-friendly editor like nano. The gunicorn service file is to ensure that gunicorn is run automatically in background to serve django</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo vim /etc/systemd/system/gunicorn.service
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/systemd/system/gunicorn.service
 </pre></div>
 </div>
 <p>An example service file using sammy as user looks as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
-<span class="nv">Description</span><span class="o">=</span>gunicorn daemon
+<span class="nv">Description</span><span class="o">=</span>gunicorn<span class="w"> </span>daemon
 <span class="nv">After</span><span class="o">=</span>network.target
 
 <span class="o">[</span>Service<span class="o">]</span>
 <span class="nv">User</span><span class="o">=</span>sammy
 <span class="nv">Group</span><span class="o">=</span>www-data
 <span class="nv">WorkingDirectory</span><span class="o">=</span>/home/sammy/blog
-<span class="nv">ExecStart</span><span class="o">=</span>/home/sammy/blog/env/bin/gunicorn --access-logfile - --workers <span class="m">3</span> --bind unix:/home/sammy/my_blog.sock my_blog.wsgi:application
+<span class="nv">ExecStart</span><span class="o">=</span>/home/sammy/blog/env/bin/gunicorn<span class="w"> </span>--access-logfile<span class="w"> </span>-<span class="w"> </span>--workers<span class="w"> </span><span class="m">3</span><span class="w"> </span>--bind<span class="w"> </span>unix:/home/sammy/my_blog.sock<span class="w"> </span>my_blog.wsgi:application
 
 <span class="o">[</span>Install<span class="o">]</span>
 <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </pre></div>
 </div>
 <p>Now, start gunicorn!</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start gunicorn.socket
-sudo systemctl <span class="nb">enable</span> gunicorn.socket
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>gunicorn.socket
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>gunicorn.socket
 </pre></div>
 </div>
 </section>
 <section id="set-nginx">
-<h3>Set Nginx<a class="headerlink" href="#set-nginx" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo vim /etc/nginx/sites-available/blog
+<h3>Set Nginx<a class="headerlink" href="#set-nginx" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/nginx/sites-available/blog
 </pre></div>
 </div>
 <p>An example setting looks as following</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server <span class="o">{</span>
-    server_name <span class="m">142</span>.93.110.76<span class="p">;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>server_name<span class="w"> </span><span class="m">142</span>.93.110.76<span class="p">;</span>
 
-    <span class="nv">location</span> <span class="o">=</span> /favicon.ico <span class="o">{</span> access_log off<span class="p">;</span> log_not_found off<span class="p">;</span> <span class="o">}</span>
-    location /static/ <span class="o">{</span>
-        root /home/sammy/blog<span class="p">;</span>
-    <span class="o">}</span>
+<span class="w">    </span><span class="nv">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/favicon.ico<span class="w"> </span><span class="o">{</span><span class="w"> </span>access_log<span class="w"> </span>off<span class="p">;</span><span class="w"> </span>log_not_found<span class="w"> </span>off<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="w">    </span>location<span class="w"> </span>/static/<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>root<span class="w"> </span>/home/sammy/blog<span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
 
-    location /media/ <span class="o">{</span>
-        root /home/sammy/media<span class="p">;</span>
-    <span class="o">}</span>
+<span class="w">    </span>location<span class="w"> </span>/media/<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>root<span class="w"> </span>/home/sammy/media<span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
 
-    location / <span class="o">{</span>
-        include proxy_params<span class="p">;</span>
-        proxy_pass http://unix:/home/sammy/my_blog.sock<span class="p">;</span>
-    <span class="o">}</span>
+<span class="w">    </span>location<span class="w"> </span>/<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>include<span class="w"> </span>proxy_params<span class="p">;</span>
+<span class="w">        </span>proxy_pass<span class="w"> </span>http://unix:/home/sammy/my_blog.sock<span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 </div>
 <p>Make a symbolic link to make your setting available to nginx</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/etc/nginx/sites-available/blog<span class="w"> </span>/etc/nginx/sites-enabled
 </pre></div>
 </div>
 <p>Test and start your Nginx server, you are good to go!</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo nginx -t
-sudo systemctl restart nginx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nginx<span class="w"> </span>-t
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>nginx
 <span class="c1"># stop 8000 port in the firewall</span>
-sudo ufw delete allow <span class="m">8000</span>
-sudo ufw allow <span class="s1">'Nginx Full'</span>
+sudo<span class="w"> </span>ufw<span class="w"> </span>delete<span class="w"> </span>allow<span class="w"> </span><span class="m">8000</span>
+sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="s1">'Nginx Full'</span>
 </pre></div>
 </div>
 </section>
 <section id="add-a-ssl-certificate-to-make-https-available">
-<h3>Add a ssl certificate to make https available<a class="headerlink" href="#add-a-ssl-certificate-to-make-https-available" title="Permalink to this headline">¶</a></h3>
+<h3>Add a ssl certificate to make https available<a class="headerlink" href="#add-a-ssl-certificate-to-make-https-available" title="Permalink to this heading">¶</a></h3>
 <p>Almost nobody uses http these days. Let’s now see how to secure our site by adding a ssl certificate!</p>
 <p>To have a more solid grasp on ssl certificate, see <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04">reference here</a>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt install certbot python3-certbot-nginx <span class="c1"># install some useful packages</span>
-sudo vim /etc/nginx/sites-available/blog
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>certbot<span class="w"> </span>python3-certbot-nginx<span class="w"> </span><span class="c1"># install some useful packages</span>
+sudo<span class="w"> </span>vim<span class="w"> </span>/etc/nginx/sites-available/blog
 </pre></div>
 </div>
 <p>Change the server_name line, example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server_name <span class="m">142</span>.93.110.76 nlpinpython.com www.nlpinpython.com<span class="p">;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server_name<span class="w"> </span><span class="m">142</span>.93.110.76<span class="w"> </span>nlpinpython.com<span class="w"> </span>www.nlpinpython.com<span class="p">;</span>
 </pre></div>
 </div>
 <p>Restart Nginx and allow https in the firewall:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl reload nginx
-sudo ufw allow <span class="s1">'Nginx Full'</span>
-sudo ufw delete allow <span class="s1">'Nginx HTTP'</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>nginx
+sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="s1">'Nginx Full'</span>
+sudo<span class="w"> </span>ufw<span class="w"> </span>delete<span class="w"> </span>allow<span class="w"> </span><span class="s1">'Nginx HTTP'</span>
 </pre></div>
 </div>
 <p>Get a ssl certificat</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo certbot --nginx -d nlpinpython.com -d www.nlpinpython.com
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>certbot<span class="w"> </span>--nginx<span class="w"> </span>-d<span class="w"> </span>nlpinpython.com<span class="w"> </span>-d<span class="w"> </span>www.nlpinpython.com
 </pre></div>
 </div>
 <p>At the last step, select <code class="docutils literal notranslate"><span class="pre">redirect</span></code>
@@ -415,20 +417,20 @@ sudo ufw delete allow <span class="s1">'Nginx HTTP'</span>
 </section>
 </section>
 <section id="most-useful-commands">
-<h2>Most useful commands:<a class="headerlink" href="#most-useful-commands" title="Permalink to this headline">¶</a></h2>
+<h2>Most useful commands:<a class="headerlink" href="#most-useful-commands" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up nginx</span>
-sudo vim /etc/nginx/sites-available/blog
+sudo<span class="w"> </span>vim<span class="w"> </span>/etc/nginx/sites-available/blog
 <span class="c1"># set up gunicorn</span>
-sudo vim /etc/systemd/system/gunicorn.service
+sudo<span class="w"> </span>vim<span class="w"> </span>/etc/systemd/system/gunicorn.service
 <span class="c1"># restart gunicorn after change</span>
-sudo systemctl restart gunicorn
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>gunicorn
 <span class="c1"># restart nginx</span>
-sudo systemctl restart nginx
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>nginx
 </pre></div>
 </div>
 <p>Export your database for backup:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -i -u postgres -W
-pg_dump dbname &gt; dbexport.pgsql
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-i<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>-W
+pg_dump<span class="w"> </span>dbname<span class="w"> </span>&gt;<span class="w"> </span>dbexport.pgsql
 </pre></div>
 </div>
 <blockquote>
@@ -526,13 +528,13 @@ pg_dump dbname &gt; dbexport.pgsql
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script src="../static/jquery.js"></script>
-    <script src="../static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
     <script src="../static/doctools.js"></script>
+    <script src="../static/sphinx_highlight.js"></script>
     <script src="../static/clipboard.min.js"></script>
     <script src="../static/copybutton.js"></script>
     <script src="../static/tabs.js"></script>
-    <script >
+    <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <!-- Global site tag (gtag.js) - Google Analytics -->

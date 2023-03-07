@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
         <title>Everything is translation (Build a chatbot using attention and self-attention in fairseq) - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,7 +37,9 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../static/custom.css" />
@@ -153,7 +155,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../high_performance_python/index.html">High performance computing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer_en.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -432,10 +434,10 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Everything-is-translation-(Build-a-chatbot-using-attention-and-self-attention-in-fairseq)">
-<h1>Everything is translation (Build a chatbot using attention and self-attention in fairseq)<a class="headerlink" href="#Everything-is-translation-(Build-a-chatbot-using-attention-and-self-attention-in-fairseq)" title="Permalink to this headline">¶</a></h1>
+<h1>Everything is translation (Build a chatbot using attention and self-attention in fairseq)<a class="headerlink" href="#Everything-is-translation-(Build-a-chatbot-using-attention-and-self-attention-in-fairseq)" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou Wang</a></p>
 <section id="Build-a-simple-chatbot-using-NMT-model">
-<h2>Build a simple chatbot using NMT model<a class="headerlink" href="#Build-a-simple-chatbot-using-NMT-model" title="Permalink to this headline">¶</a></h2>
+<h2>Build a simple chatbot using NMT model<a class="headerlink" href="#Build-a-simple-chatbot-using-NMT-model" title="Permalink to this heading">¶</a></h2>
 <p>Chatbots are quite popular these days. Modern models can even tell corny jokes (like <a class="reference external" href="https://ai.googleblog.com/2020/01/towards-conversational-agent-that-can.html">Google’s Meena</a>).</p>
 <p>If you followed <a class="reference external" href="./06_machine_translation">the tutorial on build Neural translation model</a>, you have actually learned the basics needed for building a chatbot. Surprising? Maybe not :) Actually, in a chatbot setting, it’s common to consider the question as the text to be “translated” and the answer as an translation.</p>
 <p>The bitext is thus a file consisting of lines separated often by <code class="docutils literal notranslate"><span class="pre">\t</span></code>: the first item being the question and the last item the response.</p>
@@ -446,7 +448,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>head data/dialog/selfdialog.valid.tok.fr
+<span></span><span class="o">!</span>head<span class="w"> </span>data/dialog/selfdialog.valid.tok.fr
 </pre></div>
 </div>
 </div>
@@ -472,7 +474,7 @@ I like this new trend of taking animated Disney movies and making them into live
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>head data/dialog/selfdialog.valid.tok.en
+<span></span><span class="o">!</span>head<span class="w"> </span>data/dialog/selfdialog.valid.tok.en
 </pre></div>
 </div>
 </div>
@@ -499,7 +501,7 @@ Me , too . I trust Disney to do it right .
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>cat ./src/dialog/preprocess.sh
+<span></span><span class="o">!</span>cat<span class="w"> </span>./src/dialog/preprocess.sh
 </pre></div>
 </div>
 </div>
@@ -524,7 +526,7 @@ fairseq-preprocess \
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>head src/dialog/train.sh
+<span></span><span class="o">!</span>head<span class="w"> </span>src/dialog/train.sh
 </pre></div>
 </div>
 </div>
@@ -548,7 +550,7 @@ fairseq-train \ data/chatbot-bin \
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>head src/dialog/inference.sh
+<span></span><span class="o">!</span>head<span class="w"> </span>src/dialog/inference.sh
 </pre></div>
 </div>
 </div>
@@ -567,7 +569,7 @@ fairseq-interactive \ data/chatbot-bin \
 <p>Et voilà! You built your first dialogue system :) <img alt="image1" src="../_images/2022-03-07-13-27-55.png"/></p>
 </section>
 <section id="So-what-is-attention">
-<h2>So what is attention<a class="headerlink" href="#So-what-is-attention" title="Permalink to this headline">¶</a></h2>
+<h2>So what is attention<a class="headerlink" href="#So-what-is-attention" title="Permalink to this heading">¶</a></h2>
 <p>Remember in <a class="reference external" href="./06_machine_translation">the previous tutorial</a>, we briefly talked about the main drawback of a vanilla seq2seq2 model. The input (a sentence or a text) is encoded into a single vector regardless of its length, resulting in a loss of information.</p>
 <p>If we think about how a human translates a sentence, it’s often the case that human translators don’t remember the sentence and use a static internal representation to produce translations. Actually, he will often look back to the original text in order to focus his attention on the relevant parts at each time step.</p>
 <p>Suppose the text to translate is “Le chat cherche de la nourriture désespérément” in French, a human translator would start by translating “the cat”, focusing his attention on “Le chat”. Then he will maybe put his focus on the word “désespérément” and output “desparately”. Finally he will shift his attention back to “cherche de la nourriture” meaning “look for something to eat”.</p>
@@ -577,7 +579,7 @@ time step of translation, the decoder has access to a different, weighted repres
 <p>Bahdanau, D., Cho, K., &amp; Bengio, Y. (2016). Neural Machine Translation by Jointly Learning to Align and Translate. ArXiv:1409.0473 [Cs, Stat]. http://arxiv.org/abs/1409.0473</p>
 </section>
 <section id="And-the-self-attention-?">
-<h2>And the self-attention ?<a class="headerlink" href="#And-the-self-attention-?" title="Permalink to this headline">¶</a></h2>
+<h2>And the self-attention ?<a class="headerlink" href="#And-the-self-attention-?" title="Permalink to this heading">¶</a></h2>
 <p>The attention mechanism is designed to tackle the issue of the single vector representation. However, it is still facing another problem: long-range dependence. As a sentence’s length increases, it would be more and more difficult to “remember” relations between different elements inside a sentence.</p>
 <p>For instance, in the sentence “The neighbor is not here today because of the vacation, that’s why his cat keeps meowing.”. It is very difficult for a RNN unit to know that <code class="docutils literal notranslate"><span class="pre">his</span></code> is related to <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">neighbor</span></code> since too many words lie between these two phrases. However, a simple rule like <code class="docutils literal notranslate"><span class="pre">his</span></code> is always related to the nearest human pronoun should work.</p>
 <p>In another words, this kind of <code class="docutils literal notranslate"><span class="pre">random</span> <span class="pre">access</span></code> is more efficient than the <code class="docutils literal notranslate"><span class="pre">linear</span> <span class="pre">access</span></code> way of RNNs.</p>
@@ -587,7 +589,7 @@ time step of translation, the decoder has access to a different, weighted repres
 <p><a class="reference external" href="http://nlp.seas.harvard.edu/2018/04/03/attention.html">The annotated transformer</a></p>
 </section>
 <section id="How-to-use-self-attention-in-fairseq?">
-<h2>How to use self-attention in fairseq?<a class="headerlink" href="#How-to-use-self-attention-in-fairseq?" title="Permalink to this headline">¶</a></h2>
+<h2>How to use self-attention in fairseq?<a class="headerlink" href="#How-to-use-self-attention-in-fairseq?" title="Permalink to this heading">¶</a></h2>
 <p>The nice thing about <code class="docutils literal notranslate"><span class="pre">fairseq</span></code> is that it implements and provides already many sota model architectures including transformer. Also fairseq makes it really smooth to use multiple GPUs.</p>
 <p>To use the transformer architecture, just change the <code class="docutils literal notranslate"><span class="pre">--arch</span> <span class="pre">lstm</span></code> to <code class="docutils literal notranslate"><span class="pre">--arch</span> <span class="pre">transformer</span></code>. You can ignore the hyperparameters because the choice of the latters is irrelevant here.</p>
 <div class="nbinput docutils container">
@@ -595,7 +597,7 @@ time step of translation, the decoder has access to a different, weighted repres
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>head src/dialog/train_transformer.sh
+<span></span><span class="o">!</span>head<span class="w"> </span>src/dialog/train_transformer.sh
 </pre></div>
 </div>
 </div>
@@ -618,7 +620,7 @@ data/chatbot-bin \
 </div>
 </section>
 <section id="Conclusions">
-<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Permalink to this headline">¶</a></h2>
+<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Permalink to this heading">¶</a></h2>
 <p>That’s it :) You know how to build a simple chatbot right now. Next time we will talk about how to use NMT models to implement Grammatical Error Correction (GEC) and especially, how the whole architecture can be used to produce <code class="docutils literal notranslate"><span class="pre">noisy</span> <span class="pre">texts</span></code> (texts containing errors).</p>
 <p>Stay tuned :)</p>
 </section>
@@ -679,13 +681,13 @@ data/chatbot-bin \
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script src="../static/jquery.js"></script>
-    <script src="../static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
     <script src="../static/doctools.js"></script>
+    <script src="../static/sphinx_highlight.js"></script>
     <script src="../static/clipboard.min.js"></script>
     <script src="../static/copybutton.js"></script>
     <script src="../static/tabs.js"></script>
-    <script >
+    <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <!-- Global site tag (gtag.js) - Google Analytics -->

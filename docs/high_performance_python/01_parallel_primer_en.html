@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="My Codebase" href="../codebase/index.html" /><link rel="prev" title="High performance computing" href="index.html" />
 
-    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
         <title>Parallelization in Python: a beginner’s guide (1, using map) - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,7 +37,9 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../static/custom.css" />
@@ -432,7 +434,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Parallelization-in-Python:-a-beginner’s-guide-(1,-using-map)">
-<h1>Parallelization in Python: a beginner’s guide (1, using map)<a class="headerlink" href="#Parallelization-in-Python:-a-beginner’s-guide-(1,-using-map)" title="Permalink to this headline">¶</a></h1>
+<h1>Parallelization in Python: a beginner’s guide (1, using map)<a class="headerlink" href="#Parallelization-in-Python:-a-beginner’s-guide-(1,-using-map)" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>Parallelization is very useful in a lot of daily tasks, however tutorials often begin with obscure explanations about multithreading and multiprocessing. Don’t get me wrong, these concepts are crucial in complex scenarios, however they are intimidating and unnecessary for beginners.</p>
 <p>Let’s use a code-first and example-driven approach to introduce parallelization in Python.</p>
@@ -440,7 +442,7 @@ div.rendered_html tbody tr:hover {
 <p>Instinctively, you say to yourself that the best approach is to unzip all the files altogether instead of processing 1 by 1.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">altogether</span></code> way is parallelization.</p>
 <section id="Check-how-many-cores-that-I-have-on-my-computer">
-<h2>Check how many cores that I have on my computer<a class="headerlink" href="#Check-how-many-cores-that-I-have-on-my-computer" title="Permalink to this headline">¶</a></h2>
+<h2>Check how many cores that I have on my computer<a class="headerlink" href="#Check-how-many-cores-that-I-have-on-my-computer" title="Permalink to this heading">¶</a></h2>
 <p>Please note that I use <code class="docutils literal notranslate"><span class="pre">multiprocess</span></code> here instead of <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> because the latter has some issue with Jupyter Notebook. See <a class="reference external" href="https://stackoverflow.com/questions/41385708/multiprocessing-example-giving-attributeerror">here</a>.</p>
 <p>We have 16 cpus :)</p>
 <div class="nbinput docutils container">
@@ -470,7 +472,7 @@ Number of processors:  16
 </div>
 </section>
 <section id="Get-the-filenames-and-have-a-peek-at-the-size-of-each-file">
-<h2>Get the filenames and have a peek at the size of each file<a class="headerlink" href="#Get-the-filenames-and-have-a-peek-at-the-size-of-each-file" title="Permalink to this headline">¶</a></h2>
+<h2>Get the filenames and have a peek at the size of each file<a class="headerlink" href="#Get-the-filenames-and-have-a-peek-at-the-size-of-each-file" title="Permalink to this heading">¶</a></h2>
 <p>In our case, their extensions are <code class="docutils literal notranslate"><span class="pre">.7z</span></code> and they are located in the <code class="docutils literal notranslate"><span class="pre">/Users/xiaoou/Downloads/frwac_7z/</span></code> directory. We can use <code class="docutils literal notranslate"><span class="pre">glob</span></code> to get the list of filenames. As you can see from the output, these files are quite huge and can take some time if we unzip them one by one.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -504,7 +506,7 @@ Number of processors:  16
 </div>
 </section>
 <section id="Run-the-test-with-multiple-cores-and-1-single-core">
-<h2>Run the test with multiple cores and 1 single core<a class="headerlink" href="#Run-the-test-with-multiple-cores-and-1-single-core" title="Permalink to this headline">¶</a></h2>
+<h2>Run the test with multiple cores and 1 single core<a class="headerlink" href="#Run-the-test-with-multiple-cores-and-1-single-core" title="Permalink to this heading">¶</a></h2>
 <p>So let’s use multiprocessing. The key component here is Pool which specifies how many cores that we want to use to process files at the same time (1 core per file). See the unzip_7z function which is quite self-explainable. Here I use the map function to run the extract_7z function on each .7z file.</p>
 <p>The xo_timer is a decorator that I wrote to compute time. You can ignore it in this tutorial :)</p>
 <div class="nbinput docutils container">
@@ -551,7 +553,7 @@ Function: unzip_7z, Time: 45.80530025600001
 <p>When using 16 cores, the total time of unzipping these 4 files is 12.4 seconds, while using only 1 core takes 45.8 seconds!</p>
 </section>
 <section id="Conclusion">
-<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Permalink to this headline">¶</a></h2>
+<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Permalink to this heading">¶</a></h2>
 <p>In this article we see how using multiple cores/cpus is possible in Python. Hopefully you see the power of parallelization and start to leverage this function in your work. Stay tuned for more tutorials on this subject :)</p>
 </section>
 </section>
@@ -628,13 +630,13 @@ Function: unzip_7z, Time: 45.80530025600001
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script src="../static/jquery.js"></script>
-    <script src="../static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
     <script src="../static/doctools.js"></script>
+    <script src="../static/sphinx_highlight.js"></script>
     <script src="../static/clipboard.min.js"></script>
     <script src="../static/copybutton.js"></script>
     <script src="../static/tabs.js"></script>
-    <script >
+    <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <!-- Global site tag (gtag.js) - Google Analytics -->

@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="High performance computing" href="../high_performance_python/index.html" /><link rel="prev" title="Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷" href="02_mca_ergatif_fr.html" />
 
-    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
         <title>Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,7 +37,9 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../static/custom.css" />
@@ -153,7 +155,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../high_performance_python/index.html">High performance computing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer_en.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -432,10 +434,10 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Analyse-en-composantes-principales-(PCA)-:-prépositions-d’inclusion-en-français-🇫🇷">
-<h1>Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷<a class="headerlink" href="#Analyse-en-composantes-principales-(PCA)-:-prépositions-d’inclusion-en-français-🇫🇷" title="Permalink to this headline">¶</a></h1>
+<h1>Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷<a class="headerlink" href="#Analyse-en-composantes-principales-(PCA)-:-prépositions-d’inclusion-en-français-🇫🇷" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <section id="Question">
-<h2>Question<a class="headerlink" href="#Question" title="Permalink to this headline">¶</a></h2>
+<h2>Question<a class="headerlink" href="#Question" title="Permalink to this heading">¶</a></h2>
 <p>Gréa (2017) compare 5 prépositions qui dénotent l’inclusion en français :</p>
 <ul class="simple">
 <li><p>parmi</p></li>
@@ -447,7 +449,7 @@ div.rendered_html tbody tr:hover {
 <p>Quel est donc le profil sémantique de chaque préposition ? Plus concrètement, avec quel type d’entités tendent à apparaître ces prépositions ?</p>
 </section>
 <section id="Métrique">
-<h2>Métrique<a class="headerlink" href="#Métrique" title="Permalink to this headline">¶</a></h2>
+<h2>Métrique<a class="headerlink" href="#Métrique" title="Permalink to this heading">¶</a></h2>
 <p>Gréa utilise une mesure d’association appelée calcul des spécificités basées sur une distribution hypergéométrique.</p>
 <p>En gros plus la valeur est grande, plus des éléments sont proches. Il a appliqué cette mesure sur le corpus FrWac. Pour plus de détails, allez sur le lien ci-dessous.</p>
 <p><a class="reference external" href="https://www.degruyter.com/document/doi/10.1515/cog-2015-0127/html">https://www.degruyter.com/document/doi/10.1515/cog-2015-0127/html</a></p>
@@ -483,9 +485,9 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="PCA">
-<h2>PCA<a class="headerlink" href="#PCA" title="Permalink to this headline">¶</a></h2>
+<h2>PCA<a class="headerlink" href="#PCA" title="Permalink to this heading">¶</a></h2>
 <section id="Combien-de-dimensions">
-<h3>Combien de dimensions<a class="headerlink" href="#Combien-de-dimensions" title="Permalink to this headline">¶</a></h3>
+<h3>Combien de dimensions<a class="headerlink" href="#Combien-de-dimensions" title="Permalink to this heading">¶</a></h3>
 <p>De toute évidence, les trois premières dimensions suffisent pour représenter les variables.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -494,11 +496,11 @@ div.rendered_html tbody tr:hover {
 <div class="input_area highlight-r notranslate"><div class="highlight"><pre>
 <span></span><span class="nf">library</span><span class="p">(</span><span class="n">FactoMineR</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="s">"factoextra"</span><span class="p">)</span>
-<span class="n">mca.object</span> <span class="o">&lt;-</span> <span class="nf">PCA</span><span class="p">(</span><span class="n">inclusion</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-<span class="n">eig.val</span> <span class="o">&lt;-</span> <span class="nf">get_eigenvalue</span><span class="p">(</span><span class="n">mca.object</span><span class="p">)</span>
+<span class="n">mca.object</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">PCA</span><span class="p">(</span><span class="n">inclusion</span><span class="p">,</span><span class="w"> </span><span class="n">graph</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">eig.val</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">get_eigenvalue</span><span class="p">(</span><span class="n">mca.object</span><span class="p">)</span>
 <span class="n">eig.val</span>
-<span class="nf">fviz_screeplot</span><span class="p">(</span><span class="n">mca.object</span><span class="p">,</span> <span class="n">addlabels</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">45</span><span class="p">))</span>
-<span class="n">pca.object</span> <span class="o">&lt;-</span> <span class="nf">PCA</span><span class="p">(</span><span class="n">inclusion</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fviz_screeplot</span><span class="p">(</span><span class="n">mca.object</span><span class="p">,</span><span class="w"> </span><span class="n">addlabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">))</span>
+<span class="n">pca.object</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">PCA</span><span class="p">(</span><span class="n">inclusion</span><span class="p">,</span><span class="w"> </span><span class="n">graph</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -529,7 +531,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Graphe-des-variables">
-<h3>Graphe des variables<a class="headerlink" href="#Graphe-des-variables" title="Permalink to this headline">¶</a></h3>
+<h3>Graphe des variables<a class="headerlink" href="#Graphe-des-variables" title="Permalink to this heading">¶</a></h3>
 <p>Grâce au graphe des variables, vous pouvez voir se dessiner 3 profils :</p>
 <ul class="simple">
 <li><p>au sein de (en haut à gauche)</p></li>
@@ -541,10 +543,10 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-r notranslate"><div class="highlight"><pre>
-<span></span> <span class="c1"># graph of variables</span>
- <span class="nf">plot.PCA</span><span class="p">(</span><span class="n">pca.object</span><span class="p">,</span> <span class="n">choix</span><span class="o">=</span><span class="s">"var"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
- <span class="c1"># graph of individuals</span>
- <span class="nf">plot.PCA</span><span class="p">(</span><span class="n">pca.object</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.8</span><span class="p">,</span> <span class="n">autoLab</span><span class="o">=</span><span class="s">"auto"</span><span class="p">,</span> <span class="n">shadowtext</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
+<span></span><span class="w"> </span><span class="c1"># graph of variables</span>
+<span class="w"> </span><span class="nf">plot.PCA</span><span class="p">(</span><span class="n">pca.object</span><span class="p">,</span><span class="w"> </span><span class="n">choix</span><span class="o">=</span><span class="s">"var"</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
+<span class="w"> </span><span class="c1"># graph of individuals</span>
+<span class="w"> </span><span class="nf">plot.PCA</span><span class="p">(</span><span class="n">pca.object</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">autoLab</span><span class="o">=</span><span class="s">"auto"</span><span class="p">,</span><span class="w"> </span><span class="n">shadowtext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -564,7 +566,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Graphe-des-individus">
-<h3>Graphe des individus<a class="headerlink" href="#Graphe-des-individus" title="Permalink to this headline">¶</a></h3>
+<h3>Graphe des individus<a class="headerlink" href="#Graphe-des-individus" title="Permalink to this heading">¶</a></h3>
 <p>Cependant, le graphe des individus est à peine lisible car il y a trop d’items. De ce fait nous devons filtrer les items peu utiles aux 3 profils mentionnés plus haut.</p>
 <p>En mettant <code class="docutils literal notranslate"><span class="pre">select="coord</span> <span class="pre">20"</span></code> comme option, seuls les 20 items aux valeurs les plus extrêmes sont affichés.</p>
 <div class="nbinput docutils container">
@@ -572,7 +574,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-r notranslate"><div class="highlight"><pre>
-<span></span><span class="nf">plot.PCA</span><span class="p">(</span><span class="n">pca.object</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s">"coord 20"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">"select=\"coord 20\""</span><span class="p">)</span>
+<span></span><span class="nf">plot.PCA</span><span class="p">(</span><span class="n">pca.object</span><span class="p">,</span><span class="w"> </span><span class="n">select</span><span class="o">=</span><span class="s">"coord 20"</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">"select=\"coord 20\""</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -586,7 +588,7 @@ div.rendered_html tbody tr:hover {
 </section>
 </section>
 <section id="Remarques-et-Conclusions">
-<h2>Remarques et Conclusions<a class="headerlink" href="#Remarques-et-Conclusions" title="Permalink to this headline">¶</a></h2>
+<h2>Remarques et Conclusions<a class="headerlink" href="#Remarques-et-Conclusions" title="Permalink to this heading">¶</a></h2>
 <p>En combinant les informations provenant des variables et des individus, nous pouvons voir que :</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">au</span> <span class="pre">sein</span> <span class="pre">de</span></code> tend à apparaître avec des noms collectifs dénotant des organisations constituées d’humains</p></li>
@@ -596,7 +598,7 @@ div.rendered_html tbody tr:hover {
 <p>Cependant, la distinction entre les types d’une même catégorie rest peu apparente. <code class="docutils literal notranslate"><span class="pre">Au</span> <span class="pre">centre</span> <span class="pre">du</span> <span class="pre">conflit</span></code> désigne par exemple un humain qui est soit l’enquêteur soit la partie directement concernée d’un conflit, alors que <code class="docutils literal notranslate"><span class="pre">au</span> <span class="pre">coeur</span> <span class="pre">du</span> <span class="pre">conflit</span></code> dénote plutôt quelque chose de temporel ou de spatial comme <code class="docutils literal notranslate"><span class="pre">au</span> <span class="pre">pic</span> <span class="pre">du</span> <span class="pre">conflit</span></code>/<code class="docutils literal notranslate"><span class="pre">en</span> <span class="pre">plein</span> <span class="pre">conflit</span></code>.</p>
 </section>
 <section id="Références-principales">
-<h2>Références principales<a class="headerlink" href="#Références-principales" title="Permalink to this headline">¶</a></h2>
+<h2>Références principales<a class="headerlink" href="#Références-principales" title="Permalink to this heading">¶</a></h2>
 <p>Gréa, Philippe. 2017. “Inside in French.” Cognitive Linguistics 28 (1): 77–130.</p>
 <p>Cours de Guillaume Desagulier intitulé linguistique outillée et traitements statistiques : <a class="reference external" href="https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html">https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html</a></p>
 <p>Guillaume Desagulier. Multivariate Exploratory Approaches. 2020. ffhalshs-01926339v3ff</p>
@@ -682,13 +684,13 @@ div.rendered_html tbody tr:hover {
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script src="../static/jquery.js"></script>
-    <script src="../static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
     <script src="../static/doctools.js"></script>
+    <script src="../static/sphinx_highlight.js"></script>
     <script src="../static/clipboard.min.js"></script>
     <script src="../static/copybutton.js"></script>
     <script src="../static/tabs.js"></script>
-    <script >
+    <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -721,8 +723,8 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../static/custom.js"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

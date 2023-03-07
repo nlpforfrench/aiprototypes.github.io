@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="My python codebase (including packages/libraries)" href="03_python.html" /><link rel="prev" title="My codebase for bash/shell script (macOS)" href="01_bash.html" />
 
-    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
         <title>Tumux-related code - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,7 +37,9 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../static/custom.css" />
@@ -153,7 +155,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../high_performance_python/index.html">High performance computing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer_en.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">My Codebase</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -184,41 +186,41 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="tumux-related-code">
-<h1>Tumux-related code<a class="headerlink" href="#tumux-related-code" title="Permalink to this headline">¶</a></h1>
+<h1>Tumux-related code<a class="headerlink" href="#tumux-related-code" title="Permalink to this heading">¶</a></h1>
 <p>If you check <a class="reference internal" href="01_bash.html"><span class="doc std std-doc">my bash codebase</span></a>, you’ll see that it’s possible to run a task/process in background with <code class="docutils literal notranslate"><span class="pre">nohup</span></code> and in the comment i said <code class="docutils literal notranslate"><span class="pre">or</span> <span class="pre">use</span> <span class="pre">tumux</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nohup commande <span class="c1"># nonstop after disconnection/or use tumux</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nohup<span class="w"> </span>commande<span class="w"> </span><span class="c1"># nonstop after disconnection/or use tumux</span>
 </pre></div>
 </div>
 <section id="so-why-using-tumux">
-<h2>So why using tumux?<a class="headerlink" href="#so-why-using-tumux" title="Permalink to this headline">¶</a></h2>
+<h2>So why using tumux?<a class="headerlink" href="#so-why-using-tumux" title="Permalink to this heading">¶</a></h2>
 <p>Well put simply, it makes your life easier.</p>
 </section>
 <section id="detaching">
-<h2>Detaching<a class="headerlink" href="#detaching" title="Permalink to this headline">¶</a></h2>
+<h2>Detaching<a class="headerlink" href="#detaching" title="Permalink to this heading">¶</a></h2>
 <p>Tmux keeps all the windows and panes in a session. You can exit a session at any point. This is called “detaching”. The wonderful part is that Tmux will keep this session alive until you kill the tmux server (e.g. when you reboot) so that at any later point in time you can pick that session up exactly from where you left it by simply “attaching” to that session.</p>
 <p>Those who have done web development/remote scripting/ssh will see what I mean.</p>
 </section>
 <section id="my-code-base">
-<h2>My Code base<a class="headerlink" href="#my-code-base" title="Permalink to this headline">¶</a></h2>
+<h2>My Code base<a class="headerlink" href="#my-code-base" title="Permalink to this heading">¶</a></h2>
 <blockquote>
 <div><p>c = ctrl</p>
 </div></blockquote>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux <span class="c1"># start</span>
-c-b % <span class="c1"># horizontal split</span>
-c-b arrow <span class="c1"># move between panes</span>
-tmux kill-session -t kocijan <span class="c1"># kill a session named kocijan</span>
-tmux ls <span class="c1"># see running sessions</span>
-c-b x <span class="c1"># kill session when on live, use c-d works too</span>
-tmux attach -t <span class="m">0</span> <span class="c1"># attach a detached window</span>
-tmux attach -t kocijan <span class="c1"># attach a session named kocijan</span>
-tmux new -s kocijan <span class="c1"># start a session named kocijan</span>
-tmux rename-session -t <span class="m">0</span> database <span class="c1"># rename the session</span>
-C-b d <span class="c1"># detach a session</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux<span class="w"> </span><span class="c1"># start</span>
+c-b<span class="w"> </span>%<span class="w"> </span><span class="c1"># horizontal split</span>
+c-b<span class="w"> </span>arrow<span class="w"> </span><span class="c1"># move between panes</span>
+tmux<span class="w"> </span>kill-session<span class="w"> </span>-t<span class="w"> </span>kocijan<span class="w"> </span><span class="c1"># kill a session named kocijan</span>
+tmux<span class="w"> </span>ls<span class="w"> </span><span class="c1"># see running sessions</span>
+c-b<span class="w"> </span>x<span class="w"> </span><span class="c1"># kill session when on live, use c-d works too</span>
+tmux<span class="w"> </span>attach<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="c1"># attach a detached window</span>
+tmux<span class="w"> </span>attach<span class="w"> </span>-t<span class="w"> </span>kocijan<span class="w"> </span><span class="c1"># attach a session named kocijan</span>
+tmux<span class="w"> </span>new<span class="w"> </span>-s<span class="w"> </span>kocijan<span class="w"> </span><span class="c1"># start a session named kocijan</span>
+tmux<span class="w"> </span>rename-session<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span><span class="w"> </span>database<span class="w"> </span><span class="c1"># rename the session</span>
+C-b<span class="w"> </span>d<span class="w"> </span><span class="c1"># detach a session</span>
 </pre></div>
 </div>
 </section>
 <section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h2>
 <p>https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/</p>
 </section>
 </section>
@@ -295,13 +297,13 @@ C-b d <span class="c1"># detach a session</span>
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script src="../static/jquery.js"></script>
-    <script src="../static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
     <script src="../static/doctools.js"></script>
+    <script src="../static/sphinx_highlight.js"></script>
     <script src="../static/clipboard.min.js"></script>
     <script src="../static/copybutton.js"></script>
     <script src="../static/tabs.js"></script>
-    <script >
+    <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <!-- Global site tag (gtag.js) - Google Analytics -->

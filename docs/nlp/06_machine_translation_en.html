@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <meta name="generator" content="sphinx-3.5.1, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
         <title>How to build a LSTM-based Neural Machine Translation model with fairseq - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,7 +37,9 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../static/custom.css" />
@@ -153,7 +155,7 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../high_performance_python/index.html">High performance computing</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label for="toctree-checkbox-7"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../high_performance_python/01_parallel_primer_en.html">Parallelization in Python: a beginner’s guide (1, using map)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../codebase/index.html">My Codebase</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label for="toctree-checkbox-8"><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -432,29 +434,29 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="How-to-build-a-LSTM-based-Neural-Machine-Translation-model-with-fairseq">
-<h1>How to build a LSTM-based Neural Machine Translation model with fairseq<a class="headerlink" href="#How-to-build-a-LSTM-based-Neural-Machine-Translation-model-with-fairseq" title="Permalink to this headline">¶</a></h1>
+<h1>How to build a LSTM-based Neural Machine Translation model with fairseq<a class="headerlink" href="#How-to-build-a-LSTM-based-Neural-Machine-Translation-model-with-fairseq" title="Permalink to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou Wang</a></p>
 <p>Neural Machine Translation (NMT) is often an end-to-end pipeline requiring less code and training time compared to Statistical Machine Translation (SMT). Two open-source libraries are often used in this domain: <code class="docutils literal notranslate"><span class="pre">opennmt</span></code> and <code class="docutils literal notranslate"><span class="pre">fairseq</span></code>. In this tutorial, we will see how to quickly train a NMT model using LSTM, a type of RNN capable of retaining more information on long range dependencies.</p>
 <p>It should be noted that NMT uses often a sequence to sequence model (Seq2Seq), meaning that it takes a sequence of words as inputs, encodes them (encoder) and outputs another sequence of words (decoder). However, the length of the inputs and outputs in NMT needs not to be the same, contrary to tasks like part-of-speech tagging.</p>
 <section id="RNN,-typical-use-(before-attention)-and-major-downside">
-<h2>RNN, typical use (before attention) and major downside<a class="headerlink" href="#RNN,-typical-use-(before-attention)-and-major-downside" title="Permalink to this headline">¶</a></h2>
+<h2>RNN, typical use (before attention) and major downside<a class="headerlink" href="#RNN,-typical-use-(before-attention)-and-major-downside" title="Permalink to this heading">¶</a></h2>
 <p>We mentioned that LSTM was a type of RNN. One of the main drawbacks of the traditional way of using RNN in Seq2Seq (in our case both the encoder and the decoder use LSTMs) is that the encoder transforms a sentence into a single vector (the last hidden state) regardless of the sentence’s length. The state-of-the-art uses the transformer architecture that we will introduce later in another article.</p>
 </section>
 <section id="Data-preparation">
-<h2>Data preparation<a class="headerlink" href="#Data-preparation" title="Permalink to this headline">¶</a></h2>
+<h2>Data preparation<a class="headerlink" href="#Data-preparation" title="Permalink to this heading">¶</a></h2>
 <p>In machine translation, one would typically have a parallel text corpus (also called bitexts) in the following fashion:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Let's</span> <span class="pre">try</span> <span class="pre">something.\tPermíteme</span> <span class="pre">intentarlo.</span></code></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">\t</span></code> is the tab separator. Then the whole corpus is separated into two files containing each some monolingual texts. Each text is then filtered to remove sentences containing errors (too long or not good translation) and tokenized (since most models take words as inputs). Then the two separatef files are transformed into a binary format to faciliate training, which can be easily done in <code class="docutils literal notranslate"><span class="pre">fairseq</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--thresholdtgt</span></code> and <code class="docutils literal notranslate"><span class="pre">--thresholdsrc</span></code> options map words appearing less than threshold times to unknown.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq-preprocess <span class="se">\</span>
---source-lang es <span class="se">\</span>
---target-lang en <span class="se">\</span>
---trainpref data/tatoeba.eng_spa.train.tok <span class="se">\</span>
---validpref data/tatoeba.eng_spa.valid.tok <span class="se">\</span>
---testpref data/tatoeba.eng_spa.test.tok <span class="se">\</span>
---destdir data/mt-bin <span class="se">\</span>
---thresholdsrc <span class="m">3</span> <span class="se">\</span>
---thresholdtgt <span class="m">3</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq-preprocess<span class="w"> </span><span class="se">\</span>
+--source-lang<span class="w"> </span>es<span class="w"> </span><span class="se">\</span>
+--target-lang<span class="w"> </span>en<span class="w"> </span><span class="se">\</span>
+--trainpref<span class="w"> </span>data/tatoeba.eng_spa.train.tok<span class="w"> </span><span class="se">\</span>
+--validpref<span class="w"> </span>data/tatoeba.eng_spa.valid.tok<span class="w"> </span><span class="se">\</span>
+--testpref<span class="w"> </span>data/tatoeba.eng_spa.test.tok<span class="w"> </span><span class="se">\</span>
+--destdir<span class="w"> </span>data/mt-bin<span class="w"> </span><span class="se">\</span>
+--thresholdsrc<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+--thresholdtgt<span class="w"> </span><span class="m">3</span>
 </pre></div>
 </div>
 <p>Please note that it’s important to specify source and target language because these informations are contained in the filenames. See the structure of the data folder.</p>
@@ -463,7 +465,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>tree ./data
+<span></span><span class="o">!</span>tree<span class="w"> </span>./data
 </pre></div>
 </div>
 </div>
@@ -490,10 +492,10 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="ch">#!bash preprocess.sh</span>
-<span class="o">!</span>tree ./data/mt-bin
-<span class="o">!</span>head -n <span class="m">5</span> ./data/mt-bin/dict.en.txt
-<span class="o">!</span>wc -l ./data/mt-bin/dict.en.txt
-<span class="o">!</span>wc -l ./data/mt-bin/dict.es.txt
+<span class="o">!</span>tree<span class="w"> </span>./data/mt-bin
+<span class="o">!</span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>./data/mt-bin/dict.en.txt
+<span class="o">!</span>wc<span class="w"> </span>-l<span class="w"> </span>./data/mt-bin/dict.en.txt
+<span class="o">!</span>wc<span class="w"> </span>-l<span class="w"> </span>./data/mt-bin/dict.es.txt
 </pre></div>
 </div>
 </div>
@@ -531,7 +533,7 @@ a 25625
 </div>
 </section>
 <section id="Training">
-<h2>Training<a class="headerlink" href="#Training" title="Permalink to this headline">¶</a></h2>
+<h2>Training<a class="headerlink" href="#Training" title="Permalink to this heading">¶</a></h2>
 <p>Let’s kick-start the training process. It’s easy to see from the bash script that we use lstm (default embedding size is 512) as building units, together with the use of adam optimizer and a learning rate of 1.0e-3. <code class="docutils literal notranslate"><span class="pre">max-tokens</span></code> defines the number of tokens loaded on a single batch.The choice of hyperparameters is a tricky engineering problem better tackled using <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>, see for example <a class="reference external" href="https://github.com/tensorflow/tensor2tensor#translation">https://github.com/tensorflow/tensor2tensor#translation</a>. In this tutorial, we will use some random
 values. Also note the <code class="docutils literal notranslate"><span class="pre">save-dir</span></code> option specifying the output path for models. The training would continue infinitely and each time an epoch ends, the checkpoint (model’s parameters) is saved in <code class="docutils literal notranslate"><span class="pre">data/mt-cp</span></code>. Also, after each epoch, the loss is automatically calculated on the train and val. Whenever you pressed <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code>, the training is stopped. The number of epochs you wait until <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> is called <strong>patience</strong>.</p>
 <div class="nbinput docutils container">
@@ -539,7 +541,7 @@ values. Also note the <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>cat train.sh
+<span></span><span class="o">!</span>cat<span class="w"> </span>train.sh
 <span class="c1">#!bash train.sh</span>
 </pre></div>
 </div>
@@ -567,7 +569,7 @@ data/mt-bin \
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>tree ./data/mt-pt/
+<span></span><span class="o">!</span>tree<span class="w"> </span>./data/mt-pt/
 </pre></div>
 </div>
 </div>
@@ -586,7 +588,7 @@ data/mt-bin \
 </pre></div></div>
 </div>
 <section id="So-how-the-model-is-trained?">
-<h3>So how the model is trained?<a class="headerlink" href="#So-how-the-model-is-trained?" title="Permalink to this headline">¶</a></h3>
+<h3>So how the model is trained?<a class="headerlink" href="#So-how-the-model-is-trained?" title="Permalink to this heading">¶</a></h3>
 <p>If one can do some multiclass classification, the term <code class="docutils literal notranslate"><span class="pre">cross</span> <span class="pre">entropy</span></code> should be familiar and it’s a kind of loss used to calculate how a probability distribution <strong>p</strong> is different from another <strong>q</strong> (or how p diverges from q or what is the relative entropy of p with respect to q).</p>
 <p>More concretely, the decoder takes a <code class="docutils literal notranslate"><span class="pre">&lt;START&gt;</span></code> token and the last hidden state of the encoder as input and calculate a probability distribution for the next word.</p>
 <p>Let’s say the Spanish text is <code class="docutils literal notranslate"><span class="pre">María</span> <span class="pre">es</span> <span class="pre">hermosa.</span></code> A hidden state <code class="docutils literal notranslate"><span class="pre">x</span></code> is generated by the encoder and is feeded into the decoder with a <code class="docutils literal notranslate"><span class="pre">&lt;START&gt;</span></code> token since it’s the first word. Then the model would compute a probability distribution for each word in the dictionary. Say there are 3 words in the dict: <code class="docutils literal notranslate"><span class="pre">Mary,</span> <span class="pre">a,</span> <span class="pre">b</span></code> . The probability calculated by the model would probably be <code class="docutils literal notranslate"><span class="pre">30%,</span> <span class="pre">40%,</span> <span class="pre">50%</span></code>. This is obviously wrong, so the model would try to adjust/learn the right distribution based on
@@ -595,26 +597,26 @@ the difference between this distribution and the true distribution (cross entrop
 </section>
 </section>
 <section id="Inference/translate">
-<h2>Inference/translate<a class="headerlink" href="#Inference/translate" title="Permalink to this headline">¶</a></h2>
+<h2>Inference/translate<a class="headerlink" href="#Inference/translate" title="Permalink to this heading">¶</a></h2>
 <p>The following script can be used to translate new sentences. Each new sentence occupies a new line in the file <code class="docutils literal notranslate"><span class="pre">source.txt</span></code> and the translations are redirected to <code class="docutils literal notranslate"><span class="pre">target.txt</span></code>.</p>
 <p>Since the decoder uses the output of the encoder to generate new texts, the model is called <code class="docutils literal notranslate"><span class="pre">conditional</span> <span class="pre">language</span> <span class="pre">model</span></code>. Also, it’s a <code class="docutils literal notranslate"><span class="pre">auroregressive</span></code> model because it always generate text from left to right.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq-interactive --input<span class="o">=</span>source.txt <span class="se">\</span>
-data/mt-bin <span class="se">\</span>
---path data/mt-pt/checkpoint_best.pt <span class="se">\</span>
---beam <span class="m">5</span> <span class="se">\</span>
---source-lang es <span class="se">\</span>
---target-lang en &gt; target.txt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq-interactive<span class="w"> </span>--input<span class="o">=</span>source.txt<span class="w"> </span><span class="se">\</span>
+data/mt-bin<span class="w"> </span><span class="se">\</span>
+--path<span class="w"> </span>data/mt-pt/checkpoint_best.pt<span class="w"> </span><span class="se">\</span>
+--beam<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+--source-lang<span class="w"> </span>es<span class="w"> </span><span class="se">\</span>
+--target-lang<span class="w"> </span>en<span class="w"> </span>&gt;<span class="w"> </span>target.txt
 </pre></div>
 </div>
 <section id="What-is-–beam?">
-<h3>What is –beam?<a class="headerlink" href="#What-is-–beam?" title="Permalink to this headline">¶</a></h3>
+<h3>What is –beam?<a class="headerlink" href="#What-is-–beam?" title="Permalink to this heading">¶</a></h3>
 <p>There are commonly two ways for the decoder (of translation model) to translate new sentences. Remember that contrary to the training period where the model knows the right translation, the decoder now doesn’t know the right answer for new sentences.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">greedy</span> <span class="pre">decoding</span></code> makes a bold assumption: the quality of the whole translated sentence can be optimized by taking each time the word with the largest score. Let’s say you want to translate the sentence <code class="docutils literal notranslate"><span class="pre">María</span> <span class="pre">es</span> <span class="pre">hermosa</span></code>. This means that at each step where a new word is to be translated, the model always select the word with the maximum possibility.</p>
 <p>Howeven, this local view can be non ideal. Sometimes you want to consider long-term benefits and it’s exactly the case here because we want a overall good quality at the sentence level. This is the <code class="docutils literal notranslate"><span class="pre">Beam</span> <span class="pre">search</span> <span class="pre">decoding</span></code>.</p>
 <p>This kind of long-term thinking is prevalent in life. Let’s say that you want to go from A to Z. The first possibility (A-B-C-Z) has the score (1-4-2-2) and the second option (A-D-E-Z) has the score (1-3-4-5). If you take the first itinerary, you are using the <code class="docutils literal notranslate"><span class="pre">greedy</span> <span class="pre">decoding</span></code> because <code class="docutils literal notranslate"><span class="pre">B</span></code> gives a better score than <code class="docutils literal notranslate"><span class="pre">D</span></code> (4&gt;3). However, the second option gives a much higher total score (13&gt;9).</p>
 </section>
 <section id="We-can’t-try-out-every-possibility">
-<h3>We can’t try out every possibility<a class="headerlink" href="#We-can’t-try-out-every-possibility" title="Permalink to this headline">¶</a></h3>
+<h3>We can’t try out every possibility<a class="headerlink" href="#We-can’t-try-out-every-possibility" title="Permalink to this heading">¶</a></h3>
 <p>Since the total words in a dictionary is often huge and it is impossible to test each path possible (for each new word there are n possibilities). It is often necessary to make a compromise and choose a maximum option at each time step (word step for translation). Here we choose 5, meaning that at each new word we choose 5 possible words.</p>
 <p>Let’s see the translations :) We use the interactive mode here because the input file is raw text. For binarized data, use <code class="docutils literal notranslate"><span class="pre">fairseq-generate</span></code>. See <a class="reference external" href="https://fairseq.readthedocs.io/en/latest/getting_started.html">here</a>.</p>
 <p>A line prefixed with O is a copy of the original source sentence; H is the hypothesis along with an average log-likelihood; D (same as H here), the detokenized hypothesis; and P is the positional score per token position, including the <code class="docutils literal notranslate"><span class="pre">end-of-sentence</span></code> marker which is omitted from the text. Since the translation of <code class="docutils literal notranslate"><span class="pre">Hola</span></code> is <code class="docutils literal notranslate"><span class="pre">Hi</span> <span class="pre">!</span></code>, there are 3 positional score for the whole sentence (+<code class="docutils literal notranslate"><span class="pre">end-of-sentence</span></code>).</p>
@@ -623,7 +625,7 @@ data/mt-bin <span class="se">\</span>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>cat target.txt
+<span></span><span class="o">!</span>cat<span class="w"> </span>target.txt
 </pre></div>
 </div>
 </div>
@@ -657,7 +659,7 @@ P-3     -2.1072 -1.2201 -0.8574 -2.9196 -0.7664 -0.1294 -3.8994 -0.4957 -0.0010
 </section>
 </section>
 <section id="Conclusion,-possible-improvements-and-variations">
-<h2>Conclusion, possible improvements and variations<a class="headerlink" href="#Conclusion,-possible-improvements-and-variations" title="Permalink to this headline">¶</a></h2>
+<h2>Conclusion, possible improvements and variations<a class="headerlink" href="#Conclusion,-possible-improvements-and-variations" title="Permalink to this heading">¶</a></h2>
 <p>In this tutorial, we go through the whole process of training a NMT model. We use LSTM as building blocks for both the encoder and the decoder. We hope that you can see how simple it is to use <code class="docutils literal notranslate"><span class="pre">fairseq</span></code> for NMT tasks.</p>
 <p>Multiple improvements are however possible, mainly:</p>
 <ol class="arabic simple">
@@ -741,13 +743,13 @@ P-3     -2.1072 -1.2201 -0.8574 -2.9196 -0.7664 -0.1294 -3.8994 -0.4957 -0.0010
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script src="../static/jquery.js"></script>
-    <script src="../static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
     <script src="../static/doctools.js"></script>
+    <script src="../static/sphinx_highlight.js"></script>
     <script src="../static/clipboard.min.js"></script>
     <script src="../static/copybutton.js"></script>
     <script src="../static/tabs.js"></script>
-    <script >
+    <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
