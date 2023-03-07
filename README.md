@@ -1,5 +1,3 @@
-# Awesome French NLP tutorials
+# AI Prototypes
 
-> A buffet of awesome nlp tutorials written for French
-
-[Page web](https://nlpforfrench.fr)
+[Page web](https://aiprototypes.com/)
