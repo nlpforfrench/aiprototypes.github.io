@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Roadmap and cheatsheet of algorithms and data structures" href="099algo_map.html" /><link rel="prev" title="Algorithme ou plusieurs façons de résoudre un problème 🇫🇷" href="01_intro_fr.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Data structures or many ways of organizing your stuff 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,9 +434,9 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Data-structures-or-many-ways-of-organizing-your-stuff-🇬🇧">
-<h1>Data structures or many ways of organizing your stuff 🇬🇧<a class="headerlink" href="#Data-structures-or-many-ways-of-organizing-your-stuff-🇬🇧" title="Permalink to this heading">¶</a></h1>
+<h1>Data structures or many ways of organizing your stuff 🇬🇧<a class="headerlink" href="#Data-structures-or-many-ways-of-organizing-your-stuff-🇬🇧" title="Link to this heading">¶</a></h1>
 <section id="I-ain’t-know-nothing-about-data-structures">
-<h2>I ain’t know nothing about data structures<a class="headerlink" href="#I-ain’t-know-nothing-about-data-structures" title="Permalink to this heading">¶</a></h2>
+<h2>I ain’t know nothing about data structures<a class="headerlink" href="#I-ain’t-know-nothing-about-data-structures" title="Link to this heading">¶</a></h2>
 <p>Many people, when being introduced to data structures related concepts, don’t realize that they already use extensively various kinds of data structures in their life.</p>
 <p>Check out the following example:</p>
 <div class="nbinput docutils container">
@@ -444,20 +444,20 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># First way</span>
-<span class="n">x</span> <span class="o">=</span> <span class="s2">"hello"</span>
-<span class="n">y</span> <span class="o">=</span> <span class="s2">"my name"</span>
-<span class="n">z</span> <span class="o">=</span> <span class="s2">"is Xiaoou"</span>
+<span></span># First way
+x = "hello"
+y = "my name"
+z = "is Xiaoou"
 
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+print(x,y,z)
 
-<span class="c1"># Second way</span>
-<span class="n">presentation</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"hello"</span><span class="p">,</span><span class="s2">"my name"</span><span class="p">,</span><span class="s2">"is Xiaoou"</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">presentation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">presentation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">presentation</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+# Second way
+presentation = ["hello","my name","is Xiaoou"]
+print(presentation[0],presentation[1],presentation[2])
 
-<span class="c1"># Third way</span>
-<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">presentation</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">" "</span><span class="p">)</span>
+# Third way
+for word in presentation:
+    print(word, end = " ")
 </pre></div>
 </div>
 </div>
@@ -474,7 +474,7 @@ hello my name is Xiaoou
 <p>In the first approach you use a <code class="docutils literal notranslate"><span class="pre">string</span></code> and you’ll agree that the code, already fulfilling its mission, looks quite weird. The second one looks better because the use of <code class="docutils literal notranslate"><span class="pre">array</span></code> and the third one is the best-looking one because it takes advantage of the <code class="docutils literal notranslate"><span class="pre">iterable</span></code> property of an array.</p>
 </section>
 <section id="Data-structure,-speed-and-memory">
-<h2>Data structure, speed and memory<a class="headerlink" href="#Data-structure,-speed-and-memory" title="Permalink to this heading">¶</a></h2>
+<h2>Data structure, speed and memory<a class="headerlink" href="#Data-structure,-speed-and-memory" title="Link to this heading">¶</a></h2>
 <p>However, data structure is much more than looking organized. If you’ve read <a class="reference internal" href="01_intro_en.html"><span class="doc">the first tutorial</span></a>, it should be clear to you that speed matters when designing programs. But to what speed is related ? We all know that hardware impacts strongly the performance, however this aspect is unrelated in our discussion. More concretely, when we use the word <code class="docutils literal notranslate"><span class="pre">speed</span></code> in algorithms we are referring specifically to how many steps an algorithm takes.</p>
 <p>Note that on the Internet you will meet a bunch of terms of which I’ve made a summary.</p>
 <img alt="test2" src="../images/2021-04-13-15-43-22.png"/>
@@ -482,7 +482,7 @@ hello my name is Xiaoou
 <p>So what do I mean by <code class="docutils literal notranslate"><span class="pre">how</span> <span class="pre">many</span> <span class="pre">steps</span></code>?</p>
 <p>For this you have to know how things are stored/organized on your computer’s memory.</p>
 <section id="How-computer-memory-works">
-<h3>How computer memory works<a class="headerlink" href="#How-computer-memory-works" title="Permalink to this heading">¶</a></h3>
+<h3>How computer memory works<a class="headerlink" href="#How-computer-memory-works" title="Link to this heading">¶</a></h3>
 <p>Put simply, the computer memory has a lot of <code class="docutils literal notranslate"><span class="pre">memory</span> <span class="pre">address</span></code>es by means of which we can store things. Some are distributed sparsely while some, like <code class="docutils literal notranslate"><span class="pre">array</span></code>, are placed on a compact memory span.</p>
 <img alt="test1" src="../images/2021-04-13-15-53-53.png"/>
 <p>Another common data structure is called <code class="docutils literal notranslate"><span class="pre">set</span></code>. The set is very useful when we need a list of non-duplicate items. A common example is phone book.</p>
@@ -491,7 +491,7 @@ hello my name is Xiaoou
 </section>
 </section>
 <section id="Analyse-a-data-structure-(Read,-search,-insert-and-delete)">
-<h2>Analyse a data structure (Read, search, insert and delete)<a class="headerlink" href="#Analyse-a-data-structure-(Read,-search,-insert-and-delete)" title="Permalink to this heading">¶</a></h2>
+<h2>Analyse a data structure (Read, search, insert and delete)<a class="headerlink" href="#Analyse-a-data-structure-(Read,-search,-insert-and-delete)" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Read refers to checking the value at a specific memory address.</p></li>
 <li><p>Search refers to checking whether a certain value exists and if so, retrieve the memory address of where this value is located.</p></li>
@@ -505,7 +505,7 @@ hello my name is Xiaoou
 <p>Quick anecdote: Do you know why in most programming languages the index starts at 0?</p>
 <p>It’s because 0 means 0 element from the beginning = the same address as the start of of the array, a value <code class="docutils literal notranslate"><span class="pre">remembered</span></code> by your computer when you create an array. Another value recorded is the length of the array.</p>
 <section id="Read-(list-vs-set)">
-<h3>Read (list vs set)<a class="headerlink" href="#Read-(list-vs-set)" title="Permalink to this heading">¶</a></h3>
+<h3>Read (list vs set)<a class="headerlink" href="#Read-(list-vs-set)" title="Link to this heading">¶</a></h3>
 <p>Say that you want to check the value at index 3. All you need to do is:</p>
 <ol class="arabic simple">
 <li><p>Add 3 to the address of the first element.</p></li>
@@ -514,11 +514,11 @@ hello my name is Xiaoou
 <p>So basically it takes 2 steps.</p>
 </section>
 <section id="Search-(list-vs-set)">
-<h3>Search (list vs set)<a class="headerlink" href="#Search-(list-vs-set)" title="Permalink to this heading">¶</a></h3>
+<h3>Search (list vs set)<a class="headerlink" href="#Search-(list-vs-set)" title="Link to this heading">¶</a></h3>
 <p>Unluckily we don’t have instant access to each value of an array/set, so in the worst case, we’d have to check all the values = N steps to find a value/affirm its absence. This principle applies to both data structures.</p>
 </section>
 <section id="Insert-(idem)">
-<h3>Insert (idem)<a class="headerlink" href="#Insert-(idem)" title="Permalink to this heading">¶</a></h3>
+<h3>Insert (idem)<a class="headerlink" href="#Insert-(idem)" title="Link to this heading">¶</a></h3>
 <p>Here comes the real game (in French we say ça change la donne).</p>
 <p>First of all it takes at most N steps to insert a new value into an array. Finding the right spot takes just 1 step (see the Read section), however before insertion one has to shift all the elements to make space for the new element.</p>
 <p>I know, one picture is worth a thousand words.</p>
@@ -528,13 +528,13 @@ hello my name is Xiaoou
 <p>Remember that a set is supposed to contain no duplicate elements. So first you have to make sure that the element to be inserted has no duplicate! In the worst case it takes N steps. Besides, when we’re inserting a value at the beginning of a set, another N steps are required to shift all the data to the right and another final step to insert the new value, taking the total number of steps to 2N + 1 steps.</p>
 </section>
 <section id="Deletion-(idem)">
-<h3>Deletion (idem)<a class="headerlink" href="#Deletion-(idem)" title="Permalink to this heading">¶</a></h3>
+<h3>Deletion (idem)<a class="headerlink" href="#Deletion-(idem)" title="Link to this heading">¶</a></h3>
 <p>Just like the insertion, deletion requires also shifting because remember, an array should be stored on contingent memory cells. The sames applies to array-based set. So it’s not difficult to figure out that in the worst case we are bound to make N moves when the first element is deleted.</p>
 <img alt="../images/2021-04-13-23-32-36.png" src="../images/2021-04-13-23-32-36.png"/>
 </section>
 </section>
 <section id="Which-data-structure-to-use">
-<h2>Which data structure to use<a class="headerlink" href="#Which-data-structure-to-use" title="Permalink to this heading">¶</a></h2>
+<h2>Which data structure to use<a class="headerlink" href="#Which-data-structure-to-use" title="Link to this heading">¶</a></h2>
 <p>That’s a tricky question and it all depends on how well you know your data. If you are quite sure that your workflow won’t involve a lot of insertion, then it would be safe to use a set since you want some strong constraint on your data. Otherwise you should use an array-like structure since frequent insertions would considerably slow down your program’s performance.</p>
 <p>I see it coming already: but that’s only 1 operation right? Don’t hurry, the next tutorial will help you gain a solid grasp on the intricate interactions between data structures, algorithms and performance. You would also know why we distinguish best case, average and worst cases when it comes to comparing algorithms.</p>
 <p>Especially you’ll get to know a domain of extensive research in computer science: sorting.</p>
@@ -544,17 +544,17 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># create a random list with no duplicate values</span>
-<span class="kn">import</span> <span class="nn">random</span>
+<span></span># create a random list with no duplicate values
+import random
 
-<span class="k">def</span> <span class="nf">generate_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">randomlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="c1"># shuffle list in place</span>
-    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">randomlist</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">randomlist</span>
+def generate_list(n):
+    randomlist = list(range(n))
+    # shuffle list in place
+    random.shuffle(randomlist)
+    return randomlist
 
-<span class="n">test</span> <span class="o">=</span> <span class="n">generate_list</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+test = generate_list(100)
+len(test)
 </pre></div>
 </div>
 </div>
@@ -572,14 +572,14 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">linear_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span></span>def linear_search(arr, x):
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+    for i in range(len(arr)):
 
-        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">i</span>
+        if arr[i] == x:
+            return i
 
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    return -1
 </pre></div>
 </div>
 </div>
@@ -588,7 +588,7 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">randomlist_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">randomlist</span><span class="p">)</span>
+<span></span>randomlist_sorted = sorted(randomlist)
 </pre></div>
 </div>
 </div>
@@ -597,21 +597,21 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span></span>def binary_search(arr, element):
+    start = 0
+    end = len(arr)-1
 
-    <span class="k">while</span> <span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">):</span>
-        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    while (start &lt;= end):
+        mid = (start + end) // 2
 
-        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="n">mid</span>
-        <span class="k">elif</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        if element == arr[mid]:
+            return mid
+        elif element &lt; arr[mid]:
+            end = mid - 1
+        else:
+            start = mid + 1
 
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    return -1
 </pre></div>
 </div>
 </div>
@@ -629,8 +629,8 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>it -r1 -n100
-<span class="n">binary_search</span><span class="p">(</span><span class="n">randomlist_sorted</span><span class="p">,</span> <span class="mi">295</span><span class="p">)</span>
+<span></span>%%timeit -r1 -n100
+binary_search(randomlist_sorted, 295)
 </pre></div>
 </div>
 </div>
@@ -647,8 +647,8 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>it -r1 -n100
-<span class="n">linear_search</span><span class="p">(</span><span class="n">randomlist_sorted</span><span class="p">,</span><span class="mi">295</span><span class="p">)</span>
+<span></span>%%timeit -r1 -n100
+linear_search(randomlist_sorted,295)
 </pre></div>
 </div>
 </div>
@@ -666,8 +666,8 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># sorted list in python</span>
-<span class="c1"># !pip install sortedcontainers</span>
+<span></span># sorted list in python
+# !pip install sortedcontainers
 </pre></div>
 </div>
 </div>
@@ -676,10 +676,10 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sortedcontainers</span> <span class="kn">import</span> <span class="n">SortedList</span>
-<span class="n">sl</span> <span class="o">=</span> <span class="n">SortedList</span><span class="p">([</span><span class="s1">'f'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">])</span>
-<span class="n">sl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"e"</span><span class="p">)</span>
-<span class="n">sl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"f"</span><span class="p">)</span>
+<span></span>from sortedcontainers import SortedList
+sl = SortedList(['f', 'a', 'c', 'd', 'b'])
+sl.add("e")
+sl.index("f")
 </pre></div>
 </div>
 </div>
@@ -697,15 +697,15 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># bubble sort, raw version</span>
-<span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">our_list</span><span class="p">):</span>
-    <span class="c1"># We go through the list as many times as there are elements</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">our_list</span><span class="p">)):</span>
-        <span class="c1"># We want the last pair of adjacent elements to be (n-2, n-1)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c1"># Swap</span>
-                <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<span></span># bubble sort, raw version
+def bubble_sort(our_list):
+    # We go through the list as many times as there are elements
+    for i in range(len(our_list)):
+        # We want the last pair of adjacent elements to be (n-2, n-1)
+        for j in range(len(our_list) - 1):
+            if our_list[j] &gt; our_list[j+1]:
+                # Swap
+                our_list[j], our_list[j+1] = our_list[j+1], our_list[j]
 </pre></div>
 </div>
 </div>
@@ -714,9 +714,9 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">our_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-<span class="n">bubble_sort</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span>
+<span></span>our_list = [19, 13, 6, 2, 18, 8]
+bubble_sort(our_list)
+print(our_list)
 </pre></div>
 </div>
 </div>
@@ -733,20 +733,20 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># optimization</span>
-<span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">our_list</span><span class="p">):</span>
-    <span class="n">has_swapped</span> <span class="o">=</span> <span class="kc">True</span>
+<span></span># optimization
+def bubble_sort(our_list):
+    has_swapped = True
 
-    <span class="n">num_of_iterations</span> <span class="o">=</span> <span class="mi">0</span>
+    num_of_iterations = 0
 
-    <span class="k">while</span><span class="p">(</span><span class="n">has_swapped</span><span class="p">):</span>
-        <span class="n">has_swapped</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">our_list</span><span class="p">)</span> <span class="o">-</span> <span class="n">num_of_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="c1"># Swap</span>
-                <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">our_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="n">has_swapped</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">num_of_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
+    while(has_swapped):
+        has_swapped = False
+        for i in range(len(our_list) - num_of_iterations - 1):
+            if our_list[i] &gt; our_list[i+1]:
+                # Swap
+                our_list[i], our_list[i+1] = our_list[i+1], our_list[i]
+                has_swapped = True
+        num_of_iterations += 1
 </pre></div>
 </div>
 </div>
@@ -755,20 +755,20 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># selection sort the joker sort</span>
-<span class="k">def</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
-    <span class="c1"># i indicates how many items were sorted</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="c1"># To find the minimum value of the unsorted segment</span>
-        <span class="c1"># We first assume that the first element is the lowest</span>
-        <span class="n">min_index</span> <span class="o">=</span> <span class="n">i</span>
-        <span class="c1"># We then use j to loop through the remaining elements</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-            <span class="c1"># Update the min_index if the element at j is lower than it</span>
-            <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">L</span><span class="p">[</span><span class="n">min_index</span><span class="p">]:</span>
-                <span class="n">min_index</span> <span class="o">=</span> <span class="n">j</span>
-        <span class="c1"># After finding the lowest item of the unsorted regions, swap with the first unsorted item</span>
-        <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">min_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">min_index</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span></span># selection sort the joker sort
+def selection_sort(L):
+    # i indicates how many items were sorted
+    for i in range(len(L)-1):
+        # To find the minimum value of the unsorted segment
+        # We first assume that the first element is the lowest
+        min_index = i
+        # We then use j to loop through the remaining elements
+        for j in range(i+1, len(L)-1):
+            # Update the min_index if the element at j is lower than it
+            if L[j] &lt; L[min_index]:
+                min_index = j
+        # After finding the lowest item of the unsorted regions, swap with the first unsorted item
+        L[i], L[min_index] = L[min_index], L[i]
 </pre></div>
 </div>
 </div>
@@ -777,33 +777,33 @@ hello my name is Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Python program for implementation of Insertion Sort</span>
+<span></span># Python program for implementation of Insertion Sort
 
-<span class="c1"># Function to do insertion sort</span>
-<span class="k">def</span> <span class="nf">insertionSort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+# Function to do insertion sort
+def insertionSort(arr):
 
-    <span class="c1"># Traverse through 1 to len(arr)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+    # Traverse through 1 to len(arr)
+    for i in range(1, len(arr)):
 
-            <span class="n">key</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            key = arr[i]
 
-            <span class="c1"># Move elements of arr[0..i-1], that are</span>
-            <span class="c1"># greater than key, to one position ahead</span>
-            <span class="c1"># of their current position</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span>
-            <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span>
-                            <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+            # Move elements of arr[0..i-1], that are
+            # greater than key, to one position ahead
+            # of their current position
+            j = i-1
+            while j &gt;= 0 and key &lt; arr[j] :
+                            arr[j + 1] = arr[j]
+                            j -= 1
+            arr[j + 1] = key
 
 
-<span class="c1"># Driver code to test above</span>
-<span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-<span class="n">insertionSort</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="s2">"</span><span class="si">% d</span><span class="s2">"</span> <span class="o">%</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+# Driver code to test above
+arr = [12, 11, 13, 5, 6]
+insertionSort(arr)
+for i in range(len(arr)):
+    print ("% d" % arr[i])
 
-<span class="c1"># This code is contributed by Mohit Kumra</span>
+# This code is contributed by Mohit Kumra
 </pre></div>
 </div>
 </div>
@@ -912,12 +912,12 @@ hello my name is Xiaoou
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -953,6 +953,6 @@ StatCounter"></a></div></noscript>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

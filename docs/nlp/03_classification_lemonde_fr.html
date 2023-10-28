@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Transformers in NLP with PyTorch, TensorFlow and Hugging Face" href="../transformers/index.html" /><link rel="prev" title="Classification de prénoms en genre (masculin/féminin) 🇫🇷" href="02_classification_prenoms_fr.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -186,10 +186,10 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="text-classification-du-tf-idf-aux-word-embeddings-en-passant-par-features-expertes">
-<h1>Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷<a class="headerlink" href="#text-classification-du-tf-idf-aux-word-embeddings-en-passant-par-features-expertes" title="Permalink to this heading">¶</a></h1>
+<h1>Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷<a class="headerlink" href="#text-classification-du-tf-idf-aux-word-embeddings-en-passant-par-features-expertes" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a>, <a class="reference external" href="https://www.linkedin.com/in/xingyu-liu-aba896a1/">Xingyu LIU</a></p>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>La classification de textes est une tâche courante en traitement automatique des langues (TAL). Dans ce tutoriel nous allons explorer diverses features (TF-IDF, plongement lexical, features linguistiques) alimentant à leur tour des modèles variés dont entre autres la régression logistique, classification naïve bayésienne et perceptron multicouche.</p>
 <p>Le but de ce tutoriel est de construire un classifieur qui permet de catégoriser correctement des textes en 3 classes : société, économie et politique.</p>
 <div class="admonition-teaser admonition">
@@ -208,7 +208,7 @@
 <p>Figure 1 : Répartition des tâches pendant l’écriture de ce tutoriel</p>
 </section>
 <section id="structure-du-tutoriel">
-<h2>Structure du tutoriel<a class="headerlink" href="#structure-du-tutoriel" title="Permalink to this heading">¶</a></h2>
+<h2>Structure du tutoriel<a class="headerlink" href="#structure-du-tutoriel" title="Link to this heading">¶</a></h2>
 <ol class="simple">
 <li><p>Nous présentons le prétraitement de notre corpus.</p></li>
 <li><p>Ensuite nous utilisons TF-IDF comme feature et un classifieur bayésien pour établir une baseline. Le package <code class="docutils literal notranslate"><span class="pre">Lime</span></code> est utilisé pour comprendre le fonctionnement du classifieur qui a ensuite permis une légère amélioration de performance.</p></li>
@@ -217,7 +217,7 @@
 </ol>
 </section>
 <section id="pretraitement-du-corpus">
-<h2>Prétraitement du corpus<a class="headerlink" href="#pretraitement-du-corpus" title="Permalink to this heading">¶</a></h2>
+<h2>Prétraitement du corpus<a class="headerlink" href="#pretraitement-du-corpus" title="Link to this heading">¶</a></h2>
 <p>Nous avons scrapé 9000 articles par thème. Les thèmes principaux sont : société, sport, économie, culture et politique. Nous avons ensuite sélectionné aléatoirement 1000 articles pour la tâche de classification.</p>
 <p>La tokenisation a été effectuée avec le package Stanza (Qi et al., 2020). Ce tokeniseur a notamment l’avantage de regrouper par défaut des mots séparés par tiret du type « gratte-ciel », alors que dans Spacy un tel comportement nécessite une configuration ad hoc engendrant d’autres problèmes.</p>
 <p>Nous avons aussi essayé de regrouper les entités nommées dans un seul token car cela permet de garder des informations sémantiques intactes. Dans Spacy il est facile d’y procéder ainsi mais dans Stanza il n’existe pas de fonction pré-définie. Nous avons donc soumis un <a class="reference external" href="https://github.com/stanfordnlp/stanza/issues/583">issue</a> sur Github et proposé notre propre solution sur le même lien au cas où cela pourrait servir la communauté.</p>
@@ -230,16 +230,16 @@
 <p>Figure 3 : Structure du corpus enrichi en xml</p>
 </section>
 <section id="classification-de-textes">
-<h2>Classification de textes<a class="headerlink" href="#classification-de-textes" title="Permalink to this heading">¶</a></h2>
+<h2>Classification de textes<a class="headerlink" href="#classification-de-textes" title="Link to this heading">¶</a></h2>
 <section id="etablissement-dune-baseline">
-<h3>Établissement d’une baseline<a class="headerlink" href="#etablissement-dune-baseline" title="Permalink to this heading">¶</a></h3>
+<h3>Établissement d’une baseline<a class="headerlink" href="#etablissement-dune-baseline" title="Link to this heading">¶</a></h3>
 <p>Vu que notre classifieur recourra principalement au plongement lexical, il nous a paru utile d’établir une baseline en utilisant un vecteur TF-IDF.</p>
 <p>Un document peut être représenté de diverses façons selon le traitement des mots contenus dans le document. Le modèle le plus simple est le sac de mots qui compte l’occurrence de chaque token afin de générer une matrice documents-termes (MDT). Ce modèle est quelque peu simpliste car l’occurrence des tokens augmente en fonction de la longueur du document. Pour remédier à ce défaut la MDT peut être modifiée pour représenter non plus la fréquence absolue mais la fréquence relative des tokens. Cependant il subsiste toujours le problème des mots vides car ces derniers sont quasiment toujours les plus fréquents (cf. la loi de Zipf à ce propos).</p>
 <p>Pour faire face à ce problème une autre mesure est proposée : celle de TF-IDF, la formule de cette mesure est la suivante :</p>
 <figure class="align-center" id="id1">
 <img alt="../images/a322e8b3.png" src="../images/a322e8b3.png"/>
 <figcaption>
-<p><span class="caption-text">Figure 4 : Formule de TF-IDF</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Figure 4 : Formule de TF-IDF</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>L’efficacité de cette mesure est basée sur l’hypothèse selon laquelle un terme doit être à la fois fréquent et spécifique à un document pour caractériser ce dernier. Notons que cette feature est peu gourmande en termes de calcul.</p>
@@ -257,7 +257,7 @@
 <p>Les fonctionnalités proposées par Lime nous ont incités à faire un post-traitement susceptible d’augmenter la performance du classifieur. Nous avons extrait les 3 premiers termes de chaque prédiction de classe au cas où la prédiction serait mauvaise. Cette liste de termes constitue par la suite une liste de « mots inadéquats » avec laquelle nous filtrons le texte de chaque article. Nous avons ensuite ré-entraîné le classifieur, portant l’accuracy global de 0.82 à 0.85. Ce score de 0.85 a été retenu par la suite comme benchmark pour notre tâche de classification.</p>
 </section>
 <section id="classification-a-base-du-plongement-lexical">
-<h3>Classification à base du plongement lexical<a class="headerlink" href="#classification-a-base-du-plongement-lexical" title="Permalink to this heading">¶</a></h3>
+<h3>Classification à base du plongement lexical<a class="headerlink" href="#classification-a-base-du-plongement-lexical" title="Link to this heading">¶</a></h3>
 <p>Dans cette sous-section nous allons utiliser le plongement lexical pour caractériser un mot et par la suite un article en prenant la moyenne de tous les vecteurs lexicaux constituant l’article.</p>
 <p>Le plongement lexical vise à représenter un mot par un vecteur de nombres réels. Autrement dit, le principe fondamental consiste à représenter un concept linguistique par l’intermédiaire d’une représentation mathématique. Le mot « chien » serait représenté par exemple par un vecteur à 3 dimensions [1.3, 2.2, 4,1].</p>
 <p>Au cours de la recherche d’une représentation mathématique adéquate, certaines idées ont permis d’éclairer le chemin dont entre autres l’hypothèse distributionnelle de Harris (distributional hypothesis, (Harris, 1954)) dans le domaine de la sémantique distributionnelle. On retiendra aussi la fameuse phrase de Firth : Vous connaîtrez un mot par ses voisinages (You shall know a word by the company it keeps (Firth, 1957)). L’implémentation informatique la plus courante de cette idée est basée sur l’article de (Mikolov et al., 2013). Notons que le plongement lexical est en essence le produit d’une tâche reposant elle-même sur l’entraînement d’un réseau de neurones . Deux tâches sont possibles pour obtenir les vecteurs : soit on essaie de prédire un mot à partir de son contexte (CBOW), soit on prédit l’entourage d’un mot (Skip-gram).</p>
@@ -365,14 +365,14 @@
 <p>Cependant, les F1 scores des classes politique et société restent bas. Ils sont respectivement 0.75 et 0.76, ce qui fait que l’accuracy général du classifieur SVM est inférieur au benchmark TF-IDF (0.82 vs 0.85).</p>
 </section>
 <section id="elaboration-des-features-dites-expertes">
-<h3>Elaboration des features dites expertes<a class="headerlink" href="#elaboration-des-features-dites-expertes" title="Permalink to this heading">¶</a></h3>
+<h3>Elaboration des features dites expertes<a class="headerlink" href="#elaboration-des-features-dites-expertes" title="Link to this heading">¶</a></h3>
 <p>Pour améliorer davantage notre classifieur SVM, nous avons calculé 5 features supplémentaires : diversité lexicale, distance cosinus entre un article et 4 termes les plus fréquents à chaque classe et enfin, un vecteur one-hot à 12 dimensions construit sur l’absence et la présence des 4 termes mentionnés plus haut. La diversité lexicale a été calculée en divisant le nombre de tokens uniques par le nombre de tokens total.</p>
 <p>Pour évaluer l’effet de chaque feature, nous avons tout d’abord exclu le vecteur du document et utilisé la régression logistique (méthode Newton-conjugate gradient) en gardant uniquement les features expertes. Les valeurs P&gt;|z| nous indiquent que la diversité lexicale est peu probable de contribuer à la classification (0.986). En revanche, les distances cosinus et le vecteur one-hot sont tous pertinents (toutes les valeurs sont inférieures à 0.05).</p>
 <p>Nous avons donc intégré ces deux features dans le classifieur SVM. L’accuracy général est monté à 0.85 et les F1 scores montés à 0.80 pour les classes politique et société.</p>
 </section>
 </section>
 <section id="conclusions-et-perspectives">
-<h2>Conclusions et perspectives<a class="headerlink" href="#conclusions-et-perspectives" title="Permalink to this heading">¶</a></h2>
+<h2>Conclusions et perspectives<a class="headerlink" href="#conclusions-et-perspectives" title="Link to this heading">¶</a></h2>
 <p>Nous avons donc construit un corpus de 5 thèmes, appliqué un prétraitement typique sur les textes de chaque article, extrait et élaboré des features et enfin testé les features sur divers classifieurs.</p>
 <p>Quelques points méritent d’être mentionnés :</p>
 <ol class="simple">
@@ -382,12 +382,12 @@
 </ol>
 </section>
 <section id="tutoriels-a-venir">
-<h2>Tutoriels à venir<a class="headerlink" href="#tutoriels-a-venir" title="Permalink to this heading">¶</a></h2>
+<h2>Tutoriels à venir<a class="headerlink" href="#tutoriels-a-venir" title="Link to this heading">¶</a></h2>
 <p>Dans le domaine de la classification de textes, les réseaux de neurones du type RNN ont fait preuve d’efficacité. Des modèles de langues pré-entraînés du type Bert (Vaswani et al., 2017) ont davantage poussé les limites de performance. Des features linguistiques basés sur les propriétés morpho-syntaxiques des tokens peuvent aussi s’avérer utiles.</p>
 <p>A très bientôt pour plus de tutoriels :D</p>
 </section>
 <section id="references">
-<h2>Références<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<h2>Références<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
 <p>Fauconnier, J.-P. (2015). French word embeddings.</p>
 <p>Firth, J. R. (1957). A synopsis of linguistic theory, 1930-1955. Studies in Linguistic Analysis.</p>
 <p>Harris, Z. S. (1954). Distributional structure. Word, 10(2–3), 146–162.</p>
@@ -480,12 +480,12 @@ Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016). “Why Should I Trust You?
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -519,6 +519,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

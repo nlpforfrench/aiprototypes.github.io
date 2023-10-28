@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Analyse en composantes principales (PCA) : prépositions d’inclusion en français 🇫🇷" href="03_pca_inclusion_fr.html" /><link rel="prev" title="La loi de Zipf illustrée avec gutenbergr en R 🇫🇷" href="01_zipf_fr.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,7 +434,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Analyse-des-Correspondances-Multiples-:-le-cas-de-l’ergatif-en-warlipiri-🇫🇷">
-<h1>Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷<a class="headerlink" href="#Analyse-des-Correspondances-Multiples-:-le-cas-de-l’ergatif-en-warlipiri-🇫🇷" title="Permalink to this heading">¶</a></h1>
+<h1>Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷<a class="headerlink" href="#Analyse-des-Correspondances-Multiples-:-le-cas-de-l’ergatif-en-warlipiri-🇫🇷" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>Dans ce tutoriel nous explorons le jeu de données <code class="docutils literal notranslate"><span class="pre">lwarlipiri.rds</span></code> à l’aide d’une méthode exploratoire multivariée adaptée afin d’investiguer dans quelle mesure l’utilisation du marqueur de cas ergatif <code class="docutils literal notranslate"><span class="pre">CaseMarking</span></code> est liée aux variables suivantes :</p>
 <ul class="simple">
@@ -482,11 +482,11 @@ Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/
 </pre></div></div>
 </div>
 <section id="Pourquoi-MCA">
-<h2>Pourquoi MCA<a class="headerlink" href="#Pourquoi-MCA" title="Permalink to this heading">¶</a></h2>
+<h2>Pourquoi MCA<a class="headerlink" href="#Pourquoi-MCA" title="Link to this heading">¶</a></h2>
 <p>Nous choisissons l’analyse des correspondances multiples (MCA) comme méthode car dans leur forme la plus classique <code class="docutils literal notranslate"><span class="pre">PCA</span></code> s’applique surtout aux variables continues, <code class="docutils literal notranslate"><span class="pre">CA</span></code> à une table de contingence et <code class="docutils literal notranslate"><span class="pre">MCA</span></code> à une table de variables catégorielles comme c’est le cas ici, d’autant plus que le nombre de facteurs par variable n’est pas élevé.</p>
 </section>
 <section id="Table-de-co-occurrence">
-<h2>Table de co-occurrence<a class="headerlink" href="#Table-de-co-occurrence" title="Permalink to this heading">¶</a></h2>
+<h2>Table de co-occurrence<a class="headerlink" href="#Table-de-co-occurrence" title="Link to this heading">¶</a></h2>
 <p>Après maintes explorations, nous avons trouvé une cooccurrence de comptage très pratique. Nous procédons donc à la construction d’un tel tableau.</p>
 <p>On produit aussi le tableau en utilisant des proportions.</p>
 <div class="nbinput docutils container">
@@ -586,7 +586,7 @@ Tableau 2
 </div>
 </section>
 <section id="Quelques-remarques-issues-des-tableaux-de-proportion">
-<h2>Quelques remarques issues des tableaux de proportion<a class="headerlink" href="#Quelques-remarques-issues-des-tableaux-de-proportion" title="Permalink to this heading">¶</a></h2>
+<h2>Quelques remarques issues des tableaux de proportion<a class="headerlink" href="#Quelques-remarques-issues-des-tableaux-de-proportion" title="Link to this heading">¶</a></h2>
 <p>Il est à noter que les remarques suivantes ne s’appliquent qu’aux données de ce tutoriel.</p>
 <ol class="arabic simple">
 <li><p>L’usage de l’ergatif est plus fréquent chez l’adulte que chez l’enfant, ce qui n’est pas le cas d’other. Si l’on regarde le tableau 2, les adultes utilisent plus l’ergatif qu’other, les enfants aussi. Cependant cette préférence est plus marquée chez l’adulte.</p></li>
@@ -595,9 +595,9 @@ Tableau 2
 </ol>
 </section>
 <section id="Que-nous-dit-MCA">
-<h2>Que nous dit MCA<a class="headerlink" href="#Que-nous-dit-MCA" title="Permalink to this heading">¶</a></h2>
+<h2>Que nous dit MCA<a class="headerlink" href="#Que-nous-dit-MCA" title="Link to this heading">¶</a></h2>
 <section id="Choix-des-dimensions">
-<h3>Choix des dimensions<a class="headerlink" href="#Choix-des-dimensions" title="Permalink to this heading">¶</a></h3>
+<h3>Choix des dimensions<a class="headerlink" href="#Choix-des-dimensions" title="Link to this heading">¶</a></h3>
 <p>Si l’on regarde les valeurs propres et les pourcentage de variance, il semble que toutes les quatres dimensions sont importantes. La discontinuité est à peine observable. La difficulté de focaliser sur uniquement 2 dimensions survient assez fréquemment en MCA.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -694,7 +694,7 @@ Tableau 2
 <p>Nous voyons bien qu’ergative et other contribuent peu à la dimension 3 (avec une mauvaise qualité en plus) et que les contributions globales des catégories sur la dimension 4 sont finalement assez faibles. Nous décidons donc de nous focaliser quand même sur les deux premières dimensions.</p>
 </section>
 <section id="Corrélation-entre-variables-et-dimensions">
-<h3>Corrélation entre variables et dimensions<a class="headerlink" href="#Corrélation-entre-variables-et-dimensions" title="Permalink to this heading">¶</a></h3>
+<h3>Corrélation entre variables et dimensions<a class="headerlink" href="#Corrélation-entre-variables-et-dimensions" title="Link to this heading">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -781,7 +781,7 @@ comprendre cette question.</p>
 </section>
 </section>
 <section id="Référence">
-<h2>Référence<a class="headerlink" href="#Référence" title="Permalink to this heading">¶</a></h2>
+<h2>Référence<a class="headerlink" href="#Référence" title="Link to this heading">¶</a></h2>
 <p>Cours de Guillaume Desagulier intitulé linguistique outillée et traitements statistiques</p>
 <p><a class="reference external" href="https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html">https://corpling.modyco.fr/workshops/M2TAL/4.multivariate.html</a></p>
 </section>
@@ -864,12 +864,12 @@ comprendre cette question.</p>
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -905,6 +905,6 @@ StatCounter"></a></div></noscript>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

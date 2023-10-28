@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Algorithme ou plusieurs façons de résoudre un problème 🇫🇷" href="01_intro_fr.html" /><link rel="prev" title="Algorithms and data structures by examples in Python" href="index.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Algorithm or many ways of solving a problem 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,12 +434,12 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Algorithm-or-many-ways-of-solving-a-problem-🇬🇧">
-<h1>Algorithm or many ways of solving a problem 🇬🇧<a class="headerlink" href="#Algorithm-or-many-ways-of-solving-a-problem-🇬🇧" title="Permalink to this heading">¶</a></h1>
+<h1>Algorithm or many ways of solving a problem 🇬🇧<a class="headerlink" href="#Algorithm-or-many-ways-of-solving-a-problem-🇬🇧" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>See <a class="reference internal" href="index.html"><span class="doc">my manga</span></a> to have an idea on why I wrote these tutorials.</p>
 <p>In a similar spirit as the math series, this series of tutorial is an introduction to algorithms and data structures. It targets students in the humanities and social sciences but not only because I think that learning by examples can benefit all those who like coding and top-down learning.</p>
 <section id="A-simplistic-example">
-<h2>A simplistic example<a class="headerlink" href="#A-simplistic-example" title="Permalink to this heading">¶</a></h2>
+<h2>A simplistic example<a class="headerlink" href="#A-simplistic-example" title="Link to this heading">¶</a></h2>
 <p>Let’s first consider a simple example for illustrative purpose.</p>
 <p>One day you need a function filtering all the even numbers smaller than <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <p>Now someone offers you two options(algorithms). Naturally, each option(algorithm) comprises a set of steps.</p>
@@ -448,15 +448,15 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="n">temp_l</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">def</span> <span class="nf">print_evens_fast</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">temp_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
-<span class="n">print_evens_fast</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span></span>%%time
+temp_l = []
+def print_evens_fast(n):
+    i = 0
+    while i &lt; n:
+        if i % 2 == 0:
+            temp_l.append(i)
+        i += 2
+print_evens_fast(50)
 </pre></div>
 </div>
 </div>
@@ -474,15 +474,15 @@ Wall time: 27.9 µs
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="n">temp_l</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">def</span> <span class="nf">print_evens_slow</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">temp_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">print_evens_slow</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span></span>%%time
+temp_l = []
+def print_evens_slow(n):
+    i = 0
+    while i &lt; n:
+        if i % 2 == 0:
+            temp_l.append(i)
+        i += 1
+print_evens_slow(50)
 </pre></div>
 </div>
 </div>
@@ -496,11 +496,11 @@ Wall time: 30 µs
 </pre></div></div>
 </div>
 <section id="What-time-is-it">
-<h3>What time is it<a class="headerlink" href="#What-time-is-it" title="Permalink to this heading">¶</a></h3>
+<h3>What time is it<a class="headerlink" href="#What-time-is-it" title="Link to this heading">¶</a></h3>
 <p>In the output above, you should mainly focus on the wall time. Roughly speaking, <code class="docutils literal notranslate"><span class="pre">wall</span> <span class="pre">time</span></code>, also called <code class="docutils literal notranslate"><span class="pre">real</span></code>, represents actual elapsed time, while <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">sys</span></code> values represent CPU execution time. See <a class="reference external" href="https://stackoverflow.com/questions/3432085/how-to-understand-the-output-of-time-command">here</a> for more explanations.</p>
 </section>
 <section id="More-loops-please">
-<h3>More loops please<a class="headerlink" href="#More-loops-please" title="Permalink to this heading">¶</a></h3>
+<h3>More loops please<a class="headerlink" href="#More-loops-please" title="Link to this heading">¶</a></h3>
 <p>As you see the <code class="docutils literal notranslate"><span class="pre">print_evens_fast</span></code> is slightly fast than the second one. The difference, however, seems trivial. If you have a critical mind, you will object, rightly so, that a single trial is quite subject to randomness.</p>
 <p>A practical trick would be using the <code class="docutils literal notranslate"><span class="pre">timeit%%</span></code> magic command in Ipython. In this case I’ll use <code class="docutils literal notranslate"><span class="pre">r1</span> <span class="pre">n100</span></code> meaning 1 run of 100 loops.</p>
 <div class="nbinput docutils container">
@@ -508,15 +508,15 @@ Wall time: 30 µs
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>it -r1 -n100
-<span class="n">temp_l</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">def</span> <span class="nf">print_evens_fast</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">temp_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
-<span class="n">print_evens_fast</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span></span>%%timeit -r1 -n100
+temp_l = []
+def print_evens_fast(n):
+    i = 0
+    while i &lt; n:
+        if i % 2 == 0:
+            temp_l.append(i)
+        i += 2
+print_evens_fast(50)
 </pre></div>
 </div>
 </div>
@@ -533,15 +533,15 @@ Wall time: 30 µs
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>it -r1 -n100
-<span class="n">temp_l</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">def</span> <span class="nf">print_evens_slow</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">temp_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">print_evens_slow</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span></span>%%timeit -r1 -n100
+temp_l = []
+def print_evens_slow(n):
+    i = 0
+    while i &lt; n:
+        if i % 2 == 0:
+            temp_l.append(i)
+        i += 1
+print_evens_slow(50)
 </pre></div>
 </div>
 </div>
@@ -559,7 +559,7 @@ Wall time: 30 µs
 </section>
 </section>
 <section id="A-real-life-example">
-<h2>A real-life example<a class="headerlink" href="#A-real-life-example" title="Permalink to this heading">¶</a></h2>
+<h2>A real-life example<a class="headerlink" href="#A-real-life-example" title="Link to this heading">¶</a></h2>
 <p>Let’s take a look at another example, this time much more practical.</p>
 <p>Websites often use ID to manage customers. Every day some IDs are used and some are freed. When some client tries to acquire a new ID, we want to always allocate it the smallest available one.</p>
 <p>So how can you find the smallest free ID, which is 10, from the following list?</p>
@@ -570,26 +570,26 @@ Wall time: 30 µs
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="k">def</span> <span class="nf">brute_force</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The user can use the free id </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-            <span class="k">break</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+<span></span>%%time
+def brute_force(lst):
+    i = 0
+    while True:
+        if i not in lst:
+            print(f"The user can use the free id {i}")
+            break
+        i = i + 1
 
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="c1"># reproductibility</span>
-<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+import random
+# reproductibility
+random.seed(0)
 
-<span class="n">nb_ids</span> <span class="o">=</span> <span class="mi">50000</span>
-<span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nb_ids</span><span class="p">))</span>
-<span class="n">lst_shuffled</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"the first 6 ids of the shuffled list is </span><span class="si">{</span><span class="n">lst_shuffled</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">nb_removed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">nb_ids</span><span class="p">)</span>
-<span class="n">lst_shuffled</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">nb_removed</span><span class="p">)</span>
-<span class="n">brute_force</span><span class="p">(</span><span class="n">lst_shuffled</span><span class="p">)</span>
+nb_ids = 50000
+lst = list(range(nb_ids))
+lst_shuffled = random.sample(lst, len(lst))
+print(f"the first 6 ids of the shuffled list is {lst_shuffled[:6]}")
+nb_removed = random.randrange(nb_ids)
+lst_shuffled.pop(nb_removed)
+brute_force(lst_shuffled)
 </pre></div>
 </div>
 </div>
@@ -615,16 +615,16 @@ Wall time: 9.44 s
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="k">def</span> <span class="nf">min_free</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-            <span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The id </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s1"> can be used.'</span><span class="p">)</span>
+<span></span>%%time
+def min_free(lst):
+    n = len(lst)
+    a = [0]*(n+1)
+    for x in lst:
+        if x &lt; n:
+            a[x] = 1
+    print(f'The id {a.index(0)} can be used.')
 
-<span class="n">min_free</span><span class="p">(</span><span class="n">lst_shuffled</span><span class="p">)</span>
+min_free(lst_shuffled)
 </pre></div>
 </div>
 </div>
@@ -641,7 +641,7 @@ Wall time: 4.51 ms
 <p>As you can see the min_free version spits the same ID, however it takes only 4.51 ms. Note that, given the huge gap, we can save ourselves from running multiple loops.</p>
 </section>
 <section id="Quantifying-speed-and-space">
-<h2>Quantifying speed and space<a class="headerlink" href="#Quantifying-speed-and-space" title="Permalink to this heading">¶</a></h2>
+<h2>Quantifying speed and space<a class="headerlink" href="#Quantifying-speed-and-space" title="Link to this heading">¶</a></h2>
 <p>There remains a minor issue. Isn’t it tedious to run the program each time or even multiple times to have an idea of the speed ? Besides, the performance can differ quite significantly according to one’s computer configuration.</p>
 <p>Luckily people figured out an easier and more objective way of quantifying time called Big O notation (actually it quantifies the time complexity of an algorithm).</p>
 <p>For this particular case the time complexity of the brute force one is <span class="math notranslate nohighlight">\(O(n^2)\)</span> and the other one <span class="math notranslate nohighlight">\(O(n)\)</span>. However the faster one uses more memory (consider the list <code class="docutils literal notranslate"><span class="pre">a</span></code> set aside as a bookkeeper), we say that the space complexity is <span class="math notranslate nohighlight">\(O(n)\)</span>.</p>
@@ -723,12 +723,12 @@ Wall time: 4.51 ms
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -764,6 +764,6 @@ StatCounter"></a></div></noscript>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

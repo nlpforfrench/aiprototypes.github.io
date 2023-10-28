@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Be a responsible programmer when doing Object-Oriented Programming 🇬🇧" href="05_oop_web_scraping_cooper_en.html" /><link rel="prev" title="Connect to remote jupyter notebook in Pycharm" href="03_jupyter_remote_pycharm.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,9 +434,9 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧">
-<h1>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧<a class="headerlink" href="#Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧" title="Permalink to this heading">¶</a></h1>
+<h1>Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧<a class="headerlink" href="#Understand-objected-oriented-programming-(OOP)-by-building-a-minimal-Web-Scraping-framework-🇬🇧" title="Link to this heading">¶</a></h1>
 <section id="What-you-are-going-to-learn">
-<h2>What you are going to learn<a class="headerlink" href="#What-you-are-going-to-learn" title="Permalink to this heading">¶</a></h2>
+<h2>What you are going to learn<a class="headerlink" href="#What-you-are-going-to-learn" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">requests</span></code> is a very popular package in Python because it provides many convenient methods to handle requests, parsing and exception handling. One could also use the official <code class="docutils literal notranslate"><span class="pre">urllib</span></code> package, however for the same tasks it is overall much easier to use requests due to its code design. You can clearly see the philosophy of the creator through the website’s motto:</p>
 <img alt="../images/2021-04-30-20-25-11.png" src="../images/2021-04-30-20-25-11.png"/>
 <p>The objective of this tutorial is to introduce you to objected-oriented programming (OOP) by imitating a working example in <code class="docutils literal notranslate"><span class="pre">requests</span></code>. After having a grasp of the very basic principles of OOP, we would move on to a more elaborate example to make you better seize the benefits of OOP.</p>
@@ -448,7 +448,7 @@ pip<span class="w"> </span>install<span class="w"> </span>beautifulsoup4
 </div>
 </section>
 <section id="A-working-example-in-requests">
-<h2>A working example in requests<a class="headerlink" href="#A-working-example-in-requests" title="Permalink to this heading">¶</a></h2>
+<h2>A working example in requests<a class="headerlink" href="#A-working-example-in-requests" title="Link to this heading">¶</a></h2>
 <p>Here is a quick starting example using <code class="docutils literal notranslate"><span class="pre">requests</span></code>, as you can see from the output.</p>
 <ol class="arabic simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">get</span></code> method returns a class object.</p></li>
@@ -461,26 +461,26 @@ pip<span class="w"> </span>install<span class="w"> </span>beautifulsoup4
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span></span>import requests
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://www.google.com/'</span><span class="p">)</span>
+r = requests.get('https://www.google.com/')
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"The get method returns a class object."</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+print("The get method returns a class object.")
+print("-------------")
+print(type(r))
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The status code tells us that the request is successful."</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+print("\nThe status code tells us that the request is successful.")
+print("-------------")
+print(r.status_code)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The text property returns the source code of Google homepage."</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+print("\nThe text property returns the source code of Google homepage.")
+print("-------------")
+print(type(r.text))
+print(r.text)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The cookies property returns your cookies."</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+print("\nThe cookies property returns your cookies.")
+print("-------------")
+print(r.cookies)
 </pre></div>
 </div>
 </div>
@@ -522,7 +522,7 @@ The cookies property returns your cookies.
 </div>
 </section>
 <section id="Class,-constructor,-method-and-property">
-<h2>Class, constructor, method and property<a class="headerlink" href="#Class,-constructor,-method-and-property" title="Permalink to this heading">¶</a></h2>
+<h2>Class, constructor, method and property<a class="headerlink" href="#Class,-constructor,-method-and-property" title="Link to this heading">¶</a></h2>
 <p>When we talk about objected-oriented programming (OOP), no matter which language you are using (Some languages like Java and C++ are more natively class-based), the four most fundamental concepts are <code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">constructor</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code> and <code class="docutils literal notranslate"><span class="pre">property</span></code>.</p>
 <p>Let’s construct our first class in Python. A class is a concept, a perception. Let’s say we want to define what is a human being (Person).</p>
 <p>Typically you would start building your <code class="docutils literal notranslate"><span class="pre">Person</span></code> (capital case) class by defining it’s properties (name, nationality, job) using a constructor (the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> here). You would also like to define the class’s method (what a human can do).</p>
@@ -533,23 +533,23 @@ The cookies property returns your cookies.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
-  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">nationality</span><span class="p">,</span> <span class="n">job</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">nationality</span> <span class="o">=</span> <span class="n">nationality</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">job</span> <span class="o">=</span> <span class="n">job</span>
+<span></span>class Person:
+  def __init__(self, name, nationality, job):
+    self.name = name
+    self.nationality = nationality
+    self.job = job
 
-  <span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Hello my name is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">I'm </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nationality</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">I work in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">job</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+  def greeting(self):
+      print(f"Hello my name is {self.name}.\nI'm {self.nationality}.\nI work in {self.job}.")
 
-<span class="c1"># initiate a class</span>
-<span class="n">me</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Xiaoou"</span><span class="p">,</span> <span class="s2">"Chinese"</span><span class="p">,</span> <span class="s2">"NLP"</span><span class="p">)</span>
+# initiate a class
+me = Person("Xiaoou", "Chinese", "NLP")
 
-<span class="c1"># using the greeting method</span>
-<span class="n">me</span><span class="o">.</span><span class="n">greeting</span><span class="p">()</span>
+# using the greeting method
+me.greeting()
 
-<span class="c1"># access the name property</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">me</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+# access the name property
+print(me.name)
 </pre></div>
 </div>
 </div>
@@ -570,16 +570,16 @@ Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://www.google.com/'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span></span>r = requests.get('https://www.google.com/')
+print(type(r))
+print(r.status_code)
+print(r.text)
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Imitate-the-requests-framework">
-<h2>Imitate the requests framework<a class="headerlink" href="#Imitate-the-requests-framework" title="Permalink to this heading">¶</a></h2>
+<h2>Imitate the requests framework<a class="headerlink" href="#Imitate-the-requests-framework" title="Link to this heading">¶</a></h2>
 <p>When you run <code class="docutils literal notranslate"><span class="pre">requests.get("https://www.google.com/")</span></code>, you have an object of class <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">'requests.models.Response'&gt;</span></code>. This object has two properties: <code class="docutils literal notranslate"><span class="pre">status_code</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code>. Let’s replicate this schema with an example of article scraping.</p>
 <p>So basically we are trying to have an object returned after calling a function/method.</p>
 <p>So we first create the class <code class="docutils literal notranslate"><span class="pre">Content</span></code> and then the function <code class="docutils literal notranslate"><span class="pre">scrape_lemonde</span></code> which encapsulate the scraped url, title, and the first 100 characters in the object created by the <code class="docutils literal notranslate"><span class="pre">Content</span></code> class.</p>
@@ -588,42 +588,42 @@ Xiaoou
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span></span>import requests
+from bs4 import BeautifulSoup
 
-<span class="k">class</span> <span class="nc">Content</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">first100</span> <span class="o">=</span> <span class="n">first100</span>
+class Content:
+    def __init__(self, url, title, first100):
+        self.url = url
+        self.title = title
+        self.first100 = first100
 
-<span class="k">def</span> <span class="nf">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">soup</span>
+def get_parsed_text(url):
+    req = requests.get(url)
+    soup = BeautifulSoup(req.text, 'html.parser')
+    return soup
 
-<span class="k">def</span> <span class="nf">scrape_lemonde</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">soup</span> <span class="o">=</span> <span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">body_tags</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">article</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">"p"</span><span class="p">,</span> <span class="s2">"h2"</span><span class="p">],</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="s2">""</span>
-    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">body_tags</span><span class="p">:</span>
-        <span class="n">body</span> <span class="o">+=</span> <span class="n">tag</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
-    <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+def scrape_lemonde(url):
+    soup = get_parsed_text(url)
+    title = soup.find('h1').text
+    body_tags = soup.article.find_all(["p", "h2"], recursive=False)
+    body = ""
+    for tag in body_tags:
+        body += tag.get_text()
+    first100 = body[:100]
+    return Content(url, title, first100)
 
-<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html'</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">scrape_lemonde</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+url = 'https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html'
+content = scrape_lemonde(url)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+print("Url")
+print("---------")
+print(content.url)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+print("\nTitle\n----------")
+print(content.title)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+print("\nFirst 100 characters\n-----------")
+print(content.first100)
 </pre></div>
 </div>
 </div>
@@ -658,29 +658,29 @@ First 100 characters
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># The new function</span>
-<span class="k">def</span> <span class="nf">scrape_nytimes</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">bs</span> <span class="o">=</span> <span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'div.StoryBodyCompanionColumn div p'</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">])</span>
-    <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+<span></span># The new function
+def scrape_nytimes(url):
+    bs = get_parsed_text(url)
+    title = bs.find('h1').text
+    lines = bs.select('div.StoryBodyCompanionColumn div p')
+    body = '\n'.join([line.text for line in lines])
+    first100 = body[:100]
+    return Content(url, title, first100)
 
-<span class="c1"># Exactly the same schema</span>
+# Exactly the same schema
 
-<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://www.nytimes.com/2018/01/25/opinion/sunday/silicon-valley-immortality.html'</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">scrape_nytimes</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+url = 'https://www.nytimes.com/2018/01/25/opinion/sunday/silicon-valley-immortality.html'
+content = scrape_nytimes(url)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+print("Url")
+print("---------")
+print(content.url)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+print("\nTitle\n----------")
+print(content.title)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+print("\nFirst 100 characters\n-----------")
+print(content.first100)
 </pre></div>
 </div>
 </div>
@@ -714,73 +714,73 @@ Would you like to live forever? Some billionaires, already invincible in every o
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Content</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">first100</span> <span class="o">=</span> <span class="n">first100</span>
+<span></span>class Content:
+    def __init__(self, url, title, first100):
+        self.url = url
+        self.title = title
+        self.first100 = first100
 
-<span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+class Crawler:
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">journal</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">journal</span> <span class="o">=</span> <span class="n">journal</span>
-        <span class="c1"># if newspaper not recognized</span>
-        <span class="k">if</span> <span class="n">journal</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"lemonde"</span><span class="p">,</span><span class="s2">"nyt"</span><span class="p">]:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"Our services doesn't scrape this website for the moment.</span><span class="se">\n</span><span class="s2">Please contact us to build a scraper for this journal :D"</span><span class="p">)</span>
+    def __init__(self, journal):
+        self.journal = journal
+        # if newspaper not recognized
+        if journal not in ["lemonde","nyt"]:
+            print("Our services doesn't scrape this website for the moment.\nPlease contact us to build a scraper for this journal :D")
 
-    <span class="k">def</span> <span class="nf">get_parsed_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
-        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">soup</span>
+    def get_parsed_text(self,url):
+        req = requests.get(url)
+        soup = BeautifulSoup(req.text, 'html.parser')
+        return soup
 
-    <span class="k">def</span> <span class="nf">scrape_lemonde</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
-        <span class="n">soup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">body_tags</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">article</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">"p"</span><span class="p">,</span> <span class="s2">"h2"</span><span class="p">],</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">body</span> <span class="o">=</span> <span class="s2">""</span>
-        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">body_tags</span><span class="p">:</span>
-            <span class="n">body</span> <span class="o">+=</span> <span class="n">tag</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
-        <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+    def scrape_lemonde(self,url):
+        soup = self.get_parsed_text(url)
+        title = soup.find('h1').text
+        body_tags = soup.article.find_all(["p", "h2"], recursive=False)
+        body = ""
+        for tag in body_tags:
+            body += tag.get_text()
+        first100 = body[:100]
+        return Content(url, title, first100)
 
-    <span class="k">def</span> <span class="nf">scrape_nytimes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
-        <span class="n">bs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parsed_text</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">lines</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'div.StoryBodyCompanionColumn div p'</span><span class="p">)</span>
-        <span class="n">body</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">])</span>
-        <span class="n">first100</span> <span class="o">=</span> <span class="n">body</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">Content</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">first100</span><span class="p">)</span>
+    def scrape_nytimes(self,url):
+        bs = self.get_parsed_text(url)
+        title = bs.find('h1').text
+        lines = bs.select('div.StoryBodyCompanionColumn div p')
+        body = '\n'.join([line.text for line in lines])
+        first100 = body[:100]
+        return Content(url, title, first100)
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">journal</span> <span class="o">==</span> <span class="s2">"lemonde"</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scrape_lemonde</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">journal</span> <span class="o">==</span> <span class="s2">"nyt"</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scrape_nytimes</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    def get(self,url):
+        if self.journal == "lemonde":
+            return self.scrape_lemonde(url)
+        elif self.journal == "nyt":
+            return self.scrape_nytimes(url)
 </pre></div>
 </div>
 </div>
 <section id="Le-monde-scraper">
-<h3>Le monde scraper<a class="headerlink" href="#Le-monde-scraper" title="Permalink to this heading">¶</a></h3>
+<h3>Le monde scraper<a class="headerlink" href="#Le-monde-scraper" title="Link to this heading">¶</a></h3>
 <p>Now let’s generate a scraper for articles of the newspaper <code class="docutils literal notranslate"><span class="pre">Le</span> <span class="pre">Monde</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Create the Le Monde Crawler</span>
-<span class="n">lemonde_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"lemonde"</span><span class="p">)</span>
+<span></span># Create the Le Monde Crawler
+lemonde_crawler = Crawler("lemonde")
 
-<span class="n">lemonde_content</span> <span class="o">=</span> <span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html"</span><span class="p">)</span>
+lemonde_content = lemonde_crawler.get("https://www.lemonde.fr/mondephilatelique/article/2021/04/03/le-mouvement-wiener-werkstatte-dans-cartes-postales-magazine_6075495_5470897.html")
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+print("Url")
+print("---------")
+print(lemonde_content.url)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+print("\nTitle\n----------")
+print(lemonde_content.title)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+print("\nFirst 100 characters\n-----------")
+print(lemonde_content.first100)
 </pre></div>
 </div>
 </div>
@@ -804,27 +804,27 @@ First 100 characters
 </div>
 </section>
 <section id="New-York-Times-scraper">
-<h3>New York Times scraper<a class="headerlink" href="#New-York-Times-scraper" title="Permalink to this heading">¶</a></h3>
+<h3>New York Times scraper<a class="headerlink" href="#New-York-Times-scraper" title="Link to this heading">¶</a></h3>
 <p>Now a scraper for articles of New York Times.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Create the New York Times Crawler</span>
-<span class="n">nyt_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"nyt"</span><span class="p">)</span>
+<span></span># Create the New York Times Crawler
+nyt_crawler = Crawler("nyt")
 
-<span class="n">nyt_content</span> <span class="o">=</span> <span class="n">nyt_crawler</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://www.nytimes.com/2021/04/02/us/politics/capitol-attack.html"</span><span class="p">)</span>
+nyt_content = nyt_crawler.get("https://www.nytimes.com/2021/04/02/us/politics/capitol-attack.html")
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Url"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"---------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nyt_content</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+print("Url")
+print("---------")
+print(nyt_content.url)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Title</span><span class="se">\n</span><span class="s2">----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nyt_content</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+print("\nTitle\n----------")
+print(nyt_content.title)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First 100 characters</span><span class="se">\n</span><span class="s2">-----------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nyt_content</span><span class="o">.</span><span class="n">first100</span><span class="p">)</span>
+print("\nFirst 100 characters\n-----------")
+print(nyt_content.first100)
 </pre></div>
 </div>
 </div>
@@ -848,14 +848,14 @@ WASHINGTON — The band of razor wire-topped fencing around the Capitol had rece
 </div>
 </section>
 <section id="Unknown-journal-name">
-<h3>Unknown journal name<a class="headerlink" href="#Unknown-journal-name" title="Permalink to this heading">¶</a></h3>
+<h3>Unknown journal name<a class="headerlink" href="#Unknown-journal-name" title="Link to this heading">¶</a></h3>
 <p>When the end user enters an unknown journal, it will spit out the pre-defined message.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bbc_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"bbc"</span><span class="p">)</span>
+<span></span>bbc_crawler = Crawler("bbc")
 </pre></div>
 </div>
 </div>
@@ -871,7 +871,7 @@ Please contact us to build a scraper for this journal :D
 </section>
 </section>
 <section id="Wrap-up">
-<h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Permalink to this heading">¶</a></h2>
+<h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Link to this heading">¶</a></h2>
 <p>Bravo for having reading so far, hopefully you have:</p>
 <ol class="arabic simple">
 <li><p>Learned how to manage a little web-scraping project using class in Python</p></li>
@@ -964,12 +964,12 @@ Please contact us to build a scraper for this journal :D
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -1003,6 +1003,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

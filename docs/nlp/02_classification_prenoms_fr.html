@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Text Classification: du TF-IDF aux word embeddings en passant par features expertes 🇫🇷" href="03_classification_lemonde_fr.html" /><link rel="prev" title="Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷" href="01_compara_anno_fr.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Classification de prénoms en genre (masculin/féminin) 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,29 +434,29 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷">
-<h1>Classification de prénoms en genre (masculin/féminin) 🇫🇷<a class="headerlink" href="#Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷" title="Permalink to this heading">¶</a></h1>
+<h1>Classification de prénoms en genre (masculin/féminin) 🇫🇷<a class="headerlink" href="#Classification-de-prénoms-en-genre-(masculin/féminin)-🇫🇷" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>Cet exemple très simple issu du <a class="reference external" href="https://www.amazon.fr/Natural-Language-Processing-Python-Steven/dp/0596516495/ref=sr_1_11?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&amp;dchild=1&amp;keywords=nltk&amp;qid=1616280931&amp;sr=8-11">livre</a> de Steven Bird vous donne une idée sur à quoi ressemble le boulot d’un ingénieur junior en Machine Learning.</p>
 <p>La tâche consiste à entraîner un classifieur bayésien pour prédire le genre d’un prénom.</p>
 <section id="Sélection-de-features">
-<h2>Sélection de features<a class="headerlink" href="#Sélection-de-features" title="Permalink to this heading">¶</a></h2>
+<h2>Sélection de features<a class="headerlink" href="#Sélection-de-features" title="Link to this heading">¶</a></h2>
 <p>On commence par prendre la dernière lettre d’un prénom comme feature et la stocker dans un dictionnaire.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! creation de last latter comme feature</span>
+<span></span>#! creation de last latter comme feature
 
-<span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">names</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">gender_features</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-     <span class="k">return</span> <span class="p">{</span><span class="s1">'last_letter'</span><span class="p">:</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
+import nltk
+from nltk.corpus import names
+import random
+random.seed(13)
+def gender_features(word):
+     return {'last_letter': word[-1]}
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"La dernière lettre du pronom Shrek est"</span><span class="p">)</span>
-<span class="n">gender_features</span><span class="p">(</span><span class="s1">'Shrek'</span><span class="p">)</span>
+print("La dernière lettre du pronom Shrek est")
+gender_features('Shrek')
 </pre></div>
 </div>
 </div>
@@ -479,21 +479,21 @@ La dernière lettre du prnom Shrek est
 </div>
 </section>
 <section id="Mise-en-forme-du-corpus">
-<h2>Mise en forme du corpus<a class="headerlink" href="#Mise-en-forme-du-corpus" title="Permalink to this heading">¶</a></h2>
+<h2>Mise en forme du corpus<a class="headerlink" href="#Mise-en-forme-du-corpus" title="Link to this heading">¶</a></h2>
 <p>Le corpus provient de <code class="docutils literal notranslate"><span class="pre">nltk</span></code>. Ici on crée une liste de tuples grâce à quelques méthodes intégrées dans <code class="docutils literal notranslate"><span class="pre">nltk.corpus</span></code>. Notez l’emploi de list comprehension ici pour rendre le code plus concis tout en gardant la lisibilité.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! creation de datasets</span>
+<span></span>#! creation de datasets
 
-<span class="n">labeled_names</span> <span class="o">=</span> <span class="p">([(</span><span class="n">name</span><span class="p">,</span> <span class="s1">'male'</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">'male.txt'</span><span class="p">)]</span> <span class="o">+</span>
- <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="s1">'female'</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">'female.txt'</span><span class="p">)])</span>
+labeled_names = ([(name, 'male') for name in names.words('male.txt')] +
+ [(name, 'female') for name in names.words('female.txt')])
 
-<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">labeled_names</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Un échantillon du corpus"</span><span class="p">)</span>
-<span class="n">labeled_names</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+random.shuffle(labeled_names)
+print("Un échantillon du corpus")
+labeled_names[:10]
 </pre></div>
 </div>
 </div>
@@ -525,16 +525,16 @@ Un échantillon du corpus
 </div>
 </section>
 <section id="Création-des-corpus-train/test">
-<h2>Création des corpus train/test<a class="headerlink" href="#Création-des-corpus-train/test" title="Permalink to this heading">¶</a></h2>
+<h2>Création des corpus train/test<a class="headerlink" href="#Création-des-corpus-train/test" title="Link to this heading">¶</a></h2>
 <p>Ici on applique à la fonction de la <code class="docutils literal notranslate"><span class="pre">section</span> <span class="pre">1</span></code> à tous les noms du corpus. Les 500 premiers samples sont mis à l’écart pour servir de test.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! creation de paire feature/label</span>
+<span></span>#! creation de paire feature/label
 
-<span class="n">featuresets</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">labeled_names</span><span class="p">]</span>
+featuresets = [(gender_features(n), gender) for (n, gender) in labeled_names]
 </pre></div>
 </div>
 </div>
@@ -543,28 +543,28 @@ Un échantillon du corpus
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! creation de train et test</span>
+<span></span>#! creation de train et test
 
-<span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">featuresets</span><span class="p">[</span><span class="mi">500</span><span class="p">:],</span> <span class="n">featuresets</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+train_set, test_set = featuresets[500:], featuresets[:500]
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Première-classification">
-<h2>Première classification<a class="headerlink" href="#Première-classification" title="Permalink to this heading">¶</a></h2>
+<h2>Première classification<a class="headerlink" href="#Première-classification" title="Link to this heading">¶</a></h2>
 <p>La précision est autour de 75.2%. On liste les features les plus utiles pour étudier quels sont les problèmes potentiels. Le likely ratio <code class="docutils literal notranslate"><span class="pre">male</span> <span class="pre">:</span> <span class="pre">female</span></code> signifie la probabilité exacte qu’un prénom particulier soit masculin/féminin en fonction de sa dernière lettre (donc feature).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
-<span class="c1">#! classify</span>
-<span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">gender_features</span><span class="p">(</span><span class="s1">'Neo'</span><span class="p">))</span>
-<span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">gender_features</span><span class="p">(</span><span class="s1">'Trinity'</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">test_set</span><span class="p">))</span>
-<span class="n">classifier</span><span class="o">.</span><span class="n">show_most_informative_features</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="c1">#! see likely ratio</span>
+<span></span>classifier = nltk.NaiveBayesClassifier.train(train_set)
+#! classify
+classifier.classify(gender_features('Neo'))
+classifier.classify(gender_features('Trinity'))
+print(nltk.classify.accuracy(classifier, test_set))
+classifier.show_most_informative_features(5)
+#! see likely ratio
 </pre></div>
 </div>
 </div>
@@ -584,11 +584,11 @@ Most Informative Features
 </div>
 </section>
 <section id="Ajout-de-features-et-problème-d’overfitting">
-<h2>Ajout de features et problème d’overfitting<a class="headerlink" href="#Ajout-de-features-et-problème-d’overfitting" title="Permalink to this heading">¶</a></h2>
+<h2>Ajout de features et problème d’overfitting<a class="headerlink" href="#Ajout-de-features-et-problème-d’overfitting" title="Link to this heading">¶</a></h2>
 <p>Si vous ajoutez trop de features, le modèle risque d’être trop adapté à tes données et se généralise mal sur des données non vues. Cela s’appelle <code class="docutils literal notranslate"><span class="pre">overfitting</span></code> et survient souvent quand le corpus est petit, ce qui est le cas ici.</p>
 </section>
 <section id="Let’s-add-features">
-<h2>Let’s add features<a class="headerlink" href="#Let’s-add-features" title="Permalink to this heading">¶</a></h2>
+<h2>Let’s add features<a class="headerlink" href="#Let’s-add-features" title="Link to this heading">¶</a></h2>
 <p>Dans un premier temps, nous allons essayer d’ajouter plein de features.</p>
 <p>Examinons la fonction <code class="docutils literal notranslate"><span class="pre">gender_features2</span></code>. Les features sont :</p>
 <ul class="simple">
@@ -602,16 +602,16 @@ Most Informative Features
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! add features</span>
-<span class="k">def</span> <span class="nf">gender_features2</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"first_letter"</span><span class="p">:</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="s2">"last_letter"</span><span class="p">:</span> <span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()}</span>
-    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s1">'abcdefghijklmnopqrstuvwxyz'</span><span class="p">:</span>
-        <span class="n">features</span><span class="p">[</span><span class="s2">"count(</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">letter</span><span class="p">)]</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
-        <span class="n">features</span><span class="p">[</span><span class="s2">"has(</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">letter</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">letter</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">features</span>
+<span></span>#! add features
+def gender_features2(name):
+    features = {"first_letter": name[0].lower(), "last_letter": name[-1].lower()}
+    for letter in 'abcdefghijklmnopqrstuvwxyz':
+        features["count({})".format(letter)] = name.lower().count(letter)
+        features["has({})".format(letter)] = (letter in name.lower())
+    return features
 
-<span class="n">demo</span> <span class="o">=</span> <span class="n">gender_features2</span><span class="p">(</span><span class="s2">"john"</span><span class="p">)</span>
-<span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="mi">5</span><span class="p">)</span>
+demo = gender_features2("john")
+random.sample(demo.items(),5)
 </pre></div>
 </div>
 </div>
@@ -630,19 +630,19 @@ Most Informative Features
 </div>
 </section>
 <section id="La-précision-augmente">
-<h2>La précision augmente<a class="headerlink" href="#La-précision-augmente" title="Permalink to this heading">¶</a></h2>
+<h2>La précision augmente<a class="headerlink" href="#La-précision-augmente" title="Link to this heading">¶</a></h2>
 <p>Avec ce nouveau featureset, la précision est montée de 75.2% à 77.4%.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">featuresets</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features2</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">labeled_names</span><span class="p">]</span>
-<span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">featuresets</span><span class="p">[</span><span class="mi">500</span><span class="p">:],</span> <span class="n">featuresets</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">test_set</span><span class="p">))</span>
+<span></span>featuresets = [(gender_features2(n), gender) for (n, gender) in labeled_names]
+train_set, test_set = featuresets[500:], featuresets[:500]
+classifier = nltk.NaiveBayesClassifier.train(train_set)
+print(nltk.classify.accuracy(classifier, test_set))
 
-<span class="c1">#! 0.752 vs 0.774</span>
+#! 0.752 vs 0.774
 </pre></div>
 </div>
 </div>
@@ -656,7 +656,7 @@ Most Informative Features
 </div>
 </section>
 <section id="Feature-engineering-via-l’analyse-des-erreurs">
-<h2>Feature engineering via l’analyse des erreurs<a class="headerlink" href="#Feature-engineering-via-l’analyse-des-erreurs" title="Permalink to this heading">¶</a></h2>
+<h2>Feature engineering via l’analyse des erreurs<a class="headerlink" href="#Feature-engineering-via-l’analyse-des-erreurs" title="Link to this heading">¶</a></h2>
 <p>Ici nous expliquons le processus de feature engineering qui consiste à analyser les erreurs de la machine sur la base desquelles on filtre/supprime/créé des features.</p>
 <p>L’intelligence artificielle n’est finalement pas si artificielle, non ? (Bon j’avoue que c’est pas du deep learning, mais quand même)</p>
 <p>Notons ici la création de ‘devset’. Cette répartition en 3 sets est canonique en Machine Learning. On utilise le train pour entraîner le modèle, le devset pour ajuster ce modèle. Enfin le test ne doit être utilisé que pour l’évaluation finale.</p>
@@ -666,9 +666,9 @@ Most Informative Features
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">train_names</span> <span class="o">=</span> <span class="n">labeled_names</span><span class="p">[</span><span class="mi">1500</span><span class="p">:]</span>
-<span class="n">devtest_names</span> <span class="o">=</span> <span class="n">labeled_names</span><span class="p">[</span><span class="mi">500</span><span class="p">:</span><span class="mi">1500</span><span class="p">]</span>
-<span class="n">test_names</span> <span class="o">=</span> <span class="n">labeled_names</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+<span></span>train_names = labeled_names[1500:]
+devtest_names = labeled_names[500:1500]
+test_names = labeled_names[:500]
 </pre></div>
 </div>
 </div>
@@ -677,13 +677,13 @@ Most Informative Features
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! use devtest</span>
-<span class="n">train_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">train_names</span><span class="p">]</span>
-<span class="n">devtest_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">devtest_names</span><span class="p">]</span>
-<span class="n">test_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">test_names</span><span class="p">]</span>
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+<span></span>#! use devtest
+train_set = [(gender_features(n), gender) for (n, gender) in train_names]
+devtest_set = [(gender_features(n), gender) for (n, gender) in devtest_names]
+test_set = [(gender_features(n), gender) for (n, gender) in test_names]
+classifier = nltk.NaiveBayesClassifier.train(train_set)
 
-<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">devtest_set</span><span class="p">))</span>
+print(nltk.classify.accuracy(classifier, devtest_set))
 </pre></div>
 </div>
 </div>
@@ -697,7 +697,7 @@ Most Informative Features
 </div>
 </section>
 <section id="Premières-hypothèses-sur-les-erreurs">
-<h2>Premières hypothèses sur les erreurs<a class="headerlink" href="#Premières-hypothèses-sur-les-erreurs" title="Permalink to this heading">¶</a></h2>
+<h2>Premières hypothèses sur les erreurs<a class="headerlink" href="#Premières-hypothèses-sur-les-erreurs" title="Link to this heading">¶</a></h2>
 <p>Analysons les erreurs affichées ci-dessous.</p>
 <p>Les pronoms terminés par <code class="docutils literal notranslate"><span class="pre">yn</span></code> tendent à être féminins, alors que ceux terminés par <code class="docutils literal notranslate"><span class="pre">n</span></code> tendent à être masculins. Du coup deux règles serait meilleures qu’une seule.</p>
 <p>Ca semble être le même principe pour les pronoms terminés par <code class="docutils literal notranslate"><span class="pre">h</span></code> qui sont principalement féminins et ceux terminés par <code class="docutils literal notranslate"><span class="pre">ch</span></code> qui ont tendance à être masculins</p>
@@ -706,14 +706,14 @@ Most Informative Features
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">devtest_names</span><span class="p">:</span>
-     <span class="n">guess</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-     <span class="k">if</span> <span class="n">guess</span> <span class="o">!=</span> <span class="n">tag</span><span class="p">:</span>
-         <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">guess</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="p">)</span>
+<span></span>errors = []
+for (name, tag) in devtest_names:
+     guess = classifier.classify(gender_features(name))
+     if guess != tag:
+         errors.append( (tag, guess, name) )
 
-<span class="k">for</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">guess</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">errors</span><span class="p">):</span>
-     <span class="nb">print</span><span class="p">(</span><span class="s1">'correct=</span><span class="si">{:&lt;8}</span><span class="s1"> guess=</span><span class="si">{:&lt;8s}</span><span class="s1"> name=</span><span class="si">{:&lt;30}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">guess</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+for (tag, guess, name) in sorted(errors):
+     print('correct={:&lt;8} guess={:&lt;8s} name={:&lt;30}'.format(tag, guess, name))
 </pre></div>
 </div>
 </div>
@@ -966,7 +966,7 @@ correct=male     guess=female   name=Zollie
 </div>
 </section>
 <section id="Intégration-des-nouveaux-features-dans-le-classifieur">
-<h2>Intégration des nouveaux features dans le classifieur<a class="headerlink" href="#Intégration-des-nouveaux-features-dans-le-classifieur" title="Permalink to this heading">¶</a></h2>
+<h2>Intégration des nouveaux features dans le classifieur<a class="headerlink" href="#Intégration-des-nouveaux-features-dans-le-classifieur" title="Link to this heading">¶</a></h2>
 <p>Il semble bénéfique d’ajuster nos features en incluant les deux dernières lettres.</p>
 <p>Et youpi ! La précision est montée de 76% à 78.1%. C’est pas mal non ?</p>
 <div class="nbinput docutils container">
@@ -974,16 +974,16 @@ correct=male     guess=female   name=Zollie
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">gender_features</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-     <span class="k">return</span> <span class="p">{</span><span class="s1">'suffix1'</span><span class="p">:</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span>
-             <span class="s1">'suffix2'</span><span class="p">:</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]}</span>
+<span></span>def gender_features(word):
+     return {'suffix1': word[-1:],
+             'suffix2': word[-2:]}
 
-<span class="n">train_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">train_names</span><span class="p">]</span>
-<span class="n">devtest_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">gender_features</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">gender</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span> <span class="ow">in</span> <span class="n">devtest_names</span><span class="p">]</span>
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">NaiveBayesClassifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">classify</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">devtest_set</span><span class="p">))</span>
+train_set = [(gender_features(n), gender) for (n, gender) in train_names]
+devtest_set = [(gender_features(n), gender) for (n, gender) in devtest_names]
+classifier = nltk.NaiveBayesClassifier.train(train_set)
+print(nltk.classify.accuracy(classifier, devtest_set))
 
-<span class="c1"># 0.76 -&gt; 0.781</span>
+# 0.76 -&gt; 0.781
 </pre></div>
 </div>
 </div>
@@ -997,13 +997,13 @@ correct=male     guess=female   name=Zollie
 </div>
 </section>
 <section id="Importance-de-nouveaux-splits-train/dev">
-<h2>Importance de nouveaux splits train/dev<a class="headerlink" href="#Importance-de-nouveaux-splits-train/dev" title="Permalink to this heading">¶</a></h2>
+<h2>Importance de nouveaux splits train/dev<a class="headerlink" href="#Importance-de-nouveaux-splits-train/dev" title="Link to this heading">¶</a></h2>
 <p>Nous pouvons donc réitérer ce processus d’analyse d’erreurs et de feature engineering jusqu’à obtenir une performance satisfaisante.</p>
 <p>Attention !:D</p>
 <p>Il vaut mieux faire un nouveau split train/dev à chaque fois qu’on intègre/supprime des features pour éviter l’overfitting.</p>
 </section>
 <section id="Conclusions">
-<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Permalink to this heading">¶</a></h2>
+<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Link to this heading">¶</a></h2>
 <p>Bravo d’avoir fini l’article !</p>
 <p>Ce qu’il faut retenir :</p>
 <ol class="arabic simple">
@@ -1095,12 +1095,12 @@ correct=male     guess=female   name=Zollie
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -1134,6 +1134,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

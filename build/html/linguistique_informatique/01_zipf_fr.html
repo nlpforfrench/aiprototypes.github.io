@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Analyse des Correspondances Multiples : le cas de l’ergatif en warlipiri 🇫🇷" href="02_mca_ergatif_fr.html" /><link rel="prev" title="Computational Linguistics in R" href="index.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>La loi de Zipf illustrée avec gutenbergr en R 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,11 +434,11 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷">
-<h1>La loi de Zipf illustrée avec gutenbergr en R 🇫🇷<a class="headerlink" href="#La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷" title="Permalink to this heading">¶</a></h1>
+<h1>La loi de Zipf illustrée avec gutenbergr en R 🇫🇷<a class="headerlink" href="#La-loi-de-Zipf-illustrée-avec-gutenbergr-en-R-🇫🇷" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>Il s’agit de montrer quelques aspects de la loi de Zipf avec 3 textes (Wuthering Heights, Madame Bovary et Faust) récupérés du site Gutenberg.</p>
 <section id="Packages-utilisés">
-<h2>Packages utilisés<a class="headerlink" href="#Packages-utilisés" title="Permalink to this heading">¶</a></h2>
+<h2>Packages utilisés<a class="headerlink" href="#Packages-utilisés" title="Link to this heading">¶</a></h2>
 <p>Les trois packages/ensemble de packages utilisés sont <code class="docutils literal notranslate"><span class="pre">gutenbergr</span></code>,<code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> et <code class="docutils literal notranslate"><span class="pre">gridExtra</span></code> (pour afficher des multi-plots).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -457,7 +457,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Workflow-général">
-<h2>Workflow général<a class="headerlink" href="#Workflow-général" title="Permalink to this heading">¶</a></h2>
+<h2>Workflow général<a class="headerlink" href="#Workflow-général" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p>On prédéfinit les titres des 3 œuvres qui seront proposées à l’utiliseur et produit par la suite un dataframe contenant les métadatas</p></li>
 </ol>
@@ -477,7 +477,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Explication-de-la-fonction-get_books_meta">
-<h2>Explication de la fonction get_books_meta<a class="headerlink" href="#Explication-de-la-fonction-get_books_meta" title="Permalink to this heading">¶</a></h2>
+<h2>Explication de la fonction get_books_meta<a class="headerlink" href="#Explication-de-la-fonction-get_books_meta" title="Link to this heading">¶</a></h2>
 <p>La fonction <code class="docutils literal notranslate"><span class="pre">get_books_meta</span></code> prend les titres des 3 oeuvres comme entrées et produit un dataframe des informations des 3 œuvres en question en filtrant les métadatas du package <code class="docutils literal notranslate"><span class="pre">guternbergr</span></code> sur les colonnes <code class="docutils literal notranslate"><span class="pre">titre</span></code> et <code class="docutils literal notranslate"><span class="pre">language</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -528,7 +528,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Explication-de-la-fonction-main">
-<h2>Explication de la fonction main<a class="headerlink" href="#Explication-de-la-fonction-main" title="Permalink to this heading">¶</a></h2>
+<h2>Explication de la fonction main<a class="headerlink" href="#Explication-de-la-fonction-main" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Dans <code class="docutils literal notranslate"><span class="pre">main</span></code>, on exécute la fonction <code class="docutils literal notranslate"><span class="pre">welcome_message</span></code> qui affiche les informations des 3 oeuvres.</p></li>
 </ul>
@@ -709,7 +709,7 @@ Tell us the book id on which you want to test the zipf's law.
 </div>
 </section>
 <section id="Ensemble-de-la-fonction-main">
-<h2>Ensemble de la fonction main<a class="headerlink" href="#Ensemble-de-la-fonction-main" title="Permalink to this heading">¶</a></h2>
+<h2>Ensemble de la fonction main<a class="headerlink" href="#Ensemble-de-la-fonction-main" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
@@ -754,7 +754,7 @@ Tell us the book id on which you want to test the zipf's law.
 </div>
 </section>
 <section id="Interprétations-des-graphes">
-<h2>Interprétations des graphes<a class="headerlink" href="#Interprétations-des-graphes" title="Permalink to this heading">¶</a></h2>
+<h2>Interprétations des graphes<a class="headerlink" href="#Interprétations-des-graphes" title="Link to this heading">¶</a></h2>
 <p>On utilisel ici le livre <code class="docutils literal notranslate"><span class="pre">Faust</span></code> comme exemple principal.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
@@ -838,17 +838,17 @@ Warning message:
 </div>
 </div>
 <section id="6.1-Graphe-des-20-mots-les-plus-courants">
-<h3>6.1 Graphe des 20 mots les plus courants<a class="headerlink" href="#6.1-Graphe-des-20-mots-les-plus-courants" title="Permalink to this heading">¶</a></h3>
+<h3>6.1 Graphe des 20 mots les plus courants<a class="headerlink" href="#6.1-Graphe-des-20-mots-les-plus-courants" title="Link to this heading">¶</a></h3>
 <p>On remarquera surtout que les tokens les plus fréquents sont des mots fonctionnels, excepté <code class="docutils literal notranslate"><span class="pre">faust</span></code> et <code class="docutils literal notranslate"><span class="pre">mephistopheles</span></code> qui sont les deux personnages principaux de l’histoire.</p>
 </section>
 <section id="6.2-Gaphe-de-la-distribution-des-fréquences-relatives">
-<h3>6.2 Gaphe de la distribution des fréquences relatives<a class="headerlink" href="#6.2-Gaphe-de-la-distribution-des-fréquences-relatives" title="Permalink to this heading">¶</a></h3>
+<h3>6.2 Gaphe de la distribution des fréquences relatives<a class="headerlink" href="#6.2-Gaphe-de-la-distribution-des-fréquences-relatives" title="Link to this heading">¶</a></h3>
 <p>On remarquera surtout que les tokens fréquents (à gauche) et les tokens rares (à droite) coexistent dans le même texte.</p>
 <p>La distribution n’est pas du tout une distribution normale. Elle a une longue queue (beaucoup de mots rares). Les mots les plus fréquents occupent déjà une grande partie du texte.</p>
 <p>Il est à noter que le choix de <code class="docutils literal notranslate"><span class="pre">binwidth</span></code> est important pour rendre le graph plus lisse, comme on peut remarquer sur le même graphe de <code class="docutils literal notranslate"><span class="pre">Wuthering</span> <span class="pre">Heights</span></code> (plus bas). Cela montre l’intérêt du graphe 3 qui illustre mieux et en termes plus concrets la loi de Zipf.</p>
 </section>
 <section id="6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives">
-<h3>6.3 Graphe des logarithmes des rangs et des fréquences relatives<a class="headerlink" href="#6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives" title="Permalink to this heading">¶</a></h3>
+<h3>6.3 Graphe des logarithmes des rangs et des fréquences relatives<a class="headerlink" href="#6.3-Graphe-des-logarithmes-des-rangs-et-des-fréquences-relatives" title="Link to this heading">¶</a></h3>
 <p>En effet, la loi de Zipf (d’abord formulée par Jean-Baptiste Estoup) stipule que dans un texte donné, la fréquence d’occurrence <code class="docutils literal notranslate"><span class="pre">f(n)</span></code> (nous prenons ici la fréquence relative) d’un mot est liée à son rang <code class="docutils literal notranslate"><span class="pre">n</span></code> dans l’ordre des fréquences par une loi de la forme</p>
 <div class="math-wrapper"><div class="math notranslate nohighlight">
 \[f(n)=\frac{K}{n}\]</div></div>
@@ -857,7 +857,7 @@ Warning message:
 </section>
 </section>
 <section id="Références">
-<h2>Références<a class="headerlink" href="#Références" title="Permalink to this heading">¶</a></h2>
+<h2>Références<a class="headerlink" href="#Références" title="Link to this heading">¶</a></h2>
 <p>Mandelbrot, Benoit. 1954. Structure formelle des textes et communcation. Word 10:1–27.</p>
 <p>Cours de Guillaume Desagulier intitulé linguistique outillée et traitements statistiques : <a class="reference external" href="https://corpling.modyco.fr/workshops/M2TAL/2.descriptive.stats.html">https://corpling.modyco.fr/workshops/M2TAL/2.descriptive.stats.html</a></p>
 </section>
@@ -943,12 +943,12 @@ Warning message:
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -984,6 +984,6 @@ StatCounter"></a></div></noscript>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"equationNumbers": {"autoNumber": "AMS", "useLabelIds": true}}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

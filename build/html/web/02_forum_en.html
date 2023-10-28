@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Deploying Django app on Ubuntu at digitalocean + SSL certificate 🇬🇧" href="03_django_en.html" /><link rel="prev" title="Scraper « le monde » et construire ton propre corpus 🇫🇷" href="01_lemonde_fr.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>On your way to scraping French forums 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,11 +434,11 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="On-your-way-to-scraping-French-forums-🇬🇧">
-<h1>On your way to scraping French forums 🇬🇧<a class="headerlink" href="#On-your-way-to-scraping-French-forums-🇬🇧" title="Permalink to this heading">¶</a></h1>
+<h1>On your way to scraping French forums 🇬🇧<a class="headerlink" href="#On-your-way-to-scraping-French-forums-🇬🇧" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>Be sure to have read the first tutorial <a class="reference internal" href="01_lemonde_en.html"><span class="doc">here</span></a>.</p>
 <section id="Get-pages">
-<h2>Get pages<a class="headerlink" href="#Get-pages" title="Permalink to this heading">¶</a></h2>
+<h2>Get pages<a class="headerlink" href="#Get-pages" title="Link to this heading">¶</a></h2>
 <p>The construction of the scraper for the forum <code class="docutils literal notranslate"><span class="pre">doctissimo</span></code> is actually simpler. Let’s look at the link of the second page of the “pain dos” section as an example:</p>
 <p><a class="reference external" href="https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-2.htm">https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-2.htm</a></p>
 <p>First I write a function to generate the links including page numbering:</p>
@@ -447,9 +447,9 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">links_page</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-"</span> <span class="o">+</span>
-         <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">".htm"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
-<span class="n">links_page</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span></span>links_page = ["https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-" +
+         str(i) + ".htm" for i in range(10)]
+links_page[:2]
 </pre></div>
 </div>
 </div>
@@ -469,27 +469,27 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>  <span class="c1"># standard python module</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">from</span> <span class="nn">urllib.error</span> <span class="kn">import</span> <span class="n">HTTPError</span>
+<span></span>from urllib.request import urlopen  # standard python module
+from bs4 import BeautifulSoup
+from urllib.error import HTTPError
 
-<span class="k">def</span> <span class="nf">get_post_links</span><span class="p">(</span><span class="n">link</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"text url not valid"</span><span class="p">)</span>
-    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">"html.parser"</span><span class="p">)</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"row"</span><span class="p">)</span>
-    <span class="n">test</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">post</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'a'</span><span class="p">):</span>
-            <span class="n">test</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'href'</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">test</span>
+def get_post_links(link):
+    try:
+        html = urlopen(link)
+    except HTTPError as e:
+        print("text url not valid")
+    soup = BeautifulSoup(html, "html.parser")
+    temp = soup.find_all(scope="row")
+    test = set()
+    for post in temp:
+        if post.find('a'):
+            test.add(post.find('a').get('href'))
+    return test
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-2.htm"</span>
+url = "https://forum.doctissimo.fr/sante/douleur-dos/liste_sujet-2.htm"
 
-<span class="n">links_threads</span> <span class="o">=</span> <span class="n">get_post_links</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="nb">list</span><span class="p">(</span><span class="n">links_threads</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+links_threads = get_post_links(url)
+list(links_threads)[0]
 </pre></div>
 </div>
 </div>
@@ -504,7 +504,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Scrape-interactions/posts">
-<h2>Scrape interactions/posts<a class="headerlink" href="#Scrape-interactions/posts" title="Permalink to this heading">¶</a></h2>
+<h2>Scrape interactions/posts<a class="headerlink" href="#Scrape-interactions/posts" title="Link to this heading">¶</a></h2>
 <p>Now it’s just a matter of scrape the posts from the first page of each thread. It is quite straightforward because the text of each post is in a span tag where the itemprop property equals text. The code says a little more about tag structure.</p>
 <p>The code block below allows to print:</p>
 <ol class="arabic simple">
@@ -518,24 +518,24 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">read_html</span><span class="p">(</span><span class="n">link</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"text url not valid"</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">"html.parser"</span><span class="p">)</span>
+<span></span>def read_html(link):
+    try:
+        html = urlopen(link)
+    except HTTPError as e:
+        print("text url not valid")
+    return BeautifulSoup(html, "html.parser")
 
-<span class="n">content</span> <span class="o">=</span> <span class="n">read_html</span><span class="p">(</span><span class="s2">"https://forum.doctissimo.fr/sante/douleur-dos/osteopathie-sujet_165606_1.htm"</span><span class="p">)</span>
+content = read_html("https://forum.doctissimo.fr/sante/douleur-dos/osteopathie-sujet_165606_1.htm")
 
-<span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s2">"md-post__content"</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">meta</span> <span class="ow">in</span> <span class="n">post</span><span class="o">.</span><span class="n">find_previous</span><span class="p">(</span><span class="s2">"header"</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"span"</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">))</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">itemprop</span><span class="o">=</span><span class="s2">"text"</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
-    <span class="c1"># replace &amp;#034; with quotes</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="s2">"&amp;#034;"</span>
-    <span class="n">post_body</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">'"'</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">post_body</span><span class="p">)</span>
+for post in content.find_all(class_="md-post__content"):
+    for meta in post.find_previous("header").find_all("span"):
+        print(meta.get_text().replace("\n",""))
+    text = post.find(itemprop="text").get_text()
+    body = text.replace("\n","")
+    # replace &amp;#034; with quotes
+    s = "&amp;#034;"
+    post_body = body.replace(s, '"')
+    print(post_body)
 </pre></div>
 </div>
 </div>
@@ -562,7 +562,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Perspectives">
-<h2>Perspectives<a class="headerlink" href="#Perspectives" title="Permalink to this heading">¶</a></h2>
+<h2>Perspectives<a class="headerlink" href="#Perspectives" title="Link to this heading">¶</a></h2>
 <p>Now it’s up to you to do some corpus analysis :D</p>
 </section>
 </section>
@@ -638,12 +638,12 @@ div.rendered_html tbody tr:hover {
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -677,6 +677,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Tumux-related code" href="02_tmux.html" /><link rel="prev" title="My Codebase" href="index.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>My codebase for bash/shell script (macOS) - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -186,9 +186,9 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="my-codebase-for-bash-shell-script-macos">
-<h1>My codebase for bash/shell script (macOS)<a class="headerlink" href="#my-codebase-for-bash-shell-script-macos" title="Permalink to this heading">¶</a></h1>
+<h1>My codebase for bash/shell script (macOS)<a class="headerlink" href="#my-codebase-for-bash-shell-script-macos" title="Link to this heading">¶</a></h1>
 <section id="encoding">
-<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this heading">¶</a></h2>
+<h2>Encoding<a class="headerlink" href="#encoding" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>file<span class="w"> </span>-I<span class="w"> </span><span class="c1"># get file encoding</span>
 iconv<span class="w"> </span>-l<span class="w"> </span><span class="c1"># see convertible encoding</span>
 iconv<span class="w"> </span>-f<span class="w"> </span><span class="s2">""</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="nv">$filename</span>
@@ -196,7 +196,7 @@ iconv<span class="w"> </span>-f<span class="w"> </span><span class="s2">""</span
 </div>
 </section>
 <section id="check-memory-os-etc">
-<h2>check memory, os etc…<a class="headerlink" href="#check-memory-os-etc" title="Permalink to this heading">¶</a></h2>
+<h2>check memory, os etc…<a class="headerlink" href="#check-memory-os-etc" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># memory</span>
 cat<span class="w"> </span>/proc/meminfo
 <span class="c1"># or</span>
@@ -207,7 +207,7 @@ cat<span class="w"> </span>/etc/*-release
 </div>
 </section>
 <section id="xargs">
-<h2>xargs<a class="headerlink" href="#xargs" title="Permalink to this heading">¶</a></h2>
+<h2>xargs<a class="headerlink" href="#xargs" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>By<span class="w"> </span>default<span class="w"> </span>xargs<span class="w"> </span>reads<span class="w"> </span>items<span class="w"> </span>from<span class="w"> </span>standard<span class="w"> </span>input<span class="w"> </span>as<span class="w"> </span>separated<span class="w"> </span>by<span class="w"> </span>blanks<span class="w"> </span>and
 
 <span class="nb">echo</span><span class="w"> </span><span class="s1">'one two three'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>mkdir
@@ -238,7 +238,7 @@ cat<span class="w"> </span>temp.txt<span class="w"> </span><span class="p">|</sp
 </div>
 </section>
 <section id="sed-expression">
-<h2>sed “expression”<a class="headerlink" href="#sed-expression" title="Permalink to this heading">¶</a></h2>
+<h2>sed “expression”<a class="headerlink" href="#sed-expression" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>searching,<span class="w"> </span>find<span class="w"> </span>and<span class="w"> </span>replace,<span class="w"> </span>insertion<span class="w"> </span>or<span class="w"> </span>deletion<span class="w"> </span>on<span class="w"> </span>files
 sed<span class="w"> </span><span class="s1">'s/unix/linux/'</span><span class="w"> </span>test.txt<span class="w"> </span><span class="c1"># first occur of each line</span>
 sed<span class="w"> </span><span class="s1">'s/unix/linux/2'</span><span class="w"> </span>geekfile.txt<span class="w"> </span><span class="c1"># nth token</span>
@@ -256,7 +256,7 @@ sed<span class="w"> </span><span class="s1">'3,6d'</span><span class="w"> </span
 </div>
 </section>
 <section id="awk-text-processing">
-<h2>awk text processing<a class="headerlink" href="#awk-text-processing" title="Permalink to this heading">¶</a></h2>
+<h2>awk text processing<a class="headerlink" href="#awk-text-processing" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>awk<span class="w"> </span><span class="s1">'{print}'</span><span class="w"> </span>test.txt
 awk<span class="w"> </span><span class="s1">'/manager/ {print}'</span><span class="w"> </span>employee.txt<span class="w"> </span><span class="c1"># contains manager</span>
 <span class="c1"># fields $0 represents the whole line.</span>
@@ -272,7 +272,7 @@ awk<span class="w"> </span><span class="s1">'length($0) &gt; 10'</span><span cla
 </div>
 </section>
 <section id="tr-convert">
-<h2>tr convert<a class="headerlink" href="#tr-convert" title="Permalink to this heading">¶</a></h2>
+<h2>tr convert<a class="headerlink" href="#tr-convert" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## awk '{!seen[$0]++};END{for(i in seen) if(seen[i]==1)print i}' file # awk is faster than sort|uniq -c</span>
 cat<span class="w"> </span>testfile<span class="w"> </span><span class="p">|</span>tr<span class="w"> </span>a-z<span class="w"> </span>A-Z<span class="w"> </span><span class="c1"># convert to upper case</span>
 cat<span class="w"> </span>testfile<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span>aeiouAEIOU<span class="w"> </span><span class="c1"># delete all vowels</span>
@@ -298,14 +298,14 @@ grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'^[A-Z]+$
 </div>
 </section>
 <section id="wc">
-<h2>wc<a class="headerlink" href="#wc" title="Permalink to this heading">¶</a></h2>
+<h2>wc<a class="headerlink" href="#wc" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wc<span class="w"> </span>-lwcm<span class="w"> </span>line<span class="w"> </span>word<span class="w"> </span>byte<span class="w"> </span>character
 <span class="m">448</span><span class="w"> </span><span class="m">3632</span><span class="w"> </span><span class="m">22226</span><span class="w"> </span><span class="c1"># lines words characters</span>
 </pre></div>
 </div>
 </section>
 <section id="grep">
-<h2>grep<a class="headerlink" href="#grep" title="Permalink to this heading">¶</a></h2>
+<h2>grep<a class="headerlink" href="#grep" title="Link to this heading">¶</a></h2>
 <p>when grep is invoked as egrep the grep binary activates its internal logic as it would be called as grep -E
 The difference is that -E option enables usage of extended regexp patterns. It will allow you using of such meta-symbols as +, ? or |</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s2">"this"</span><span class="w"> </span>demo_file
@@ -326,7 +326,7 @@ grep<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>
 </div>
 </section>
 <section id="export">
-<h2>export<a class="headerlink" href="#export" title="Permalink to this heading">¶</a></h2>
+<h2>export<a class="headerlink" href="#export" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="w"> </span>environment<span class="w"> </span>variables
 <span class="nb">export</span><span class="w"> </span><span class="nv">GREP_OPTIONS</span><span class="o">=</span><span class="s1">'--color=auto'</span><span class="w"> </span><span class="nv">GREP_COLOR</span><span class="o">=</span><span class="s1">'100;8'</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">MYENV</span><span class="o">=</span><span class="m">7</span><span class="w"> </span>//<span class="w"> </span>define<span class="w"> </span>a<span class="w"> </span>variable
@@ -340,7 +340,7 @@ $<span class="w"> </span><span class="nb">export</span><span class="w"> </span><
 </div>
 </section>
 <section id="tricks">
-<h2>tricks<a class="headerlink" href="#tricks" title="Permalink to this heading">¶</a></h2>
+<h2>tricks<a class="headerlink" href="#tricks" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>foo/bar/zoo/andsoforth<span class="w"> </span><span class="c1"># parent/recursive</span>
 <span class="c1">#regex</span>
 ?<span class="w"> </span><span class="m">0</span><span class="w"> </span>or<span class="w"> </span><span class="m">1</span>
@@ -348,7 +348,7 @@ $<span class="w"> </span><span class="nb">export</span><span class="w"> </span><
 </div>
 </section>
 <section id="nlp">
-<h2>NLP<a class="headerlink" href="#nlp" title="Permalink to this heading">¶</a></h2>
+<h2>NLP<a class="headerlink" href="#nlp" title="Link to this heading">¶</a></h2>
 <p>Excellent ressources:</p>
 <p>http://www.stanford.edu/class/cs124/kwc-unix-for-poets.pdf</p>
 <p>http://www.stanford.edu/class/cs124/lec/124-2021-UnixForPoets.pdf</p>
@@ -361,38 +361,38 @@ cat<span class="w"> </span>testfile<span class="w"> </span><span class="p">|</sp
 </div>
 </section>
 <section id="cut">
-<h2>Cut<a class="headerlink" href="#cut" title="Permalink to this heading">¶</a></h2>
+<h2>Cut<a class="headerlink" href="#cut" title="Link to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cut</span> <span class="o">-</span><span class="n">c1</span><span class="o">-</span><span class="mi">2</span> <span class="o">&lt;&lt;&lt;</span> <span class="mi">44150</span> <span class="c1"># first 2 charac</span>
 <span class="n">tail</span> <span class="o">-</span><span class="mi">5</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">passwd</span> <span class="o">|</span> <span class="n">cut</span> <span class="o">-</span><span class="n">d</span><span class="p">:</span> <span class="o">-</span><span class="n">f1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span> <span class="c1"># delimit, -f = field</span>
 </pre></div>
 </div>
 </section>
 <section id="previous-code-result">
-<h2>Previous code result<a class="headerlink" href="#previous-code-result" title="Permalink to this heading">¶</a></h2>
+<h2>Previous code result<a class="headerlink" href="#previous-code-result" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"OK"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"NOK"</span>
 </pre></div>
 </div>
 </section>
 <section id="read-a-file">
-<h2>Read a file<a class="headerlink" href="#read-a-file" title="Permalink to this heading">¶</a></h2>
+<h2>Read a file<a class="headerlink" href="#read-a-file" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>&lt;<span class="w"> </span>notes.csv
 </pre></div>
 </div>
 </section>
 <section id="find-a-file">
-<h2>Find a file<a class="headerlink" href="#find-a-file" title="Permalink to this heading">¶</a></h2>
+<h2>Find a file<a class="headerlink" href="#find-a-file" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span>*.html<span class="w"> </span><span class="c1"># current folder html files</span>
 </pre></div>
 </div>
 </section>
 <section id="read-from-the-keyboard-fin-to-end">
-<h2>Read from the keyboard, FIN to end<a class="headerlink" href="#read-from-the-keyboard-fin-to-end" title="Permalink to this heading">¶</a></h2>
+<h2>Read from the keyboard, FIN to end<a class="headerlink" href="#read-from-the-keyboard-fin-to-end" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!sort<span class="w"> </span>-n<span class="w"> </span>&lt;&lt;<span class="w"> </span>FIN<span class="w"> </span><span class="c1"># remove ! to run</span>
 </pre></div>
 </div>
 </section>
 <section id="error-append-to-the-file-as-well-as-other-messages">
-<h2>Error append to the file as well as other messages<a class="headerlink" href="#error-append-to-the-file-as-well-as-other-messages" title="Permalink to this heading">¶</a></h2>
+<h2>Error append to the file as well as other messages<a class="headerlink" href="#error-append-to-the-file-as-well-as-other-messages" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cut<span class="w"> </span>-d<span class="w"> </span>,<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="w"> </span>fiche.csv<span class="w"> </span>&gt;&gt;<span class="w"> </span>eleves.txt<span class="w"> </span><span class="m">2</span>&gt;<span class="nv">$1</span>
 cut<span class="w"> </span>-d<span class="w"> </span>,<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="w"> </span>fiche.csv<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>eleves.txt
 
@@ -403,13 +403,13 @@ cut<span class="w"> </span>-d<span class="w"> </span>,<span class="w"> </span>-f
 </div>
 </section>
 <section id="print-all-the-files-folder">
-<h2>Print all the files folder<a class="headerlink" href="#print-all-the-files-folder" title="Permalink to this heading">¶</a></h2>
+<h2>Print all the files folder<a class="headerlink" href="#print-all-the-files-folder" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="se">\*</span>.py<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 </pre></div>
 </div>
 </section>
 <section id="who-is-there">
-<h2>Who is there?<a class="headerlink" href="#who-is-there" title="Permalink to this heading">¶</a></h2>
+<h2>Who is there?<a class="headerlink" href="#who-is-there" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>who
 
 w<span class="w"> </span><span class="c1"># who is doing what</span>
@@ -417,13 +417,13 @@ w<span class="w"> </span><span class="c1"># who is doing what</span>
 </div>
 </section>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Permalink to this heading">¶</a></h2>
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">history</span><span class="w"> </span>&gt;<span class="w"> </span>hist.txt<span class="w"> </span><span class="c1"># export command history</span>
 </pre></div>
 </div>
 </section>
 <section id="ssh-related">
-<h2>Ssh related<a class="headerlink" href="#ssh-related" title="Permalink to this heading">¶</a></h2>
+<h2>Ssh related<a class="headerlink" href="#ssh-related" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create public and private keys using ssh-key-gen on local-host</span>
 ssh-keygen
 <span class="c1"># Copy your local key to remote</span>
@@ -433,7 +433,7 @@ ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa.pub<s
 </div>
 </section>
 <section id="watch-process-and-kill">
-<h2>Watch process and kill<a class="headerlink" href="#watch-process-and-kill" title="Permalink to this heading">¶</a></h2>
+<h2>Watch process and kill<a class="headerlink" href="#watch-process-and-kill" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ps
 ps<span class="w"> </span>-ef<span class="w"> </span><span class="c1"># all the process</span>
 ps<span class="w"> </span>-ejH<span class="w"> </span><span class="c1"># tree display</span>
@@ -448,7 +448,7 @@ uptime<span class="w"> </span><span class="c1"># working since when?</span>
 </div>
 </section>
 <section id="run-background">
-<h2>Run background<a class="headerlink" href="#run-background" title="Permalink to this heading">¶</a></h2>
+<h2>Run background<a class="headerlink" href="#run-background" title="Link to this heading">¶</a></h2>
 <p>https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ctrl<span class="w"> </span>z<span class="w"> </span><span class="c1"># pause the current process</span>
 <span class="nb">bg</span><span class="w"> </span><span class="c1"># continue in background</span>
@@ -469,13 +469,13 @@ nohup<span class="w"> </span>commande<span class="w"> </span><span class="c1"># 
 </div>
 </section>
 <section id="concatenate">
-<h2>Concatenate<a class="headerlink" href="#concatenate" title="Permalink to this heading">¶</a></h2>
+<h2>Concatenate<a class="headerlink" href="#concatenate" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="se">\*</span>.txt<span class="w"> </span>&gt;&gt;<span class="w"> </span>all.txt
 </pre></div>
 </div>
 </section>
 <section id="watch-gpu-hardware-related">
-<h2>Watch gpu/hardware related<a class="headerlink" href="#watch-gpu-hardware-related" title="Permalink to this heading">¶</a></h2>
+<h2>Watch gpu/hardware related<a class="headerlink" href="#watch-gpu-hardware-related" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/local/cuda/bin/nvcc<span class="w"> </span>--version<span class="w"> </span><span class="c1"># check cuda version</span>
 
 watch<span class="w"> </span>-d<span class="w"> </span>-n<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>nvidia-smi<span class="w"> </span><span class="c1"># https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda</span>
@@ -501,7 +501,7 @@ curl<span class="w"> </span>ifconfig.me
 </div>
 </section>
 <section id="replace-string-in-files">
-<h2>Replace string in files<a class="headerlink" href="#replace-string-in-files" title="Permalink to this heading">¶</a></h2>
+<h2>Replace string in files<a class="headerlink" href="#replace-string-in-files" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-print0<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span>perl<span class="w"> </span>-pi<span class="w"> </span>-e<span class="w"> </span><span class="s2">"s/\?digest.\*\"/\"/g"</span><span class="w"> </span><span class="c1"># use find, perl and regex, remove all ?digest like / / /</span>
 
 grep<span class="w"> </span>-rl<span class="w"> </span>static<span class="w"> </span>.<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>gsed<span class="w"> </span>-i<span class="w"> </span><span class="s2">"s/\images/images/g"</span><span class="w"> </span><span class="c1"># use grep, gsed is necessary to avoir useless backupfiles on macOS, all files under static</span>
@@ -509,11 +509,11 @@ grep<span class="w"> </span>-rl<span class="w"> </span>static<span class="w"> </
 </div>
 </section>
 <section id="tmux-related">
-<h2>Tmux related<a class="headerlink" href="#tmux-related" title="Permalink to this heading">¶</a></h2>
+<h2>Tmux related<a class="headerlink" href="#tmux-related" title="Link to this heading">¶</a></h2>
 <p>See <a class="reference internal" href="02_tmux.html"><span class="doc std std-doc">tmux codebase</span></a></p>
 </section>
 <section id="stop-process-by-keyboard">
-<h2>Stop process by keyboard<a class="headerlink" href="#stop-process-by-keyboard" title="Permalink to this heading">¶</a></h2>
+<h2>Stop process by keyboard<a class="headerlink" href="#stop-process-by-keyboard" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl-c<span class="w"> </span><span class="c1"># Ctrl-\ to hard kill</span>
 </pre></div>
 </div>
@@ -616,12 +616,12 @@ grep<span class="w"> </span>-rl<span class="w"> </span>static<span class="w"> </
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -655,6 +655,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

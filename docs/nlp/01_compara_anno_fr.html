@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Classification de prénoms en genre (masculin/féminin) 🇫🇷" href="02_classification_prenoms_fr.html" /><link rel="prev" title="NLP and Machine Learning-related" href="index.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -186,10 +186,10 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="comparer-spacy-stanfordnlp-et-treetagger-sur-un-corpus-oral-et-un-corpus-de-presse">
-<h1>Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷<a class="headerlink" href="#comparer-spacy-stanfordnlp-et-treetagger-sur-un-corpus-oral-et-un-corpus-de-presse" title="Permalink to this heading">¶</a></h1>
+<h1>Comparer Spacy, StanfordNLP et TreeTagger sur un corpus oral et un corpus de presse 🇫🇷<a class="headerlink" href="#comparer-spacy-stanfordnlp-et-treetagger-sur-un-corpus-oral-et-un-corpus-de-presse" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a>, <a class="reference external" href="https://www.linkedin.com/in/xingyu-liu-aba896a1/">Xingyu LIU</a></p>
 <section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">¶</a></h2>
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h2>
 <p>L’annotation morphosyntaxique est une tâche consistant à assigner des informations grammaticales à chaque mot d’un
 texte. Un tagger (ou étiqueteur) est typiquement couplé à un outil de segmentation en phrases et en mots et/ou à un
 lemmatiseur.</p>
@@ -212,25 +212,25 @@ tant de facteurs contribuant à la décision finale d’un tel ou tel étiqueteu
 </ol>
 </section>
 <section id="etiqueteurs-parseurs-choisis">
-<h2>Étiqueteurs/parseurs choisis<a class="headerlink" href="#etiqueteurs-parseurs-choisis" title="Permalink to this heading">¶</a></h2>
+<h2>Étiqueteurs/parseurs choisis<a class="headerlink" href="#etiqueteurs-parseurs-choisis" title="Link to this heading">¶</a></h2>
 <p>Les 3 étiqueteurs sont Treetagger (Schmid, 1994), Spacy (Explosion, 2017) et StanfordNLP, rebaptisé aujourd’hui en
 Stanza (Qi et al., 2020).</p>
 </section>
 <section id="constitution-du-corpus">
-<h2>Constitution du corpus<a class="headerlink" href="#constitution-du-corpus" title="Permalink to this heading">¶</a></h2>
+<h2>Constitution du corpus<a class="headerlink" href="#constitution-du-corpus" title="Link to this heading">¶</a></h2>
 <p>Nous avons construit deux corpus en aspirant des textes de la rubrique santé
 de <code class="docutils literal notranslate"><span class="pre">le</span> <span class="pre">monde</span></code>(https://www.lemonde.fr/sante/) et <code class="docutils literal notranslate"><span class="pre">doctissimo</span></code>(https://forum.doctissimo.fr/sante/). La documentation de ce
 processus se trouve <span class="xref myst">ici</span>.</p>
 <p>100 articles journalistiques et 100 posts de forum ont été utilisés comme corpus de base.</p>
 </section>
 <section id="analyses-textuelles-exploratoires">
-<h2>Analyses textuelles exploratoires<a class="headerlink" href="#analyses-textuelles-exploratoires" title="Permalink to this heading">¶</a></h2>
+<h2>Analyses textuelles exploratoires<a class="headerlink" href="#analyses-textuelles-exploratoires" title="Link to this heading">¶</a></h2>
 <p>Pour confirmer le thème de notre corpus nous avons scrapé deux autres corpus ayant comme thème <code class="docutils literal notranslate"><span class="pre">sport</span></code> et <code class="docutils literal notranslate"><span class="pre">économie</span></code>。</p>
 <p>Après avoir normalisé les textes voici les 10 mots les plus courants du corpus santé.</p>
 <figure class="align-center" id="id1">
 <img alt="../images/sante.png" src="../images/sante.png"/>
 <figcaption>
-<p><span class="caption-text">Graphe des 10 mots les plus fréquents du corpus de santé</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Graphe des 10 mots les plus fréquents du corpus de santé</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Par contraintes d’espace nous n’allons pas afficher le même type de graphes pour le corpus de forum. Notez simplement
@@ -246,14 +246,14 @@ plus fréquents.</p>
 <figure class="align-center" id="id2">
 <img alt="../images/correlation.png" src="../images/correlation.png"/>
 <figcaption>
-<p><span class="caption-text">Graphe de corrélation pour 3 corpus de différents genres</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Graphe de corrélation pour 3 corpus de différents genres</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="echantillonnage-des-corpus-et-standardisation-des-etiquettes-d-annotation">
-<h2>Échantillonnage des corpus et standardisation des étiquettes d’annotation<a class="headerlink" href="#echantillonnage-des-corpus-et-standardisation-des-etiquettes-d-annotation" title="Permalink to this heading">¶</a></h2>
+<h2>Échantillonnage des corpus et standardisation des étiquettes d’annotation<a class="headerlink" href="#echantillonnage-des-corpus-et-standardisation-des-etiquettes-d-annotation" title="Link to this heading">¶</a></h2>
 <section id="strategie-dechantillonnage-des-deux-corpus">
-<h3>Stratégie d’échantillonnage des deux corpus<a class="headerlink" href="#strategie-dechantillonnage-des-deux-corpus" title="Permalink to this heading">¶</a></h3>
+<h3>Stratégie d’échantillonnage des deux corpus<a class="headerlink" href="#strategie-dechantillonnage-des-deux-corpus" title="Link to this heading">¶</a></h3>
 <p>Vu la quantité de textes et le manque de personnel il nous a paru impossible d’annoter tous les deux corpus. Il n’est
 pas pour autant préférable d’annoter uniquement quelques articles ou quelques posts pour faire l’évaluation car
 l’intérêt de l’aspiration se trouvera fortement diminué.</p>
@@ -267,7 +267,7 @@ La figure suivante illustre cette distribution :</p>
 <figure class="align-center" id="id3">
 <img alt="../images/distribution.png" src="../images/distribution.png"/>
 <figcaption>
-<p><span class="caption-text">Distribution de longueurs de phrases du corpus de presse</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Distribution de longueurs de phrases du corpus de presse</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Pour que ces quatre catégories de phrases soient également représentées, nous avons généré 60 nombres aléatoires par
@@ -277,7 +277,7 @@ deux échantillons constituent une bonne base pour garantir la comparabilité co
 corpus.</p>
 </section>
 <section id="standardisation-des-etiquettes">
-<h3>Standardisation des étiquettes<a class="headerlink" href="#standardisation-des-etiquettes" title="Permalink to this heading">¶</a></h3>
+<h3>Standardisation des étiquettes<a class="headerlink" href="#standardisation-des-etiquettes" title="Link to this heading">¶</a></h3>
 <p>Si les deux taggers Spacy et StanfordNLP ont recours aux étiquettes de Universal Dependencies (
 UD, <a class="reference external" href="https://universaldependencies.org/u/pos/all.html#al-u-pos/NUM">Nivre et al., 2016</a>), Treetagger utilise des
 étiquettes basées sur le jeu d’étiquettes de Penn
@@ -295,14 +295,14 @@ la catégorie « PROPN » (nom propre) en UD.</p>
 <figure class="align-center" id="id4">
 <img alt="../images/8dba10bb.png" src="../images/8dba10bb.png"/>
 <figcaption>
-<p><span class="caption-text">Conversion des tags de TreeTagger en tags d’UD</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Conversion des tags de TreeTagger en tags d’UD</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Une dernière question porte sur la lemmatisation. Treetagger parfois attribue une sous-étiquette @card@ à des chiffres.
 Nous avons transformé systématiquement ce lemme en token original pour garantir la fiabilité des mesures ultérieures.</p>
 </section>
 <section id="quelques-problemes-mineurs">
-<h3>Quelques problèmes mineurs<a class="headerlink" href="#quelques-problemes-mineurs" title="Permalink to this heading">¶</a></h3>
+<h3>Quelques problèmes mineurs<a class="headerlink" href="#quelques-problemes-mineurs" title="Link to this heading">¶</a></h3>
 <p>Il nous a paru utile de préciser ici quelques problèmes rencontrés durant la standardisation d’étiquettes pour permettre
 une meilleure reproductibilité de codes :</p>
 <ol class="simple">
@@ -319,15 +319,15 @@ normaux.</p></li>
 </section>
 </section>
 <section id="evaluation-des-taggers">
-<h2>Évaluation des taggers<a class="headerlink" href="#evaluation-des-taggers" title="Permalink to this heading">¶</a></h2>
+<h2>Évaluation des taggers<a class="headerlink" href="#evaluation-des-taggers" title="Link to this heading">¶</a></h2>
 <section id="presentation-generale-des-taggers">
-<h3>Présentation générale des taggers<a class="headerlink" href="#presentation-generale-des-taggers" title="Permalink to this heading">¶</a></h3>
+<h3>Présentation générale des taggers<a class="headerlink" href="#presentation-generale-des-taggers" title="Link to this heading">¶</a></h3>
 <p>Les taggers morphosyntaxiques sont nombreux sur le marché, ci-dessous une liste de quelques taggers pour le français
 utilisés dans la littérature :</p>
 <figure class="align-center" id="id5">
 <img alt="../images/266bcab0.png" src="../images/266bcab0.png"/>
 <figcaption>
-<p><span class="caption-text">Liste non exhaustive de différents taggers disponibles pour le français (https://github.com/clement-plancq/outils-corpus)</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Liste non exhaustive de différents taggers disponibles pour le français (https://github.com/clement-plancq/outils-corpus)</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Le principe des taggers peut être fort simple. Un algorithme simpliste qui catégorise les mots connus dans le tag le
@@ -339,7 +339,7 @@ peuvent porter qu’une catégorie morphosyntaxique. Or, ces derniers sont les p
 <figure class="align-center" id="id6">
 <img alt="../images/e90103e4.png" src="../images/e90103e4.png"/>
 <figcaption>
-<p><span class="caption-text">Répartition des mots ambigus et non-ambigus dans deux corpus d’anglais (Jurafsky, 2000)</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Répartition des mots ambigus et non-ambigus dans deux corpus d’anglais (Jurafsky, 2000)</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Différents types d’étiqueteurs existent.</p>
@@ -355,7 +355,7 @@ SVM, CRF, etc.)</p>
 protocoles nécessitent un grand investissement de temps. De plus, il n’est pas toujours aisé d’analyser les erreurs.</p>
 </section>
 <section id="spacy-treetagger-et-stanfordnlp">
-<h3>Spacy, TreeTagger et StanfordNLP<a class="headerlink" href="#spacy-treetagger-et-stanfordnlp" title="Permalink to this heading">¶</a></h3>
+<h3>Spacy, TreeTagger et StanfordNLP<a class="headerlink" href="#spacy-treetagger-et-stanfordnlp" title="Link to this heading">¶</a></h3>
 <p>Les taggers morphosyntaxiques utilisés ici sont Spacy, TreeTagger et StanfordNLP (désormais appelé Stanza). Il est à
 noter que le nom du dernier tagger peut prêter à confusion car il existe aussi un framework appelé Stanford CoreNLP (
 Manning et al., 2014) qui est surtout connu pour sa performance sur des données en anglais et ses fonctions avancées
@@ -383,7 +383,7 @@ fonctions poussées comme l’analyse sentimentale. Cependant le modèle actuel 
 <figure class="align-center" id="id7">
 <img alt="../images/597aa052.png" src="../images/597aa052.png"/>
 <figcaption>
-<p><span class="caption-text">Fonctionnalités disponibles de Stanford CoreNLP pour 6 langues</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Fonctionnalités disponibles de Stanford CoreNLP pour 6 langues</span><a class="headerlink" href="#id7" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Enfin StanfordNLP est un framework de Python basé sur PyTorch et applicable à 66 langues à l’heure actuelle. C’est un
@@ -392,12 +392,12 @@ neurones.</p>
 <figure class="align-center" id="id8">
 <img alt="../images/f9aca8e1.png" src="../images/f9aca8e1.png"/>
 <figcaption>
-<p><span class="caption-text">Caractéristiques techniques de StanfordNLP par rapport à d’autres frameworks en TAL (Qi et al., 2020)</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Caractéristiques techniques de StanfordNLP par rapport à d’autres frameworks en TAL (Qi et al., 2020)</span><a class="headerlink" href="#id8" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="evaluation-sur-le-plan-de-la-vitesse-de-traitement">
-<h3>Évaluation sur le plan de la vitesse de traitement<a class="headerlink" href="#evaluation-sur-le-plan-de-la-vitesse-de-traitement" title="Permalink to this heading">¶</a></h3>
+<h3>Évaluation sur le plan de la vitesse de traitement<a class="headerlink" href="#evaluation-sur-le-plan-de-la-vitesse-de-traitement" title="Link to this heading">¶</a></h3>
 <p>Pour cette tâche nous avons construit un gros corpus de 568 000 mots en dupliquant simplement un corpus de base. Les
 commandes utilisées pour évaluer les 4 taggers sont :</p>
 <ul class="simple">
@@ -472,7 +472,7 @@ annotation morphosyntaxique. Le tableau suivant résume les résultats du test.<
 <figure class="align-center" id="id9">
 <img alt="../images/d18df612.png" src="../images/d18df612.png"/>
 <figcaption>
-<p><span class="caption-text">Configuration de l’ordinateur utilisé pour évaluer la vitesse d’annotation de 4 taggers</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Configuration de l’ordinateur utilisé pour évaluer la vitesse d’annotation de 4 taggers</span><a class="headerlink" href="#id9" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Nous voyons bien que Stanford NLP est le plus lent et Spacy le plus rapide. Cependant quelques remarques préliminaires
@@ -491,7 +491,7 @@ un minimum pour que le programme puisse aboutir. Compte tenu de ces facteurs nou
 StanfordNLP pour la suite de l’évaluation.</p>
 </section>
 <section id="evaluation-sur-le-plan-de-la-precision">
-<h3>Évaluation sur le plan de la précision<a class="headerlink" href="#evaluation-sur-le-plan-de-la-precision" title="Permalink to this heading">¶</a></h3>
+<h3>Évaluation sur le plan de la précision<a class="headerlink" href="#evaluation-sur-le-plan-de-la-precision" title="Link to this heading">¶</a></h3>
 <p>Dans les sous-sections qui suivent nous présentons notamment les mesures de précision, de rappel et le F-mesure tout en
 sachant que dans des tâches d’annotation on met en avant la précision.</p>
 <p>Les deux échantillons de corpus ont été annotés manuellement par nos soins, servant de « gold standard ».</p>
@@ -673,7 +673,7 @@ dans cette sous-section.</p>
 </section>
 </section>
 <section id="discussions-generales">
-<h2>Discussions générales<a class="headerlink" href="#discussions-generales" title="Permalink to this heading">¶</a></h2>
+<h2>Discussions générales<a class="headerlink" href="#discussions-generales" title="Link to this heading">¶</a></h2>
 <p>Nous commençons par quelques remarques générales valables pour les deux types de corpus :</p>
 <p>Sur les plans de la mesure de précision, de la mesure de rappel et de F-mesure :</p>
 <ul class="simple">
@@ -790,14 +790,14 @@ ce type de corpus recèle des particularités comparables ni au français formel
 </ol>
 </section>
 <section id="notes-supplementaires">
-<h2>Notes supplémentaires<a class="headerlink" href="#notes-supplementaires" title="Permalink to this heading">¶</a></h2>
+<h2>Notes supplémentaires<a class="headerlink" href="#notes-supplementaires" title="Link to this heading">¶</a></h2>
 <p>Les difficultés des parseurs actuels proviennent principalement du fait que la plupart des étiqueteurs ont été entraînés
 sur des données utilisant un français relativement soutenu. A titre d’exemples, French Treebank (Abeillé et al., 2003) a
 été construit sur un corpus tiré de « le monde ». Sequoia Treebank quant à lui a été construit sur un mélange de textes
 journalistiques et de textes de Wikipedia (Candito &amp; Seddah, 2012).</p>
 </section>
 <section id="references">
-<h2>Références<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<h2>Références<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
 <p>Abeillé, A., Clément, L., &amp; Toussenel, F. (2003). Building a treebank for French. In Treebanks (pp. 165–187). Springer.</p>
 <p>Benzitoun, C., Fort, K., &amp; Sagot, B. (2012). TCOF-POS: Un corpus libre de français parlé annoté en morphosyntaxe.</p>
 <p>Candito, M., &amp; Seddah, D. (2012). Le corpus Sequoia: Annotation syntaxique et exploitation pour l’adaptation d’analyseur
@@ -913,12 +913,12 @@ for Many Human Languages. ArXiv Preprint ArXiv:2003.07082.</p>
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -952,6 +952,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

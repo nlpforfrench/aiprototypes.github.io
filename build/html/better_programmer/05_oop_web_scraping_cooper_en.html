@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Algorithms and data structures by examples in Python" href="../algo/index.html" /><link rel="prev" title="Understand objected-oriented programming (OOP) by building a minimal Web Scraping framework 🇬🇧" href="04_oop_web_scraping_en.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Be a responsible programmer when doing Object-Oriented Programming 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,9 +434,9 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Be-a-responsible-programmer-when-doing-Object-Oriented-Programming-🇬🇧">
-<h1>Be a responsible programmer when doing Object-Oriented Programming 🇬🇧<a class="headerlink" href="#Be-a-responsible-programmer-when-doing-Object-Oriented-Programming-🇬🇧" title="Permalink to this heading">¶</a></h1>
+<h1>Be a responsible programmer when doing Object-Oriented Programming 🇬🇧<a class="headerlink" href="#Be-a-responsible-programmer-when-doing-Object-Oriented-Programming-🇬🇧" title="Link to this heading">¶</a></h1>
 <section id="What-you-will-learn">
-<h2>What you will learn<a class="headerlink" href="#What-you-will-learn" title="Permalink to this heading">¶</a></h2>
+<h2>What you will learn<a class="headerlink" href="#What-you-will-learn" title="Link to this heading">¶</a></h2>
 <p>After a first tutorial on Object-Oriented Programming in Python, I feel like it’s necessary to write more on OOP because when you read source code of many popular frameworks (like <code class="docutils literal notranslate"><span class="pre">requests</span></code>), inevitably you will come across some more advanced concepts relevant to collaborative programming.</p>
 <p>No, I’m not talking about stuff like <code class="docutils literal notranslate"><span class="pre">inheritance</span></code> and <code class="docutils literal notranslate"><span class="pre">polymorphism</span></code>. These convoluted terms are actually the easiest ones to understand and I’m sure that you’ll find tons of tutorials on these subjects.</p>
 <p>What you’ll learn in this tutorial are:</p>
@@ -452,7 +452,7 @@ div.rendered_html tbody tr:hover {
 <p>I will implement these concepts by simplifying the web scraping framework example built in the previous tutorial. Check <a class="reference internal" href="04_oop_web_scraping_en.html"><span class="doc">here</span></a> if interested.</p>
 </section>
 <section id="Class-and-instance-variable">
-<h2>Class and instance variable<a class="headerlink" href="#Class-and-instance-variable" title="Permalink to this heading">¶</a></h2>
+<h2>Class and instance variable<a class="headerlink" href="#Class-and-instance-variable" title="Link to this heading">¶</a></h2>
 <p>The scraper class that I built last time is a scraper capable of adjusting its behaviour according the newspaper.</p>
 <p>Let’s say that this scraper is created by a company which offers all sorts of service related to web. The CEO wants every object instantiated by this class to be endowed with a property called <code class="docutils literal notranslate"><span class="pre">company</span></code> so that the clients know where the scraper comes from.</p>
 <p>That’s when the class variable comes into play.</p>
@@ -461,11 +461,11 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+<span></span>class Crawler:
 
-    <span class="n">company</span> <span class="o">=</span> <span class="s2">"Web Crawling®, nlpinfrench.fr"</span>
+    company = "Web Crawling®, nlpinfrench.fr"
 
-<span class="nb">print</span><span class="p">(</span><span class="n">Crawler</span><span class="o">.</span><span class="n">company</span><span class="p">)</span>
+print(Crawler.company)
 </pre></div>
 </div>
 </div>
@@ -484,8 +484,8 @@ Web Crawling®, nlpinfrench.fr
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">crawler_class_var</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">crawler_class_var</span><span class="o">.</span><span class="n">company</span><span class="p">)</span>
+<span></span>crawler_class_var = Crawler()
+print(crawler_class_var.company)
 </pre></div>
 </div>
 </div>
@@ -499,7 +499,7 @@ Web Crawling®, nlpinfrench.fr
 </div>
 </section>
 <section id="Be-visible">
-<h2>Be visible<a class="headerlink" href="#Be-visible" title="Permalink to this heading">¶</a></h2>
+<h2>Be visible<a class="headerlink" href="#Be-visible" title="Link to this heading">¶</a></h2>
 <p>Now imagine that the CEO is not satisfied with this branding strategy and he wishes something even more visible so that one doesn’t even need to know the <code class="docutils literal notranslate"><span class="pre">company</span></code> property. How can you achieve it?</p>
 <p>Let’s observe the following code.</p>
 <div class="nbinput docutils container">
@@ -507,7 +507,7 @@ Web Crawling®, nlpinfrench.fr
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"I'm a string"</span><span class="p">)</span>
+<span></span>print("I'm a string")
 </pre></div>
 </div>
 </div>
@@ -525,16 +525,16 @@ I'm a string
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+<span></span>class Crawler:
 
-    <span class="n">company</span> <span class="o">=</span> <span class="s2">"Web Crawling®, nlpinfrench.fr"</span>
+    company = "Web Crawling®, nlpinfrench.fr"
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">Crawler</span><span class="o">.</span><span class="n">company</span>
+    def __str__(self):
+        return Crawler.company
 
-<span class="n">crawler_str</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">crawler_str</span><span class="p">)</span>
-<span class="n">crawler_str</span>
+crawler_str = Crawler()
+print(crawler_str)
+crawler_str
 </pre></div>
 </div>
 </div>
@@ -562,16 +562,16 @@ Web Crawling®, nlpinfrench.fr
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+<span></span>class Crawler:
 
-    <span class="n">company</span> <span class="o">=</span> <span class="s2">"Web Crawling®, nlpinfrench.fr"</span>
+    company = "Web Crawling®, nlpinfrench.fr"
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">Crawler</span><span class="o">.</span><span class="n">company</span>
+    def __repr__(self):
+        return Crawler.company
 
-<span class="n">crawler_repr</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">()</span>
+crawler_repr = Crawler()
 
-<span class="n">crawler_repr</span>
+crawler_repr
 </pre></div>
 </div>
 </div>
@@ -586,7 +586,7 @@ Web Crawling®, nlpinfrench.fr
 </div>
 </section>
 <section id="Be-control-freak">
-<h2>Be control freak<a class="headerlink" href="#Be-control-freak" title="Permalink to this heading">¶</a></h2>
+<h2>Be control freak<a class="headerlink" href="#Be-control-freak" title="Link to this heading">¶</a></h2>
 <p>Now that your CEO is happy with his self-branding strategy, you show your code to the senior software engineer who objects, rightly so, that the company name can be changed by anyone!</p>
 <p>Yes, one can easily changes the class variable to, I don’t know, tell others that the spirit of prank is still alive.</p>
 <div class="nbinput docutils container">
@@ -594,16 +594,16 @@ Web Crawling®, nlpinfrench.fr
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+<span></span>class Crawler:
 
-    <span class="n">company</span> <span class="o">=</span> <span class="s2">"Web Crawling®, nlpinfrench.fr"</span>
+    company = "Web Crawling®, nlpinfrench.fr"
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">Crawler</span><span class="o">.</span><span class="n">company</span>
+    def __repr__(self):
+        return Crawler.company
 
-<span class="n">crawler_control</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">()</span>
-<span class="n">Crawler</span><span class="o">.</span><span class="n">company</span> <span class="o">=</span> <span class="s2">"April Fool!"</span>
-<span class="n">crawler_repr</span>
+crawler_control = Crawler()
+Crawler.company = "April Fool!"
+crawler_repr
 </pre></div>
 </div>
 </div>
@@ -625,14 +625,14 @@ April Fool!
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+<span></span>class Crawler:
 
-    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_company</span> <span class="o">=</span>  <span class="n">company</span>
+    def __init__ (self, company):
+        self._company =  company
 
-<span class="n">lemonde_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"nlpinfrench.fr"</span><span class="p">)</span>
-<span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">_company</span> <span class="o">=</span> <span class="s2">"April fool again!"</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">_company</span><span class="p">)</span>
+lemonde_crawler = Crawler("nlpinfrench.fr")
+lemonde_crawler._company = "April fool again!"
+print(lemonde_crawler._company)
 </pre></div>
 </div>
 </div>
@@ -652,13 +652,13 @@ April fool again!
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+<span></span>class Crawler:
 
-    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__company</span> <span class="o">=</span>  <span class="n">company</span>
+    def __init__ (self, company):
+        self.__company =  company
 
-<span class="n">lemonde_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"nlpinfrench.fr"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">__company</span><span class="p">)</span>
+lemonde_crawler = Crawler("nlpinfrench.fr")
+print(lemonde_crawler.__company)
 </pre></div>
 </div>
 </div>
@@ -683,21 +683,21 @@ April fool again!
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">Crawler</span><span class="p">:</span>
+<span></span>class Crawler:
 
-    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__company</span> <span class="o">=</span>  <span class="n">company</span>
+    def __init__ (self, company):
+        self.__company =  company
 
-<span class="n">lemonde_crawler</span> <span class="o">=</span> <span class="n">Crawler</span><span class="p">(</span><span class="s2">"nlpinfrench.fr"</span><span class="p">)</span>
+lemonde_crawler = Crawler("nlpinfrench.fr")
 
-<span class="c1"># I can still access it!</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">_Crawler__company</span><span class="p">)</span>
+# I can still access it!
+print(lemonde_crawler._Crawler__company)
 
-<span class="c1"># and modify it!</span>
-<span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">__company</span> <span class="o">=</span> <span class="s2">"Hello! April fool x3 :DDDD"</span>
+# and modify it!
+lemonde_crawler.__company = "Hello! April fool x3 :DDDD"
 
-<span class="c1"># and now access it again</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lemonde_crawler</span><span class="o">.</span><span class="n">__company</span><span class="p">)</span>
+# and now access it again
+print(lemonde_crawler.__company)
 
 </pre></div>
 </div>
@@ -713,16 +713,16 @@ Hello! April fool x3 :DDDD
 </div>
 </section>
 <section id="We’re-all-consenting-adults-here">
-<h2>We’re all consenting adults here<a class="headerlink" href="#We’re-all-consenting-adults-here" title="Permalink to this heading">¶</a></h2>
+<h2>We’re all consenting adults here<a class="headerlink" href="#We’re-all-consenting-adults-here" title="Link to this heading">¶</a></h2>
 <p>So what’s the point of <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">mangling</span></code>?</p>
 <p>The objective is really informative rather than restrictive. In Python programming, there is a commonly used phrase that says “we’re all consenting adults here”. We are all expected to behave like an adult.</p>
 <p>In practice you are not to expected to fully embrace these naming rules as novice. Just keep in mind that you should think twice before modifying values of a mangled variable if you are in an open-source project.</p>
 </section>
 <section id="Time-to-become-a-senior-engineer">
-<h2>Time to become a senior engineer<a class="headerlink" href="#Time-to-become-a-senior-engineer" title="Permalink to this heading">¶</a></h2>
+<h2>Time to become a senior engineer<a class="headerlink" href="#Time-to-become-a-senior-engineer" title="Link to this heading">¶</a></h2>
 </section>
 <section id="Wrap-up">
-<h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Permalink to this heading">¶</a></h2>
+<h2>Wrap-up<a class="headerlink" href="#Wrap-up" title="Link to this heading">¶</a></h2>
 <p>As always, I recommend the book by Mark Lutz if you want to dive deep into OOP :</p>
 <p><em>Programming Python: Powerful Object-Oriented Programming</em></p>
 </section>
@@ -803,12 +803,12 @@ Hello! April fool x3 :DDDD
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -842,6 +842,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

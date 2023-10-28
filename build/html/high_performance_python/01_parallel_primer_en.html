@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="My Codebase" href="../codebase/index.html" /><link rel="prev" title="High performance computing" href="index.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Parallelization in Python: a beginner’s guide (1, using map) - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,7 +434,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Parallelization-in-Python:-a-beginner’s-guide-(1,-using-map)">
-<h1>Parallelization in Python: a beginner’s guide (1, using map)<a class="headerlink" href="#Parallelization-in-Python:-a-beginner’s-guide-(1,-using-map)" title="Permalink to this heading">¶</a></h1>
+<h1>Parallelization in Python: a beginner’s guide (1, using map)<a class="headerlink" href="#Parallelization-in-Python:-a-beginner’s-guide-(1,-using-map)" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>Parallelization is very useful in a lot of daily tasks, however tutorials often begin with obscure explanations about multithreading and multiprocessing. Don’t get me wrong, these concepts are crucial in complex scenarios, however they are intimidating and unnecessary for beginners.</p>
 <p>Let’s use a code-first and example-driven approach to introduce parallelization in Python.</p>
@@ -442,7 +442,7 @@ div.rendered_html tbody tr:hover {
 <p>Instinctively, you say to yourself that the best approach is to unzip all the files altogether instead of processing 1 by 1.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">altogether</span></code> way is parallelization.</p>
 <section id="Check-how-many-cores-that-I-have-on-my-computer">
-<h2>Check how many cores that I have on my computer<a class="headerlink" href="#Check-how-many-cores-that-I-have-on-my-computer" title="Permalink to this heading">¶</a></h2>
+<h2>Check how many cores that I have on my computer<a class="headerlink" href="#Check-how-many-cores-that-I-have-on-my-computer" title="Link to this heading">¶</a></h2>
 <p>Please note that I use <code class="docutils literal notranslate"><span class="pre">multiprocess</span></code> here instead of <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> because the latter has some issue with Jupyter Notebook. See <a class="reference external" href="https://stackoverflow.com/questions/41385708/multiprocessing-example-giving-attributeerror">here</a>.</p>
 <p>We have 16 cpus :)</p>
 <div class="nbinput docutils container">
@@ -450,14 +450,14 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">multiprocess</span> <span class="k">as</span> <span class="nn">mp</span>
+<span></span>import multiprocess as mp
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of processors: "</span><span class="p">,</span> <span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span>
+print("Number of processors: ", mp.cpu_count())
 
-<span class="kn">import</span> <span class="nn">os</span>
+import os
 
-<span class="n">workers</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span>
+workers = os.cpu_count()
+print(workers)
 </pre></div>
 </div>
 </div>
@@ -472,26 +472,26 @@ Number of processors:  16
 </div>
 </section>
 <section id="Get-the-filenames-and-have-a-peek-at-the-size-of-each-file">
-<h2>Get the filenames and have a peek at the size of each file<a class="headerlink" href="#Get-the-filenames-and-have-a-peek-at-the-size-of-each-file" title="Permalink to this heading">¶</a></h2>
+<h2>Get the filenames and have a peek at the size of each file<a class="headerlink" href="#Get-the-filenames-and-have-a-peek-at-the-size-of-each-file" title="Link to this heading">¶</a></h2>
 <p>In our case, their extensions are <code class="docutils literal notranslate"><span class="pre">.7z</span></code> and they are located in the <code class="docutils literal notranslate"><span class="pre">/Users/xiaoou/Downloads/frwac_7z/</span></code> directory. We can use <code class="docutils literal notranslate"><span class="pre">glob</span></code> to get the list of filenames. As you can see from the output, these files are quite huge and can take some time if we unzip them one by one.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span></span>import glob
 
-<span class="k">def</span> <span class="nf">get_fns</span><span class="p">(</span><span class="nb">dir</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+def get_fns(dir):
+    return glob.glob(dir)
 
-<span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"mb"</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s2">"mb"</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+def get_size(fn, unit="mb"):
+    if unit == "mb":
+        return round(os.path.getsize(fn)/(1024*1024), 2)
 
-<span class="n">pattern</span> <span class="o">=</span> <span class="s2">"/Users/xiaoou/Downloads/frwac_7z/*.7z"</span>
-<span class="n">fns_7z</span> <span class="o">=</span> <span class="n">get_fns</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-<span class="n">sizes</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">get_size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="s2">" mb"</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fns_7z</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sizes</span><span class="p">)</span>
+pattern = "/Users/xiaoou/Downloads/frwac_7z/*.7z"
+fns_7z = get_fns(pattern)
+sizes = {x: (str(get_size(x))+" mb") for x in fns_7z}
+print(sizes)
 
 </pre></div>
 </div>
@@ -506,7 +506,7 @@ Number of processors:  16
 </div>
 </section>
 <section id="Run-the-test-with-multiple-cores-and-1-single-core">
-<h2>Run the test with multiple cores and 1 single core<a class="headerlink" href="#Run-the-test-with-multiple-cores-and-1-single-core" title="Permalink to this heading">¶</a></h2>
+<h2>Run the test with multiple cores and 1 single core<a class="headerlink" href="#Run-the-test-with-multiple-cores-and-1-single-core" title="Link to this heading">¶</a></h2>
 <p>So let’s use multiprocessing. The key component here is Pool which specifies how many cores that we want to use to process files at the same time (1 core per file). See the unzip_7z function which is quite self-explainable. Here I use the map function to run the extract_7z function on each .7z file.</p>
 <p>The xo_timer is a decorator that I wrote to compute time. You can ignore it in this tutorial :)</p>
 <div class="nbinput docutils container">
@@ -514,28 +514,28 @@ Number of processors:  16
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">py7zr</span>
-<span class="kn">from</span> <span class="nn">multiprocess</span> <span class="kn">import</span> <span class="n">Pool</span>
-<span class="kn">from</span> <span class="nn">frenchnlp.utils</span> <span class="kn">import</span> <span class="n">timer</span>
+<span></span>import py7zr
+from multiprocess import Pool
+from frenchnlp.utils import timer
 
-<span class="nd">@timer</span>
-<span class="k">def</span> <span class="nf">unzip_7z</span><span class="p">(</span><span class="n">workers</span><span class="p">,</span> <span class="n">fns</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">extract_7z</span><span class="p">,</span> <span class="n">fns</span><span class="p">)</span>
+@timer
+def unzip_7z(workers, fns):
+    with Pool(workers) as p:
+        p.map(extract_7z, fns)
 
-<span class="k">def</span> <span class="nf">extract_7z</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">py7zr</span><span class="o">.</span><span class="n">SevenZipFile</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span>
-        <span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">"/Users/xiaoou/Downloads/frwac_7z/"</span><span class="p">)</span>
+def extract_7z(fn):
+    with py7zr.SevenZipFile(fn, mode='r') as z:
+        z.extractall("/Users/xiaoou/Downloads/frwac_7z/")
 
-<span class="c1"># Use all the cores (16 in this case)</span>
+# Use all the cores (16 in this case)
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"time by using </span><span class="si">{</span><span class="n">workers</span><span class="si">}</span><span class="s2"> cores."</span><span class="p">)</span>
-<span class="n">unzip_7z</span><span class="p">(</span><span class="n">workers</span><span class="p">,</span> <span class="n">fns_7z</span><span class="p">)</span>
+print(f"time by using {workers} cores.")
+unzip_7z(workers, fns_7z)
 
-<span class="c1"># use 1 core</span>
+# use 1 core
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"time by using 1 core."</span><span class="p">)</span>
-<span class="n">unzip_7z</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fns_7z</span><span class="p">)</span>
+print(f"time by using 1 core.")
+unzip_7z(1, fns_7z)
 </pre></div>
 </div>
 </div>
@@ -553,7 +553,7 @@ Function: unzip_7z, Time: 45.80530025600001
 <p>When using 16 cores, the total time of unzipping these 4 files is 12.4 seconds, while using only 1 core takes 45.8 seconds!</p>
 </section>
 <section id="Conclusion">
-<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Permalink to this heading">¶</a></h2>
+<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading">¶</a></h2>
 <p>In this article we see how using multiple cores/cpus is possible in Python. Hopefully you see the power of parallelization and start to leverage this function in your work. Stay tuned for more tutorials on this subject :)</p>
 </section>
 </section>
@@ -630,12 +630,12 @@ Function: unzip_7z, Time: 45.80530025600001
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -669,6 +669,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

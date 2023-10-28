@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,10 +434,10 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Classification-de-commentaires-avec-Camembert-sans-prise-de-tête-:-les-fondamentaux-🇫🇷">
-<h1>Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷<a class="headerlink" href="#Classification-de-commentaires-avec-Camembert-sans-prise-de-tête-:-les-fondamentaux-🇫🇷" title="Permalink to this heading">¶</a></h1>
+<h1>Classification de commentaires avec Camembert sans prise de tête : les fondamentaux 🇫🇷<a class="headerlink" href="#Classification-de-commentaires-avec-Camembert-sans-prise-de-tête-:-les-fondamentaux-🇫🇷" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <section id="Motivation">
-<h2>Motivation<a class="headerlink" href="#Motivation" title="Permalink to this heading">¶</a></h2>
+<h2>Motivation<a class="headerlink" href="#Motivation" title="Link to this heading">¶</a></h2>
 <p>Camembert a été publié en juin 2020. Cependant force est de constater que l’emploi de Bert en français (Il s’agit plutôt de Roberta pour Camembert, voir <a class="reference external" href="01_theorie">10 questions rapides sur Bert</a>) n’est pas encore une tendance. Nous pensons que cela est en partie dû au manque de tutoriels sur l’emploi des modèles pré-entraînés.</p>
 <p>Ceci est le deuxième d’une série de 10 tutoriels sur Camembert. Dans ce tuto nous allons voir notamment comment utiliser Camembert sans fine-tuning, ce dernier présupposant des connaissances relativement plus poussées.</p>
 <p>Nous commençons par installer <code class="docutils literal notranslate"><span class="pre">transformers</span></code> et <code class="docutils literal notranslate"><span class="pre">sentencepiece</span></code>, deux packages nécessaires à l’usage de Camembert. Quelques autres packages courants en machine learning ont aussi été importés.</p>
@@ -446,25 +446,25 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># !pip install transformers</span>
-<span class="c1"># !pip install sentencepiece</span>
+<span></span># !pip install transformers
+# !pip install sentencepiece
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">transformers</span> <span class="k">as</span> <span class="nn">ppb</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import cross_val_score
+import torch
+import transformers as ppb
+import warnings
+warnings.filterwarnings('ignore')
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Données">
-<h2>Données<a class="headerlink" href="#Données" title="Permalink to this heading">¶</a></h2>
+<h2>Données<a class="headerlink" href="#Données" title="Link to this heading">¶</a></h2>
 <p>Ensuite nous importons les données. Il s’agit d’un petit jeu de données que j’ai trouvé <a class="reference external" href="https://medium.com/@vitalshchutski/french-nlp-entamez-le-camembert-avec-les-librairies-fast-bert-et-transformers-14e65f84c148">ici</a>. Cela vous permettra notamment de répliquer ce tutoriel sur votre propre ordinateur, tant l’usage de GPU est peu nécessaire.</p>
 <p>La structure du dataframe est simple. Il y a une colonne commentaire avec quelques autres colonnes annotant la classe de ce commentaire. J’ai filtré les autres classes en ne gardant que <code class="docutils literal notranslate"><span class="pre">temps</span></code> pour utiliser une simple régression logistique sur les données. 1 signifie que le commentaire est lié à des problèmes de temps d’attente et 0 non.</p>
 <div class="nbinput docutils container">
@@ -472,14 +472,14 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">url</span><span class="o">=</span><span class="s2">"https://raw.githubusercontent.com/nlpinfrench/nlpinfrench.github.io/master/source/labeled_data.csv"</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'review'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">,</span><span class="s1">'temps'</span><span class="p">,</span><span class="s1">'e'</span><span class="p">])</span>
-<span class="c1"># Report the number of sentences.</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Number of sentences: </span><span class="si">{:,}</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="c1"># remove unuseful columns</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"review"</span><span class="p">,</span><span class="s2">"temps"</span><span class="p">]]</span>
-<span class="c1"># Display 5 random rows from the data.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span></span>url="https://raw.githubusercontent.com/nlpinfrench/nlpinfrench.github.io/master/source/labeled_data.csv"
+df = pd.read_csv(url,header=1,names = ['a','review','b','c','temps','e'])
+# Report the number of sentences.
+print('Number of sentences: {:,}\n'.format(df.shape[0]))
+# remove unuseful columns
+df = df[["review","temps"]]
+# Display 5 random rows from the data.
+df.sample(5)
 </pre></div>
 </div>
 </div>
@@ -551,7 +551,7 @@ Number of sentences: 322
 </div>
 </section>
 <section id="Modèle-et-Tokenizer">
-<h2>Modèle et Tokenizer<a class="headerlink" href="#Modèle-et-Tokenizer" title="Permalink to this heading">¶</a></h2>
+<h2>Modèle et Tokenizer<a class="headerlink" href="#Modèle-et-Tokenizer" title="Link to this heading">¶</a></h2>
 <p>Ensuite nous allons importer le modèle, le tokenizer et les weights pré-entraînés. Les weights sont comme les word embeddings. Deux choses à noter :</p>
 <ol class="arabic simple">
 <li><p>Bert a son propre tokenizer avec un vocabulaire fixe. Il est donc inutile de tokénisez vous-même.</p></li>
@@ -564,12 +564,12 @@ Number of sentences: 322
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># load model, tokenizer and weights</span>
-<span class="n">camembert</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="p">(</span><span class="n">ppb</span><span class="o">.</span><span class="n">CamembertModel</span><span class="p">,</span> <span class="n">ppb</span><span class="o">.</span><span class="n">CamembertTokenizer</span><span class="p">,</span> <span class="s1">'camembert-base'</span><span class="p">)</span>
+<span></span># load model, tokenizer and weights
+camembert, tokenizer, weights = (ppb.CamembertModel, ppb.CamembertTokenizer, 'camembert-base')
 
-<span class="c1"># Load pretrained model/tokenizer</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">camembert</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+# Load pretrained model/tokenizer
+tokenizer = tokenizer.from_pretrained(weights)
+model = camembert.from_pretrained(weights)
 </pre></div>
 </div>
 </div>
@@ -579,18 +579,18 @@ Number of sentences: 322
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># see if there are length &gt; 512</span>
-<span class="n">max_len</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">sent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"review"</span><span class="p">]):</span>
-    <span class="c1"># Tokenize the text and add `[CLS]` and `[SEP]` tokens.</span>
-    <span class="n">input_ids</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sent</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">512</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"annoying review at"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="s2">"with length"</span><span class="p">,</span>
-              <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">))</span>
-    <span class="c1"># Update the maximum sentence length.</span>
-    <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_len</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">))</span>
+<span></span># see if there are length &gt; 512
+max_len = 0
+for i,sent in enumerate(df["review"]):
+    # Tokenize the text and add `[CLS]` and `[SEP]` tokens.
+    input_ids = tokenizer.encode(sent, add_special_tokens=True)
+    if len(input_ids) &gt; 512:
+        print("annoying review at", i,"with length",
+              len(input_ids))
+    # Update the maximum sentence length.
+    max_len = max(max_len, len(input_ids))
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Max sentence length: '</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+print('Max sentence length: ', max_len)
 </pre></div>
 </div>
 </div>
@@ -608,28 +608,28 @@ Max sentence length:  556
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># remove &gt; 512 sentence</span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">314</span><span class="p">],</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span></span># remove &gt; 512 sentence
+df.drop([314],inplace=True)
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Padding">
-<h2>Padding<a class="headerlink" href="#Padding" title="Permalink to this heading">¶</a></h2>
+<h2>Padding<a class="headerlink" href="#Padding" title="Link to this heading">¶</a></h2>
 <p>Maintenant que la phrase la plus longue enlevée, nous faisons un padding de 472 tokens pour homogénéiser la longueur de phrases. Cela rendra l’entraînement plus simple. Nous indiquons aussi où se trouve les paddings avec <code class="docutils literal notranslate"><span class="pre">np.where</span></code> pour que Bert sache traiter les tokens de padding.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">tokenized</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'review'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">((</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
-<span class="n">max_len</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokenized</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_len</span><span class="p">:</span>
-        <span class="n">max_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span></span>tokenized = df['review'].apply((lambda x: tokenizer.encode(x, add_special_tokens=True)))
+max_len = 0
+for i in tokenized.values:
+    if len(i) &gt; max_len:
+        max_len = len(i)
 
-<span class="n">padded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">max_len</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokenized</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
-<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">padded</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+padded = np.array([i + [0]*(max_len-len(i)) for i in tokenized.values])
+np.array(padded).shape
 </pre></div>
 </div>
 </div>
@@ -647,8 +647,8 @@ Max sentence length:  556
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">attention_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">padded</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">attention_mask</span><span class="o">.</span><span class="n">shape</span>
+<span></span>attention_mask = np.where(padded != 0, 1, 0)
+attention_mask.shape
 </pre></div>
 </div>
 </div>
@@ -663,33 +663,33 @@ Max sentence length:  556
 </div>
 </section>
 <section id="Utiliser-l’encodeur-(encoder)">
-<h2>Utiliser l’encodeur (encoder)<a class="headerlink" href="#Utiliser-l’encodeur-(encoder)" title="Permalink to this heading">¶</a></h2>
+<h2>Utiliser l’encodeur (encoder)<a class="headerlink" href="#Utiliser-l’encodeur-(encoder)" title="Link to this heading">¶</a></h2>
 <p>Enfin nous transformer les tokens en tensor pour les passer dans le fameux transformer. Seule la dernière couche est conservée pour faire la classification.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">input_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">padded</span><span class="p">)</span>
-<span class="n">attention_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">attention_mask</span><span class="p">)</span>
+<span></span>input_ids = torch.tensor(padded)
+attention_mask = torch.tensor(attention_mask)
 
-<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="n">last_hidden_states</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span><span class="p">)</span>
+with torch.no_grad():
+    last_hidden_states = model(input_ids, attention_mask=attention_mask)
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Entraîner-un-modèle-logistique">
-<h2>Entraîner un modèle logistique<a class="headerlink" href="#Entraîner-un-modèle-logistique" title="Permalink to this heading">¶</a></h2>
+<h2>Entraîner un modèle logistique<a class="headerlink" href="#Entraîner-un-modèle-logistique" title="Link to this heading">¶</a></h2>
 <p>Comme nous avons seulement besoin du premier token (CLS qui signifie classification) pour le modèle logistique, nous faisons en slice avec <code class="docutils literal notranslate"><span class="pre">[:,0,:]</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">features</span> <span class="o">=</span> <span class="n">last_hidden_states</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">temps</span>
-<span class="n">labels</span>
+<span></span>features = last_hidden_states[0][:,0,:].numpy()
+labels = df.temps
+labels
 
 </pre></div>
 </div>
@@ -700,7 +700,7 @@ Max sentence length:  556
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">train_features</span><span class="p">,</span> <span class="n">test_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">test_labels</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span></span>train_features, test_features, train_labels, test_labels = train_test_split(features, labels)
 </pre></div>
 </div>
 </div>
@@ -709,13 +709,13 @@ Max sentence length:  556
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Grid search</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'C'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">)}</span>
-<span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">LogisticRegression</span><span class="p">(),</span> <span class="n">parameters</span><span class="p">)</span>
-<span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span>
+<span></span># Grid search
+parameters = {'C': np.linspace(0.0001, 100, 20)}
+grid_search = GridSearchCV(LogisticRegression(), parameters)
+grid_search.fit(train_features, train_labels)
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">'best parameters: '</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'best scrores: '</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+print('best parameters: ', grid_search.best_params_)
+print('best scrores: ', grid_search.best_score_)
 </pre></div>
 </div>
 </div>
@@ -733,8 +733,8 @@ best scrores:  0.8625
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">lr_clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">'C'</span><span class="p">])</span>
-<span class="n">lr_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span>
+<span></span>lr_clf = LogisticRegression(C=grid_search.best_params_['C'])
+lr_clf.fit(train_features, train_labels)
 
 </pre></div>
 </div>
@@ -754,7 +754,7 @@ LogisticRegression(C=5.263252631578947, class_weight=None, dual=False,
 </div>
 </section>
 <section id="Résultats-et-conclusions">
-<h2>Résultats et conclusions<a class="headerlink" href="#Résultats-et-conclusions" title="Permalink to this heading">¶</a></h2>
+<h2>Résultats et conclusions<a class="headerlink" href="#Résultats-et-conclusions" title="Link to this heading">¶</a></h2>
 <p>Nous arrivons donc à une précision de 91.36%. Si nous avions utilisé un classifieur aléatoire la précision aurait été autour de 60%.</p>
 <p>Voilà ! Bravo d’avoir lu jusqu’ici. Nous espérons que vous avez vu que finalement Bert n’était pas si difficile à comprendre. Il s’agit juste d’un encoder auquel on ajoute un algorithme de classification.</p>
 <p>La vraie force de Bert réside dans ses possibilités de fine-tuning. A bientôt donc pour un cas pratique en classification de documents :D</p>
@@ -763,7 +763,7 @@ LogisticRegression(C=5.263252631578947, class_weight=None, dual=False,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">lr_clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_features</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span>
+<span></span>lr_clf.score(test_features, test_labels)
 </pre></div>
 </div>
 </div>
@@ -781,11 +781,11 @@ LogisticRegression(C=5.263252631578947, class_weight=None, dual=False,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sklearn.dummy</span> <span class="kn">import</span> <span class="n">DummyClassifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">DummyClassifier</span><span class="p">()</span>
+<span></span>from sklearn.dummy import DummyClassifier
+clf = DummyClassifier()
 
-<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Dummy classifier score: </span><span class="si">%0.3f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">)"</span> <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+scores = cross_val_score(clf, train_features, train_labels)
+print("Dummy classifier score: %0.3f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 </pre></div>
 </div>
 </div>
@@ -799,7 +799,7 @@ Dummy classifier score: 0.621 (+/- 0.15)
 </div>
 </section>
 <section id="Références-principales-:">
-<h2>Références principales :<a class="headerlink" href="#Références-principales-:" title="Permalink to this heading">¶</a></h2>
+<h2>Références principales :<a class="headerlink" href="#Références-principales-:" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/</a></p>
 <p><a class="reference external" href="https://camembert-model.fr/">https://camembert-model.fr/</a></p>
 </section>
@@ -863,12 +863,12 @@ Dummy classifier score: 0.621 (+/- 0.15)
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -902,6 +902,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

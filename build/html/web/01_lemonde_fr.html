@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="On your way to scraping French forums 🇬🇧" href="02_forum_en.html" /><link rel="prev" title="Complete tutorial on scraping French news from Le Monde 🇬🇧" href="01_lemonde_en.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Scraper « le monde » et construire ton propre corpus 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,40 +434,40 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Scraper-«-le-monde-»-et-construire-ton-propre-corpus-🇫🇷">
-<h1>Scraper « le monde » et construire ton propre corpus 🇫🇷<a class="headerlink" href="#Scraper-«-le-monde-»-et-construire-ton-propre-corpus-🇫🇷" title="Permalink to this heading">¶</a></h1>
+<h1>Scraper « le monde » et construire ton propre corpus 🇫🇷<a class="headerlink" href="#Scraper-«-le-monde-»-et-construire-ton-propre-corpus-🇫🇷" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <section id="Pourquoi-tu-aurais-besoin-de-scraper">
-<h2>Pourquoi tu aurais besoin de scraper<a class="headerlink" href="#Pourquoi-tu-aurais-besoin-de-scraper" title="Permalink to this heading">¶</a></h2>
+<h2>Pourquoi tu aurais besoin de scraper<a class="headerlink" href="#Pourquoi-tu-aurais-besoin-de-scraper" title="Link to this heading">¶</a></h2>
 <p>Parfois tu te trouves dans la situation où tu dois constituer ton propre corpus pour y mener des tests de classifieur/parseur/etc.</p>
 </section>
 <section id="Problèmes-légaux">
-<h2>Problèmes légaux<a class="headerlink" href="#Problèmes-légaux" title="Permalink to this heading">¶</a></h2>
+<h2>Problèmes légaux<a class="headerlink" href="#Problèmes-légaux" title="Link to this heading">¶</a></h2>
 <p>Il est à noter que le scraping peut soulever des problèmes légaux liés surtout aux droits d’auteurs. Je te conseille donc de bien te renseigner avant de faire du scraping. Un bon point de départ serait un site comme <a class="reference external" href="https://soshace.com/responsible-web-scraping-gathering-data-ethically-and-legally/">celui-ci</a>.</p>
 </section>
 <section id="Scraper-le-monde">
-<h2>Scraper le monde<a class="headerlink" href="#Scraper-le-monde" title="Permalink to this heading">¶</a></h2>
+<h2>Scraper le monde<a class="headerlink" href="#Scraper-le-monde" title="Link to this heading">¶</a></h2>
 <section id="Obtenir-des-liens-d’archives">
-<h3>Obtenir des liens d’archives<a class="headerlink" href="#Obtenir-des-liens-d’archives" title="Permalink to this heading">¶</a></h3>
+<h3>Obtenir des liens d’archives<a class="headerlink" href="#Obtenir-des-liens-d’archives" title="Link to this heading">¶</a></h3>
 <p>La première chose à faire est de générer un lien d’archives. A titre d’exemple, le lien <code class="docutils literal notranslate"><span class="pre">https://www.lemonde.fr/archives-du-monde/01-01-2020/</span></code> contient tous les articles publiés le 1er janvier 2020. La fonction <code class="docutils literal notranslate"><span class="pre">create_archive_link</span></code> prend starting ear/month/day et ending year/month/day comme entrées et retourne un dictionnaire sous forme de <code class="docutils literal notranslate"><span class="pre">year:links</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">create_archive_links</span><span class="p">(</span><span class="n">year_start</span><span class="p">,</span> <span class="n">year_end</span><span class="p">,</span> <span class="n">month_start</span><span class="p">,</span> <span class="n">month_end</span><span class="p">,</span> <span class="n">day_start</span><span class="p">,</span> <span class="n">day_end</span><span class="p">):</span>
-    <span class="n">archive_links</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">year_start</span><span class="p">,</span> <span class="n">year_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"-"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"-"</span> <span class="o">+</span>
-                 <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">month_start</span><span class="p">,</span> <span class="n">month_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span>
-                 <span class="nb">range</span><span class="p">(</span><span class="n">day_start</span><span class="p">,</span> <span class="n">day_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-        <span class="n">archive_links</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s2">"https://www.lemonde.fr/archives-du-monde/"</span> <span class="o">+</span> <span class="n">date</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">archive_links</span>
+<span></span>def create_archive_links(year_start, year_end, month_start, month_end, day_start, day_end):
+    archive_links = {}
+    for y in range(year_start, year_end + 1):
+        dates = [str(d).zfill(2) + "-" + str(m).zfill(2) + "-" +
+                 str(y) for m in range(month_start, month_end + 1) for d in
+                 range(day_start, day_end + 1)]
+        archive_links[y] = [
+            "https://www.lemonde.fr/archives-du-monde/" + date + "/" for date in dates]
+    return archive_links
 
-<span class="n">demo_archives</span> <span class="o">=</span> <span class="n">create_archive_links</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span><span class="mi">2020</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+demo_archives = create_archive_links(2006,2020,1, 12, 1, 31)
 
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">demo_archives</span><span class="p">[</span><span class="mi">2015</span><span class="p">],</span><span class="mi">6</span><span class="p">)</span>
+import random
+random.sample(demo_archives[2015],6)
 </pre></div>
 </div>
 </div>
@@ -493,7 +493,7 @@ div.rendered_html tbody tr:hover {
 </ol>
 </section>
 <section id="Quand-les-exceptions-agissent-en-ta-faveur">
-<h3>Quand les exceptions agissent en ta faveur<a class="headerlink" href="#Quand-les-exceptions-agissent-en-ta-faveur" title="Permalink to this heading">¶</a></h3>
+<h3>Quand les exceptions agissent en ta faveur<a class="headerlink" href="#Quand-les-exceptions-agissent-en-ta-faveur" title="Link to this heading">¶</a></h3>
 <p>Les exceptions sont pratiques dans notre cas car nous avons généré des liens pour des dates comme 02-31, c’est beaucoup facile de catcher ces exceptions que de générer des liens correspondant seulement à des dates existantes. Chaque lien d’article est dans un tag <code class="docutils literal notranslate"><span class="pre">&lt;section&gt;</span></code> contenant une <code class="docutils literal notranslate"><span class="pre">class</span></code> nommé <code class="docutils literal notranslate"><span class="pre">teaser</span></code>.</p>
 <p>Il est important de filtrer tous les articles non gratuits avec un <code class="docutils literal notranslate"><span class="pre">span</span> <span class="pre">&gt;</span> <span class="pre">class</span> <span class="pre">icon__premium</span></code> (à moins que tu aies un compte premium). Tous les liens contenant le mot-clé <code class="docutils literal notranslate"><span class="pre">en-direct</span></code> sont aussi à filtrer car ce sont des vidéos. Tu aurais compris que web scraping demande des capacités d’analyse des pages webs.</p>
 <img alt="../_images/4404a12e.png" src="../_images/4404a12e.png"/>
@@ -502,34 +502,34 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">urllib.error</span> <span class="kn">import</span> <span class="n">HTTPError</span>
-<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span></span>from urllib.error import HTTPError
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
-<span class="k">def</span> <span class="nf">get_articles_links</span><span class="p">(</span><span class="n">archive_links</span><span class="p">):</span>
-    <span class="n">links_non_abonne</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">archive_links</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"url not valid"</span><span class="p">,</span> <span class="n">link</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">"html.parser"</span><span class="p">)</span>
-            <span class="n">news</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s2">"teaser"</span><span class="p">)</span>
-            <span class="c1"># condition here : if no span icon__premium (abonnes)</span>
-            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">news</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">item</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'span'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'class'</span><span class="p">:</span> <span class="s1">'icon__premium'</span><span class="p">}):</span>
-                    <span class="n">l_article</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)[</span><span class="s1">'href'</span><span class="p">]</span>
-                    <span class="c1"># en-direct = video</span>
-                    <span class="k">if</span> <span class="s1">'en-direct'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">l_article</span><span class="p">:</span>
-                        <span class="n">links_non_abonne</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_article</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">links_non_abonne</span>
+def get_articles_links(archive_links):
+    links_non_abonne = []
+    for link in archive_links:
+        try:
+            html = urlopen(link)
+        except HTTPError as e:
+            print("url not valid", link)
+        else:
+            soup = BeautifulSoup(html, "html.parser")
+            news = soup.find_all(class_="teaser")
+            # condition here : if no span icon__premium (abonnes)
+            for item in news:
+                if not item.find('span', {'class': 'icon__premium'}):
+                    l_article = item.find('a')['href']
+                    # en-direct = video
+                    if 'en-direct' not in l_article:
+                        links_non_abonne.append(l_article)
+    return links_non_abonne
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Sauvegarder-les-liens-d’articles-dans-un-fichier-txt">
-<h3>Sauvegarder les liens d’articles dans un fichier txt<a class="headerlink" href="#Sauvegarder-les-liens-d’articles-dans-un-fichier-txt" title="Permalink to this heading">¶</a></h3>
+<h3>Sauvegarder les liens d’articles dans un fichier txt<a class="headerlink" href="#Sauvegarder-les-liens-d’articles-dans-un-fichier-txt" title="Link to this heading">¶</a></h3>
 <p>Je te propose d’écrire une fonction pour stocker les liens existants car il est peu probable qu’ils ne changent. Ici la date de publication est utilisée pour nommer les fichiers.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">write_links</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">links</span><span class="p">,</span> <span class="n">year_fn</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">"/lemonde*"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year_fn</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"\_links.txt"</span><span class="p">),</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -547,7 +547,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Scraper-un-seul-article">
-<h3>Scraper un seul article<a class="headerlink" href="#Scraper-un-seul-article" title="Permalink to this heading">¶</a></h3>
+<h3>Scraper un seul article<a class="headerlink" href="#Scraper-un-seul-article" title="Link to this heading">¶</a></h3>
 <p>Maintenant tu peux commencer à scraper les textes. Il suffit de scraper tous les éléments <code class="docutils literal notranslate"><span class="pre">h1,</span> <span class="pre">h2</span> <span class="pre">et</span> <span class="pre">p</span></code>. Mets <code class="docutils literal notranslate"><span class="pre">recursive=False</span></code> car tu veux que le “scrapeur” arrête de fouiller dans les structures plus profondes dès qu’il trouve le texte.</p>
 <p>Par souci de modularité, écrivons une fonction scrapant un seul article :</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_single_page</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
@@ -564,7 +564,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Classifier-les-textes-par-thème">
-<h3>Classifier les textes par thème<a class="headerlink" href="#Classifier-les-textes-par-thème" title="Permalink to this heading">¶</a></h3>
+<h3>Classifier les textes par thème<a class="headerlink" href="#Classifier-les-textes-par-thème" title="Link to this heading">¶</a></h3>
 <p>La classification par thème est très courante comme tâche en machine learning. Je te propose donc une fonction attribuant à chaque article une catégorie. L’information est déjà contenue dans le lien : <code class="docutils literal notranslate"><span class="pre">https://www.lemonde.fr/politique/article/2020/01/01/reforme-des-retraites-macron-reste-inflexible-aucune-issue-ne-se-profile_6024550_823448.html</span></code> contient par exemple le mot-clé <code class="docutils literal notranslate"><span class="pre">politique</span></code>.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_theme</span><span class="p">(</span><span class="n">link</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
@@ -577,7 +577,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Scraper-tout">
-<h3>Scraper tout<a class="headerlink" href="#Scraper-tout" title="Permalink to this heading">¶</a></h3>
+<h3>Scraper tout<a class="headerlink" href="#Scraper-tout" title="Link to this heading">¶</a></h3>
 <p>C’est enfin le moment de tout scraper ! Pour ce faire je te conseille d’utiliser le package <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> car le scraping peut être long et tu voudras savoir où il en est. Voici à quoi ressemble la barre de progression :</p>
 <img alt="../_images/957b6f67.png" src="../_images/957b6f67.png"/>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scrape_articles</span><span class="p">(</span><span class="n">dict_links</span><span class="p">):</span>
@@ -620,7 +620,7 @@ div.rendered_html tbody tr:hover {
 </section>
 </section>
 <section id="Gist">
-<h2>Gist<a class="headerlink" href="#Gist" title="Permalink to this heading">¶</a></h2>
+<h2>Gist<a class="headerlink" href="#Gist" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://gist.github.com/xiaoouwang/0f054840af560488f2162c110b6045b5#file-lemondescraper-py">https://gist.github.com/xiaoouwang/0f054840af560488f2162c110b6045b5#file-lemondescraper-py</a></p>
 </section>
 </section>
@@ -705,12 +705,12 @@ div.rendered_html tbody tr:hover {
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -744,6 +744,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

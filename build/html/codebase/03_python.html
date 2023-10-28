@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&lt;no title&gt;" href="04_r.html" /><link rel="prev" title="Tumux-related code" href="02_tmux.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>My python codebase (including packages/libraries) - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -186,9 +186,9 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="my-python-codebase-including-packages-libraries">
-<h1>My python codebase (including packages/libraries)<a class="headerlink" href="#my-python-codebase-including-packages-libraries" title="Permalink to this heading">¶</a></h1>
+<h1>My python codebase (including packages/libraries)<a class="headerlink" href="#my-python-codebase-including-packages-libraries" title="Link to this heading">¶</a></h1>
 <section id="sphinx-myst">
-<h2>Sphinx/MyST<a class="headerlink" href="#sphinx-myst" title="Permalink to this heading">¶</a></h2>
+<h2>Sphinx/MyST<a class="headerlink" href="#sphinx-myst" title="Link to this heading">¶</a></h2>
 <!-- ```{include} snippets/include-md.md
 ``` -->
 <p>https://sphinx-themes.org/sample-sites/pydata-sphinx-theme/demo/structure.html</p>
@@ -197,7 +197,7 @@
 <p>https://myst-parser.readthedocs.io/en/latest/index.html</p>
 </section>
 <section id="virtual-environment">
-<h2>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Permalink to this heading">¶</a></h2>
+<h2>Virtual Environment<a class="headerlink" href="#virtual-environment" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
 conda<span class="w"> </span>env<span class="w"> </span>remove<span class="w"> </span>--name<span class="w"> </span>myenv
 <span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>py33
@@ -207,7 +207,7 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
 </div>
 </section>
 <section id="dictionary">
-<h2>Dictionary<a class="headerlink" href="#dictionary" title="Permalink to this heading">¶</a></h2>
+<h2>Dictionary<a class="headerlink" href="#dictionary" title="Link to this heading">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span>
 <span class="c1"># get method</span>
 
@@ -242,14 +242,14 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
 </div>
 </section>
 <section id="sampling">
-<h2>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">¶</a></h2>
+<h2>Sampling<a class="headerlink" href="#sampling" title="Link to this heading">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">v6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># list</span>
 <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">v6</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># dict</span>
 </pre></div>
 </div>
 </section>
 <section id="reload-a-package">
-<h2>Reload a package<a class="headerlink" href="#reload-a-package" title="Permalink to this heading">¶</a></h2>
+<h2>Reload a package<a class="headerlink" href="#reload-a-package" title="Link to this heading">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># import *</span>
 <span class="n">reload_package</span> <span class="o">=</span> <span class="s2">"hehe"</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
@@ -265,7 +265,7 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
 </div>
 </section>
 <section id="print-list-iterator">
-<h2>Print list/iterator<a class="headerlink" href="#print-list-iterator" title="Permalink to this heading">¶</a></h2>
+<h2>Print list/iterator<a class="headerlink" href="#print-list-iterator" title="Link to this heading">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">list_</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">list_</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -274,7 +274,7 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
 </div>
 </section>
 <section id="watchdog-use-unit-test-as-an-exemple">
-<h2>Watchdog (use unit test as an exemple)<a class="headerlink" href="#watchdog-use-unit-test-as-an-exemple" title="Permalink to this heading">¶</a></h2>
+<h2>Watchdog (use unit test as an exemple)<a class="headerlink" href="#watchdog-use-unit-test-as-an-exemple" title="Link to this heading">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">watch_dog</span> <span class="o">=</span> <span class="s2">"hehe"</span>
 <span class="n">watchmedo</span> <span class="n">shell</span><span class="o">-</span><span class="n">command</span> <span class="n">patterns</span><span class="o">=</span><span class="s2">"*.py;*.txt"</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">command</span><span class="o">=</span><span class="s1">'echo "$</span><span class="si">{watch_src_path}</span><span class="s1">" .</span>
 <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gorakhargosh</span><span class="o">/</span><span class="n">watchdog</span>
@@ -283,7 +283,7 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
 <p>See my <a class="reference external" href="https://xiaoouwang.medium.com/.create-a-watchdog-in-python-to-look-for-filesystem-changes-aaabefd14de4?source=your_stories_page-------------------------------------">medium post</a></p>
 </section>
 <section id="json-related">
-<h2>Json related<a class="headerlink" href="#json-related" title="Permalink to this heading">¶</a></h2>
+<h2>Json related<a class="headerlink" href="#json-related" title="Link to this heading">¶</a></h2>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">'records'</span><span class="p">)</span> <span class="c1"># handle headers</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"test.json"</span><span class="p">,</span><span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -292,7 +292,7 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
 </div>
 </section>
 <section id="get-text-from-web">
-<h2>Get text from web<a class="headerlink" href="#get-text-from-web" title="Permalink to this heading">¶</a></h2>
+<h2>Get text from web<a class="headerlink" href="#get-text-from-web" title="Link to this heading">¶</a></h2>
 <p>See my <a class="reference external" href="https://stackoverflow.com/a/66354054/3448445">stackoverflow explanation</a>.</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"http://www.gutenberg.org/files/10/10-0.txt"</span><span class="p">)</span>
@@ -302,7 +302,7 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
 </div>
 </section>
 <section id="jupyter-to-python">
-<h2>Jupyter to Python<a class="headerlink" href="#jupyter-to-python" title="Permalink to this heading">¶</a></h2>
+<h2>Jupyter to Python<a class="headerlink" href="#jupyter-to-python" title="Link to this heading">¶</a></h2>
 <p>jupyter nbconvert –to script *.ipynb</p>
 </section>
 </section>
@@ -385,12 +385,12 @@ python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </s
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -424,6 +424,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

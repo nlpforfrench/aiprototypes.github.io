@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>How to build a spell checker with deep learning - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -186,37 +186,37 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="how-to-build-a-spell-checker-with-deep-learning">
-<h1>How to build a spell checker with deep learning<a class="headerlink" href="#how-to-build-a-spell-checker-with-deep-learning" title="Permalink to this heading">¶</a></h1>
+<h1>How to build a spell checker with deep learning<a class="headerlink" href="#how-to-build-a-spell-checker-with-deep-learning" title="Link to this heading">¶</a></h1>
 <p>By <a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou Wang</a></p>
 <section id="spell-checker-is-like-machine-translation">
-<h2>Spell checker is like machine translation<a class="headerlink" href="#spell-checker-is-like-machine-translation" title="Permalink to this heading">¶</a></h2>
+<h2>Spell checker is like machine translation<a class="headerlink" href="#spell-checker-is-like-machine-translation" title="Link to this heading">¶</a></h2>
 <p>Nowadays people are all more or less familiar with the term <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">translation</span></code>, which is implemented as the main function of a website like <code class="docutils literal notranslate"><span class="pre">googletranslate</span></code> or simply as part of a larger-scale software (software as a service).</p>
 <p>However few people are aware that spell checker can also be considered using the same mindset as neural machine translation, meaning that the encoder would encode the grammatically incorrect sentences and the decoder would output the grammatically correct sentences.</p>
 <p><img alt="" src="../_images/2021-06-07-15-28-58.png"/></p>
 </section>
 <section id="brief-history-on-machine-translation">
-<h2>Brief history on machine translation<a class="headerlink" href="#brief-history-on-machine-translation" title="Permalink to this heading">¶</a></h2>
+<h2>Brief history on machine translation<a class="headerlink" href="#brief-history-on-machine-translation" title="Link to this heading">¶</a></h2>
 <section id="expert-systems">
-<h3>Expert systems<a class="headerlink" href="#expert-systems" title="Permalink to this heading">¶</a></h3>
+<h3>Expert systems<a class="headerlink" href="#expert-systems" title="Link to this heading">¶</a></h3>
 <p>At the very beginning, machine translation systems are called expert systems. An often quoted example is the Georgetown-IBM experiment started during the Second World War. The principle is quite simple: there is a dictionary allowing to translate from word to word, and the expert’s job is to take care of the aligning problem which consists of finding the right place for each word separately translated.</p>
 <p>For languages like Spanish and English it is relatively simple because the word order is unlikely to change significantly during translation, however for languages like Chinese or Japanese even the smartest experts can quickly get overwhelmed.</p>
 <p><img alt="" src="../_images/2021-06-07-14-46-42.png"/></p>
 </section>
 <section id="statistical-machine-translation">
-<h3>Statistical Machine Translation<a class="headerlink" href="#statistical-machine-translation" title="Permalink to this heading">¶</a></h3>
+<h3>Statistical Machine Translation<a class="headerlink" href="#statistical-machine-translation" title="Link to this heading">¶</a></h3>
 <p>In 1980s, a new approach called Statistical Machine Translation becomes increasing popular. Basically people start leveraging power of machine learning and aided by some sophisticated algorithms, many systems translate parts of sentences rather than isolated words, which partially resolves the aligning problem.</p>
 <p>A lot of bilingual/parallel corpus are established during this period in order to find “sentence piece” candidates from one language to another. The most successful system is called Moses with, hold your breath, more than 100000 lines of code! Understanding and installing such a system requires dozens of hours and only big companies can afford such a luxury.</p>
 <p><img alt="" src="../_images/2021-06-07-14-55-22.png"/></p>
 </section>
 <section id="neural-machine-translation">
-<h3>Neural Machine Translation<a class="headerlink" href="#neural-machine-translation" title="Permalink to this heading">¶</a></h3>
+<h3>Neural Machine Translation<a class="headerlink" href="#neural-machine-translation" title="Link to this heading">¶</a></h3>
 <p>If you look closely at the screenshot of Moses’ Website, you can see that the software is no longer actively maintained since the end of 2015, that’s mainly because of the publication of a ground-breaking article that starts a whole new trend in Machine Translation.</p>
 <p><img alt="" src="../_images/2021-06-07-14-57-10.png"/></p>
 <p>In this paper, researchers were able to provide a nice solution to long-distance translation precision, meaning that machines were able to understand sentences much longer than before. The solution is called today as attention mechanism and often applied on RNNs. It is also the predecessor of another revolutionary paper, <code class="docutils literal notranslate"><span class="pre">attention</span> <span class="pre">is</span> <span class="pre">all</span> <span class="pre">you</span> <span class="pre">need</span></code> by Vaswani, Ashish, et al..</p>
 </section>
 </section>
 <section id="grammar-checker-as-a-transformer">
-<h2>Grammar Checker as a transformer<a class="headerlink" href="#grammar-checker-as-a-transformer" title="Permalink to this heading">¶</a></h2>
+<h2>Grammar Checker as a transformer<a class="headerlink" href="#grammar-checker-as-a-transformer" title="Link to this heading">¶</a></h2>
 <p>The paper of Vaswani, Ashish, et al. highlightes a new deep learning architecture called Transformer. The transformer always has an encoder and a decoder, however it get rids of recurrence and can thus be trained in much less time! In order to achieve this, a transformer uses self-attention in contrast to cross-attention used in early systems of Neural Machine Translation.</p>
 <p>At this point you should already catch a glimpse of what we are going to do:</p>
 <ol class="simple">
@@ -225,24 +225,24 @@
 </ol>
 </section>
 <section id="where-can-we-get-the-data">
-<h2>Where can we get the data ?<a class="headerlink" href="#where-can-we-get-the-data" title="Permalink to this heading">¶</a></h2>
+<h2>Where can we get the data ?<a class="headerlink" href="#where-can-we-get-the-data" title="Link to this heading">¶</a></h2>
 <p>If you know the term <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">mining</span></code>, it should be clear to you that data is essential in <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning/deep</span> <span class="pre">learning</span></code>. In our particular case, although you might get better results using Transformer rather than RNN, the margin of difference should be quite small. It is also the reason behind <a class="reference external" href="https://www.youtube.com/watch?v=06-AZXmwHjo">Andrew Ng’s calling for a more data-centric approach</a> because many people have been busy training fancy models instead of collecting more quality data.</p>
 <p>The main difficulty in constructing a high performance spell checker is to get enough data because such data are often proprietary.</p>
 <p>The good news is that we can partially circumvent this problem by being creative!</p>
 </section>
 <section id="make-data-dirty">
-<h2>Make data dirty<a class="headerlink" href="#make-data-dirty" title="Permalink to this heading">¶</a></h2>
+<h2>Make data dirty<a class="headerlink" href="#make-data-dirty" title="Link to this heading">¶</a></h2>
 <p>Suppose you have built a small spell checker using 1G data. This is a small amount of data in machine learning sense. However if you reverse the whole process, these 1G data can actually be used as a wrong sentence generator and in turn generate any amount of data that you desire.</p>
 <p>This process of actively producing wrong sentences to supply large quantity data to models is called <code class="docutils literal notranslate"><span class="pre">back-translation</span></code> in the machine translation literature.</p>
 </section>
 <section id="want-some-code">
-<h2>Want some code?<a class="headerlink" href="#want-some-code" title="Permalink to this heading">¶</a></h2>
+<h2>Want some code?<a class="headerlink" href="#want-some-code" title="Link to this heading">¶</a></h2>
 <p>I encourage you to read <a class="reference external" href="http://www.realworldnlpbook.com/blog/unreasonable-effectiveness-of-transformer-spell-checker.html">this tutorial</a> to see how simple it is to build a powerful spell checker with just tens of lines.</p>
 <p>As a teaser/reminder, here is what the final system is capable of:</p>
 <p><img alt="" src="../_images/2021-06-07-15-28-58.png"/></p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
 <p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., … &amp; Polosukhin, I. (2017). Attention is all you need. arXiv preprint arXiv:1706.03762.</p>
 <p>Bahdanau, D., Cho, K., &amp; Bengio, Y. (2014). Neural machine translation by jointly learning to align and translate. arXiv preprint arXiv:1409.0473.</p>
 <p>Edunov, S., Ott, M., Auli, M., &amp; Grangier, D. (2018). Understanding back-translation at scale. arXiv preprint arXiv:1808.09381.</p>
@@ -311,12 +311,12 @@
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -350,6 +350,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

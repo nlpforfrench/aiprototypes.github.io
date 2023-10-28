@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Connect to remote jupyter notebook in Pycharm" href="03_jupyter_remote_pycharm.html" /><link rel="prev" title="Mieux programmer en Python 🇫🇷" href="01_python_fr.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>A serious guide to git 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -186,11 +186,11 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="a-serious-guide-to-git">
-<h1>A serious guide to git 🇬🇧<a class="headerlink" href="#a-serious-guide-to-git" title="Permalink to this heading">¶</a></h1>
+<h1>A serious guide to git 🇬🇧<a class="headerlink" href="#a-serious-guide-to-git" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <p>This document is created because very few tutorials on Internet give a thorough introduction to <code class="docutils literal notranslate"><span class="pre">git</span></code>, instead a lot of homogeneous 10-minutes quick introductions are offered. Then people just wonder around <code class="docutils literal notranslate"><span class="pre">stackoverflow</span></code> to solve <em>mysterious problems</em>. This approach can appear to be easy at the beginning but quickly unsustainable. This is the V1 of a “hard” introduction that gives you a complete working knowledge of <code class="docutils literal notranslate"><span class="pre">git</span></code>. It’s heavily inspired by the <code class="docutils literal notranslate"><span class="pre">pro</span> <span class="pre">git</span></code> book available <a class="reference external" href="https://git-scm.com/book/en/v2">here</a>.</p>
 <section id="general">
-<h2>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h2>
+<h2>General<a class="headerlink" href="#general" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>install : https://git-scm.com/download/</p></li>
 <li><p>setting ~/.gitconfig</p></li>
@@ -205,7 +205,7 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
 </ul>
 </section>
 <section id="starting-point">
-<h2>Starting point<a class="headerlink" href="#starting-point" title="Permalink to this heading">¶</a></h2>
+<h2>Starting point<a class="headerlink" href="#starting-point" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>create a repository
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p></li>
@@ -231,7 +231,7 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
 <p>For python template, see <a class="reference external" href="https://github.com/github/gitignore/blob/master/Python.gitignore">here</a>. For other languages, see <a class="reference external" href="https://github.com/github/gitignore">here</a></p>
 </section>
 <section id="intermediate">
-<h2>Intermediate<a class="headerlink" href="#intermediate" title="Permalink to this heading">¶</a></h2>
+<h2>Intermediate<a class="headerlink" href="#intermediate" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> by itself doesn’t show all changes made since your last commit — only changes that are still unstaged. If you’ve staged all of your changes, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> will give you no output. Instead, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--staged</span></code>. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--cached</span></code> is a synonym.</p>
 <p>Often people use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">message</span></code> directly, at the base level, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> works, and you would enter the commit message using your text editor set by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">core.editor</span></code>.</p>
 <p>After you make a commit (you have to make a commit message whether you use <code class="docutils literal notranslate"><span class="pre">-m</span></code> or not). You get this kind of feedback. <code class="docutils literal notranslate"><span class="pre">main</span></code> is the branch, <code class="docutils literal notranslate"><span class="pre">5641629</span></code> is the SHA-1 checksum and the rest is statistics.</p>
@@ -241,11 +241,11 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
 <p><img alt="" src="../images/2021-01-21-20-39-55.png"/></p>
 </section>
 <section id="push">
-<h2>Push<a class="headerlink" href="#push" title="Permalink to this heading">¶</a></h2>
+<h2>Push<a class="headerlink" href="#push" title="Link to this heading">¶</a></h2>
 <p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show-ref</span></code> to see the name after <code class="docutils literal notranslate"><span class="pre">refs/heads/</span></code>. Sometimes it’s <code class="docutils literal notranslate"><span class="pre">master</span></code> sometimes it’s <code class="docutils literal notranslate"><span class="pre">main</span></code>. See <a class="reference external" href="https://stackoverflow.com/questions/4181861/message-src-refspec-master-does-not-match-any-when-pushing-commits-in-git">here</a>. Accordingly, you should <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">master/main</span></code>.</p>
 </section>
 <section id="step-back-in-your-git-workspace">
-<h2>Step back in your git workspace<a class="headerlink" href="#step-back-in-your-git-workspace" title="Permalink to this heading">¶</a></h2>
+<h2>Step back in your git workspace<a class="headerlink" href="#step-back-in-your-git-workspace" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>remove files from Git after staging or committing</p></li>
 </ul>
@@ -262,36 +262,36 @@ git<span class="w"> </span>add<span class="w"> </span>b.md<span class="w"> </spa
 </div>
 </section>
 <section id="follow-log">
-<h2>Follow/log<a class="headerlink" href="#follow-log" title="Permalink to this heading">¶</a></h2>
+<h2>Follow/log<a class="headerlink" href="#follow-log" title="Link to this heading">¶</a></h2>
 <p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> to see a commit history. Use <code class="docutils literal notranslate"><span class="pre">-2</span></code> to see only 2 most recent log. <code class="docutils literal notranslate"><span class="pre">-p</span></code> to see diff information. Also see <code class="docutils literal notranslate"><span class="pre">--pretty=oneline</span></code>. But a more straightforward way is to use a <code class="docutils literal notranslate"><span class="pre">GUI</span></code>. Seriously, it can be useful when it comes to branches and merging.</p>
 </section>
 <section id="undo-things">
-<h2>Undo things<a class="headerlink" href="#undo-things" title="Permalink to this heading">¶</a></h2>
+<h2>Undo things<a class="headerlink" href="#undo-things" title="Link to this heading">¶</a></h2>
 <section id="change-commit-message">
-<h3>6.1 Change commit message<a class="headerlink" href="#change-commit-message" title="Permalink to this heading">¶</a></h3>
+<h3>6.1 Change commit message<a class="headerlink" href="#change-commit-message" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code> is used when you want to change the previous commit message and don’t want to clutter the commit space with tons of useless messages. Only amend commits that are still local and have not been pushed somewhere.</p>
 <p>❗️ Amending previously pushed commits and force pushing the branch will cause problems for your collaborators.</p>
 </section>
 <section id="unstage">
-<h3>6.2 Unstage<a class="headerlink" href="#unstage" title="Permalink to this heading">¶</a></h3>
+<h3>6.2 Unstage<a class="headerlink" href="#unstage" title="Link to this heading">¶</a></h3>
 <p>For example, let’s say you’ve changed two files and want to commit them as two separate changes, but you accidentally type git add * and stage them both.</p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">HEAD</span> <span class="pre">--</span></code> or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">--staged</span> <span class="pre">file</span></code></p>
 </section>
 <section id="back-to-the-last-commit-state-danger-part">
-<h3>Back to the last commit state, danger part<a class="headerlink" href="#back-to-the-last-commit-state-danger-part" title="Permalink to this heading">¶</a></h3>
+<h3>Back to the last commit state, danger part<a class="headerlink" href="#back-to-the-last-commit-state-danger-part" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">--</span> <span class="pre">file</span></code></p>
 <p>:x: Don’t use this unless you know what you are doing since changes would be lost forever.</p>
 <p>If you would like to keep the changes you’ve made to that file but still need to get it out of the way for now, Use <code class="docutils literal notranslate"><span class="pre">stashing</span></code> and <code class="docutils literal notranslate"><span class="pre">branching</span></code>.</p>
 </section>
 </section>
 <section id="remote">
-<h2>Remote<a class="headerlink" href="#remote" title="Permalink to this heading">¶</a></h2>
+<h2>Remote<a class="headerlink" href="#remote" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span></code> gives the remote rep called often <code class="docutils literal notranslate"><span class="pre">origin</span></code>. Use <code class="docutils literal notranslate"><span class="pre">-v</span></code> to see more info.</p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">origin</span></code> fetches any new work that has been pushed to that server since you cloned (or last fetched from) it. It’s important to note that the git fetch command only downloads the data to your local repository. It’s up to you to see if you’ll merge.</p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> generally fetches data from the server you originally cloned from and automatically tries to merge it into the code you’re currently working on.</p>
 </section>
 <section id="branching">
-<h2>Branching<a class="headerlink" href="#branching" title="Permalink to this heading">¶</a></h2>
+<h2>Branching<a class="headerlink" href="#branching" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -377,12 +377,12 @@ git<span class="w"> </span>add<span class="w"> </span>b.md<span class="w"> </spa
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -416,6 +416,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

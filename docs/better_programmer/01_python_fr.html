@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="A serious guide to git 🇬🇧" href="02_git3_en.html" /><link rel="prev" title="Better Programmer" href="index.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>Mieux programmer en Python 🇫🇷 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -434,16 +434,16 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Mieux-programmer-en-Python-🇫🇷">
-<h1>Mieux programmer en Python 🇫🇷<a class="headerlink" href="#Mieux-programmer-en-Python-🇫🇷" title="Permalink to this heading">¶</a></h1>
+<h1>Mieux programmer en Python 🇫🇷<a class="headerlink" href="#Mieux-programmer-en-Python-🇫🇷" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaoou WANG</a></p>
 <section id="Les-grands-principes">
-<h2>Les grands principes<a class="headerlink" href="#Les-grands-principes" title="Permalink to this heading">¶</a></h2>
+<h2>Les grands principes<a class="headerlink" href="#Les-grands-principes" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">this</span>
+<span></span>import this
 </pre></div>
 </div>
 </div>
@@ -477,20 +477,20 @@ Namespaces are one honking great idea -- let's do more of those!
 </div>
 </section>
 <section id="N’utilisez-pas-des-syntaxes-exotiques">
-<h2>N’utilisez pas des syntaxes exotiques<a class="headerlink" href="#N’utilisez-pas-des-syntaxes-exotiques" title="Permalink to this heading">¶</a></h2>
+<h2>N’utilisez pas des syntaxes exotiques<a class="headerlink" href="#N’utilisez-pas-des-syntaxes-exotiques" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! don't</span>
-<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="n">c</span> <span class="o">=</span> <span class="s1">'abcdef'</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="c1">#* do</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span>
+<span></span>#! don't
+a = [1, 2, 3, 4]
+c = 'abcdef'
+print(a[::-1])
+print(c[::-1])
+#* do
+print(list(reversed(a)))
+print(list(reversed(c)))
 </pre></div>
 </div>
 </div>
@@ -505,48 +505,48 @@ fedcba
 </div>
 </section>
 <section id="Évitez-les-keywords-de-Python-pour-des-noms-de-variables.">
-<h2>Évitez les keywords de Python pour des noms de variables.<a class="headerlink" href="#Évitez-les-keywords-de-Python-pour-des-noms-de-variables." title="Permalink to this heading">¶</a></h2>
+<h2>Évitez les keywords de Python pour des noms de variables.<a class="headerlink" href="#Évitez-les-keywords-de-Python-pour-des-noms-de-variables." title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! don't</span>
-<span class="k">def</span> <span class="nf">funA</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">element</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">pass</span>
+<span></span>#! don't
+def funA(list, num):
+    for element in list:
+        if num == element:
+            return True
+        else:
+            pass
 
-<span class="c1">#* do</span>
-<span class="k">def</span> <span class="nf">find_num</span><span class="p">(</span><span class="n">searchList</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">listValue</span> <span class="ow">in</span> <span class="n">searchList</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">listValue</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">pass</span>
+#* do
+def find_num(searchList, num):
+    for listValue in searchList:
+        if num == listValue:
+            return True
+        else:
+            pass
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Implémenter-Switch-en-Python">
-<h2>Implémenter Switch en Python<a class="headerlink" href="#Implémenter-Switch-en-Python" title="Permalink to this heading">¶</a></h2>
+<h2>Implémenter Switch en Python<a class="headerlink" href="#Implémenter-Switch-en-Python" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#* implement switch case in python</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="mi">0</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-      <span class="mi">1</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-      <span class="mi">2</span><span class="p">:</span> <span class="s2">"2"</span>
-    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">"???"</span><span class="p">)</span>
+<span></span>#* implement switch case in python
+def f(x):
+    return {
+      0: "0",
+      1: "1",
+      2: "2"
+    }.get(x, "???")
 
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># ???</span>
+print(f(1)) # 1
+print(f(4)) # ???
 </pre></div>
 </div>
 </div>
@@ -561,45 +561,45 @@ fedcba
 </div>
 </section>
 <section id="Espaces-et-lignes">
-<h2>Espaces et lignes<a class="headerlink" href="#Espaces-et-lignes" title="Permalink to this heading">¶</a></h2>
+<h2>Espaces et lignes<a class="headerlink" href="#Espaces-et-lignes" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#* Use space</span>
-<span class="c1">#! don't</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="n">guess_made</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">number</span> <span class="o">=</span> <span class="n">guess_made</span>
+<span></span>#* Use space
+#! don't
+import random
+guess_made = 0
+number = guess_made
 
-<span class="c1">#* Do</span>
-<span class="kn">import</span> <span class="nn">random</span>
+#* Do
+import random
 
-<span class="n">guess_made</span> <span class="o">=</span> <span class="mi">0</span>
+guess_made = 0
 
-<span class="n">number</span> <span class="o">=</span> <span class="n">guess_made</span>
+number = guess_made
 
-<span class="c1">#! don't</span>
-<span class="k">if</span> <span class="n">number</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+#! don't
+if number==3:
+    print(4)
 
-<span class="c1">#* do</span>
-<span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+#* do
+if number == 3:
+    print(4)
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Expression-ternaire">
-<h2>Expression ternaire<a class="headerlink" href="#Expression-ternaire" title="Permalink to this heading">¶</a></h2>
+<h2>Expression ternaire<a class="headerlink" href="#Expression-ternaire" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Ternary expression in Python</span>
-<span class="nb">print</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="kc">True</span> <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span></span># Ternary expression in Python
+print(4) if True else print(4)
 
 </pre></div>
 </div>
@@ -614,7 +614,7 @@ fedcba
 </div>
 </section>
 <section id="Refactoring">
-<h2>Refactoring<a class="headerlink" href="#Refactoring" title="Permalink to this heading">¶</a></h2>
+<h2>Refactoring<a class="headerlink" href="#Refactoring" title="Link to this heading">¶</a></h2>
 <p>Pour un grand projet, la bonne organisation des codes est primordiale et différencie les débutants des chevronnés.</p>
 <p>Une bonne pratique serait de stocker les constantes dans un même fichier et d’en importer là où il en faut.</p>
 <div class="nbinput docutils container">
@@ -622,9 +622,9 @@ fedcba
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#* Put all constants in one file `constant.py` in this example</span>
-<span class="kn">import</span> <span class="nn">constant</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">constant</span><span class="o">.</span><span class="n">MY_CONSTANT</span><span class="p">)</span>
+<span></span>#* Put all constants in one file `constant.py` in this example
+import constant
+print(constant.MY_CONSTANT)
 </pre></div>
 </div>
 </div>
@@ -638,20 +638,20 @@ fedcba
 </div>
 </section>
 <section id="Sucres-syntaxiques">
-<h2>Sucres syntaxiques<a class="headerlink" href="#Sucres-syntaxiques" title="Permalink to this heading">¶</a></h2>
+<h2>Sucres syntaxiques<a class="headerlink" href="#Sucres-syntaxiques" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="ch">#! don't</span>
-<span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
+<span></span>%%time
+#! don't
+x = 3
+y = 4
 
-<span class="n">temp</span> <span class="o">=</span> <span class="n">x</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">temp</span>
+temp = x
+x = y
+y = temp
 </pre></div>
 </div>
 </div>
@@ -669,12 +669,12 @@ Wall time: 3.81 µs
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="c1">#* do this, it's cleaner, somewhat slower</span>
-<span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
+<span></span>%%time
+#* do this, it's cleaner, somewhat slower
+x = 3
+y = 4
 
-<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+x,y = y,x
 </pre></div>
 </div>
 </div>
@@ -689,30 +689,30 @@ Wall time: 4.77 µs
 </div>
 </section>
 <section id="Les-conditions-de-if">
-<h2>Les conditions de if<a class="headerlink" href="#Les-conditions-de-if" title="Permalink to this heading">¶</a></h2>
+<h2>Les conditions de if<a class="headerlink" href="#Les-conditions-de-if" title="Link to this heading">¶</a></h2>
 <p>Du moment qu’une condition est évaluée comme fausse, on passe à la ligne suivante.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#! don't</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">abbreviations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"cf."</span><span class="p">,</span> <span class="s2">"e.g."</span><span class="p">,</span> <span class="s2">"ex."</span><span class="p">,</span> <span class="s2">"etc."</span><span class="p">,</span> <span class="s2">"flg."</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"Mr."</span><span class="p">,</span> <span class="s2">"Hat"</span><span class="p">,</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"chasing"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">abbreviations</span> <span class="ow">and</span> <span class="n">w</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s1">'.'</span><span class="p">:</span>
-            <span class="k">pass</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
-<span class="c1">#* do</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">abbreviations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"cf."</span><span class="p">,</span> <span class="s2">"e.g."</span><span class="p">,</span> <span class="s2">"ex."</span><span class="p">,</span> <span class="s2">"etc."</span><span class="p">,</span> <span class="s2">"flg."</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"Mr."</span><span class="p">,</span> <span class="s2">"Hat"</span><span class="p">,</span> <span class="s2">"is"</span><span class="p">,</span> <span class="s2">"chasing"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'.'</span> <span class="ow">and</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">abbreviations</span><span class="p">:</span>
-            <span class="k">pass</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+<span></span>#! don't
+from time import time
+t = time()
+abbreviations = ["cf.", "e.g.", "ex.", "etc.", "flg."]
+for i in range(100000):
+    for w in ("Mr.", "Hat", "is", "chasing", "."):
+        if w in abbreviations and w[-1]=='.':
+            pass
+print(time() - t)
+#* do
+t = time()
+abbreviations = ["cf.", "e.g.", "ex.", "etc.", "flg."]
+for i in range(100000):
+    for w in ("Mr.", "Hat", "is", "chasing", "."):
+        if w[-1] == '.' and w in abbreviations:
+            pass
+print(time() - t)
 
 
 </pre></div>
@@ -729,7 +729,7 @@ Wall time: 4.77 µs
 </div>
 </section>
 <section id="To-be-continued,-2021-03-20">
-<h2>To be continued, 2021-03-20<a class="headerlink" href="#To-be-continued,-2021-03-20" title="Permalink to this heading">¶</a></h2>
+<h2>To be continued, 2021-03-20<a class="headerlink" href="#To-be-continued,-2021-03-20" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -811,12 +811,12 @@ Wall time: 4.77 µs
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -850,6 +850,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

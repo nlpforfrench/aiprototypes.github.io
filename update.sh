@@ -1,5 +1,5 @@
 # rm -rf build/html
-conda activate aiprototypes
+# conda activahttps://raw.githubusercontent.com/nlpforfrench/aiprototypes.github.io/master/source/static/data/test.txptte aiprototypes
 rm -rf docs
 make html
 cd build/html

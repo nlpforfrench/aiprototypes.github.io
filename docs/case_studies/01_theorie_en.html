@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js">
   <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <meta name="generator" content="sphinx-6.1.3, furo 2021.02.28.beta28"/>
+    <meta name="generator" content="sphinx-7.2.6, furo 2021.02.28.beta28"/>
         <title>10 questions on Bert 🇬🇧 - </title>
       <link rel="stylesheet" href="../static/styles/furo.css?digest=be5985a4059b5c2cd56ed0804790452beca62674">
     <link rel="stylesheet" href="../static/pygments.css">
@@ -37,12 +37,12 @@
   --color-code-foreground: #d0d0d0;
   
   }
-</style><link rel="stylesheet" type="text/css" href="../static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css" />
-    <link rel="stylesheet" type="text/css" href="../static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../static/custom.css" />
+</style><link rel="stylesheet" type="text/css" href="../static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/furo.css?v=5f0bca00" />
+    <link rel="stylesheet" type="text/css" href="../static/copybutton.css?v=f78ba3b0" />
+    <link rel="stylesheet" type="text/css" href="../static/tabs.css?v=eb6ac661" />
+    <link rel="stylesheet" type="text/css" href="../static/gallery.css?v=f1f6b6fd" />
+    <link rel="stylesheet" type="text/css" href="../static/custom.css?v=d268d653" />
     <link rel="stylesheet" href="../static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
   <body dir="">
     
@@ -186,49 +186,49 @@
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
         <section id="questions-on-bert">
-<h1>10 questions on Bert 🇬🇧<a class="headerlink" href="#questions-on-bert" title="Permalink to this heading">¶</a></h1>
+<h1>10 questions on Bert 🇬🇧<a class="headerlink" href="#questions-on-bert" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://scholar.google.fr/citations?user=vKAMMpwAAAAJ&amp;hl=en">Xiaooou Wang</a></p>
 <section id="what-is-bert">
-<h2>What is Bert?<a class="headerlink" href="#what-is-bert" title="Permalink to this heading">¶</a></h2>
+<h2>What is Bert?<a class="headerlink" href="#what-is-bert" title="Link to this heading">¶</a></h2>
 <p>The main component of Bert is a 12-layer neural network that processes text. The final layer of Bert can be adapted to your liking as long as it is relevant to your tasks (named entity recognition, sentimental analysis…).</p>
 </section>
 <section id="what-are-roberta-xlnet-and-albert">
-<h2>What are RoBERTa, XLNet, and ALBERT?<a class="headerlink" href="#what-are-roberta-xlnet-and-albert" title="Permalink to this heading">¶</a></h2>
+<h2>What are RoBERTa, XLNet, and ALBERT?<a class="headerlink" href="#what-are-roberta-xlnet-and-albert" title="Link to this heading">¶</a></h2>
 <p>Models derived from Bert that have achieved better performance on benchmarks than Bert.</p>
 </section>
 <section id="do-i-need-to-understand-recurrence-cnn-or-rnn-models-to-understand-the-subtleties-of-bert">
-<h2>Do I need to understand recurrence (CNN or RNN models) to understand the subtleties of Bert?<a class="headerlink" href="#do-i-need-to-understand-recurrence-cnn-or-rnn-models-to-understand-the-subtleties-of-bert" title="Permalink to this heading">¶</a></h2>
+<h2>Do I need to understand recurrence (CNN or RNN models) to understand the subtleties of Bert?<a class="headerlink" href="#do-i-need-to-understand-recurrence-cnn-or-rnn-models-to-understand-the-subtleties-of-bert" title="Link to this heading">¶</a></h2>
 <p>No, Bert is based on the transformer architecture. Moreover, only the encoder part is concerned.</p>
 </section>
 <section id="what-is-the-difference-between-rnn-and-transformer">
-<h2>What is the difference between RNN and Transformer?<a class="headerlink" href="#what-is-the-difference-between-rnn-and-transformer" title="Permalink to this heading">¶</a></h2>
+<h2>What is the difference between RNN and Transformer?<a class="headerlink" href="#what-is-the-difference-between-rnn-and-transformer" title="Link to this heading">¶</a></h2>
 <p>Recurrent neural networks only “look” at one word at a time and use hidden states to store, filter and integrate past information. This makes the model very complicated at various levels.</p>
 <p>Beware, RNNs are a field of research in their own right. This deserves another series of tutorials.</p>
 </section>
 <section id="link-between-pre-training-fine-tuning-and-transfer-learning">
-<h2>Link between Pre-training, Fine-Tuning and Transfer Learning?<a class="headerlink" href="#link-between-pre-training-fine-tuning-and-transfer-learning" title="Permalink to this heading">¶</a></h2>
+<h2>Link between Pre-training, Fine-Tuning and Transfer Learning?<a class="headerlink" href="#link-between-pre-training-fine-tuning-and-transfer-learning" title="Link to this heading">¶</a></h2>
 <p>Bert is pre-trained on a huge corpus with two tasks. Given the specificity of these two tasks, it is assumed (this is just an assumption) that the model will acquire a deeply contextualized understanding of the words (in concrete terms, these are embeddings). But this out-of-box model is not suitable for downstream tasks that require relearning on specific corpora (fine-tuning). The study of these two processes falls within the realm of transfer learning.</p>
 </section>
 <section id="what-are-the-benefits-of-such-an-approach">
-<h2>What are the benefits of such an approach?<a class="headerlink" href="#what-are-the-benefits-of-such-an-approach" title="Permalink to this heading">¶</a></h2>
+<h2>What are the benefits of such an approach?<a class="headerlink" href="#what-are-the-benefits-of-such-an-approach" title="Link to this heading">¶</a></h2>
 <p>Training a model for a specific task often requires a huge corpus of a particular domain that is not necessarily available. Moreover it is very expensive in terms of time and computation. The fine-tuning process, in addition to saving time, achieves better performances than a home-made model trained from scratch.</p>
 <p>But beware! This does not mean that fine-tuning takes a few seconds, it is just fast compared to Bert’s pre-training and home-made models. Looking back in history, the benefits of this approach were first noticed in image recognition (branch of computer vision). Theoretically, there is little that is new.</p>
 </section>
 <section id="what-tasks-is-bert-trained-on">
-<h2>What tasks is Bert trained on?<a class="headerlink" href="#what-tasks-is-bert-trained-on" title="Permalink to this heading">¶</a></h2>
+<h2>What tasks is Bert trained on?<a class="headerlink" href="#what-tasks-is-bert-trained-on" title="Link to this heading">¶</a></h2>
 <p><img alt="" src="../images/0b53924e.png"/></p>
 <p>As for Mikolov’s word embedding, these are fake tasks or pre-training tasks. The first one (Masked Language Model) is to guess a hidden word in a sentence (like the word <code class="docutils literal notranslate"><span class="pre">cool</span></code>) and the second one (Next Sentence Prediction) is to determine if the second of a pair of sentences (like the sentence in orange) is the continuation of the first one.</p>
 </section>
 <section id="what-are-the-advantages-of-bert-embeddings">
-<h2>What are the advantages of Bert embeddings?<a class="headerlink" href="#what-are-the-advantages-of-bert-embeddings" title="Permalink to this heading">¶</a></h2>
+<h2>What are the advantages of Bert embeddings?<a class="headerlink" href="#what-are-the-advantages-of-bert-embeddings" title="Link to this heading">¶</a></h2>
 <p>Since the word is hidden inside the sentence, Bert is supposed to acquire a contextualized representation using both the left and right context. This is also the case for BiLSTM but the context exploited by the latter is more restricted. Also it is to be noted that Bert has a fixed vocabulary made up of “wordpiece” (tokens, sub-tokens, characters), which makes it possible to treat out of vocabulary (OOV) problems in a more effective way.</p>
 </section>
 <section id="why-wordpiece">
-<h2>Why WordPiece?<a class="headerlink" href="#why-wordpiece" title="Permalink to this heading">¶</a></h2>
+<h2>Why WordPiece?<a class="headerlink" href="#why-wordpiece" title="Link to this heading">¶</a></h2>
 <p>Let’s take <code class="docutils literal notranslate"><span class="pre">unconstitutionally</span></code>. If we train a vector for this word it is unlikely that we will find many occurrences of it. This word will then be under-represented. On the other hand, if we break it down into “un”, “constitution”, “al” and “ly”. These three subtokens would be more frequent (thus more samples) in a large corpus and the combination of these 3 subtokens would constitute a better representation.</p>
 </section>
 <section id="how-does-fine-tuning-work-in-practice">
-<h2>How does fine-tuning work in practice?<a class="headerlink" href="#how-does-fine-tuning-work-in-practice" title="Permalink to this heading">¶</a></h2>
+<h2>How does fine-tuning work in practice?<a class="headerlink" href="#how-does-fine-tuning-work-in-practice" title="Link to this heading">¶</a></h2>
 <p>This question is related to the question. The fine-tuning process depends on the last layer you add to Bert. Let’s take sentimental analysis as an example. The figure we created illustrates this simple principle. After 12 Bert layers we add a binary classifier which, depending on the embedding of the CLS token (which includes the info of the whole sentence), predicts whether it is a positive or negative comment.</p>
 <p><img alt="" src="../images/3ed81414.png"/></p>
 <div class="note admonition">
@@ -304,12 +304,12 @@
   </main>
 </div>
     <script id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
-    <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-    <script src="../static/doctools.js"></script>
-    <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/clipboard.min.js"></script>
-    <script src="../static/copybutton.js"></script>
-    <script src="../static/tabs.js"></script>
+    <script src="../static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../static/doctools.js?v=888ff710"></script>
+    <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../static/clipboard.min.js?v=e637711f"></script>
+    <script src="../static/copybutton.js?v=56c01ce6"></script>
+    <script src="../static/tabs.js?v=967f3e0a"></script>
     <script>
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
@@ -343,6 +343,6 @@ StatCounter"></a></div></noscript>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@4.0/dist/gumshoe.polyfills.min.js"></script>
 </script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../static/custom.js"></script>
+    <script src="../static/custom.js?v=6433806a"></script>
     <script src="../static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>
