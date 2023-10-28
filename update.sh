@@ -1,4 +1,5 @@
 # rm -rf build/html
+conda activate aiprototypes
 rm -rf docs
 make html
 cd build/html
